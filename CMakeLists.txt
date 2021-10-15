@@ -14,7 +14,7 @@ find_package(Qt6 COMPONENTS
         Widgets
         REQUIRED)
 
-add_executable(TasQ_Application main.cpp)
+add_executable(TasQ_Application main.cpp widgets/MainWindow/MainWindow.cpp widgets/MainWindow/MainWindow.h widgets/MainWindow/MainWindow.ui)
 target_link_libraries(TasQ_Application
         Qt::Core
         Qt::Gui
