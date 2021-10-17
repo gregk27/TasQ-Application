@@ -11,10 +11,10 @@ set(CMAKE_PREFIX_PATH "C:/Qt/6.1.3/mingw81_64")
 find_package(Qt6 COMPONENTS
         Core
         Gui
-        Widgets
+        widgets
         REQUIRED)
 
-add_executable(TasQ_Application main.cpp widgets/MainWindow/MainWindow.cpp widgets/MainWindow/MainWindow.h widgets/MainWindow/MainWindow.ui)
+add_executable(TasQ_Application src/main.cpp src/widgets/MainWindow/MainWindow.cpp src/widgets/MainWindow/MainWindow.h src/widgets/MainWindow/MainWindow.ui)
 target_link_libraries(TasQ_Application
         Qt::Core
         Qt::Gui
@@ -42,7 +42,7 @@ if (WIN32)
                 "${QT_INSTALL_PATH}/plugins/platforms/qwindows${DEBUG_SUFFIX}.dll"
                 "$<TARGET_FILE_DIR:${PROJECT_NAME}>/plugins/platforms/")
     endif ()
-    foreach (QT_LIB Core Gui Widgets)
+    foreach (QT_LIB Core Gui widgets)
         add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
                 COMMAND ${CMAKE_COMMAND} -E copy
                 "${QT_INSTALL_PATH}/bin/Qt6${QT_LIB}${DEBUG_SUFFIX}.dll"
