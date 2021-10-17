@@ -23,3 +23,17 @@
 │  ├─ widgets/                 Test for custom UI widgets
 ├─ cmakelists.txt           cmake build configuration
 ```
+
+## Building
+### Qt UI Compiler path
+In order to create the UI, `*.ui` files are compiled by Qt, using `uic`. Ensure that the Qt bin folder (`[QT INSTAL DIR]\[VERSION]\[Compiler]\bin`) is on the path.
+
+### CMake Configuration
+CMake needs the path to your Qt installation. This can be configured by adding `-DCMAKE_PREFIX_PATH=[Qt toolchain path]` to **CMake Options** in **File | Settings | Build, Execution, Deployment | CMake**.
+
+![CMake options for a Qt project](https://resources.jetbrains.com/help/img/idea/2021.2/cl_qt_cmake_options.png)
+
+### Build configuration
+To ensure your application can find the binaries for required libraries, your build configuration should have the environment variable `PATH` set to `$PROJECT_DIR$/lib/bin`.
+
+CLion configurations are included for **TasQ_Application** and **TasQ_Application_autogen** which include these settings.
