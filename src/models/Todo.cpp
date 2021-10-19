@@ -13,7 +13,7 @@ string Todo::getName() {
     return name;
 }
 
-string Todo::setName(string &newName) {
+void Todo::setName(string &newName) {
     // TODO: Add database changes
     name = newName;
 }

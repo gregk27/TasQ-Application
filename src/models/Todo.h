@@ -34,7 +34,7 @@ namespace models {
         /**
          * Set the To-do's name, will be reflected in databases
          */
-        string setName(string &newName);
+        void setName(string &newName);
 
         /**
          * Get the To-do's completion flag
