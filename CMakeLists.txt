@@ -12,7 +12,7 @@ find_package(Qt6 COMPONENTS
         widgets
         REQUIRED)
 
-add_executable(TasQ_Application src/main.cpp src/widgets/MainWindow/MainWindow.cpp src/widgets/MainWindow/MainWindow.h src/widgets/MainWindow/MainWindow.ui src/models/User.cpp src/models/User.h src/models/ModelBase.cpp)
+add_executable(TasQ_Application src/main.cpp src/widgets/MainWindow/MainWindow.cpp src/widgets/MainWindow/MainWindow.h src/widgets/MainWindow/MainWindow.ui src/models/User.cpp src/models/User.h src/models/ModelBase.cpp src/models/School.cpp src/models/School.h)
 target_link_libraries(TasQ_Application
         Qt::Core
         Qt::Gui
