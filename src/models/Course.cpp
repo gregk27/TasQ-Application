@@ -36,11 +36,11 @@ void Course::setYear(unsigned short &newYear) {
     year = newYear;
 }
 
-Term Course::getTerm() {
+enums::Term Course::getTerm() {
     return term;
 }
 
-void Course::setTerm(Term &newTerm) {
+void Course::setTerm(enums::Term &newTerm) {
     // TODO: Add database changes
     term = newTerm;
 }

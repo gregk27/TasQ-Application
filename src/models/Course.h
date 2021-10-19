@@ -5,7 +5,7 @@
 #ifndef TASQ_APPLICATION_COURSE_H
 #define TASQ_APPLICATION_COURSE_H
 #include "ModelBase.h"
-#include "Term.h"
+#include "Enums.h"
 
 /**
  * Classes and functions for handling data models
@@ -20,7 +20,7 @@ namespace models {
         string name;
         string code;
         unsigned short year;
-        Term term;
+        enums::Term term;
         string prof;
         string owner;
         uuid schoolId;
@@ -62,11 +62,11 @@ namespace models {
         /**
          * Get the course's academic term
          */
-        Term getTerm();
+        enums::Term getTerm();
         /**
          * Set the course's academic term, will be reflected in databases
          */
-        void setTerm(Term &newTerm);
+        void setTerm(enums::Term &newTerm);
 
         /**
          * Get the course's professor
