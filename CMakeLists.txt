@@ -7,7 +7,7 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
 include_directories("${PROJECT_SOURCE_DIR}/include")
-include_directories(WH-Application ${CMAKE_SOURCE_DIR}/lib/include)
+include_directories(TasQ_Application ${CMAKE_SOURCE_DIR}/lib/include)
 
 find_package(Qt6 COMPONENTS
         Core
