@@ -20,6 +20,14 @@ namespace models {
         uuid eventId;
     public:
         /**
+         * Create an event from a json object with the structure
+         * <pre>
+         * "id": string,           - ID of the reminder<br/>
+         * "event": string         - ID of the event the reminder is for
+         */
+        explicit Reminder(json &json);
+
+        /**
          * Get the reminder's id
          */
         uuid getId();

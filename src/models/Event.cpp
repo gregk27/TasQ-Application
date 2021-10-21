@@ -5,6 +5,17 @@
 
 using namespace models;
 
+Event::Event(json &json):
+        type(enums::EventType::fromDB(json["type"])) {
+    id = json["id"];
+    courseID = json["course"];
+    name = json["name"];
+    weight = json["weight"];
+    datetime = json["datetime"];
+    endDate = json["endDate"];
+    weekly = json["weekly"];
+}
+
 uuid Event::getId() {
     return id;
 }
@@ -52,11 +63,11 @@ void Event::setDatetime(unsigned long long &newDatetime) {
     datetime = newDatetime;
 }
 
-unsigned long long Event::getEndDate() {
+optional<unsigned long long> Event::getEndDate() {
     return getEndDate();
 }
 
-void Event::setEndDate(unsigned long long &newEndDate) {
+void Event::setEndDate(optional<unsigned long long> &newEndDate) {
     endDate = newEndDate;
 }
 

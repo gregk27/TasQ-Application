@@ -22,6 +22,15 @@ namespace models {
         bool completed;
     public:
         /**
+         * Create a To-Do from a json object with the structure
+         * <pre>
+         * "id": string,           - ID of the To-Do<br/>
+         * "name": string,         - Name of the To-Do<br/>
+         * "completed": boolean,   - To-Do completion flag
+         */
+        explicit Todo(json &json);
+
+        /**
          * Get the To-do's id
          */
         uuid getId();

@@ -8,3 +8,8 @@ using namespace models;
 string School::getName() {
     return name;
 }
+
+School::School(json &json) {
+    id = json["id"];
+    name = json["name"];
+}

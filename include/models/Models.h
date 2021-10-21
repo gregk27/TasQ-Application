@@ -6,8 +6,10 @@
 #define TASQ_APPLICATION_MODELS_H
 
 #include <string>
+#include <nlohmann/json.hpp>
 
 using namespace std;
+using json = nlohmann::json;
 
 /**
  * Classes and functions for handling data models

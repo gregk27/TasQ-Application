@@ -6,6 +6,8 @@
 #include <string>
 #include <nlohmann/json.hpp>
 
+#include <models/School.h>
+
 using namespace std;
 
 int main(int argc, char *argv[]) {
@@ -18,12 +20,13 @@ int main(int argc, char *argv[]) {
 
     cout << net::getStatus() << endl;
 
-    string s = R"({"status": "Alive"})";
+    string str = R"({"id": "asdf", "name": "Queen's"})";
 
-    auto js = nlohmann::json::parse(s);
+    auto js = nlohmann::json::parse(str);
 
-    cout << js["status"] << endl;
-    cout << js["payload"] << endl;
+    models::School s(js);
+
+    cout << s.getName() << endl;
 
     return QApplication::exec();
 }

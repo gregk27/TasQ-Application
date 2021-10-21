@@ -28,7 +28,7 @@ const Term Term::SUMMER = Term(2);
 
 const Term Term::FALL = Term(3);
 
-Term Term::fromDB(string &s) {
+Term Term::fromDB(string s) {
     for (int i = 0; i < numTerms; i++) {
         if (s == dbNames[i])
             return Term(i);
@@ -54,7 +54,7 @@ char Term::toLetter() {
 const string EventType::dbNames[] = {"LECTURE", "TUTORIAL", "LAB", "TEST", "QUIZ", "ASSIGNMENT"};
 const string EventType::prettyNames[] = {"Lecture", "Tutorial", "Lab", "Test", "Quiz", "Assignment"};
 
-EventType EventType::fromDB(string &s) {
+EventType EventType::fromDB(string s) {
     for (int i = 0; i < numEventTypes; i++) {
         if (s == dbNames[i])
             return EventType(i);
@@ -69,3 +69,4 @@ string EventType::toDB() {
 string EventType::toString() {
     return prettyNames[val];
 }
+

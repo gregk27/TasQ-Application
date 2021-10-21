@@ -21,6 +21,16 @@ namespace models {
         string email;
         uuid schoolId;
     public:
+        /**
+         * Create a user from a json object with the structure
+         * <pre>
+         * "id": string,               - Registered user's ID<br/>
+         * "name": string,             - Registered user's name<br/>
+         * "email": string,            - Registered user's email<br/>
+         * "school": string            - Registered user's school's ID
+         */
+        explicit User(json &json);
+
         uuid getId();
 
         /**

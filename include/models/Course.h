@@ -28,6 +28,21 @@ namespace models {
 
     public:
         /**
+         * Create a course from a json object with the structure
+         * <pre>
+         * "id": string,               - ID of the course<br/>
+         * "name": string,             - Updated name of the course<br/>
+         * "code": string,             - Updated course code<br/>
+         * "year": int,                - Updated academic year of the course<br/>
+         * "term": string,             - Updated term of the course<br/>
+         * "prof": string,             - Updated professor teaching the course<br/>
+         * "owner": string,            - ID of the user who maintains the course<br/>
+         * "school": string,           - Updated ID of the course's school<br/>
+         * "modified": long int        - Unix timestamp the course or it's children were last modified
+         */
+        explicit Course(json &json);
+
+        /**
          * Get the course's id
          */
         uuid getId();

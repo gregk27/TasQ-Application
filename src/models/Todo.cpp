@@ -5,6 +5,12 @@
 #include <models/Todo.h>
 using namespace models;
 
+Todo::Todo(json &json) {
+    id = json["id"];
+    name = json["name"];
+    completed = json["completed"];
+}
+
 uuid Todo::getId() {
     return id;
 }

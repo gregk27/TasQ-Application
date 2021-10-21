@@ -5,6 +5,18 @@
 #include <models/Course.h>
 using namespace models;
 
+Course::Course(json &json):
+        term(enums::Term::fromDB(json["dbTerm"])) {
+    id = json["id"];
+    name = json["name"];
+    code = json["code"];
+    year = json["year"];
+    prof = json["prof"];
+    owner = json["owner"];
+    schoolId = json["school"];
+    modified = json["modified"];
+}
+
 uuid Course::getId() {
     return id;
 }

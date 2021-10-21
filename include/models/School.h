@@ -20,6 +20,14 @@ namespace models {
         string name;
     public:
         /**
+         * Create a school from a json object with the structure
+         * <pre>
+         * "id": string,           - ID of school <br/>
+         * "name": string,         - Name of school
+         */
+        explicit School(json &json);
+
+        /**
          * Get the school's name
          */
         string getName();

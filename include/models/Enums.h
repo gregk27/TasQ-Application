@@ -60,7 +60,7 @@ namespace models::enums {
          * @param s Database entry
          * @return Term with value based on dbNames
          */
-        Term fromDB(string &s);
+        static Term fromDB(string s);
 
         /**
          * Get the term's database name
@@ -121,7 +121,7 @@ namespace models::enums {
          * @param s Database entry
          * @return EventType with value based on dbNames
          */
-        EventType fromDB(string &s);
+        static EventType fromDB(string s);
 
         /**
          * Get the eventType's database name
