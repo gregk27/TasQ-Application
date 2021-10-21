@@ -16,3 +16,9 @@ The nlohmann/json library is used for parsing API responses.
 
 It is a single-header library, and can be downloaded from [https://github.com/nlohmann/json/releases](https://github.com/nlohmann/json/releases). <br/>
 The header should be placed in /lib/include/nlohmann
+
+## Catch2
+Catch 2 is used for unit and integration testing.
+
+It is a single-header library which can be downloaded from [https://github.com/catchorg/Catch2/releases](https://github.com/catchorg/Catch2/releases) </br>
+The header should be placed in /lib/include/catch2
