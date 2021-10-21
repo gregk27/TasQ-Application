@@ -7,12 +7,16 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
 include_directories("${PROJECT_SOURCE_DIR}/include")
+include_directories(WH-Application ${CMAKE_SOURCE_DIR}/lib/include)
 
 find_package(Qt6 COMPONENTS
         Core
         Gui
         widgets
+        Network
         REQUIRED)
+
+find_library(CURL libcurl lib/lib)
 
 add_executable(TasQ_Application
         src/main.cpp
@@ -28,12 +32,14 @@ add_executable(TasQ_Application
         src/models/Reminder.cpp include/models/Reminder.h
         src/models/Todo.cpp include/models/Todo.h
         src/models/Application.cpp include/models/Application.h
-        )
+        include/net/net.h src/net/net.cpp)
 
 target_link_libraries(TasQ_Application
         Qt::Core
         Qt::Gui
         Qt::Widgets
+        Qt::Network
+        ${CURL}
         )
 
 if (WIN32)
