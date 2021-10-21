@@ -68,10 +68,9 @@ string net::get(string url){
 
     CURLcode res = curl_easy_perform(curl);
 
+    // If the code is anything but okay, throw an exception
     if(res != CURLE_OK){
-        // TODO: Error handling
-        cerr << curl_easy_strerror(res) << endl;
-        return "";
+        throw NetworkException(res);
     }
 
     // Create string from response
@@ -83,6 +82,15 @@ string net::get(string url){
 }
 
 bool net::getStatus() {
-    string result = net::get(BASE_URL + "/status");
-    return result == R"({"status": "Alive"})";
+    try{
+        string result = net::get(BASE_URL + "/status");
+        return result == R"({"status": "Alive"})";
+    } catch (NetworkException &e){
+        cerr << e.what() << endl;
+    }
+    return false;
 }
+
+// Build error string and use parent constructor
+net::NetworkException::NetworkException(CURLcode code):
+    std::runtime_error("Request returned code " + to_string(code) + ": " + curl_easy_strerror(code)) { }

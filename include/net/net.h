@@ -6,6 +6,7 @@
 #define TASQ_APPLICATION_NET_H
 
 #include <string>
+#include <stdexcept>
 #include <curl/curl.h>
 
 /**
@@ -36,6 +37,18 @@ namespace net {
      * @returns True if API is alive and can be reached
      */
     bool getStatus();
+
+    /**
+     * Exception thrown on curl request failure
+     */
+    class NetworkException: public std::runtime_error {
+    public:
+        /**
+         * Create a new NetworkException
+         * @param code curl response code
+         */
+        explicit NetworkException(CURLcode code);
+    };
 }
 
 #endif //TASQ_APPLICATION_NET_H
