@@ -24,12 +24,10 @@ namespace models {
     class ModelBase {
     private:
 
-        ~ModelBase();
-
     protected:
-        ModelBase();
 
     public:
+        ModelBase() {};
 
     };
 }

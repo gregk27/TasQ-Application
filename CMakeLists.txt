@@ -7,6 +7,7 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
 include_directories("${PROJECT_SOURCE_DIR}/include")
+include_directories("${PROJECT_SOURCE_DIR}/lib/include")
 
 find_package(Qt6 COMPONENTS
         Core
@@ -28,13 +29,25 @@ add_executable(TasQ_Application
         src/models/Reminder.cpp include/models/Reminder.h
         src/models/Todo.cpp include/models/Todo.h
         src/models/Application.cpp include/models/Application.h
-        )
+        test/models/UserTest.cpp)
 
 target_link_libraries(TasQ_Application
         Qt::Core
         Qt::Gui
         Qt::Widgets
         )
+
+add_executable(TasQ_NoQt
+        src/models/User.cpp include/models/User.h
+        src/models/ModelBase.cpp include/models/ModelBase.h
+        src/models/School.cpp include/models/School.h
+        src/models/Course.cpp include/models/Course.h
+        src/models/Enums.cpp include/models/Enums.h
+        src/models/Event.cpp include/models/Event.h
+        src/models/Reminder.cpp include/models/Reminder.h
+        src/models/Todo.cpp include/models/Todo.h
+        src/models/Application.cpp include/models/Application.h
+        test/models/UserTest.cpp)
 
 if (WIN32)
     set(DEBUG_SUFFIX)
