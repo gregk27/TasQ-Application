@@ -24,7 +24,7 @@ add_executable(TasQ_Application
         include/widgets/MainWindow.h
         src/widgets/MainWindow/MainWindow.ui
         src/models/User.cpp include/models/User.h
-        src/models/ModelBase.cpp include/models/ModelBase.h
+        include/models/Models.h
         src/models/School.cpp include/models/School.h
         src/models/Course.cpp include/models/Course.h
         src/models/Enums.cpp include/models/Enums.h
@@ -32,7 +32,7 @@ add_executable(TasQ_Application
         src/models/Reminder.cpp include/models/Reminder.h
         src/models/Todo.cpp include/models/Todo.h
         src/models/Application.cpp include/models/Application.h
-        include/net/net.h src/net/net.cpp)
+        include/net/net.h src/net/net.cpp include/models/Models.h)
 
 target_link_libraries(TasQ_Application
         Qt::Core

@@ -5,7 +5,7 @@
 #ifndef TASQ_APPLICATION_REMINDER_H
 #define TASQ_APPLICATION_REMINDER_H
 
-#include "ModelBase.h"
+#include "Models.h"
 
 /**
  * Classes and functions for handling data models

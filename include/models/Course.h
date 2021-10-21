@@ -4,7 +4,7 @@
 
 #ifndef TASQ_APPLICATION_COURSE_H
 #define TASQ_APPLICATION_COURSE_H
-#include "ModelBase.h"
+#include "Models.h"
 #include "Enums.h"
 
 /**
@@ -14,7 +14,7 @@ namespace models {
     /**
      * Data model representing a course
      */
-    class Course: public ModelBase {
+    class Course {
     private:
         uuid id;
         string name;

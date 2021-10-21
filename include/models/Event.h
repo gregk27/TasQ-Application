@@ -5,7 +5,7 @@
 #ifndef TASQ_APPLICATION_EVENT_H
 #define TASQ_APPLICATION_EVENT_H
 
-#include "ModelBase.h"
+#include "Models.h"
 #include "Enums.h"
 
 /**
@@ -15,7 +15,7 @@ namespace models {
     /**
      * Data model representing an event
      */
-    class Event : public ModelBase {
+    class Event {
     private:
         uuid id;
         uuid courseID;

@@ -5,7 +5,7 @@
 #ifndef TASQ_APPLICATION_TODO_H
 #define TASQ_APPLICATION_TODO_H
 
-#include "ModelBase.h"
+#include "Models.h"
 
 /**
  * Classes and functions for handling data models
@@ -15,7 +15,7 @@ namespace models {
     /**
      * Data model representing a To-do item for the local user
      */
-    class Todo : public ModelBase {
+    class Todo {
     private:
         uuid id;
         string name;

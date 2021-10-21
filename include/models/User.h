@@ -5,7 +5,7 @@
 #ifndef TASQ_APPLICATION_USER_H
 #define TASQ_APPLICATION_USER_H
 
-#include "ModelBase.h"
+#include "Models.h"
 
 /**
  * Classes and functions for handling data models
@@ -14,7 +14,7 @@ namespace models {
     /**
      * Data model representing a user account/profile
      */
-    class User : public ModelBase {
+    class User {
     private:
         uuid id;
         string name;
