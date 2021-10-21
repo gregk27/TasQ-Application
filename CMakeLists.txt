@@ -28,8 +28,7 @@ add_executable(TasQ_Application
         src/models/Event.cpp include/models/Event.h
         src/models/Reminder.cpp include/models/Reminder.h
         src/models/Todo.cpp include/models/Todo.h
-        src/models/Application.cpp include/models/Application.h
-        test/models/UserTest.cpp)
+        src/models/Application.cpp include/models/Application.h)
 
 target_link_libraries(TasQ_Application
         Qt::Core
