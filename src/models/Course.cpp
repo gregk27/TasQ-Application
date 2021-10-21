@@ -2,7 +2,7 @@
 // Created by Greg on 2021-10-19.
 //
 
-#include "Course.h"
+#include <models/Course.h>
 using namespace models;
 
 uuid Course::getId() {

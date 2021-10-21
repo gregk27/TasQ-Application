@@ -2,7 +2,7 @@
 // Created by Greg on 2021-10-19.
 //
 
-#include "Enums.h"
+#include <models/Enums.h>
 
 using namespace models::enums;
 

@@ -1,6 +1,6 @@
 #include <QApplication>
 #include <QPushButton>
-#include "widgets/MainWindow/MainWindow.h"
+#include "widgets/MainWindow.h"
 
 int main(int argc, char *argv[]) {
     QApplication a(argc, argv);

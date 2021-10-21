@@ -2,7 +2,7 @@
 // Created by Greg on 2021-10-19.
 //
 
-#include "Reminder.h"
+#include <models/Reminder.h>
 using namespace models;
 
 uuid Reminder::getId() {

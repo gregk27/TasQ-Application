@@ -6,6 +6,8 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
+include_directories("${PROJECT_SOURCE_DIR}/include")
+
 find_package(Qt6 COMPONENTS
         Core
         Gui
@@ -15,17 +17,17 @@ find_package(Qt6 COMPONENTS
 add_executable(TasQ_Application
         src/main.cpp
         src/widgets/MainWindow/MainWindow.cpp
-        src/widgets/MainWindow/MainWindow.h
+        include/widgets/MainWindow.h
         src/widgets/MainWindow/MainWindow.ui
-        src/models/User.cpp src/models/User.h
-        src/models/ModelBase.cpp src/models/ModelBase.h
-        src/models/School.cpp src/models/School.h
-        src/models/Course.cpp src/models/Course.h
-        src/models/Enums.cpp src/models/Enums.h
-        src/models/Event.cpp src/models/Event.h
-        src/models/Reminder.cpp src/models/Reminder.h
-        src/models/Todo.cpp src/models/Todo.h
-        src/models/Application.cpp src/models/Application.h
+        src/models/User.cpp include/models/User.h
+        src/models/ModelBase.cpp include/models/ModelBase.h
+        src/models/School.cpp include/models/School.h
+        src/models/Course.cpp include/models/Course.h
+        src/models/Enums.cpp include/models/Enums.h
+        src/models/Event.cpp include/models/Event.h
+        src/models/Reminder.cpp include/models/Reminder.h
+        src/models/Todo.cpp include/models/Todo.h
+        src/models/Application.cpp include/models/Application.h
         )
 
 target_link_libraries(TasQ_Application

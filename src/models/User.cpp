@@ -2,7 +2,7 @@
 // Created by Greg on 2021-10-17.
 //
 
-#include "User.h"
+#include <models/User.h>
 
 using namespace models;
 

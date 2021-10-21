@@ -1,7 +1,7 @@
 //
 // Created by Greg on 2021-10-19.
 //
-#include "Event.h"
+#include <models/Event.h>
 
 using namespace models;
 
