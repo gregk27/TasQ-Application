@@ -11,7 +11,7 @@
 namespace net {
     extern CURL *curl;
 
-    const std::string BASE_URL = "http://server.lan:120";
+    const std::string BASE_URL = "https://tasq.gregk.ca";
 
     void init();
 

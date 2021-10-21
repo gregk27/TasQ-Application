@@ -8,3 +8,5 @@ The CURL library is used for web requests to the backend API
 
 Windows binaries can be downloaded from [https://curl.se/windows/](https://curl.se/windows/). <br/>
 The bin, lib, and include folders should be copied to /lib.
+
+You will also need to add `cacert.pem` downloaded from [http://curl.haxx.se/ca/cacert.pem](http://curl.haxx.se/ca/cacert.pem) to /bin for https functionality.

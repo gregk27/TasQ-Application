@@ -53,11 +53,14 @@ string net::get(string url){
     curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void *)&chunk);
     // Specify user agent
     curl_easy_setopt(curl, CURLOPT_USERAGENT, "libcurl-agent/1.0");
+    // Set SSL CA certificates
+    curl_easy_setopt (curl, CURLOPT_CAINFO, "../lib/bin/cacert.pem");
 
     CURLcode res = curl_easy_perform(curl);
 
     if(res != CURLE_OK){
         // TODO: Error handling
+        cerr << curl_easy_strerror(res) << endl;
         return "";
     }
     return string(chunk.memory);
@@ -65,6 +68,5 @@ string net::get(string url){
 
 bool net::getStatus() {
     string result = net::get(BASE_URL + "/status");
-    cout << result << endl;
-    return false;
+    return result == R"({"status": "Alive"})";
 }
