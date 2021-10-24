@@ -12,7 +12,11 @@ Event::Event(json &json):
     name = json["name"];
     weight = json["weight"];
     datetime = json["datetime"];
-    endDate = json["endDate"];
+    if(json["endDate"].is_null()){
+        endDate = {};
+    } else {
+        endDate = json["endDate"];
+    }
     weekly = json["weekly"];
 }
 
@@ -64,7 +68,7 @@ void Event::setDatetime(unsigned long long &newDatetime) {
 }
 
 optional<unsigned long long> Event::getEndDate() {
-    return getEndDate();
+    return endDate;
 }
 
 void Event::setEndDate(optional<unsigned long long> &newEndDate) {

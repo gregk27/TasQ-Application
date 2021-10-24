@@ -52,8 +52,13 @@ add_executable(TasQ_NoQt
         src/models/Reminder.cpp include/models/Reminder.h
         src/models/Todo.cpp include/models/Todo.h
         src/models/Application.cpp include/models/Application.h
-        test/models/UserTest.cpp
-        )
+        test/models/TestUser.cpp
+        test/models/TestCourse.cpp
+        test/models/TestEvent.cpp
+        test/models/TestEnums.cpp
+        test/models/TestTodo.cpp
+        test/models/TestReminder.cpp
+        test/models/TestSchool.cpp)
 
 if (WIN32)
     set(DEBUG_SUFFIX)

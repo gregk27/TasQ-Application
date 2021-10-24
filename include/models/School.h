@@ -28,6 +28,11 @@ namespace models {
         explicit School(json &json);
 
         /**
+         * Get the school's ID
+         */
+        string getId();
+
+        /**
          * Get the school's name
          */
         string getName();

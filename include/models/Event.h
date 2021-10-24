@@ -24,7 +24,7 @@ namespace models {
         enums::EventType type;
         int weight;
         unsigned long long datetime;
-        optional<unsigned long long> endDate;
+        std::optional<unsigned long long> endDate;
         bool weekly;
 
     public:
@@ -100,12 +100,12 @@ namespace models {
         /**
          * Get the event's end date/time
          */
-        optional<unsigned long long> getEndDate();
+        std::optional<unsigned long long> getEndDate();
 
         /**
          * Set the event's end date/time, will be reflected in databases
          */
-        void setEndDate(optional<unsigned long long> &newEndDate);
+        void setEndDate(std::optional<unsigned long long> &newEndDate);
 
         /**
          * Get the event's weekly flag

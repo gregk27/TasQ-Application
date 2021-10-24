@@ -93,6 +93,11 @@ namespace models {
         void setProf(string &newProf);
 
         /**
+         * Get the course's owner
+         */
+        string getOwner();
+
+        /**
          * Get the course's school
          */
         uuid getSchoolId();

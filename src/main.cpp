@@ -16,9 +16,21 @@ int main(int argc, char *argv[]) {
     QPushButton button("Hello world!", &window);
     window.show();
 
-    net::init();
+//    net::init();
+//
+//    cout << net::getStatus() << endl;
 
-    cout << net::getStatus() << endl;
+    json j = {
+            {"id","16c6bddb-2de2-11ec-a3fd-0023aea14009"},
+            {"name","Software Dev"},
+            {"code","cmpe320"},
+            {"year",2021},
+            {"term","Fall"},
+            {"prof","El Mezouar"},
+            {"owner","71e04118-2dd7-11ec-a3fd-0023aea14009"},
+            {"school","5cd83d02-2dcf-11ec-a3fd-0023aea14009"},
+            {"modified", 1635044502}
+    };
 
     string str = R"({"id": "asdf", "name": "Queen's"})";
 

@@ -5,6 +5,10 @@
 #include <models/School.h>
 using namespace models;
 
+string School::getId() {
+    return id;
+}
+
 string School::getName() {
     return name;
 }

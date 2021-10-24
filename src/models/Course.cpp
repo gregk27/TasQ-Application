@@ -6,7 +6,7 @@
 using namespace models;
 
 Course::Course(json &json):
-        term(enums::Term::fromDB(json["dbTerm"])) {
+        term(enums::Term::fromDB(json["term"])) {
     id = json["id"];
     name = json["name"];
     code = json["code"];
@@ -64,6 +64,10 @@ string Course::getProf() {
 void Course::setProf(string &newProf) {
     // TODO: Add database changes
     prof = newProf;
+}
+
+string Course::getOwner() {
+    return owner;
 }
 
 uuid Course::getSchoolId() {
