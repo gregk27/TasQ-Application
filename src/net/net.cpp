@@ -77,7 +77,6 @@ string request(string &url, map<string, string> *body = nullptr){
     } else {
         // Set GET mode
         curl_easy_setopt(curl, CURLOPT_HTTPGET, 1);
-        curl_easy_setopt(curl, CURLOPT_NOBODY, 1);
     }
 
     CURLcode res = curl_easy_perform(curl);
