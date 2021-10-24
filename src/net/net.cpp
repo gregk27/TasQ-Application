@@ -4,6 +4,7 @@
 
 #include <net/net.h>
 #include <iostream>
+#include <sstream>
 
 using namespace std;
 using namespace net;
@@ -68,6 +69,9 @@ string net::get(string url){
     curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
     // Specify chunk for callback
     curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void *)&chunk);
+    // Set GET mode
+    curl_easy_setopt(curl, CURLOPT_HTTPGET, 1);
+    curl_easy_setopt(curl, CURLOPT_NOBODY, 1);
 
     CURLcode res = curl_easy_perform(curl);
 
@@ -87,6 +91,50 @@ string net::get(string url){
 nlohmann::json net::getJSON(string url){
     return nlohmann::json::parse(get(url));
 }
+
+string net::post(string url, map<string, string> &body) {
+    // Create a memory chunk to use
+    MemoryStruct chunk;
+    chunk.memory = (char*)malloc(1);
+    chunk.size = 0;
+
+    stringstream bodyStr;
+    for(auto &arg : body){
+        bodyStr << curl_easy_escape(curl, arg.first.c_str(), arg.first.size())
+                << "="
+                << curl_easy_escape(curl, arg.second.c_str(), arg.second.size())
+                << "&";
+    }
+
+    // Set URL
+    curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
+    // Specify chunk for callback
+    curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void *)&chunk);
+    // Specify POST data
+    curl_easy_setopt(curl, CURLOPT_POSTFIELDS, bodyStr.str().c_str());
+    // Set POST mode
+    curl_easy_setopt(curl, CURLOPT_POST, 1);
+    curl_easy_setopt(curl, CURLOPT_NOBODY, 0);
+
+    CURLcode res = curl_easy_perform(curl);
+
+    // If the code is anything but okay, throw an exception
+    if(res != CURLE_OK){
+        throw NetworkException(res);
+    }
+
+    // Create string from response
+    string out(chunk.memory);
+    // Free allocated memory to prevent leak
+    free(chunk.memory);
+
+    return out;
+}
+
+nlohmann::json net::postJSON(string url, map<string, string> &body){
+    return nlohmann::json::parse(post(url, body));
+}
+
 
 bool net::getStatus() {
     try{

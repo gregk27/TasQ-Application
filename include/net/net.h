@@ -6,6 +6,7 @@
 #define TASQ_APPLICATION_NET_H
 
 #include <string>
+#include <map>
 #include <stdexcept>
 #include <curl/curl.h>
 #include <nlohmann/json.hpp>
@@ -40,6 +41,23 @@ namespace net {
      * @see net::get(std::string)
      */
     nlohmann::json getJSON(std::string url);
+
+    /**
+     * Execute an HTTP or HTTPS POST request
+     * @param url The URL to request
+     * @param body The POST body, as key-value pairs
+     * @return string with response
+     */
+    std::string post(std::string url, std::map<std::string, std::string> &body);
+
+    /**
+     * Execute an HTTP or HTTPS POST request
+     * @param url The URL to request
+     * @param body The POST body, as key-value pairs
+     * @return json object generated from response
+     * @see net::post(std::string, std::map<std::string, std::string>)
+     */
+    nlohmann::json postJSON(std::string url, std::map<std::string, std::string> &body);
 
     /**
      * Get the API status
