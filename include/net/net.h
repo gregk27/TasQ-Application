@@ -40,7 +40,9 @@ namespace net {
      * @return json object generated from response
      * @see net::get(std::string)
      */
-    nlohmann::json getJSON(std::string url);
+    inline nlohmann::json getJSON(std::string url){
+        return nlohmann::json::parse(get(url));
+    }
 
     /**
      * Execute an HTTP or HTTPS POST request
@@ -57,7 +59,9 @@ namespace net {
      * @return json object generated from response
      * @see net::post(std::string, std::map<std::string, std::string>)
      */
-    nlohmann::json postJSON(std::string url, std::map<std::string, std::string> &body);
+    inline nlohmann::json postJSON(std::string url, std::map<std::string, std::string> &body){
+        return nlohmann::json::parse(post(url, body));
+    }
 
     /**
      * Get the API status

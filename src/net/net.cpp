@@ -41,6 +41,60 @@ static size_t WriteMemoryCallback(void *contents, size_t size, size_t nmemb, voi
     return realsize;
 }
 
+/**
+ * Local function to perform the HTTP/HTTPS requests<br/>
+ * This function is local to ensure that get/post methods are used for legibility
+ * @param url The URL to request
+ * @param body The POST body. If null then will perform GET request
+ * @return string with response
+ */
+string request(string &url, map<string, string> *body = nullptr){
+    // Create a memory chunk to use
+    MemoryStruct chunk;
+    chunk.memory = (char*)malloc(1);
+    chunk.size = 0;
+
+    // Set URL
+    curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
+    // Specify chunk for callback
+    curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void *)&chunk);
+
+    // If the body is set, then perform POST request
+    // Otherwise perform GET request
+    if(body){
+        stringstream bodyStr;
+        for(auto &arg : *body){
+            bodyStr << curl_easy_escape(curl, arg.first.c_str(), arg.first.size())
+                    << "="
+                    << curl_easy_escape(curl, arg.second.c_str(), arg.second.size())
+                    << "&";
+        }
+        // Specify POST data
+        curl_easy_setopt(curl, CURLOPT_POSTFIELDS, bodyStr.str().c_str());
+        // Set POST mode
+        curl_easy_setopt(curl, CURLOPT_POST, 1);
+        curl_easy_setopt(curl, CURLOPT_NOBODY, 0);
+    } else {
+        // Set GET mode
+        curl_easy_setopt(curl, CURLOPT_HTTPGET, 1);
+        curl_easy_setopt(curl, CURLOPT_NOBODY, 1);
+    }
+
+    CURLcode res = curl_easy_perform(curl);
+
+    // If the code is anything but okay, throw an exception
+    if(res != CURLE_OK){
+        throw NetworkException(res);
+    }
+
+    // Create string from response
+    string out(chunk.memory);
+    // Free allocated memory to prevent leak
+    free(chunk.memory);
+
+    return out;
+}
+
 /** Initialise curl handle to nullptr */
 CURL *net::curl = nullptr;
 
@@ -60,81 +114,12 @@ void net::init() {
 }
 
 string net::get(string url){
-    // Create a memory chunk to use
-    MemoryStruct chunk;
-    chunk.memory = (char*)malloc(1);
-    chunk.size = 0;
-
-    // Set URL
-    curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
-    // Specify chunk for callback
-    curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void *)&chunk);
-    // Set GET mode
-    curl_easy_setopt(curl, CURLOPT_HTTPGET, 1);
-    curl_easy_setopt(curl, CURLOPT_NOBODY, 1);
-
-    CURLcode res = curl_easy_perform(curl);
-
-    // If the code is anything but okay, throw an exception
-    if(res != CURLE_OK){
-        throw NetworkException(res);
-    }
-
-    // Create string from response
-    string out(chunk.memory);
-    // Free allocated memory to prevent leak
-    free(chunk.memory);
-
-    return out;
-}
-
-nlohmann::json net::getJSON(string url){
-    return nlohmann::json::parse(get(url));
+    return request(url);
 }
 
 string net::post(string url, map<string, string> &body) {
-    // Create a memory chunk to use
-    MemoryStruct chunk;
-    chunk.memory = (char*)malloc(1);
-    chunk.size = 0;
-
-    stringstream bodyStr;
-    for(auto &arg : body){
-        bodyStr << curl_easy_escape(curl, arg.first.c_str(), arg.first.size())
-                << "="
-                << curl_easy_escape(curl, arg.second.c_str(), arg.second.size())
-                << "&";
-    }
-
-    // Set URL
-    curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
-    // Specify chunk for callback
-    curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void *)&chunk);
-    // Specify POST data
-    curl_easy_setopt(curl, CURLOPT_POSTFIELDS, bodyStr.str().c_str());
-    // Set POST mode
-    curl_easy_setopt(curl, CURLOPT_POST, 1);
-    curl_easy_setopt(curl, CURLOPT_NOBODY, 0);
-
-    CURLcode res = curl_easy_perform(curl);
-
-    // If the code is anything but okay, throw an exception
-    if(res != CURLE_OK){
-        throw NetworkException(res);
-    }
-
-    // Create string from response
-    string out(chunk.memory);
-    // Free allocated memory to prevent leak
-    free(chunk.memory);
-
-    return out;
+    return request(url, &body);
 }
-
-nlohmann::json net::postJSON(string url, map<string, string> &body){
-    return nlohmann::json::parse(post(url, body));
-}
-
 
 bool net::getStatus() {
     try{
