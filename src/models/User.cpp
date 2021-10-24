@@ -6,6 +6,13 @@
 
 using namespace models;
 
+User::User(json &json) {
+    id = json["id"];
+    name = json["name"];
+    email = json["email"];
+    schoolId = json["school"];
+}
+
 uuid User::getId() {
     return id;
 }

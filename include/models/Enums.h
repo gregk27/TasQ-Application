@@ -60,7 +60,7 @@ namespace models::enums {
          * @param s Database entry
          * @return Term with value based on dbNames
          */
-        Term fromDB(string &s);
+        static Term fromDB(string s);
 
         /**
          * Get the term's database name
@@ -79,6 +79,15 @@ namespace models::enums {
          * @return Single-letter name for term
          */
         char toLetter();
+
+        // Override comparison operators
+        // Terms can be equal, but ordering is meaningless
+        bool operator==(Term other) const;
+        bool operator!=(Term other) const;
+        bool operator>(Term other) = delete;
+        bool operator>=(Term other) = delete;
+        bool operator<(Term other) = delete;
+        bool operator<=(Term other) = delete;
     };
 
     /**
@@ -121,7 +130,7 @@ namespace models::enums {
          * @param s Database entry
          * @return EventType with value based on dbNames
          */
-        EventType fromDB(string &s);
+        static EventType fromDB(string s);
 
         /**
          * Get the eventType's database name
@@ -134,6 +143,15 @@ namespace models::enums {
          * @return Pretty-print name for eventType
          */
         string toString();
+
+        // Override comparison operators
+        // Terms can be equal, but ordering is meaningless
+        bool operator==(EventType other) const;
+        bool operator!=(EventType other) const;
+        bool operator>(EventType other) = delete;
+        bool operator>=(EventType other) = delete;
+        bool operator<(EventType other) = delete;
+        bool operator<=(EventType other) = delete;
     };
 }
 

@@ -5,7 +5,7 @@
 #ifndef TASQ_APPLICATION_REMINDER_H
 #define TASQ_APPLICATION_REMINDER_H
 
-#include "ModelBase.h"
+#include "Models.h"
 
 /**
  * Classes and functions for handling data models
@@ -19,6 +19,14 @@ namespace models {
         uuid id;
         uuid eventId;
     public:
+        /**
+         * Create an event from a json object with the structure
+         * <pre>
+         * "id": string,           - ID of the reminder<br/>
+         * "event": string         - ID of the event the reminder is for
+         */
+        explicit Reminder(json &json);
+
         /**
          * Get the reminder's id
          */

@@ -5,7 +5,8 @@
 #ifndef TASQ_APPLICATION_EVENT_H
 #define TASQ_APPLICATION_EVENT_H
 
-#include "ModelBase.h"
+#include <optional>
+#include "Models.h"
 #include "Enums.h"
 
 /**
@@ -15,7 +16,7 @@ namespace models {
     /**
      * Data model representing an event
      */
-    class Event : public ModelBase {
+    class Event {
     private:
         uuid id;
         uuid courseID;
@@ -23,10 +24,24 @@ namespace models {
         enums::EventType type;
         int weight;
         unsigned long long datetime;
-        unsigned long long endDate;
+        std::optional<unsigned long long> endDate;
         bool weekly;
 
     public:
+        /**
+         * Create an event from a json object with the structure
+         * <pre>
+         * "id": string,           - ID of the event<br/>
+         * "course": string,       - ID of the event's course<br/>
+         * "name": string,         - Name of the event<br/>
+         * "type": string,         - Type of event<br/>
+         * "weight": int,          - Grade weight of event<br/>
+         * "datetime": long int,   - Unix timestamp of event start<br/>
+         * "endDate": long int,    - Unix timestamp of event ending<br/>
+         * "weekly": boolean       - Flag to indicate if the event occurs each week
+         */
+        explicit Event(json &json);
+
         /**
          * Get the event's id
          */
@@ -85,12 +100,12 @@ namespace models {
         /**
          * Get the event's end date/time
          */
-        unsigned long long getEndDate();
+        std::optional<unsigned long long> getEndDate();
 
         /**
          * Set the event's end date/time, will be reflected in databases
          */
-        void setEndDate(unsigned long long &newEndDate);
+        void setEndDate(std::optional<unsigned long long> &newEndDate);
 
         /**
          * Get the event's weekly flag

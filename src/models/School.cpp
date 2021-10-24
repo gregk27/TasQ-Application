@@ -5,6 +5,15 @@
 #include <models/School.h>
 using namespace models;
 
+string School::getId() {
+    return id;
+}
+
 string School::getName() {
     return name;
+}
+
+School::School(json &json) {
+    id = json["id"];
+    name = json["name"];
 }

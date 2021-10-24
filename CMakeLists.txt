@@ -1,13 +1,13 @@
 cmake_minimum_required(VERSION 3.20)
 project(TasQ_Application)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
 include_directories("${PROJECT_SOURCE_DIR}/include")
-include_directories(WH-Application ${CMAKE_SOURCE_DIR}/lib/include)
+include_directories("${PROJECT_SOURCE_DIR}/lib/include")
 
 find_package(Qt6 COMPONENTS
         Core
@@ -24,7 +24,7 @@ add_executable(TasQ_Application
         include/widgets/MainWindow.h
         src/widgets/MainWindow/MainWindow.ui
         src/models/User.cpp include/models/User.h
-        src/models/ModelBase.cpp include/models/ModelBase.h
+        include/models/Models.h
         src/models/School.cpp include/models/School.h
         src/models/Course.cpp include/models/Course.h
         src/models/Enums.cpp include/models/Enums.h
@@ -32,7 +32,8 @@ add_executable(TasQ_Application
         src/models/Reminder.cpp include/models/Reminder.h
         src/models/Todo.cpp include/models/Todo.h
         src/models/Application.cpp include/models/Application.h
-        include/net/net.h src/net/net.cpp)
+        include/net/net.h src/net/net.cpp
+        )
 
 target_link_libraries(TasQ_Application
         Qt::Core
@@ -41,6 +42,23 @@ target_link_libraries(TasQ_Application
         Qt::Network
         ${CURL}
         )
+
+add_executable(TasQ_NoQt
+        src/models/User.cpp include/models/User.h
+        src/models/School.cpp include/models/School.h
+        src/models/Course.cpp include/models/Course.h
+        src/models/Enums.cpp include/models/Enums.h
+        src/models/Event.cpp include/models/Event.h
+        src/models/Reminder.cpp include/models/Reminder.h
+        src/models/Todo.cpp include/models/Todo.h
+        src/models/Application.cpp include/models/Application.h
+        test/models/TestUser.cpp
+        test/models/TestCourse.cpp
+        test/models/TestEvent.cpp
+        test/models/TestEnums.cpp
+        test/models/TestTodo.cpp
+        test/models/TestReminder.cpp
+        test/models/TestSchool.cpp)
 
 if (WIN32)
     set(DEBUG_SUFFIX)
