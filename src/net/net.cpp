@@ -43,6 +43,9 @@ static size_t WriteMemoryCallback(void *contents, size_t size, size_t nmemb, voi
 /** Initialise curl handle to nullptr */
 CURL *net::curl = nullptr;
 
+// Set API base url
+const string net::BASE_URL = "http://server.lan:120";
+
 void net::init() {
     curl_global_init(CURL_GLOBAL_ALL);
     curl = curl_easy_init();
@@ -81,6 +84,10 @@ string net::get(string url){
     return out;
 }
 
+nlohmann::json net::getJSON(string url){
+    return nlohmann::json::parse(get(url));
+}
+
 bool net::getStatus() {
     try{
         string result = net::get(BASE_URL + "/status");
@@ -94,3 +101,7 @@ bool net::getStatus() {
 // Build error string and use parent constructor
 net::NetworkException::NetworkException(CURLcode code):
     std::runtime_error("Request returned code " + to_string(code) + ": " + curl_easy_strerror(code)) { }
+
+// Build error string and use parent constructor
+net::APIResponseException::APIResponseException(std::string endpoint, std::string message):
+    std::runtime_error("Request to " + endpoint + " failed with message: " + message) { }

@@ -8,6 +8,7 @@
 #include <string>
 #include <stdexcept>
 #include <curl/curl.h>
+#include <nlohmann/json.hpp>
 
 /**
  * Namespace containing netcode for interfacing with backend API
@@ -17,7 +18,7 @@ namespace net {
     extern CURL *curl;
 
     /** Base URL for API endpoints */
-    const std::string BASE_URL = "https://tasq.gregk.ca";
+    extern const std::string BASE_URL;
 
     /**
      * Initialise the netcode.<br/>
@@ -26,11 +27,19 @@ namespace net {
     void init();
 
     /**
-     * Execute and HTTP or HTTPS GET request
+     * Execute an HTTP or HTTPS GET request
      * @param url The URL to request
      * @return string with response
      */
     std::string get(std::string url);
+
+    /**
+     * Execute an HTTP or HTTPS GET request and get JSON response
+     * @param url The URL to request
+     * @return json object generated from response
+     * @see net::get(std::string)
+     */
+    nlohmann::json getJSON(std::string url);
 
     /**
      * Get the API status
@@ -48,6 +57,19 @@ namespace net {
          * @param code curl response code
          */
         explicit NetworkException(CURLcode code);
+    };
+
+    /**
+     * Exception thrown when API returns failed response
+     */
+    class APIResponseException: public std::runtime_error{
+    public:
+        /**
+         * Create a new APIResponseException
+         * @param endpoint API endpoint returning the response
+         * @param message error message provided by API
+         */
+         APIResponseException(std::string endpoint, std::string message);
     };
 }
 
