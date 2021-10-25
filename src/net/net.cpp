@@ -83,7 +83,7 @@ string request(string &url, map<string, string> *body = nullptr){
 
     // If the code is anything but okay, throw an exception
     if(res != CURLE_OK){
-        throw NetworkException(res);
+        throw NetworkException(url, res);
     }
 
     // Create string from response
@@ -131,8 +131,8 @@ bool net::getStatus() {
 }
 
 // Build error string and use parent constructor
-net::NetworkException::NetworkException(CURLcode code):
-    std::runtime_error("Request returned code " + to_string(code) + ": " + curl_easy_strerror(code)) { }
+net::NetworkException::NetworkException(std::string endpoint, CURLcode code):
+    std::runtime_error("Request to " + endpoint + " returned code " + to_string(code) + ": " + curl_easy_strerror(code)) { }
 
 // Build error string and use parent constructor
 net::APIResponseException::APIResponseException(std::string endpoint, std::string message):

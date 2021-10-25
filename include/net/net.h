@@ -78,7 +78,7 @@ namespace net {
          * Create a new NetworkException
          * @param code curl response code
          */
-        explicit NetworkException(CURLcode code);
+        explicit NetworkException(std::string endpoint, CURLcode code);
     };
 
     /**
