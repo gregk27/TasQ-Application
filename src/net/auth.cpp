@@ -26,6 +26,7 @@ shared_ptr<User> auth::registerUser(string &username, string &email, string &pas
         throw APIResponseException("/users/register", js["error"]);
 
     auto out = std::make_shared<User>(js["user"]);
+    auth::localUser = out;
     return out;
 }
 
@@ -41,5 +42,6 @@ shared_ptr<User> auth::login(string &email, string &password) {
         throw APIResponseException("/users/login", js["error"]);
 
     auto out = std::make_shared<User>(js["user"]);
+    auth::localUser = out;
     return out;
 }

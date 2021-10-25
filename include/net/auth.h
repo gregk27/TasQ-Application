@@ -14,6 +14,10 @@ using namespace std;
  * Namespace containing netcode for authentication with API
  */
 namespace net::auth {
+    /**
+     * Global variable with the last user returned by register or login
+     */
+    extern shared_ptr<models::User> localUser;
 
     /**
      * Register a new user in the database<br/>
