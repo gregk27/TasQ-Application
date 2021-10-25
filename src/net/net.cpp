@@ -61,6 +61,8 @@ string request(string &url, map<string, string> *body = nullptr){
 
     // If the body is set, then perform POST request
     // Otherwise perform GET request
+    /** Storage to keep postFields in scope until execution */
+    string postFields;
     if(body){
         stringstream bodyStr;
         for(auto &arg : *body){
@@ -69,8 +71,9 @@ string request(string &url, map<string, string> *body = nullptr){
                     << curl_easy_escape(curl, arg.second.c_str(), arg.second.size())
                     << "&";
         }
+        postFields = bodyStr.str();
         // Specify POST data
-        curl_easy_setopt(curl, CURLOPT_POSTFIELDS, bodyStr.str().c_str());
+        curl_easy_setopt(curl, CURLOPT_POSTFIELDS, postFields.c_str());
         // Set POST mode
         curl_easy_setopt(curl, CURLOPT_POST, 1);
         curl_easy_setopt(curl, CURLOPT_NOBODY, 0);
@@ -98,7 +101,7 @@ string request(string &url, map<string, string> *body = nullptr){
 CURL *net::curl = nullptr;
 
 // Set API base url
-const string net::BASE_URL = "http://server.lan:120";
+const string net::BASE_URL = "https://tasq.gregk.ca";
 
 void net::init() {
     curl_global_init(CURL_GLOBAL_ALL);
