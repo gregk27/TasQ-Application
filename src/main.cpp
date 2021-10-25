@@ -9,6 +9,7 @@
 #include <models/School.h>
 #include <models/User.h>
 #include <net/auth.h>
+#include <net/schools.h>
 
 using namespace std;
 
@@ -27,6 +28,13 @@ int main(int argc, char *argv[]) {
         cout << "Logged in as " << net::auth::localUser->getName() << endl;
     } else {
         cout << "API connection failed" << endl;
+    }
+
+    for(auto &school : *net::schools::getSchools()){
+        cout << school.getName() << endl;
+        for(auto &course : *net::schools::getCourses(school)){
+            cout << course.getCode() << ":" << course.getName() << endl;
+        }
     }
 
     return QApplication::exec();
