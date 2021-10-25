@@ -66,19 +66,19 @@ namespace models::enums {
          * Get the term's database name
          * @return Database name for term
          */
-        string toDB();
+        string toDB() const;
 
         /**
          * Get the term's pretty-print name
          * @return Pretty-print name for term
          */
-        string toString();
+        string toString() const;
 
         /**
          * Get the term's single-letter name
          * @return Single-letter name for term
          */
-        char toLetter();
+        char toLetter() const;
 
         // Override comparison operators
         // Terms can be equal, but ordering is meaningless
@@ -136,13 +136,13 @@ namespace models::enums {
          * Get the eventType's database name
          * @return Database name for eventType
          */
-        string toDB();
+        string toDB() const;
 
         /**
          * Get the eventType's pretty-print name
          * @return Pretty-print name for eventType
          */
-        string toString();
+        string toString() const;
 
         // Override comparison operators
         // Terms can be equal, but ordering is meaningless

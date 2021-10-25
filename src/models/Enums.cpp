@@ -37,15 +37,15 @@ Term Term::fromDB(string s) {
     throw EnumValueException("Invalid term name " + s);
 }
 
-string Term::toDB() {
+string Term::toDB() const {
     return dbNames[val];
 }
 
-string Term::toString() {
+string Term::toString() const {
     return prettyNames[val];
 }
 
-char Term::toLetter() {
+char Term::toLetter() const {
     return letters[val];
 }
 
@@ -80,11 +80,11 @@ EventType EventType::fromDB(string s) {
     throw EnumValueException("Invalid event type " + s);
 }
 
-string EventType::toDB() {
+string EventType::toDB() const {
     return dbNames[val];
 }
 
-string EventType::toString() {
+string EventType::toString() const {
     return prettyNames[val];
 }
 
