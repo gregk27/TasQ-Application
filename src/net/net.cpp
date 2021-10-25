@@ -58,6 +58,8 @@ string request(string &url, map<string, string> *body = nullptr){
     curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
     // Specify chunk for callback
     curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void *)&chunk);
+    // Fail on bad HTTP response
+    curl_easy_setopt(curl, CURLOPT_FAILONERROR, 1);
 
     // If the body is set, then perform POST request
     // Otherwise perform GET request
