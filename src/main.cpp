@@ -65,9 +65,45 @@ int main(int argc, char *argv[]) {
     cout << "Updating course" << endl;
     c = net::courses::modify(*c);
 
+    nlohmann::json eventJSON = {
+            {"id", ""},
+            {"course", c->getId()},
+            {"name", "Test Event 1"},
+            {"type", enums::EventType::TEST.toDB()},
+            {"weight", 50},
+            {"datetime", 1635177676L},
+            {"weekly", 0}
+    };
+
+    cout << "Creating event" << endl;
+
+    Event tmpEvent(eventJSON);
+    auto e = net::courses::addEvent(tmpEvent);
+
+    cout << "Updating event" << endl;
+    string s = "Test event 1.5";
+    e->setName(s);
+    e = net::courses::modifyEvent(*e);
+
+    eventJSON["name"] = "Test event 2";
+    eventJSON["type"] = enums::EventType::LAB.toDB();
+    eventJSON["endDate"] = 1635178676L;
+
+    cout << "Creating second event" << endl;
+    tmpEvent = Event(eventJSON);
+    auto e2 = net::courses::addEvent(tmpEvent);
+
+    cout << "Removing second event" << endl;
+    net::courses::removeEvent(*e2);
+
+    cout << "Getting events" << endl;
+    auto events = net::courses::getEvents(*c);
+    for(auto event : *events){
+        cout << event.getName() << endl;
+    }
+
     cout << "Deleting course" << endl;
     net::courses::remove(*c);
-
 
     return QApplication::exec();
 }

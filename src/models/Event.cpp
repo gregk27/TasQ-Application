@@ -17,7 +17,7 @@ Event::Event(json &json):
     } else {
         endDate = json["endDate"];
     }
-    weekly = json["weekly"];
+    weekly = (int) json["weekly"];
 }
 
 uuid Event::getId() {
