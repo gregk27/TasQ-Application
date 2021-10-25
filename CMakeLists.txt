@@ -33,7 +33,7 @@ add_executable(TasQ_Application
         src/models/Todo.cpp include/models/Todo.h
         src/models/Application.cpp include/models/Application.h
         include/net/net.h src/net/net.cpp
-        )
+        src/net/auth.cpp include/net/auth.h)
 
 target_link_libraries(TasQ_Application
         Qt::Core
@@ -52,6 +52,7 @@ add_executable(TasQ_NoQt
         src/models/Reminder.cpp include/models/Reminder.h
         src/models/Todo.cpp include/models/Todo.h
         src/models/Application.cpp include/models/Application.h
+        src/net/auth.cpp include/net/auth.h
         test/models/TestUser.cpp
         test/models/TestCourse.cpp
         test/models/TestEvent.cpp
