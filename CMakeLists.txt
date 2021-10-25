@@ -33,7 +33,7 @@ add_executable(TasQ_Application
         src/models/Todo.cpp include/models/Todo.h
         src/models/Application.cpp include/models/Application.h
         include/net/net.h src/net/net.cpp
-        src/net/auth.cpp include/net/auth.h src/net/schools.cpp include/net/schools.h)
+        src/net/auth.cpp include/net/auth.h src/net/schools.cpp include/net/schools.h src/net/courses.cpp include/net/courses.h)
 
 target_link_libraries(TasQ_Application
         Qt::Core
@@ -59,7 +59,7 @@ add_executable(TasQ_NoQt
         test/models/TestEnums.cpp
         test/models/TestTodo.cpp
         test/models/TestReminder.cpp
-        test/models/TestSchool.cpp src/net/schools.cpp include/net/schools.h)
+        test/models/TestSchool.cpp src/net/schools.cpp include/net/schools.h src/net/courses.cpp include/net/courses.h)
 
 if (WIN32)
     set(DEBUG_SUFFIX)
