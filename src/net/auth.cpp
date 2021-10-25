@@ -45,3 +45,7 @@ shared_ptr<User> auth::login(string &email, string &password) {
     auth::localUser = out;
     return out;
 }
+
+// Build error string and use parent constructor
+auth::AuthException::AuthException(string action):
+        runtime_error("You must be logged in to "+action){}
