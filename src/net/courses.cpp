@@ -22,10 +22,7 @@ shared_ptr<Course> courses::add(Course &course) {
             {"school", course.getSchoolId()}
     };
 
-    auto js = postJSON(BASE_URL+"/courses/add", body);
-
-    if(!js["success"])
-        throw APIResponseException("/courses/add", js["error"]);
+    auto js = postAPI(BASE_URL+"/courses/add", body);
 
     return std::make_shared<Course>(js["course"]);;
 }
@@ -42,10 +39,7 @@ shared_ptr<Course> courses::modify(Course &course) {
             {"school", course.getSchoolId()}
     };
 
-    auto js = postJSON(BASE_URL+"/courses/"+course.getId()+"/modify", body);
-
-    if(!js["success"])
-        throw APIResponseException("/courses/"+course.getId()+"/modify", js["error"]);
+    auto js = postAPI(BASE_URL+"/courses/"+course.getId()+"/modify", body);
 
     cout << js << endl;
     return std::make_shared<Course>(js["course"]);
@@ -57,10 +51,7 @@ bool courses::remove(string &courseId) {
             {"owner", auth::localUser->getId()},
     };
 
-    auto js = postJSON(BASE_URL+"/courses/"+courseId+"/remove", body);
-
-    if(!js["success"])
-        throw APIResponseException("/courses/"+courseId+"/remove", js["error"]);
+    auto js = postAPI(BASE_URL+"/courses/"+courseId+"/remove", body);
 
     return js["success"];
 }

@@ -14,10 +14,7 @@
 using namespace net;
 
 shared_ptr<vector<School>> schools::getSchools() {
-    auto js = getJSON(BASE_URL+"/schools/get");
-
-    if(!js["success"])
-        throw APIResponseException("/schools/get", js["error"]);
+    auto js = getAPI(BASE_URL+"/schools/get");
 
     auto *out = new vector<School>;
     for(auto school : js["schools"]){
@@ -28,10 +25,7 @@ shared_ptr<vector<School>> schools::getSchools() {
 }
 
 shared_ptr<vector<Course>> schools::getCourses(string &schoolId){
-    auto js = getJSON(BASE_URL + "/schools/" + schoolId + "/courses");
-
-    if(!js["success"])
-        throw APIResponseException("/schools/" + schoolId + "/courses", js["error"]);
+    auto js = getAPI(BASE_URL + "/schools/" + schoolId + "/courses");
 
     auto *out = new vector<Course>;
     for(auto course : js["courses"]){

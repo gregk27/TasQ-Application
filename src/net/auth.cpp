@@ -20,10 +20,7 @@ shared_ptr<User> auth::registerUser(string &username, string &email, string &pas
         {"school", schoolId}
     };
 
-    auto js = postJSON(BASE_URL+"/users/register", body);
-
-    if(!js["success"])
-        throw APIResponseException("/users/register", js["error"]);
+    auto js = postAPI(BASE_URL+"/users/register", body);
 
     auto out = std::make_shared<User>(js["user"]);
     auth::localUser = out;
@@ -36,10 +33,7 @@ shared_ptr<User> auth::login(string &email, string &password) {
             {"password", password}
     };
 
-    auto js = postJSON(BASE_URL+"/users/login", body);
-
-    if(!js["success"])
-        throw APIResponseException("/users/login", js["error"]);
+    auto js = postAPI(BASE_URL+"/users/login", body);
 
     auto out = std::make_shared<User>(js["user"]);
     auth::localUser = out;
