@@ -45,6 +45,14 @@ namespace net {
     }
 
     /**
+     * Execute a GET request to API, with check for API success flag
+     * @param url The URL to request
+     * @return json object generated from response
+     * @see net::getJSON(std::string)
+     */
+    nlohmann::json getAPI(std::string url);
+
+    /**
      * Execute an HTTP or HTTPS POST request
      * @param url The URL to request
      * @param body The POST body, as key-value pairs
@@ -62,6 +70,15 @@ namespace net {
     inline nlohmann::json postJSON(std::string url, std::map<std::string, std::string> &body){
         return nlohmann::json::parse(post(url, body));
     }
+
+    /**
+     * Execute a POST request to API, with check for API success flag
+     * @param url The URL to request
+     * @param body The POST body, as key-value pairs
+     * @return json object generated from response
+     * @see net::postJSON(std::string, std::map<std::string, std::string>)
+     */
+    nlohmann::json postAPI(std::string url, std::map<std::string, std::string> &body);
 
     /**
      * Get the API status

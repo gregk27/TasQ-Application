@@ -119,8 +119,26 @@ string net::get(string url){
     return request(url);
 }
 
+nlohmann::json net::getAPI(std::string url) {
+    auto js = getJSON(url);
+
+    if(!js["success"])
+        throw APIResponseException(url, js["error"]);
+
+    return js;
+}
+
 string net::post(string url, map<string, string> &body) {
     return request(url, &body);
+}
+
+nlohmann::json net::postAPI(std::string url, map<string, string> &body) {
+    auto js = postJSON(url, body);
+
+    if(!js["success"])
+        throw APIResponseException(url, js["error"]);
+
+    return js;
 }
 
 bool net::getStatus() {
