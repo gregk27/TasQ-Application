@@ -3,7 +3,13 @@
 //
 
 #include <models/Course.h>
+#include <models/User.h>
 using namespace models;
+
+// Forward declare localUser since cannot import auth
+namespace net::auth {
+    extern shared_ptr<User> localUser;
+}
 
 Course::Course(json &json):
         term(enums::Term::fromDB(json["term"])) {
@@ -81,4 +87,28 @@ void Course::setSchoolId(uuid &newSchoolId) {
 
 unsigned long long Course::getModified() {
     return modified;
+}
+
+string Course::getURL(Action a) {
+    switch(a){
+        case NetModel::ADD:
+            return "/courses/add";
+        case NetModel::MODIFY:
+            return "/courses/"+id+"/modify";
+        case NetModel::REMOVE:
+            return "/courses/"+id+"/remove";
+    }
+    throw ActionException("none", "course");
+}
+
+map<string, string> *Course::getBody(Action a) {
+    return new map<string, string> {
+            {"name", name},
+            {"code", code},
+            {"year", to_string(year)},
+            {"term", term.toDB()},
+            {"prof", prof},
+            {"owner", net::auth::localUser->getId()},
+            {"school", schoolId}
+    };
 }

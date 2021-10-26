@@ -6,6 +6,7 @@
 #define TASQ_APPLICATION_TODO_H
 
 #include "Models.h"
+#include <models/NetModel.h>
 
 /**
  * Classes and functions for handling data models
@@ -15,7 +16,7 @@ namespace models {
     /**
      * Data model representing a To-do item for the local user
      */
-    class Todo {
+    class Todo : public NetModel {
     private:
         uuid id;
         string name;
@@ -54,6 +55,14 @@ namespace models {
          * Set the To-do's completion flag, will be reflected in databases
          */
         void setCompleted(bool newCompleted);
+
+        inline string getPayloadName() override {
+            return "todo";
+        }
+
+        string getURL(Action a) override;
+
+        map<string, string> * getBody(Action a) override;
     };
 }
 

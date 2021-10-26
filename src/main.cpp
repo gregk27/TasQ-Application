@@ -10,8 +10,8 @@
 #include <models/User.h>
 #include <net/auth.h>
 #include <net/schools.h>
-#include <net/courses.h>
-#include <net/users.h>
+#include <net/endpoints.h>
+#include <net/subscriptions.h>
 
 using namespace std;
 
@@ -56,7 +56,7 @@ int main(int argc, char *argv[]) {
     cout << "Creating course" << endl;
     Course tmp(courseJSON);
 
-    auto c = net::courses::add(tmp);
+    auto c = net::addModel<Course>(tmp);
 
     cout << c->getId() << endl;
 
@@ -64,7 +64,7 @@ int main(int argc, char *argv[]) {
     c->setName(newName);
 
     cout << "Updating course" << endl;
-    c = net::courses::modify(*c);
+    c = net::modifyModel<Course>(*c);
 
     nlohmann::json eventJSON = {
             {"id", ""},
@@ -79,12 +79,12 @@ int main(int argc, char *argv[]) {
     cout << "Creating event" << endl;
 
     Event tmpEvent(eventJSON);
-    auto e = net::courses::addEvent(tmpEvent);
+    auto e = net::addModel<Event>(tmpEvent);
 
     cout << "Updating event" << endl;
     string s = "Test event 1.5";
     e->setName(s);
-    e = net::courses::modifyEvent(*e);
+    e = net::modifyModel<Event>(*e);
 
     eventJSON["name"] = "Test event 2";
     eventJSON["type"] = enums::EventType::LAB.toDB();
@@ -92,32 +92,32 @@ int main(int argc, char *argv[]) {
 
     cout << "Creating second event" << endl;
     tmpEvent = Event(eventJSON);
-    auto e2 = net::courses::addEvent(tmpEvent);
+    auto e2 = net::addModel<Event>(tmpEvent);
 
     cout << "Removing second event" << endl;
-    net::courses::removeEvent(*e2);
+    net::removeModel<Event>(*e2);
 
     cout << "Getting events" << endl;
-    auto events = net::courses::getEvents(*c);
+    auto events = net::getEvents(*c);
     for(auto event : *events){
         cout << event.getName() << endl;
     }
 
     cout << "Subscribing to c" << endl;
-    net::users::addSubscription(*c);
+    net::subscriptions::addSubscription(*c);
 
     cout << "Getting subscriptions" << endl;
-    auto subscribed = net::users::getSubscriptions();
+    auto subscribed = net::subscriptions::getSubscriptions();
     cout << subscribed->size() << endl;
     for(auto subCourse : *subscribed){
         cout << subCourse.getName() << endl;
     }
 
     cout << "Unsubscribing" << endl;
-    net::users::removeSubscription(*c);
+    net::subscriptions::removeSubscription(*c);
 
     cout << "Deleting course" << endl;
-    net::courses::remove(*c);
+    net::removeModel<Course>(*c);
 
     return QApplication::exec();
 }

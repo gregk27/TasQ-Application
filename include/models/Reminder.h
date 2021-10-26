@@ -6,6 +6,7 @@
 #define TASQ_APPLICATION_REMINDER_H
 
 #include "Models.h"
+#include <models/NetModel.h>
 
 /**
  * Classes and functions for handling data models
@@ -14,7 +15,7 @@ namespace models {
     /**
      * Data model representing a reminder for the local user
      */
-    class Reminder {
+    class Reminder : public NetModel {
     private:
         uuid id;
         uuid eventId;
@@ -36,6 +37,14 @@ namespace models {
          * Get the reminder's event's id
          */
         uuid getEventId();
+
+        inline string getPayloadName() override {
+            return "reminder";
+        }
+
+        string getURL(Action a) override;
+
+        map<string, string> * getBody(Action a) override;
     };
 }
 
