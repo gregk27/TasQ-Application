@@ -10,8 +10,8 @@
 #include <models/User.h>
 #include <net/auth.h>
 #include <net/schools.h>
-#include <net/courses.h>
-#include <net/users.h>
+#include <net/endpoints.h>
+#include <net/subscriptions.h>
 
 using namespace std;
 
@@ -98,23 +98,23 @@ int main(int argc, char *argv[]) {
     net::removeModel<Event>(*e2);
 
     cout << "Getting events" << endl;
-    auto events = net::courses::getEvents(*c);
+    auto events = net::getEvents(*c);
     for(auto event : *events){
         cout << event.getName() << endl;
     }
 
     cout << "Subscribing to c" << endl;
-    net::users::addSubscription(*c);
+    net::subscriptions::addSubscription(*c);
 
     cout << "Getting subscriptions" << endl;
-    auto subscribed = net::users::getSubscriptions();
+    auto subscribed = net::subscriptions::getSubscriptions();
     cout << subscribed->size() << endl;
     for(auto subCourse : *subscribed){
         cout << subCourse.getName() << endl;
     }
 
     cout << "Unsubscribing" << endl;
-    net::users::removeSubscription(*c);
+    net::subscriptions::removeSubscription(*c);
 
     cout << "Deleting course" << endl;
     net::removeModel<Course>(*c);
