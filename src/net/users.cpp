@@ -41,3 +41,43 @@ shared_ptr<vector<Course>> users::updateSubscriptions(unsigned long long lastMod
 
     return out;
 }
+
+shared_ptr<Todo> users::addTodo(string &name){
+    map<string, string> body {
+            {"name", name}
+    };
+
+    auto js = postAPI(BASE_URL+"/users/"+auth::localUser->getId()+"/todos/add", body);
+
+    return make_shared<Todo>(js["todo"]);
+}
+
+shared_ptr<Todo> modifyTodo(Todo &t){
+    map<string, string> body {
+            {"name", t.getName()},
+            {"completed", to_string(t.getCompleted())}
+    };
+
+    auto js = postAPI(BASE_URL+"/users/"+auth::localUser->getId()+"/todos/"+t.getId()+"/modify", body);
+
+    return make_shared<Todo>(js["todo"]);
+}
+
+bool deleteTodo(string &todoID){
+    // API is post endpoint, but body can be empty
+    map<string, string> body = {};
+    postAPI(BASE_URL+"/users/"+auth::localUser->getId()+"/todos/"+todoID+"/remove", body);
+    return true;
+}
+
+shared_ptr<vector<Todo>> users::getTodos(){
+    auto js = getAPI(BASE_URL+"/users/"+auth::localUser->getId()+"/todos");
+
+    auto out = make_shared<vector<Todo>>();
+
+    for(auto t : js["todos"]){
+        out->push_back(Todo(t));
+    }
+
+    return out;
+}

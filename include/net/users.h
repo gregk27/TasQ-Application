@@ -7,6 +7,7 @@
 
 #include <models/User.h>
 #include <models/Course.h>
+#include <models/Todo.h>
 
 using namespace models;
 
@@ -54,6 +55,52 @@ namespace net::users {
     inline shared_ptr<vector<Course>> getSubscriptions() {
         return updateSubscriptions(0);
     }
+
+
+    /**
+     * Add a new to-do to database
+     * @param name Name of to-do to be added
+     * @return The to-do object returned by API
+     */
+    shared_ptr<Todo> addTodo(string &name);
+    /**
+     * Add a new to-do to database
+     * @param t To-do data to be added. id and owner can be empty strings, will be set by function
+     * @return The to-do object returned by API
+     */
+    inline shared_ptr<Todo> addTodo(Todo &t){
+        string name = t.getName();
+        return addTodo(name);
+    }
+
+    /**
+     * Modify an existing to-do in database
+     * @param t Updated data for to-do to be modified
+     * @return The to-do object returned by API
+     */
+    shared_ptr<Todo> modifyTodo(Todo &t);
+    /**
+     * Delete a to-do in database
+     * @param todoId ID of the to-do to delete
+     * @return True on successful deletion
+     */
+    bool deleteTodo(string &todoID);
+    /**
+     * Delete a to-do in database
+     * @param t Course to delete
+     * @return True on successful deletion
+     * @see net::to-dos::remove(string);
+     */
+    inline bool deleteTodo(Todo &t){
+        string id = t.getId();
+        return deleteTodo(id);
+    }
+
+    /**
+     * Get todos for the local user
+     * @return  vector with todos for local user
+     */
+    shared_ptr<vector<Todo>> getTodos();
 
 }
 
