@@ -8,6 +8,7 @@
 #include <optional>
 #include "Models.h"
 #include "Enums.h"
+#include <models/NetModel.h>
 
 /**
  * Classes and functions for handling data models
@@ -16,7 +17,7 @@ namespace models {
     /**
      * Data model representing an event
      */
-    class Event {
+    class Event : public NetModel {
     private:
         uuid id;
         uuid courseID;
@@ -117,6 +118,13 @@ namespace models {
          */
         void setWeekly(bool newWeekly);
 
+        inline string getPayloadName() override {
+            return "event";
+        }
+
+        string getURL(Action a) override;
+
+        map<string, string> * getBody(Action a) override;
     };
 }
 
