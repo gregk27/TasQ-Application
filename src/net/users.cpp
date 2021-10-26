@@ -81,3 +81,32 @@ shared_ptr<vector<Todo>> users::getTodos(){
 
     return out;
 }
+
+shared_ptr<Reminder> users::addReminder(Reminder &reminder){
+    map<string, string> body {
+            {"event", reminder.getEventId()}
+    };
+
+    auto js = postAPI(BASE_URL+"/users/"+auth::localUser->getId()+"/reminders/add", body);
+
+    return make_shared<Reminder>(js["reminder"]);
+}
+
+bool deleteReminder(string &reminderID){
+    // API is post endpoint, but body can be empty
+    map<string, string> body = {};
+    postAPI(BASE_URL+"/users/"+auth::localUser->getId()+"/reminders/"+reminderID+"/remove", body);
+    return true;
+}
+
+shared_ptr<vector<Reminder>> users::getReminders(){
+    auto js = getAPI(BASE_URL+"/users/"+auth::localUser->getId()+"/reminders");
+
+    auto out = make_shared<vector<Reminder>>();
+
+    for(auto t : js["reminders"]){
+        out->push_back(Reminder(t));
+    }
+
+    return out;
+}

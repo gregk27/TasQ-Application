@@ -8,6 +8,7 @@
 #include <models/User.h>
 #include <models/Course.h>
 #include <models/Todo.h>
+#include <models/Reminder.h>
 
 using namespace models;
 
@@ -102,6 +103,36 @@ namespace net::users {
      */
     shared_ptr<vector<Todo>> getTodos();
 
+
+    /**
+     * Get reminders for local user
+     * @return List of reminders for the course
+     */
+    shared_ptr<vector<Reminder>> getReminders();
+
+    /**
+     * Add an reminder for local user
+     * @param reminder Reminder data to create from
+     * @return The reminder object returned by API
+     */
+    shared_ptr<Reminder> addReminder(Reminder &reminder);
+
+    /**
+     * Delete reminder in database
+     * @param reminderId ID of the reminder to delete
+     * @param courseId ID of the reminder's course
+     * @return True on success
+     */
+    bool removeReminder(string &reminderId);
+    /**
+     * Delete reminder in database
+     * @param reminder Reminder to delete
+     * @return True on success
+     */
+    inline bool removeReminder(Reminder &reminder){
+        string reminderId = reminder.getId();
+        return removeReminder(reminderId);
+    }
 }
 
 #endif //TASQ_APPLICATION_USERS_H
