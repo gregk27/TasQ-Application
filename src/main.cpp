@@ -11,6 +11,7 @@
 #include <net/auth.h>
 #include <net/schools.h>
 #include <net/courses.h>
+#include <net/users.h>
 
 using namespace std;
 
@@ -101,6 +102,19 @@ int main(int argc, char *argv[]) {
     for(auto event : *events){
         cout << event.getName() << endl;
     }
+
+    cout << "Subscribing to c" << endl;
+    net::users::addSubscription(*c);
+
+    cout << "Getting subscriptions" << endl;
+    auto subscribed = net::users::getSubscriptions();
+    cout << subscribed->size() << endl;
+    for(auto subCourse : *subscribed){
+        cout << subCourse.getName() << endl;
+    }
+
+    cout << "Unsubscribing" << endl;
+    net::users::removeSubscription(*c);
 
     cout << "Deleting course" << endl;
     net::courses::remove(*c);
