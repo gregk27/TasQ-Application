@@ -56,7 +56,7 @@ int main(int argc, char *argv[]) {
     cout << "Creating course" << endl;
     Course tmp(courseJSON);
 
-    auto c = net::courses::add(tmp);
+    auto c = net::addModel<Course>(tmp);
 
     cout << c->getId() << endl;
 
@@ -64,7 +64,7 @@ int main(int argc, char *argv[]) {
     c->setName(newName);
 
     cout << "Updating course" << endl;
-    c = net::courses::modify(*c);
+    c = net::modifyModel<Course>(*c);
 
     nlohmann::json eventJSON = {
             {"id", ""},
@@ -117,7 +117,7 @@ int main(int argc, char *argv[]) {
     net::users::removeSubscription(*c);
 
     cout << "Deleting course" << endl;
-    net::courses::remove(*c);
+    net::removeModel<Course>(*c);
 
     return QApplication::exec();
 }
