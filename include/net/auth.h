@@ -49,6 +49,18 @@ namespace net::auth {
      * @return User in database
      */
     shared_ptr<models::User> getLocalUser();
+
+    /**
+     * Exception thrown when there's no localUser to perform an action requiring authorization
+     */
+    class AuthException: public runtime_error {
+    public:
+        /**
+         * Create a new AuthException
+         * @param action description of action being performed
+         */
+        explicit AuthException(string action);
+    };
 }
 
 #endif //TASQ_APPLICATION_AUTH_H

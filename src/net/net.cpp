@@ -4,10 +4,16 @@
 
 #include <net/net.h>
 #include <iostream>
+#include <optional>
 #include <sstream>
 
 using namespace std;
 using namespace net;
+
+// Forward declare auth session ID, since auth.h includes net.h
+namespace net::auth {
+    extern optional<string> sessionToken;
+}
 
 /** Struct to store curl response data */
 typedef struct {
@@ -58,9 +64,13 @@ string request(string &url, map<string, string> *body = nullptr){
     curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
     // Specify chunk for callback
     curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void *)&chunk);
+    // Fail on bad HTTP response
+    curl_easy_setopt(curl, CURLOPT_FAILONERROR, 1);
 
     // If the body is set, then perform POST request
     // Otherwise perform GET request
+    /** Storage to keep postFields in scope until execution */
+    string postFields;
     if(body){
         stringstream bodyStr;
         for(auto &arg : *body){
@@ -69,8 +79,9 @@ string request(string &url, map<string, string> *body = nullptr){
                     << curl_easy_escape(curl, arg.second.c_str(), arg.second.size())
                     << "&";
         }
+        postFields = bodyStr.str();
         // Specify POST data
-        curl_easy_setopt(curl, CURLOPT_POSTFIELDS, bodyStr.str().c_str());
+        curl_easy_setopt(curl, CURLOPT_POSTFIELDS, postFields.c_str());
         // Set POST mode
         curl_easy_setopt(curl, CURLOPT_POST, 1);
         curl_easy_setopt(curl, CURLOPT_NOBODY, 0);
@@ -83,7 +94,7 @@ string request(string &url, map<string, string> *body = nullptr){
 
     // If the code is anything but okay, throw an exception
     if(res != CURLE_OK){
-        throw NetworkException(res);
+        throw NetworkException(url, res);
     }
 
     // Create string from response
@@ -116,8 +127,36 @@ string net::get(string url){
     return request(url);
 }
 
+nlohmann::json net::getAPI(std::string url) {
+    // Include session token in cookie if set
+    if(auth::sessionToken.has_value()){
+        curl_easy_setopt(curl, CURLOPT_COOKIE, ("token="+auth::sessionToken.value()).c_str());
+    }
+
+    auto js = getJSON(url);
+
+    if(!js["success"])
+        throw APIResponseException(url, js["error"]);
+
+    return js;
+}
+
 string net::post(string url, map<string, string> &body) {
     return request(url, &body);
+}
+
+nlohmann::json net::postAPI(std::string url, map<string, string> &body) {
+    // Include session token in cookie if set
+    if(auth::sessionToken.has_value()){
+        curl_easy_setopt(curl, CURLOPT_COOKIE, ("token="+auth::sessionToken.value()).c_str());
+    }
+
+    auto js = postJSON(url, body);
+
+    if(!js["success"])
+        throw APIResponseException(url, js["error"]);
+
+    return js;
 }
 
 bool net::getStatus() {
@@ -131,8 +170,8 @@ bool net::getStatus() {
 }
 
 // Build error string and use parent constructor
-net::NetworkException::NetworkException(CURLcode code):
-    std::runtime_error("Request returned code " + to_string(code) + ": " + curl_easy_strerror(code)) { }
+net::NetworkException::NetworkException(std::string endpoint, CURLcode code):
+    std::runtime_error("Request to " + endpoint + " returned code " + to_string(code) + ": " + curl_easy_strerror(code)) { }
 
 // Build error string and use parent constructor
 net::APIResponseException::APIResponseException(std::string endpoint, std::string message):

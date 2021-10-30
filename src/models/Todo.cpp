@@ -3,7 +3,9 @@
 //
 
 #include <models/Todo.h>
+#include <models/User.h>
 using namespace models;
+
 
 Todo::Todo(json &json) {
     id = json["id"];
@@ -31,4 +33,23 @@ bool Todo::getCompleted() {
 void Todo::setCompleted(bool newCompleted) {
     // TODO: Add database changes
     completed = newCompleted;
+}
+
+string Todo::getURL(Action a) {
+    switch(a){
+        case NetModel::ADD:
+            return "/users/todos/add";
+        case NetModel::MODIFY:
+            return "/users/todos/"+id+"/modify";
+        case NetModel::REMOVE:
+            return "/users/todos/"+id+"/remove";
+    }
+    throw ActionException("none", "todo");
+}
+
+map<string, string> *Todo::getBody(Action a) {
+    return new map<string, string>{
+            {"name", name},
+            {"completed", to_string(completed)}
+    };
 }

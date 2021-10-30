@@ -6,6 +6,7 @@
 #define TASQ_APPLICATION_COURSE_H
 #include "Models.h"
 #include "Enums.h"
+#include <models/NetModel.h>
 
 /**
  * Classes and functions for handling data models
@@ -14,7 +15,7 @@ namespace models {
     /**
      * Data model representing a course
      */
-    class Course {
+    class Course : public NetModel {
     private:
         uuid id;
         string name;
@@ -110,6 +111,15 @@ namespace models {
          * Get the course's last modified date
          */
         unsigned long long getModified();
+
+        inline string getPayloadName() override {
+            return "course";
+        }
+
+        string getURL(Action a) override;
+
+        map<string, string> *getBody(Action a) override;
+
     };
 
 }

@@ -1,9 +1,16 @@
 //
 // Created by Greg on 2021-10-19.
 //
+#include <optional>
 #include <models/Event.h>
+#include <models/User.h>
 
 using namespace models;
+
+// Forward declare localUID since cannot import auth
+namespace net::auth {
+    extern optional<string> localUID;
+}
 
 Event::Event(json &json):
         type(enums::EventType::fromDB(json["type"])) {
@@ -17,7 +24,7 @@ Event::Event(json &json):
     } else {
         endDate = json["endDate"];
     }
-    weekly = json["weekly"];
+    weekly = (int) json["weekly"];
 }
 
 uuid Event::getId() {
@@ -81,4 +88,29 @@ bool Event::getWeekly() {
 
 void Event::setWeekly(bool newWeekly) {
     weekly = weekly;
+}
+
+string Event::getURL(Action a)  {
+    switch(a){
+        case NetModel::ADD:
+            return "/courses/"+courseID+"/events/add";
+        case NetModel::MODIFY:
+            return "/courses/"+courseID+"/events/"+id+"/modify";
+        case NetModel::REMOVE:
+            return "/courses/"+courseID+"/events/"+id+"/remove";
+    }
+    throw ActionException("none", "event");
+}
+
+map<string, string> *Event::getBody(Action a) {
+    return new map<string, string>{
+            {"id", id},
+            {"course", courseID},
+            {"name", name},
+            {"type", type.toDB()},
+            {"weight", to_string(weight)},
+            {"datetime", to_string(datetime)},
+            {"weekly", to_string(weekly)},
+            {"user", net::auth::localUID.value_or("")}
+    };
 }
