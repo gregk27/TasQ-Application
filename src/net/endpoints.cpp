@@ -9,7 +9,7 @@ using namespace std;
 using namespace models;
 
 shared_ptr<vector<Event>> net::getEvents(string &courseId) {
-    auto js = getAPI(BASE_URL+"/courses/"+courseId+"/events");
+    auto js = getAPI(BASE_URL+"/courses/"+courseId+"/events/get");
 
     auto out = make_shared<vector<Event>>();
     for(auto event : js["events"]){
@@ -20,7 +20,7 @@ shared_ptr<vector<Event>> net::getEvents(string &courseId) {
 }
 
 shared_ptr<vector<Todo>> net::getTodos(){
-    auto js = getAPI(BASE_URL+"/users/"+auth::localUser->getId()+"/todos");
+    auto js = getAPI(BASE_URL+"/users/todos/get");
 
     auto out = make_shared<vector<Todo>>();
 
@@ -32,7 +32,7 @@ shared_ptr<vector<Todo>> net::getTodos(){
 }
 
 shared_ptr<vector<Reminder>> net::getReminders(){
-    auto js = getAPI(BASE_URL+"/users/"+auth::localUser->getId()+"/reminders");
+    auto js = getAPI(BASE_URL+"/users/reminders/get");
 
     auto out = make_shared<vector<Reminder>>();
 

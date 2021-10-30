@@ -2,13 +2,14 @@
 // Created by Greg on 2021-10-19.
 //
 
+#include <optional>
 #include <models/Course.h>
 #include <models/User.h>
 using namespace models;
 
-// Forward declare localUser since cannot import auth
+// Forward declare localUID since cannot import auth
 namespace net::auth {
-    extern shared_ptr<User> localUser;
+    extern optional<string> localUID;
 }
 
 Course::Course(json &json):
@@ -108,7 +109,7 @@ map<string, string> *Course::getBody(Action a) {
             {"year", to_string(year)},
             {"term", term.toDB()},
             {"prof", prof},
-            {"owner", net::auth::localUser->getId()},
+            {"owner", net::auth::localUID.value_or("")},
             {"school", schoolId}
     };
 }

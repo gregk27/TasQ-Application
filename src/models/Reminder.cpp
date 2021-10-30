@@ -7,10 +7,6 @@
 
 using namespace models;
 
-// Forward declare localUser since cannot import auth
-namespace net::auth {
-    extern shared_ptr<User> localUser;
-}
 
 Reminder::Reminder(json &json) {
     id = json["id"];
@@ -28,11 +24,11 @@ uuid Reminder::getEventId() {
 string Reminder::getURL(Action a) {
     switch(a){
         case NetModel::ADD:
-            return "/users/"+net::auth::localUser->getId()+"/reminders/add";
+            return "/users/reminders/add";
         case NetModel::MODIFY:
             throw ActionException("modify", "reminder");
         case NetModel::REMOVE:
-            return "/users/"+net::auth::localUser->getId()+"/reminders/"+id+"/remove";
+            return "/users/reminders/"+id+"/remove";
     }
     throw ActionException("none", "reminder");
 }

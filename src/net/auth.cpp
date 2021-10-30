@@ -47,13 +47,9 @@ shared_ptr<User> auth::getLocalUser(){
     if(!localUID.has_value())
         return nullptr;
 
-    auto js = getJSON(BASE_URL+"/users/"+localUID.value());
+    auto js = getAPI(BASE_URL+"/users/"+localUID.value());
 
-    if(!js["success"])
-        throw APIResponseException("/users/login", js["error"]);
-
-    auto out = std::make_shared<User>(js["user"]);
-    return out;
+    return std::make_shared<User>(js["user"]);
 }
 
 // Build error string and use parent constructor

@@ -1,14 +1,15 @@
 //
 // Created by Greg on 2021-10-19.
 //
+#include <optional>
 #include <models/Event.h>
 #include <models/User.h>
 
 using namespace models;
 
-// Forward declare localUser since cannot import auth
+// Forward declare localUID since cannot import auth
 namespace net::auth {
-    extern shared_ptr<User> localUser;
+    extern optional<string> localUID;
 }
 
 Event::Event(json &json):
@@ -110,6 +111,6 @@ map<string, string> *Event::getBody(Action a) {
             {"weight", to_string(weight)},
             {"datetime", to_string(datetime)},
             {"weekly", to_string(weekly)},
-            {"user", net::auth::localUser->getId()}
+            {"user", net::auth::localUID.value_or("")}
     };
 }

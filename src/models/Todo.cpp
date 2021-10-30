@@ -6,10 +6,6 @@
 #include <models/User.h>
 using namespace models;
 
-// Forward declare localUser since cannot import auth
-namespace net::auth {
-    extern shared_ptr<User> localUser;
-}
 
 Todo::Todo(json &json) {
     id = json["id"];
@@ -42,11 +38,11 @@ void Todo::setCompleted(bool newCompleted) {
 string Todo::getURL(Action a) {
     switch(a){
         case NetModel::ADD:
-            return "/users/"+net::auth::localUser->getId()+"/todos/add";
+            return "/users/todos/add";
         case NetModel::MODIFY:
-            return "/users/"+net::auth::localUser->getId()+"/todos/"+id+"/modify";
+            return "/users/todos/"+id+"/modify";
         case NetModel::REMOVE:
-            return "/users/"+net::auth::localUser->getId()+"/todos/"+id+"/remove";
+            return "/users/todos/"+id+"/remove";
     }
     throw ActionException("none", "todo");
 }
