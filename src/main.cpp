@@ -21,10 +21,10 @@ int main(int argc, char *argv[]) {
     net::init();
     bool netStat = net::getStatus();
     if(netStat) {
-        string email = "dummy@gregk.ca";
-        string password = "password";
-        net::auth::login(email, password);
-        cout << "Logged in as " << net::auth::localUser->getName() << endl;
+        net::auth::sessionToken = "e859b1a3-38e8-11ec-a3fd-0023aea14009";
+        net::auth::localUID = "6df88578-3526-11ec-a3fd-0023aea14009";
+        auto u = net::auth::getLocalUser();
+        cout << "Authenticated as " << u->getName() << ", token: " << net::auth::sessionToken.value() << endl;
     } else {
         cout << "API connection failed" << endl;
     }

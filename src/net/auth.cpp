@@ -48,3 +48,16 @@ shared_ptr<User> auth::login(string &email, string &password) {
     auth::sessionToken = js["user"]["token"];
     return out;
 }
+
+shared_ptr<User> auth::getLocalUser(){
+    if(!localUID.has_value())
+        return nullptr;
+
+    auto js = getJSON(BASE_URL+"/users/"+localUID.value());
+
+    if(!js["success"])
+        throw APIResponseException("/users/login", js["error"]);
+
+    auto out = std::make_shared<User>(js["user"]);
+    return out;
+}

@@ -44,6 +44,11 @@ namespace net::auth {
      */
     shared_ptr<models::User> login(string &email, string &password);
 
+    /**
+     * Get the locally signed in user
+     * @return User in database
+     */
+    shared_ptr<models::User> getLocalUser();
 }
 
 #endif //TASQ_APPLICATION_AUTH_H
