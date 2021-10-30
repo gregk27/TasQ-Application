@@ -5,6 +5,7 @@
 #ifndef TASQ_APPLICATION_AUTH_H
 #define TASQ_APPLICATION_AUTH_H
 
+#include <optional>
 #include <net/net.h>
 #include <models/User.h>
 
@@ -15,13 +16,17 @@ using namespace std;
  */
 namespace net::auth {
     /**
+     * Session token created on login, used for authorized accesses
+     */
+    extern optional<string> sessionToken;
+    /**
      * Global variable with the last user returned by register or login
      */
-    extern shared_ptr<models::User> localUser;
+    extern optional<string> localUID;
 
     /**
      * Register a new user in the database<br/>
-     * This will update net::localUser
+     * This will update net::sessionToken and net::localUID
      * @param username user's username
      * @param email user's email
      * @param password user's password
@@ -32,13 +37,18 @@ namespace net::auth {
 
     /**
      * Log in to a user<br/>
-     * This will update net::localUser
+     * This will update net::sessionToken and net::localUID
      * @param email user's email
      * @param password user's password
      * @return User in database
      */
     shared_ptr<models::User> login(string &email, string &password);
 
+    /**
+     * Get the locally signed in user
+     * @return User in database
+     */
+    shared_ptr<models::User> getLocalUser();
 }
 
 #endif //TASQ_APPLICATION_AUTH_H
