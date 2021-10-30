@@ -9,7 +9,6 @@ using namespace models;
 User::User(json &json) {
     id = json["id"];
     name = json["name"];
-    email = json["email"];
     schoolId = json["school"];
 }
 
@@ -24,15 +23,6 @@ string User::getName() {
 void User::setName(string &newName) {
     // TODO: Add database changes
     name = newName;
-}
-
-string User::getEmail() {
-    return email;
-}
-
-void User::setEmail(string &newEmail) {
-    // TODO: Add database changes
-    email = newEmail;
 }
 
 uuid User::getSchoolId() {
