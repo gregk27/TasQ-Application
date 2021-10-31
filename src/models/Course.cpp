@@ -2,15 +2,11 @@
 // Created by Greg on 2021-10-19.
 //
 
+#include <net/auth.h>
 #include <optional>
 #include <models/Course.h>
 #include <models/User.h>
 using namespace models;
-
-// Forward declare localUID since cannot import auth
-namespace net::auth {
-    extern optional<string> localUID;
-}
 
 Course::Course(json &json):
         term(enums::Term::fromDB(json["term"])) {
@@ -109,7 +105,7 @@ map<string, string> *Course::getBody(Action a) {
             {"year", to_string(year)},
             {"term", term.toDB()},
             {"prof", prof},
-            {"owner", net::auth::localUID.value_or("")},
+            {"owner", AuthController::instance()->getLocalUIDOptional().value_or("")},
             {"school", schoolId}
     };
 }

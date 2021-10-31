@@ -111,6 +111,5 @@ map<string, string> *Event::getBody(Action a) {
             {"weight", to_string(weight)},
             {"datetime", to_string(datetime)},
             {"weekly", to_string(weekly)},
-            {"user", net::auth::localUID.value_or("")}
     };
 }

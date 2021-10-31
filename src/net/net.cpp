@@ -6,14 +6,11 @@
 #include <iostream>
 #include <optional>
 #include <sstream>
+#include <net/auth.h>
 
 using namespace std;
 using namespace net;
 
-// Forward declare auth session ID, since auth.h includes net.h
-namespace net::auth {
-    extern optional<string> sessionToken;
-}
 
 /** Struct to store curl response data */
 typedef struct {
@@ -129,8 +126,8 @@ string net::get(string url){
 
 nlohmann::json net::getAPI(std::string url) {
     // Include session token in cookie if set
-    if(auth::sessionToken.has_value()){
-        curl_easy_setopt(curl, CURLOPT_COOKIE, ("token="+auth::sessionToken.value()).c_str());
+    if(AuthController::instance()->getSessionTokenOptional().has_value()){
+        curl_easy_setopt(curl, CURLOPT_COOKIE, ("token="+AuthController::instance()->getSessionTokenOptional().value()).c_str());
     }
 
     auto js = getJSON(url);
@@ -147,8 +144,8 @@ string net::post(string url, map<string, string> &body) {
 
 nlohmann::json net::postAPI(std::string url, map<string, string> &body) {
     // Include session token in cookie if set
-    if(auth::sessionToken.has_value()){
-        curl_easy_setopt(curl, CURLOPT_COOKIE, ("token="+auth::sessionToken.value()).c_str());
+    if(AuthController::instance()->getSessionTokenOptional().has_value()){
+        curl_easy_setopt(curl, CURLOPT_COOKIE, ("token="+AuthController::instance()->getSessionTokenOptional().value()).c_str());
     }
 
     auto js = postJSON(url, body);

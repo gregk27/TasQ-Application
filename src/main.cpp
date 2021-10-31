@@ -23,11 +23,9 @@ int main(int argc, char *argv[]) {
 
     net::init();
     bool netStat = net::getStatus();
-    if(netStat) {
-        net::auth::sessionToken = "e859b1a3-38e8-11ec-a3fd-0023aea14009";
-        net::auth::localUID = "6df88578-3526-11ec-a3fd-0023aea14009";
-        auto u = net::auth::getLocalUser();
-        cout << "Authenticated as " << u->getName() << ", token: " << net::auth::sessionToken.value() << endl;
+    if(netStat && AuthController::instance()->hasSession()) {
+        auto u = AuthController::instance()->getLocalUser();
+        cout << "Authenticated as " << u->getName() << ", token: " << AuthController::instance()->getSessionToken() << endl;
     } else {
         cout << "API connection failed" << endl;
     }
