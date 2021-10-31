@@ -33,7 +33,7 @@ add_executable(TasQ_Application
         src/models/Todo.cpp include/models/Todo.h
         src/models/Application.cpp include/models/Application.h
         include/net/net.h src/net/net.cpp
-        src/net/auth.cpp include/net/auth.h src/net/schools.cpp include/net/schools.h src/net/endpoints.cpp src/net/subscriptions.cpp include/models/NetModel.h src/models/NetModel.cpp include/net/endpoints.h include/net/subscriptions.h)
+        src/net/auth.cpp include/net/auth.h src/net/schools.cpp include/net/schools.h src/net/endpoints.cpp src/net/subscriptions.cpp include/models/NetModel.h src/models/NetModel.cpp include/net/endpoints.h include/net/subscriptions.h include/net/api.h src/net/api.cpp)
 
 target_link_libraries(TasQ_Application
         Qt::Core
@@ -59,7 +59,7 @@ add_executable(TasQ_NoQt
         test/models/TestEnums.cpp
         test/models/TestTodo.cpp
         test/models/TestReminder.cpp
-        test/models/TestSchool.cpp src/net/schools.cpp include/net/schools.h src/net/endpoints.cpp src/net/subscriptions.cpp include/models/NetModel.h src/models/NetModel.cpp)
+        test/models/TestSchool.cpp src/net/schools.cpp include/net/schools.h src/net/endpoints.cpp src/net/subscriptions.cpp include/models/NetModel.h src/models/NetModel.cpp include/net/api.h src/net/api.cpp)
 
 if (WIN32)
     set(DEBUG_SUFFIX)
