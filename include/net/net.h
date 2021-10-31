@@ -11,19 +11,51 @@
 #include <curl/curl.h>
 #include <nlohmann/json.hpp>
 #include <models/NetModel.h>
+#include <iostream>
+
 
 /**
- * Namespace containing netcode for interfacing with backend API
+ * Singleton controller for network requests
  */
-namespace net {
+class NetController {
+private:
+    /** Singleton instance of NetController */
+    static NetController *_instance;
+
     /** Curl handle used for networking */
-    extern CURL *curl;
+    CURL *curl = nullptr;
+
+    NetController();
+    ~NetController();
+
+    string request(string &url, map<string, string> *body=nullptr);
+public:
+    /**
+     * Get singleton instance
+     * @return Singleton instance of the NetController
+     */
+    static NetController *instance();
 
     /**
-     * Initialise the netcode.<br/>
-     * Must be called before any other operations can be performed
+     * Set a CURLOpt, should only be done while preparing a request<br/>
+     * Partial wrapper for curl_easy_setopt()
+     * @param opt CURLOpt to set
+     * @param value String value to give opt
+     * @return CURLCode returned by curl_easy_setopt()
      */
-    void init();
+    inline CURLcode setCurlopt(CURLoption opt, string value){
+        return curl_easy_setopt(curl, opt, value.c_str());
+    }
+
+    /**
+     * Escape a string for use in request<br/>
+     * Wrapper for curl_easy_escape()
+     * @param s String to escape
+     * @return Escaped string
+     */
+    inline string escapeString(const string &s){
+        return curl_easy_escape(curl, s.c_str(), s.size());
+    }
 
     /**
      * Execute an HTTP or HTTPS GET request

@@ -10,7 +10,6 @@
 #include <net/api.h>
 
 using namespace std;
-using namespace net;
 
 /** Struct to store curl response data */
 typedef struct {
@@ -44,6 +43,26 @@ static size_t WriteMemoryCallback(void *contents, size_t size, size_t nmemb, voi
     return realsize;
 }
 
+/** Initialise curl handle to nullptr */
+NetController *NetController::_instance = nullptr;
+
+NetController::NetController() {
+    curl_global_init(CURL_GLOBAL_ALL);
+    curl = curl_easy_init();
+
+    // Set memory callback
+    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteMemoryCallback);
+    // Set SSL CA certificates
+    curl_easy_setopt (curl, CURLOPT_CAINFO, "../lib/bin/cacert.pem");
+    // Specify user agent
+    curl_easy_setopt(curl, CURLOPT_USERAGENT, "libcurl-agent/1.0");
+}
+
+NetController::~NetController() {
+    curl_easy_cleanup(curl);
+    curl_global_cleanup();
+}
+
 /**
  * Local function to perform the HTTP/HTTPS requests<br/>
  * This function is local to ensure that get/post methods are used for legibility
@@ -51,7 +70,7 @@ static size_t WriteMemoryCallback(void *contents, size_t size, size_t nmemb, voi
  * @param body The POST body. If null then will perform GET request
  * @return string with response
  */
-string request(string &url, map<string, string> *body = nullptr){
+string NetController::request(string &url, map<string, string> *body){
     // Create a memory chunk to use
     MemoryStruct chunk;
     chunk.memory = (char*)malloc(1);
@@ -71,9 +90,9 @@ string request(string &url, map<string, string> *body = nullptr){
     if(body){
         stringstream bodyStr;
         for(auto &arg : *body){
-            bodyStr << curl_easy_escape(curl, arg.first.c_str(), arg.first.size())
+            bodyStr << escapeString(arg.first)
                     << "="
-                    << curl_easy_escape(curl, arg.second.c_str(), arg.second.size())
+                    << escapeString(arg.second)
                     << "&";
         }
         postFields = bodyStr.str();
@@ -102,26 +121,17 @@ string request(string &url, map<string, string> *body = nullptr){
     return out;
 }
 
-/** Initialise curl handle to nullptr */
-CURL *net::curl = nullptr;
-
-void net::init() {
-    curl_global_init(CURL_GLOBAL_ALL);
-    curl = curl_easy_init();
-
-    // Set memory callback
-    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteMemoryCallback);
-    // Set SSL CA certificates
-    curl_easy_setopt (curl, CURLOPT_CAINFO, "../lib/bin/cacert.pem");
-    // Specify user agent
-    curl_easy_setopt(curl, CURLOPT_USERAGENT, "libcurl-agent/1.0");
+NetController *NetController::instance() {
+    if(!_instance)
+        _instance = new NetController();
+    return _instance;
 }
 
-string net::get(string url){
+string NetController::get(string url){
     return request(url);
 }
 
-string net::post(string url, map<string, string> &body) {
+string NetController::post(string url, map<string, string> &body) {
     return request(url, &body);
 }
 

@@ -14,9 +14,9 @@ string APIRequest::buildURL() {
     if(!parameters.empty()) {
         ss << "?";
         for (auto &arg: body) {
-            ss << curl_easy_escape(net::curl, arg.first.c_str(), arg.first.size())
+            ss << NetController::instance()->escapeString(arg.first)
                << "="
-               << curl_easy_escape(net::curl, arg.second.c_str(), arg.second.size())
+               << NetController::instance()->escapeString(arg.second)
                << "&";
         }
     }
@@ -40,14 +40,15 @@ APIRequest *APIRequest::setBody(map<string, string> &body) {
 }
 
 void APIRequest::execute() {
+    auto nc = NetController::instance();
     if(includeAuth){
-        curl_easy_setopt(net::curl, CURLOPT_COOKIE, ("token="+AuthController::instance()->getSessionTokenOptional().value_or("")).c_str());
+        nc->setCurlopt(CURLOPT_COOKIE,"token="+AuthController::instance()->getSessionTokenOptional().value_or(""));
     }
     string res;
     if(method == GET){
-        res = net::get(buildURL());
+        res = nc->get(buildURL());
     } else if (method == POST){
-        res = net::post(buildURL(), body);
+        res = nc->post(buildURL(), body);
     }
 
     auto js = json::parse(res);
@@ -94,7 +95,7 @@ APIController *APIController::instance() {
 }
 
 bool APIController::getStatus() {
-    string result = net::get(APIRequest::BASE_URL + "/status");
+    string result = NetController::instance()->get(APIRequest::BASE_URL + "/status");
     return result == R"({"status": "Alive"})";
 }
 

@@ -22,7 +22,6 @@ int main(int argc, char *argv[]) {
     QPushButton button("Hello world!", &window);
     window.show();
 
-    net::init();
     bool netStat = APIController::instance()->getStatus();
     if(netStat && AuthController::instance()->hasSession()) {
         auto u = AuthController::instance()->getLocalUser();
