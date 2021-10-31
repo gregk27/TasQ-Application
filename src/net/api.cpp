@@ -51,7 +51,7 @@ void APIRequest::execute() {
     auto js = json::parse(res);
     if(!js["success"]){
         response = make_shared<APIResponse>(js);
-        throw net::APIResponseException(endpoint, js["error"]);
+        throw APIResponseException(endpoint, js["error"]);
     }
     response = make_shared<APIResponse>(js);
 }
@@ -82,3 +82,7 @@ json APIResponse::getResponse() {
 json APIResponse::getPayload(string payloadName) {
     return response[payloadName];
 }
+
+// Build error string and use parent constructor
+APIResponseException::APIResponseException(std::string endpoint, std::string message):
+        std::runtime_error("Request to " + endpoint + " failed with message: " + message) { }

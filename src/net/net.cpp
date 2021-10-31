@@ -5,12 +5,12 @@
 #include <net/net.h>
 #include <iostream>
 #include <optional>
-#include <sstream>
+#include <string>
 #include <net/auth.h>
+#include <net/api.h>
 
 using namespace std;
 using namespace net;
-
 
 /** Struct to store curl response data */
 typedef struct {
@@ -167,9 +167,5 @@ bool net::getStatus() {
 }
 
 // Build error string and use parent constructor
-net::NetworkException::NetworkException(std::string endpoint, CURLcode code):
+NetworkException::NetworkException(std::string endpoint, CURLcode code):
     std::runtime_error("Request to " + endpoint + " returned code " + to_string(code) + ": " + curl_easy_strerror(code)) { }
-
-// Build error string and use parent constructor
-net::APIResponseException::APIResponseException(std::string endpoint, std::string message):
-    std::runtime_error("Request to " + endpoint + " failed with message: " + message) { }

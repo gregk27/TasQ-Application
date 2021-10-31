@@ -123,18 +123,6 @@ namespace net {
         explicit NetworkException(std::string endpoint, CURLcode code);
     };
 
-    /**
-     * Exception thrown when API returns failed response
-     */
-    class APIResponseException: public std::runtime_error{
-    public:
-        /**
-         * Create a new APIResponseException
-         * @param endpoint API endpoint returning the response
-         * @param message error message provided by API
-         */
-         APIResponseException(std::string endpoint, std::string message);
-    };
 }
 
 #endif //TASQ_APPLICATION_NET_H

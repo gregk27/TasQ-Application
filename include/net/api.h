@@ -71,7 +71,7 @@ public:
 
     /**
      * Execute the API request
-     * @throw net::APIResponseException on API failure
+     * @throw APIResponseException on API failure
      */
     void execute();
 
@@ -120,6 +120,20 @@ public:
      * @param payloadName Name of the payload object in response
      */
     json getPayload(string payloadName);
+};
+
+
+/**
+ * Exception thrown when API returns failed response
+ */
+class APIResponseException: public std::runtime_error{
+public:
+    /**
+     * Create a new APIResponseException
+     * @param endpoint API endpoint returning the response
+     * @param message error message provided by API
+     */
+    APIResponseException(std::string endpoint, std::string message);
 };
 
 #endif //TASQ_APPLICATION_API_H
