@@ -26,6 +26,8 @@ public:
     enum Method {
         GET, POST
     };
+    /** Base URL for API endpoints */
+    static const std::string BASE_URL;
 private:
     /** Endpoint targeted by the request */
     string endpoint;
@@ -122,6 +124,58 @@ public:
     json getPayload(string payloadName);
 };
 
+class APIController {
+private:
+    /** Singleton instance of AuthController */
+    static APIController *_instance;
+
+    APIController() = default;
+
+public:
+    /**
+     * Get singleton instance
+     * @return Singleton instance of the APIController
+     */
+    static APIController *instance();
+
+    /**
+     * Get the API status
+     * @returns True if API is alive and can be reached
+     */
+    bool getStatus();
+
+    template <typename T>
+    shared_ptr<T> add(models::NetModel &m){
+        map<string, string> *body = m.getBody(models::NetModel::Action::ADD);
+        auto req = APIRequest(m.getURL(models::NetModel::Action::ADD), APIRequest::POST);
+        req.setBody(*body);
+        req.execute();
+        delete body;
+        auto payload = req.getResponse()->getPayload(m.getPayloadName());
+        return make_shared<T>(payload);
+    }
+
+    template <typename T>
+    shared_ptr<T> modify(models::NetModel &m){
+        map<string, string> *body = m.getBody(models::NetModel::Action::MODIFY);
+        auto req = APIRequest(m.getURL(models::NetModel::Action::MODIFY), APIRequest::POST);
+        req.setBody(*body);
+        req.execute();
+        delete body;
+        auto payload = req.getResponse()->getPayload(m.getPayloadName());
+        return make_shared<T>(payload);
+    }
+
+    template <typename T>
+    bool remove(models::NetModel &m){
+        map<string, string> *body = m.getBody(models::NetModel::Action::REMOVE);
+        auto req = APIRequest(m.getURL(models::NetModel::Action::REMOVE), APIRequest::POST);
+        req.setBody(*body);
+        req.execute();
+        delete body;
+        return req.getResponse()->getSuccess();
+    }
+};
 
 /**
  * Exception thrown when API returns failed response

@@ -12,6 +12,7 @@
 #include <net/schools.h>
 #include <net/endpoints.h>
 #include <net/subscriptions.h>
+#include <net/api.h>
 
 using namespace std;
 
@@ -22,7 +23,7 @@ int main(int argc, char *argv[]) {
     window.show();
 
     net::init();
-    bool netStat = net::getStatus();
+    bool netStat = APIController::instance()->getStatus();
     if(netStat && AuthController::instance()->hasSession()) {
         auto u = AuthController::instance()->getLocalUser();
         cout << "Authenticated as " << u->getName() << ", token: " << AuthController::instance()->getSessionToken() << endl;
@@ -54,7 +55,7 @@ int main(int argc, char *argv[]) {
     cout << "Creating course" << endl;
     Course tmp(courseJSON);
 
-    auto c = net::addModel<Course>(tmp);
+    auto c = APIController::instance()->add<Course>(tmp);
 
     cout << c->getId() << endl;
 
@@ -62,7 +63,7 @@ int main(int argc, char *argv[]) {
     c->setName(newName);
 
     cout << "Updating course" << endl;
-    c = net::modifyModel<Course>(*c);
+    c = APIController::instance()->modify<Course>(*c);
 
     nlohmann::json eventJSON = {
             {"id", ""},
@@ -77,12 +78,12 @@ int main(int argc, char *argv[]) {
     cout << "Creating event" << endl;
 
     Event tmpEvent(eventJSON);
-    auto e = net::addModel<Event>(tmpEvent);
+    auto e = APIController::instance()->add<Event>(tmpEvent);
 
     cout << "Updating event" << endl;
     string s = "Test event 1.5";
     e->setName(s);
-    e = net::modifyModel<Event>(*e);
+    e = APIController::instance()->modify<Event>(*e);
 
     eventJSON["name"] = "Test event 2";
     eventJSON["type"] = enums::EventType::LAB.toDB();
@@ -90,10 +91,10 @@ int main(int argc, char *argv[]) {
 
     cout << "Creating second event" << endl;
     tmpEvent = Event(eventJSON);
-    auto e2 = net::addModel<Event>(tmpEvent);
+    auto e2 = APIController::instance()->add<Event>(tmpEvent);
 
     cout << "Removing second event" << endl;
-    net::removeModel<Event>(*e2);
+    APIController::instance()->remove<Event>(*e2);
 
     cout << "Getting events" << endl;
     auto events = net::getEvents(*c);
@@ -115,7 +116,7 @@ int main(int argc, char *argv[]) {
     net::subscriptions::removeSubscription(*c);
 
     cout << "Deleting course" << endl;
-    net::removeModel<Course>(*c);
+    APIController::instance()->remove<Course>(*c);
 
     return QApplication::exec();
 }

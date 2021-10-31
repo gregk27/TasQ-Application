@@ -105,9 +105,6 @@ string request(string &url, map<string, string> *body = nullptr){
 /** Initialise curl handle to nullptr */
 CURL *net::curl = nullptr;
 
-// Set API base url
-const string net::BASE_URL = "http://server.lan:120";
-
 void net::init() {
     curl_global_init(CURL_GLOBAL_ALL);
     curl = curl_easy_init();
@@ -124,46 +121,8 @@ string net::get(string url){
     return request(url);
 }
 
-nlohmann::json net::getAPI(std::string url) {
-    // Include session token in cookie if set
-    if(AuthController::instance()->getSessionTokenOptional().has_value()){
-        curl_easy_setopt(curl, CURLOPT_COOKIE, ("token="+AuthController::instance()->getSessionTokenOptional().value()).c_str());
-    }
-
-    auto js = getJSON(url);
-
-    if(!js["success"])
-        throw APIResponseException(url, js["error"]);
-
-    return js;
-}
-
 string net::post(string url, map<string, string> &body) {
     return request(url, &body);
-}
-
-nlohmann::json net::postAPI(std::string url, map<string, string> &body) {
-    // Include session token in cookie if set
-    if(AuthController::instance()->getSessionTokenOptional().has_value()){
-        curl_easy_setopt(curl, CURLOPT_COOKIE, ("token="+AuthController::instance()->getSessionTokenOptional().value()).c_str());
-    }
-
-    auto js = postJSON(url, body);
-
-    if(!js["success"])
-        throw APIResponseException(url, js["error"]);
-
-    return js;
-}
-
-bool net::getStatus() {
-    try{
-        string result = net::get(BASE_URL + "/status");
-        return result == R"({"status": "Alive"})";
-    } catch (NetworkException &e){
-        cerr << e.what() << endl;
-    }
-    return false;
 }
 
 // Build error string and use parent constructor

@@ -6,9 +6,11 @@
 #include <net/api.h>
 #include <net/auth.h>
 
+const string APIRequest::BASE_URL = "http://server.lan:120";
+
 string APIRequest::buildURL() {
     stringstream ss;
-    ss << net::BASE_URL << endpoint;
+    ss << BASE_URL << endpoint;
     if(!parameters.empty()) {
         ss << "?";
         for (auto &arg: body) {
@@ -81,6 +83,19 @@ json APIResponse::getResponse() {
 
 json APIResponse::getPayload(string payloadName) {
     return response[payloadName];
+}
+
+APIController *APIController::_instance = nullptr;
+
+APIController *APIController::instance() {
+    if(!_instance)
+        _instance = new APIController();
+    return _instance;
+}
+
+bool APIController::getStatus() {
+    string result = net::get(APIRequest::BASE_URL + "/status");
+    return result == R"({"status": "Alive"})";
 }
 
 // Build error string and use parent constructor
