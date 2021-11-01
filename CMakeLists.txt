@@ -25,6 +25,15 @@ add_executable(TasQ_Application
         include/widgets/schedulescreen.h
         src/widgets/ScheduleScreen/schedulescreen.cpp
         src/widgets/ScheduleScreen/schedulescreen.ui
+        include/widgets/profilescreen.h
+        src/widgets/ProfileScreen/profilescreen.cpp
+        src/widgets/ProfileScreen/profilescreen.ui
+        include/widgets/assignmentsscreen.h
+        src/widgets/AssignmentsScreen/assignmentsscreen.cpp
+        src/widgets/AssignmentsScreen/assignmentsscreen.ui
+        include/widgets/todoscreen.h
+        src/widgets/ToDoScreen/todoscreen.cpp
+        src/widgets/ToDoScreen/todoscreen.ui
         include/widgets/schedulefilter.h
         src/widgets/ScheduleFilter/schedulefilter.cpp
         src/widgets/ScheduleFilter/schedulefilter.ui

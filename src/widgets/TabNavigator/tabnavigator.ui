@@ -28,7 +28,7 @@ QTabWidget::tab-bar {
      <property name="currentIndex">
       <number>1</number>
      </property>
-     <widget class="QWidget" name="profile">
+     <widget class="ProfileScreen" name="profile">
       <attribute name="title">
        <string>Profile</string>
       </attribute>
@@ -38,12 +38,12 @@ QTabWidget::tab-bar {
        <string>Schedule</string>
       </attribute>
      </widget>
-     <widget class="QWidget" name="assignments">
+     <widget class="AssignmentsScreen" name="assignments">
       <attribute name="title">
        <string>Assignments</string>
       </attribute>
      </widget>
-     <widget class="QWidget" name="todo">
+     <widget class="ToDoScreen" name="todo">
       <attribute name="title">
        <string>To-Do</string>
       </attribute>
@@ -57,6 +57,24 @@ QTabWidget::tab-bar {
    <class>ScheduleScreen</class>
    <extends>QWidget</extends>
    <header>widgets/schedulescreen.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ProfileScreen</class>
+   <extends>QWidget</extends>
+   <header>widgets/profilescreen.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>AssignmentsScreen</class>
+   <extends>QWidget</extends>
+   <header>widgets/assignmentsscreen.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ToDoScreen</class>
+   <extends>QWidget</extends>
+   <header>widgets/todoscreen.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
