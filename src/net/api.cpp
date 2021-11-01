@@ -6,7 +6,7 @@
 #include <net/api.h>
 #include <net/auth.h>
 
-const string APIRequest::BASE_URL = "http://server.lan:120";
+const string APIRequest::BASE_URL = "https://tasq.gregk.ca";
 
 string APIRequest::buildURL() {
     stringstream ss;

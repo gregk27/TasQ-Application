@@ -53,7 +53,7 @@ NetController::NetController() {
     // Set memory callback
     curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteMemoryCallback);
     // Set SSL CA certificates
-    curl_easy_setopt (curl, CURLOPT_CAINFO, "../lib/bin/cacert.pem");
+    curl_easy_setopt (curl, CURLOPT_CAINFO, "./lib/bin/cacert.pem");
     // Specify user agent
     curl_easy_setopt(curl, CURLOPT_USERAGENT, "libcurl-agent/1.0");
 }

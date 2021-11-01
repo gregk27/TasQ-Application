@@ -9,6 +9,10 @@ set(CMAKE_AUTOUIC ON)
 include_directories("${PROJECT_SOURCE_DIR}/include")
 include_directories("${PROJECT_SOURCE_DIR}/lib/include")
 
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/lib/bin/cacert.pem
+    DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/lib/bin)
+
+
 find_package(Qt6 COMPONENTS
         Core
         Gui
@@ -43,23 +47,23 @@ target_link_libraries(TasQ_Application
         ${CURL}
         )
 
-add_executable(TasQ_NoQt
-        src/models/User.cpp include/models/User.h
-        src/models/School.cpp include/models/School.h
-        src/models/Course.cpp include/models/Course.h
-        src/models/Enums.cpp include/models/Enums.h
-        src/models/Event.cpp include/models/Event.h
-        src/models/Reminder.cpp include/models/Reminder.h
-        src/models/Todo.cpp include/models/Todo.h
-        src/models/Application.cpp include/models/Application.h
-        src/net/auth.cpp include/net/auth.h
-        test/models/TestUser.cpp
-        test/models/TestCourse.cpp
-        test/models/TestEvent.cpp
-        test/models/TestEnums.cpp
-        test/models/TestTodo.cpp
-        test/models/TestReminder.cpp
-        test/models/TestSchool.cpp src/net/schools.cpp include/net/schools.h src/net/endpoints.cpp src/net/subscriptions.cpp include/models/NetModel.h src/models/NetModel.cpp include/net/api.h src/net/api.cpp)
+#add_executable(TasQ_NoQt
+#        src/models/User.cpp include/models/User.h
+#        src/models/School.cpp include/models/School.h
+#        src/models/Course.cpp include/models/Course.h
+#        src/models/Enums.cpp include/models/Enums.h
+#        src/models/Event.cpp include/models/Event.h
+#        src/models/Reminder.cpp include/models/Reminder.h
+#        src/models/Todo.cpp include/models/Todo.h
+#        src/models/Application.cpp include/models/Application.h
+#        src/net/auth.cpp include/net/auth.h
+#        test/models/TestUser.cpp
+#        test/models/TestCourse.cpp
+#        test/models/TestEvent.cpp
+#        test/models/TestEnums.cpp
+#        test/models/TestTodo.cpp
+#        test/models/TestReminder.cpp
+#        test/models/TestSchool.cpp src/net/schools.cpp include/net/schools.h src/net/endpoints.cpp src/net/subscriptions.cpp include/models/NetModel.h src/models/NetModel.cpp include/net/api.h src/net/api.cpp)
 
 if (WIN32)
     set(DEBUG_SUFFIX)
