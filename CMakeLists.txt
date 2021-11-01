@@ -19,6 +19,21 @@ add_executable(TasQ_Application
         src/widgets/MainWindow/MainWindow.cpp
         include/widgets/MainWindow.h
         src/widgets/MainWindow/MainWindow.ui
+        include/widgets/tabnavigator.h
+        src/widgets/TabNavigator/tabnavigator.cpp
+        src/widgets/TabNavigator/tabnavigator.ui
+        include/widgets/schedulescreen.h
+        src/widgets/ScheduleScreen/schedulescreen.cpp
+        src/widgets/ScheduleScreen/schedulescreen.ui
+        include/widgets/schedulefilter.h
+        src/widgets/ScheduleFilter/schedulefilter.cpp
+        src/widgets/ScheduleFilter/schedulefilter.ui
+        include/widgets/scheduleweekview.h
+        src/widgets/ScheduleWeekView/scheduleweekview.cpp
+        src/widgets/ScheduleWeekView/scheduleweekview.ui
+        include/widgets/schedulelistview.h
+        src/widgets/ScheduleListView/schedulelistview.cpp
+        src/widgets/ScheduleListView/schedulelistview.ui
         src/models/User.cpp include/models/User.h
         src/models/ModelBase.cpp include/models/ModelBase.h
         src/models/School.cpp include/models/School.h

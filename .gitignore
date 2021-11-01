@@ -146,3 +146,6 @@ Thumbs.db
 *.dll
 *.exe
 
+# QT Creator
+# --------
+*.pro.user*
