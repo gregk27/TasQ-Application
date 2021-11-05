@@ -1,19 +1,59 @@
-//
-// Created by Greg on 2021-10-14.
-//
+#include "mainwindow.h"
+#include "./ui_mainwindow.h"
 
-// You may need to build the project (run Qt uic code generator) to get "ui_MainWindow.h" resolved
-
-#include <widgets/MainWindow.h>
-#include "ui_MainWindow.h"
-
-
-MainWindow::MainWindow(QWidget *parent) :
-        QMainWindow(parent), ui(new Ui::MainWindow) {
+MainWindow::MainWindow(QWidget *parent)
+    : QMainWindow(parent)
+    , ui(new Ui::MainWindow)
+{
     ui->setupUi(this);
 }
 
-MainWindow::~MainWindow() {
+MainWindow::~MainWindow()
+{
     delete ui;
+}
+
+
+
+
+void MainWindow::on_push1_clicked()
+{
+    ui->text1->setText("");
+    ui->list1->setChecked(false);
+}
+
+
+void MainWindow::on_push2_clicked()
+{
+    ui->text2->setText("");
+    ui->list2->setChecked(false);
+}
+
+
+void MainWindow::on_push3_clicked()
+{
+    ui->text3->setText("");
+    ui->list3->setChecked(false);
+}
+
+
+void MainWindow::on_push4_clicked()
+{
+    ui->text4->setText("");
+    ui->list4->setChecked(false);
+}
+
+
+void MainWindow::on_push5_clicked()
+{
+    ui->text5->setText("");
+    ui->list5->setChecked(false);
+}
+
+
+void MainWindow::on_push6_clicked()
+{
+    ui->text6->setText("");
+    ui->list6->setChecked(false);
 }
 
