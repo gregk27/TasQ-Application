@@ -6,11 +6,11 @@
 #include <net/api.h>
 #include <net/auth.h>
 
-const string APIRequest::BASE_URL = "https://tasq.gregk.ca";
+const QString APIRequest::BASE_URL = "https://tasq.gregk.ca";
 
-string APIRequest::buildURL() {
+QString APIRequest::buildURL() {
     stringstream ss;
-    ss << BASE_URL << endpoint;
+    ss << BASE_URL.toStdString() << endpoint.toStdString();
     if(!parameters.empty()) {
         ss << "?";
         for (auto &arg: body) {
@@ -20,21 +20,21 @@ string APIRequest::buildURL() {
                << "&";
         }
     }
-    return ss.str();
+    return QString::fromStdString(ss.str());
 }
 
-APIRequest::APIRequest(string endpoint, Method method, bool includeAuth) {
+APIRequest::APIRequest(QString endpoint, Method method, bool includeAuth) {
     this->endpoint = endpoint;
     this->method = method;
     this->includeAuth = includeAuth;
 }
 
-APIRequest *APIRequest::setParameters(map<string, string> &parameters) {
+APIRequest *APIRequest::setParameters(map<QString, QString> &parameters) {
     this->parameters = parameters;
     return this;
 }
 
-APIRequest *APIRequest::setBody(map<string, string> &body) {
+APIRequest *APIRequest::setBody(map<QString, QString> &body) {
     this->body = body;
     return this;
 }
@@ -44,46 +44,45 @@ void APIRequest::execute() {
     if(includeAuth){
         nc->setCurlopt(CURLOPT_COOKIE,"token="+AuthController::instance()->getSessionTokenOptional().value_or(""));
     }
-    string res;
+    QJsonDocument res;
     if(method == GET){
-        res = nc->get(buildURL());
+        res = nc->getJSON(buildURL());
     } else if (method == POST){
-        res = nc->post(buildURL(), body);
+        res = nc->postJSON(buildURL(), body);
     }
 
-    auto js = json::parse(res);
-    if(!js["success"]){
-        response = make_shared<APIResponse>(js);
-        throw APIResponseException(endpoint, js["error"]);
+    auto js = res.object();
+    response = make_shared<APIResponse>(res);
+    if(!js["success"].toBool()){
+        throw APIResponseException(endpoint, js["error"].toString());
     }
-    response = make_shared<APIResponse>(js);
 }
 
 shared_ptr<APIResponse> APIRequest::getResponse() {
     return response;
 }
 
-APIResponse::APIResponse(json &response) {
+APIResponse::APIResponse(QJsonDocument &response) {
     this->response = response;
-    success = response["success"];
+    success = response["success"].toBool();
     if(!success)
-        error = response["error"];
+        error = response["error"].toString();
 }
 
 bool APIResponse::getSuccess() {
     return success;
 }
 
-string APIResponse::getError() {
+QString APIResponse::getError() {
     return error;
 }
 
-json APIResponse::getResponse() {
+QJsonDocument APIResponse::getResponse() {
     return response;
 }
 
-json APIResponse::getPayload(string payloadName) {
-    return response[payloadName];
+QJsonValue APIResponse::getPayload(QString payloadName) {
+    return response[payloadName].toObject();
 }
 
 APIController *APIController::_instance = nullptr;
@@ -95,10 +94,10 @@ APIController *APIController::instance() {
 }
 
 bool APIController::getStatus() {
-    string result = NetController::instance()->get(APIRequest::BASE_URL + "/status");
+    QString result = NetController::instance()->get(APIRequest::BASE_URL + "/status");
     return result == R"({"status": "Alive"})";
 }
 
 // Build error string and use parent constructor
-APIResponseException::APIResponseException(std::string endpoint, std::string message):
-        std::runtime_error("Request to " + endpoint + " failed with message: " + message) { }
+APIResponseException::APIResponseException(QString endpoint, QString message):
+        std::runtime_error("Request to " + endpoint.toStdString() + " failed with message: " + message.toStdString()) { }
