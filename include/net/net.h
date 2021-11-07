@@ -30,7 +30,7 @@ private:
     NetController();
     ~NetController();
 
-    string request(string &url, map<string, string> *body=nullptr);
+    QString request(QString &url, map<QString, QString> *body=nullptr);
 public:
     /**
      * Get singleton instance
@@ -45,8 +45,8 @@ public:
      * @param value String value to give opt
      * @return CURLCode returned by curl_easy_setopt()
      */
-    inline CURLcode setCurlopt(CURLoption opt, string value){
-        return curl_easy_setopt(curl, opt, value.c_str());
+    inline CURLcode setCurlopt(CURLoption opt, QString value){
+        return curl_easy_setopt(curl, opt, value.toLocal8Bit().data());
     }
 
     /**
@@ -55,8 +55,8 @@ public:
      * @param s String to escape
      * @return Escaped string
      */
-    inline string escapeString(const string &s){
-        return curl_easy_escape(curl, s.c_str(), s.size());
+    inline string escapeString(const QString &s){
+        return curl_easy_escape(curl, s.toLocal8Bit().data(), s.size());
     }
 
     /**
@@ -64,7 +64,7 @@ public:
      * @param url The URL to request
      * @return string with response
      */
-    string get(std::string url);
+    QString get(QString url);
 
     /**
      * Execute an HTTP or HTTPS GET request and get JSON response
@@ -72,8 +72,8 @@ public:
      * @return json object generated from response
      * @see net::get(std::string)
      */
-    inline QJsonDocument getJSON(std::string url){
-        return QJsonDocument::fromJson(QString::fromStdString(get(url)).toUtf8());
+    inline QJsonDocument getJSON(QString url){
+        return QJsonDocument::fromJson(get(url).toUtf8());
     }
 
     /**
@@ -82,7 +82,7 @@ public:
      * @param body The POST body, as key-value pairs
      * @return string with response
      */
-    string post(std::string url, std::map<std::string, std::string> &body);
+    QString post(QString url, std::map<QString, QString> &body);
 
     /**
      * Execute an HTTP or HTTPS POST request
@@ -91,8 +91,8 @@ public:
      * @return json object generated from response
      * @see net::post(std::string, std::map<std::string, std::string>)
      */
-    inline QJsonDocument postJSON(std::string url, std::map<std::string, std::string> &body){
-        return QJsonDocument::fromJson(QString::fromStdString(post(url, body)).toUtf8());
+    inline QJsonDocument postJSON(QString url, std::map<QString, QString> &body){
+        return QJsonDocument::fromJson(post(url, body).toUtf8());
     }
 
 };
@@ -106,7 +106,7 @@ public:
      * Create a new NetworkException
      * @param code curl response code
      */
-    explicit NetworkException(std::string endpoint, CURLcode code);
+    explicit NetworkException(QString endpoint, CURLcode code);
 };
 
 #endif //TASQ_APPLICATION_NET_H
