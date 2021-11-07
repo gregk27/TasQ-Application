@@ -2,6 +2,7 @@
 // Created by Greg on 2021-10-19.
 //
 #include <optional>
+#include <net/auth.h>
 #include <models/Event.h>
 #include <models/User.h>
 
@@ -111,6 +112,6 @@ map<string, string> *Event::getBody(Action a) {
             {"weight", to_string(weight)},
             {"datetime", to_string(datetime)},
             {"weekly", to_string(weekly)},
-            {"user", net::auth::localUID.value_or("")}
+            {"user", AuthController::instance()->getLocalUIDOptional().value_or("")}
     };
 }

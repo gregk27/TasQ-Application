@@ -10,14 +10,17 @@
 #include <iostream>
 #include <net/net.h>
 #include <net/schools.h>
+#include <net/api.h>
 
 using namespace net;
 
 shared_ptr<vector<School>> schools::getSchools() {
-    auto js = getAPI(BASE_URL+"/schools/get");
+    auto req = APIRequest("/schools/get");
+    req.execute();
+    auto schools = req.getResponse()->getPayload("schools");
 
     auto *out = new vector<School>;
-    for(auto school : js["schools"]){
+    for(auto school : schools){
         out->push_back(School(school));
     }
 
@@ -25,10 +28,12 @@ shared_ptr<vector<School>> schools::getSchools() {
 }
 
 shared_ptr<vector<Course>> schools::getCourses(string &schoolId){
-    auto js = getAPI(BASE_URL + "/schools/" + schoolId + "/courses");
+    auto req = APIRequest("/schools/" + schoolId + "/courses/get");
+    req.execute();
+    auto courses = req.getResponse()->getPayload("courses");
 
     auto *out = new vector<Course>;
-    for(auto course : js["courses"]){
+    for(auto course : courses){
         out->push_back(Course(course));
     }
 

@@ -2,6 +2,7 @@
 // Created by Greg on 2021-10-24.
 //
 
+#include <net/api.h>
 #include <net/auth.h>
 #include <net/endpoints.h>
 
@@ -9,10 +10,12 @@ using namespace std;
 using namespace models;
 
 shared_ptr<vector<Event>> net::getEvents(string &courseId) {
-    auto js = getAPI(BASE_URL+"/courses/"+courseId+"/events/get");
+    auto req = APIRequest("/courses/"+courseId+"/events/get");
+    req.execute();
+    auto events = req.getResponse()->getPayload("events");
 
     auto out = make_shared<vector<Event>>();
-    for(auto event : js["events"]){
+    for(auto event : events){
         out->push_back(Event(event));
     }
 
@@ -20,11 +23,13 @@ shared_ptr<vector<Event>> net::getEvents(string &courseId) {
 }
 
 shared_ptr<vector<Todo>> net::getTodos(){
-    auto js = getAPI(BASE_URL+"/users/todos/get");
+    auto req = APIRequest("/users/todos/get");
+    req.execute();
+    auto todos = req.getResponse()->getPayload("todos");
 
     auto out = make_shared<vector<Todo>>();
 
-    for(auto t : js["todos"]){
+    for(auto t : todos){
         out->push_back(Todo(t));
     }
 
@@ -32,11 +37,13 @@ shared_ptr<vector<Todo>> net::getTodos(){
 }
 
 shared_ptr<vector<Reminder>> net::getReminders(){
-    auto js = getAPI(BASE_URL+"/users/reminders/get");
+    auto req = APIRequest("/users/reminders/get");
+    req.execute();
+    auto reminders = req.getResponse()->getPayload("reminders");
 
     auto out = make_shared<vector<Reminder>>();
 
-    for(auto t : js["reminders"]){
+    for(auto t : reminders){
         out->push_back(Reminder(t));
     }
 

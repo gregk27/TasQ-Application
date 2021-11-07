@@ -5,15 +5,11 @@
 #include <net/net.h>
 #include <iostream>
 #include <optional>
-#include <sstream>
+#include <string>
+#include <net/auth.h>
+#include <net/api.h>
 
 using namespace std;
-using namespace net;
-
-// Forward declare auth session ID, since auth.h includes net.h
-namespace net::auth {
-    extern optional<string> sessionToken;
-}
 
 /** Struct to store curl response data */
 typedef struct {
@@ -47,6 +43,26 @@ static size_t WriteMemoryCallback(void *contents, size_t size, size_t nmemb, voi
     return realsize;
 }
 
+/** Initialise curl handle to nullptr */
+NetController *NetController::_instance = nullptr;
+
+NetController::NetController() {
+    curl_global_init(CURL_GLOBAL_ALL);
+    curl = curl_easy_init();
+
+    // Set memory callback
+    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteMemoryCallback);
+    // Set SSL CA certificates
+    curl_easy_setopt (curl, CURLOPT_CAINFO, "./lib/bin/cacert.pem");
+    // Specify user agent
+    curl_easy_setopt(curl, CURLOPT_USERAGENT, "libcurl-agent/1.0");
+}
+
+NetController::~NetController() {
+    curl_easy_cleanup(curl);
+    curl_global_cleanup();
+}
+
 /**
  * Local function to perform the HTTP/HTTPS requests<br/>
  * This function is local to ensure that get/post methods are used for legibility
@@ -54,7 +70,7 @@ static size_t WriteMemoryCallback(void *contents, size_t size, size_t nmemb, voi
  * @param body The POST body. If null then will perform GET request
  * @return string with response
  */
-string request(string &url, map<string, string> *body = nullptr){
+string NetController::request(string &url, map<string, string> *body){
     // Create a memory chunk to use
     MemoryStruct chunk;
     chunk.memory = (char*)malloc(1);
@@ -74,9 +90,9 @@ string request(string &url, map<string, string> *body = nullptr){
     if(body){
         stringstream bodyStr;
         for(auto &arg : *body){
-            bodyStr << curl_easy_escape(curl, arg.first.c_str(), arg.first.size())
+            bodyStr << escapeString(arg.first)
                     << "="
-                    << curl_easy_escape(curl, arg.second.c_str(), arg.second.size())
+                    << escapeString(arg.second)
                     << "&";
         }
         postFields = bodyStr.str();
@@ -105,74 +121,20 @@ string request(string &url, map<string, string> *body = nullptr){
     return out;
 }
 
-/** Initialise curl handle to nullptr */
-CURL *net::curl = nullptr;
-
-// Set API base url
-const string net::BASE_URL = "http://server.lan:120";
-
-void net::init() {
-    curl_global_init(CURL_GLOBAL_ALL);
-    curl = curl_easy_init();
-
-    // Set memory callback
-    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteMemoryCallback);
-    // Set SSL CA certificates
-    curl_easy_setopt (curl, CURLOPT_CAINFO, "../lib/bin/cacert.pem");
-    // Specify user agent
-    curl_easy_setopt(curl, CURLOPT_USERAGENT, "libcurl-agent/1.0");
+NetController *NetController::instance() {
+    if(!_instance)
+        _instance = new NetController();
+    return _instance;
 }
 
-string net::get(string url){
+string NetController::get(string url){
     return request(url);
 }
 
-nlohmann::json net::getAPI(std::string url) {
-    // Include session token in cookie if set
-    if(auth::sessionToken.has_value()){
-        curl_easy_setopt(curl, CURLOPT_COOKIE, ("token="+auth::sessionToken.value()).c_str());
-    }
-
-    auto js = getJSON(url);
-
-    if(!js["success"])
-        throw APIResponseException(url, js["error"]);
-
-    return js;
-}
-
-string net::post(string url, map<string, string> &body) {
+string NetController::post(string url, map<string, string> &body) {
     return request(url, &body);
 }
 
-nlohmann::json net::postAPI(std::string url, map<string, string> &body) {
-    // Include session token in cookie if set
-    if(auth::sessionToken.has_value()){
-        curl_easy_setopt(curl, CURLOPT_COOKIE, ("token="+auth::sessionToken.value()).c_str());
-    }
-
-    auto js = postJSON(url, body);
-
-    if(!js["success"])
-        throw APIResponseException(url, js["error"]);
-
-    return js;
-}
-
-bool net::getStatus() {
-    try{
-        string result = net::get(BASE_URL + "/status");
-        return result == R"({"status": "Alive"})";
-    } catch (NetworkException &e){
-        cerr << e.what() << endl;
-    }
-    return false;
-}
-
 // Build error string and use parent constructor
-net::NetworkException::NetworkException(std::string endpoint, CURLcode code):
+NetworkException::NetworkException(std::string endpoint, CURLcode code):
     std::runtime_error("Request to " + endpoint + " returned code " + to_string(code) + ": " + curl_easy_strerror(code)) { }
-
-// Build error string and use parent constructor
-net::APIResponseException::APIResponseException(std::string endpoint, std::string message):
-    std::runtime_error("Request to " + endpoint + " failed with message: " + message) { }

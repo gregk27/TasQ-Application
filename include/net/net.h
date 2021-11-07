@@ -11,22 +11,51 @@
 #include <curl/curl.h>
 #include <nlohmann/json.hpp>
 #include <models/NetModel.h>
+#include <iostream>
+
 
 /**
- * Namespace containing netcode for interfacing with backend API
+ * Singleton controller for network requests
  */
-namespace net {
-    /** Curl handle used for networking */
-    extern CURL *curl;
+class NetController {
+private:
+    /** Singleton instance of NetController */
+    static NetController *_instance;
 
-    /** Base URL for API endpoints */
-    extern const std::string BASE_URL;
+    /** Curl handle used for networking */
+    CURL *curl = nullptr;
+
+    NetController();
+    ~NetController();
+
+    string request(string &url, map<string, string> *body=nullptr);
+public:
+    /**
+     * Get singleton instance
+     * @return Singleton instance of the NetController
+     */
+    static NetController *instance();
 
     /**
-     * Initialise the netcode.<br/>
-     * Must be called before any other operations can be performed
+     * Set a CURLOpt, should only be done while preparing a request<br/>
+     * Partial wrapper for curl_easy_setopt()
+     * @param opt CURLOpt to set
+     * @param value String value to give opt
+     * @return CURLCode returned by curl_easy_setopt()
      */
-    void init();
+    inline CURLcode setCurlopt(CURLoption opt, string value){
+        return curl_easy_setopt(curl, opt, value.c_str());
+    }
+
+    /**
+     * Escape a string for use in request<br/>
+     * Wrapper for curl_easy_escape()
+     * @param s String to escape
+     * @return Escaped string
+     */
+    inline string escapeString(const string &s){
+        return curl_easy_escape(curl, s.c_str(), s.size());
+    }
 
     /**
      * Execute an HTTP or HTTPS GET request
@@ -44,14 +73,6 @@ namespace net {
     inline nlohmann::json getJSON(std::string url){
         return nlohmann::json::parse(get(url));
     }
-
-    /**
-     * Execute a GET request to API, with check for API success flag
-     * @param url The URL to request
-     * @return json object generated from response
-     * @see net::getJSON(std::string)
-     */
-    nlohmann::json getAPI(std::string url);
 
     /**
      * Execute an HTTP or HTTPS POST request
@@ -72,69 +93,18 @@ namespace net {
         return nlohmann::json::parse(post(url, body));
     }
 
+};
+
+/**
+ * Exception thrown on curl request failure
+ */
+class NetworkException: public std::runtime_error {
+public:
     /**
-     * Execute a POST request to API, with check for API success flag
-     * @param url The URL to request
-     * @param body The POST body, as key-value pairs
-     * @return json object generated from response
-     * @see net::postJSON(std::string, std::map<std::string, std::string>)
+     * Create a new NetworkException
+     * @param code curl response code
      */
-    nlohmann::json postAPI(std::string url, std::map<std::string, std::string> &body);
-
-    /**
-     * Get the API status
-     * @returns True if API is alive and can be reached
-     */
-    bool getStatus();
-
-    template <typename T>
-    shared_ptr<T> addModel(models::NetModel &m){
-        map<string, string> *body = m.getBody(models::NetModel::Action::ADD);
-        auto js = postAPI(BASE_URL+m.getURL(models::NetModel::Action::ADD), *body);
-        delete body;
-        return make_shared<T>(js[m.getPayloadName()]);
-    }
-
-    template <typename T>
-    shared_ptr<T> modifyModel(models::NetModel &m){
-        map<string, string> *body = m.getBody(models::NetModel::Action::MODIFY);
-        auto js = postAPI(BASE_URL+m.getURL(models::NetModel::Action::MODIFY), *body);
-        delete body;
-        return make_shared<T>(js[m.getPayloadName()]);
-    }
-
-    template <typename T>
-    bool removeModel(models::NetModel &m){
-        map<string, string> *body = m.getBody(models::NetModel::Action::REMOVE);
-        auto js = postAPI(BASE_URL+m.getURL(models::NetModel::Action::REMOVE), *body);
-        delete body;
-        return true;
-    }
-
-    /**
-     * Exception thrown on curl request failure
-     */
-    class NetworkException: public std::runtime_error {
-    public:
-        /**
-         * Create a new NetworkException
-         * @param code curl response code
-         */
-        explicit NetworkException(std::string endpoint, CURLcode code);
-    };
-
-    /**
-     * Exception thrown when API returns failed response
-     */
-    class APIResponseException: public std::runtime_error{
-    public:
-        /**
-         * Create a new APIResponseException
-         * @param endpoint API endpoint returning the response
-         * @param message error message provided by API
-         */
-         APIResponseException(std::string endpoint, std::string message);
-    };
-}
+    explicit NetworkException(std::string endpoint, CURLcode code);
+};
 
 #endif //TASQ_APPLICATION_NET_H

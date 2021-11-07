@@ -12,21 +12,30 @@
 using namespace std;
 
 /**
- * Namespace containing netcode for authentication with API
+ * Singleton controller for user authentication
  */
-namespace net::auth {
+class AuthController {
+private:
+    /** Singleton instance of AuthController */
+    static AuthController *_instance;
+
+    /** Session token created on login, used for authorized accesses */
+    optional<string> sessionToken;
+    /** ID of last user returned by register or login */
+    optional<string> localUID;
+
+    AuthController();
+
+public:
     /**
-     * Session token created on login, used for authorized accesses
+     * Get singleton instance
+     * @return Singleton instance of the AuthController
      */
-    extern optional<string> sessionToken;
-    /**
-     * Global variable with the last user returned by register or login
-     */
-    extern optional<string> localUID;
+    static AuthController *instance();
 
     /**
      * Register a new user in the database<br/>
-     * This will update net::sessionToken and net::localUID
+     * This will update sessionToken and localUID
      * @param username user's username
      * @param email user's email
      * @param password user's password
@@ -37,7 +46,7 @@ namespace net::auth {
 
     /**
      * Log in to a user<br/>
-     * This will update net::sessionToken and net::localUID
+     * This will update sessionToken and localUID
      * @param email user's email
      * @param password user's password
      * @return User in database
@@ -46,21 +55,46 @@ namespace net::auth {
 
     /**
      * Get the locally signed in user
-     * @return User in database
+     * @return User in database, nullptr if not logged it
      */
     shared_ptr<models::User> getLocalUser();
 
     /**
-     * Exception thrown when there's no localUser to perform an action requiring authorization
+     * Get if there's a session credential (may or may not be valid)
+     * @return True if sessionToken and localUID are both set
      */
-    class AuthException: public runtime_error {
-    public:
-        /**
-         * Create a new AuthException
-         * @param action description of action being performed
-         */
-        explicit AuthException(string action);
-    };
-}
+    bool hasSession();
+
+    /**
+     * Get the session token for current user
+     * @throws AuthException if no user logged in
+     */
+    string getSessionToken();
+    /**
+     * Get the sessionToken as a std::optional value
+     */
+    optional<string> getSessionTokenOptional();
+    /**
+     * Get the ID for current user
+     * @throws AuthException if no user logged in
+     */
+    string getLocalUID();
+    /**
+     * Get the getLocalUID as a std::optional value
+     */
+    optional<string> getLocalUIDOptional();
+};
+
+/**
+ * Exception thrown when there's no localUser to perform an action requiring authorization
+ */
+class AuthException : public runtime_error {
+public:
+    /**
+     * Create a new AuthException
+     * @param action description of action being performed
+     */
+    explicit AuthException(string action = "perform this action");
+};
 
 #endif //TASQ_APPLICATION_AUTH_H
