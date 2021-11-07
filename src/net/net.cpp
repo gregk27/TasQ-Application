@@ -114,7 +114,7 @@ string NetController::request(string &url, map<string, string> *body){
     }
 
     // Create string from response
-    string out(chunk.memory);
+    QString out(chunk.memory);
     // Free allocated memory to prevent leak
     free(chunk.memory);
 

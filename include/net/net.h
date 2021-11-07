@@ -10,6 +10,8 @@
 #include <stdexcept>
 #include <curl/curl.h>
 #include <nlohmann/json.hpp>
+#include <QJsonDocument>
+#include <Qstring>
 #include <models/NetModel.h>
 #include <iostream>
 
@@ -62,7 +64,7 @@ public:
      * @param url The URL to request
      * @return string with response
      */
-    std::string get(std::string url);
+    string get(std::string url);
 
     /**
      * Execute an HTTP or HTTPS GET request and get JSON response
@@ -70,8 +72,8 @@ public:
      * @return json object generated from response
      * @see net::get(std::string)
      */
-    inline nlohmann::json getJSON(std::string url){
-        return nlohmann::json::parse(get(url));
+    inline QJsonDocument getJSON(std::string url){
+        return QJsonDocument::fromJson(QString::fromStdString(get(url)).toUtf8());
     }
 
     /**
@@ -80,7 +82,7 @@ public:
      * @param body The POST body, as key-value pairs
      * @return string with response
      */
-    std::string post(std::string url, std::map<std::string, std::string> &body);
+    string post(std::string url, std::map<std::string, std::string> &body);
 
     /**
      * Execute an HTTP or HTTPS POST request
@@ -89,8 +91,8 @@ public:
      * @return json object generated from response
      * @see net::post(std::string, std::map<std::string, std::string>)
      */
-    inline nlohmann::json postJSON(std::string url, std::map<std::string, std::string> &body){
-        return nlohmann::json::parse(post(url, body));
+    inline QJsonDocument postJSON(std::string url, std::map<std::string, std::string> &body){
+        return QJsonDocument::fromJson(QString::fromStdString(post(url, body)).toUtf8());
     }
 
 };
