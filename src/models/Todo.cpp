@@ -7,21 +7,21 @@
 using namespace models;
 
 
-Todo::Todo(json &json) {
-    id = json["id"];
-    name = json["name"];
-    completed = json["completed"];
+Todo::Todo(QJsonObject &json) {
+    id = json["id"].toString();
+    name = json["name"].toString();
+    completed = json["completed"].toBool();
 }
 
 uuid Todo::getId() {
     return id;
 }
 
-string Todo::getName() {
+QString Todo::getName() {
     return name;
 }
 
-void Todo::setName(string &newName) {
+void Todo::setName(QString &newName) {
     // TODO: Add database changes
     name = newName;
 }
@@ -35,7 +35,7 @@ void Todo::setCompleted(bool newCompleted) {
     completed = newCompleted;
 }
 
-string Todo::getURL(Action a) {
+QString Todo::getURL(Action a) {
     switch(a){
         case NetModel::ADD:
             return "/users/todos/add";
@@ -47,9 +47,9 @@ string Todo::getURL(Action a) {
     throw ActionException("none", "todo");
 }
 
-map<string, string> *Todo::getBody(Action a) {
-    return new map<string, string>{
+map<QString, QString> *Todo::getBody(Action a) {
+    return new map<QString, QString>{
             {"name", name},
-            {"completed", to_string(completed)}
+            {"completed0", QString::fromStdString(to_string(completed))}
     };
 }

@@ -4,6 +4,8 @@
 
 #ifndef TASQ_APPLICATION_COURSE_H
 #define TASQ_APPLICATION_COURSE_H
+
+#include <QString>
 #include "Models.h"
 #include "Enums.h"
 #include <models/NetModel.h>
@@ -18,12 +20,12 @@ namespace models {
     class Course : public NetModel {
     private:
         uuid id;
-        string name;
-        string code;
+        QString name;
+        QString code;
         unsigned short year;
         enums::Term term;
-        string prof;
-        string owner;
+        QString prof;
+        QString owner;
         uuid schoolId;
         unsigned long long modified;
 
@@ -41,7 +43,7 @@ namespace models {
          * "school": string,           - Updated ID of the course's school<br/>
          * "modified": long int        - Unix timestamp the course or it's children were last modified
          */
-        explicit Course(json &json);
+        explicit Course(QJsonObject &json);
 
         /**
          * Get the course's id
@@ -51,20 +53,20 @@ namespace models {
         /**
          * Get the course's name
          */
-        string getName();
+        QString getName();
         /**
          * Set the course's name, will be reflected in databases
          */
-        void setName(string &newName);
+        void setName(QString &newName);
 
         /**
          * Get the course's course code
          */
-        string getCode();
+        QString getCode();
         /**
          * Set the course's course code, will be reflected in databases
          */
-        void setCode(string &newCode);
+        void setCode(QString &newCode);
 
         /**
          * Get the course's academic year
@@ -87,16 +89,16 @@ namespace models {
         /**
          * Get the course's professor
          */
-        string getProf();
+        QString getProf();
         /**
          * Set the course's professor, will be reflected in databases
          */
-        void setProf(string &newProf);
+        void setProf(QString &newProf);
 
         /**
          * Get the course's owner
          */
-        string getOwner();
+        QString getOwner();
 
         /**
          * Get the course's school
@@ -112,13 +114,13 @@ namespace models {
          */
         unsigned long long getModified();
 
-        inline string getPayloadName() override {
+        inline QString getPayloadName() override {
             return "course";
         }
 
-        string getURL(Action a) override;
+        QString getURL(Action a) override;
 
-        map<string, string> *getBody(Action a) override;
+        map<QString, QString> *getBody(Action a) override;
 
     };
 

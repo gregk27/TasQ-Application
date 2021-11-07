@@ -13,19 +13,19 @@ namespace net::auth {
     extern optional<string> localUID;
 }
 
-Event::Event(json &json):
-        type(enums::EventType::fromDB(json["type"])) {
-    id = json["id"];
-    courseID = json["course"];
-    name = json["name"];
-    weight = json["weight"];
-    datetime = json["datetime"];
-    if(json["endDate"].is_null()){
+Event::Event(QJsonObject &json):
+        type(enums::EventType::fromDB(json["type"].toString())) {
+    id = json["id"].toString();
+    courseID = json["course"].toString();
+    name = json["name"].toString();
+    weight = json["weight"].toInt();
+    datetime = json["datetime"].toInteger();
+    if(json["endDate"].isNull()){
         endDate = {};
     } else {
-        endDate = json["endDate"];
+        endDate = json["endDate"].toInteger();
     }
-    weekly = (int) json["weekly"];
+    weekly = json["weekly"].toBool();
 }
 
 uuid Event::getId() {
@@ -41,11 +41,11 @@ void Event::setCourseID(uuid &newCourseID) {
     courseID = newCourseID;
 }
 
-string Event::getName() {
+QString Event::getName() {
     return name;
 }
 
-void Event::setName(string &newName) {
+void Event::setName(QString &newName) {
     // TODO: Add database changes
     name = newName;
 }
@@ -88,10 +88,10 @@ bool Event::getWeekly() {
 }
 
 void Event::setWeekly(bool newWeekly) {
-    weekly = weekly;
+    weekly = newWeekly;
 }
 
-string Event::getURL(Action a)  {
+QString Event::getURL(Action a)  {
     switch(a){
         case NetModel::ADD:
             return "/courses/"+courseID+"/events/add";
@@ -103,15 +103,15 @@ string Event::getURL(Action a)  {
     throw ActionException("none", "event");
 }
 
-map<string, string> *Event::getBody(Action a) {
-    return new map<string, string>{
+map<QString, QString> *Event::getBody(Action a) {
+    return new map<QString, QString>{
             {"id", id},
             {"course", courseID},
             {"name", name},
             {"type", type.toDB()},
-            {"weight", to_string(weight)},
-            {"datetime", to_string(datetime)},
-            {"weekly", to_string(weekly)},
+            {"weight", QString::fromStdString(to_string(weight))},
+            {"datetime", QString::fromStdString(to_string(datetime))},
+            {"weekly", QString::fromStdString(to_string(weekly))},
             {"user", AuthController::instance()->getLocalUIDOptional().value_or("")}
     };
 }

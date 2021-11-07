@@ -19,7 +19,7 @@ namespace models {
     class Todo : public NetModel {
     private:
         uuid id;
-        string name;
+        QString name;
         bool completed;
     public:
         /**
@@ -29,7 +29,7 @@ namespace models {
          * "name": string,         - Name of the To-Do<br/>
          * "completed": boolean,   - To-Do completion flag
          */
-        explicit Todo(json &json);
+        explicit Todo(QJsonObject &json);
 
         /**
          * Get the To-do's id
@@ -39,12 +39,12 @@ namespace models {
         /**
          * Get the To-do's name
          */
-        string getName();
+        QString getName();
 
         /**
          * Set the To-do's name, will be reflected in databases
          */
-        void setName(string &newName);
+        void setName(QString &newName);
 
         /**
          * Get the To-do's completion flag
@@ -56,13 +56,13 @@ namespace models {
          */
         void setCompleted(bool newCompleted);
 
-        inline string getPayloadName() override {
+        inline QString getPayloadName() override {
             return "todo";
         }
 
-        string getURL(Action a) override;
+        QString getURL(Action a) override;
 
-        map<string, string> * getBody(Action a) override;
+        map<QString, QString> * getBody(Action a) override;
     };
 }
 

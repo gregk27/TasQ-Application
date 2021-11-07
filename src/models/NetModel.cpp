@@ -6,9 +6,9 @@
 
 using namespace models;
 
-ActionException::ActionException(string action, string model):
-        runtime_error("Invalid action " + action + " for model " + model + "."){}
+ActionException::ActionException(QString action, QString model):
+        runtime_error("Invalid action " + action.toStdString() + " for model " + model.toStdString() + "."){}
 
-map<string, string> *NetModel::getBody(Action a) {
+map<QString, QString> *NetModel::getBody(Action a) {
     throw runtime_error("Payload name function not implemented!");
 }

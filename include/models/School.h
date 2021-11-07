@@ -5,6 +5,8 @@
 #ifndef TASQ_APPLICATION_SCHOOL_H
 #define TASQ_APPLICATION_SCHOOL_H
 
+#include <QJsonObject>
+#include <QString>
 #include "Models.h"
 
 /**
@@ -17,7 +19,7 @@ namespace models {
     class School {
     private:
         uuid id;
-        string name;
+        QString name;
     public:
         /**
          * Create a school from a json object with the structure
@@ -25,17 +27,17 @@ namespace models {
          * "id": string,           - ID of school <br/>
          * "name": string,         - Name of school
          */
-        explicit School(json &json);
+        explicit School(QJsonObject &json);
 
         /**
          * Get the school's ID
          */
-        string getId();
+        QString getId();
 
         /**
          * Get the school's name
          */
-        string getName();
+        QString getName();
     };
 }
 
