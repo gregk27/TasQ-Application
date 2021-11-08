@@ -38,7 +38,7 @@ shared_ptr<User> AuthController::registerUser(QString &username, QString &email,
 
     auto res = req.getResponse();
 
-    auto payload = res->getPayload("user").toObject();
+    auto payload = res->getPayload("user");
 
     auto out = std::make_shared<User>(payload);
     localUID = out->getId();
@@ -58,7 +58,7 @@ shared_ptr<User> AuthController::login(QString &email, QString &password) {
 
     auto res = req.getResponse();
 
-    auto payload = res->getPayload("user").toObject();
+    auto payload = res->getPayload("user");
     auto out = std::make_shared<User>(payload);
     localUID = out->getId();
     sessionToken = payload["token"].toString();
@@ -73,7 +73,7 @@ shared_ptr<User> AuthController::getLocalUser(){
     req.execute();
 
     auto res = req.getResponse();
-    auto payload = res->getPayload("user").toObject();
+    auto payload = res->getPayload("user");
 
     return std::make_shared<User>(payload);
 }

@@ -82,7 +82,7 @@ QJsonDocument APIResponse::getResponse() {
 }
 
 QJsonValue APIResponse::getPayload(QString payloadName) {
-    return response[payloadName].toObject();
+    return response[payloadName];
 }
 
 APIController *APIController::_instance = nullptr;

@@ -150,7 +150,7 @@ public:
 
     template <typename T>
     shared_ptr<T> add(models::NetModel &m){
-        map<string, string> *body = m.getBody(models::NetModel::Action::ADD);
+        map<QString, QString> *body = m.getBody(models::NetModel::Action::ADD);
         auto req = APIRequest(m.getURL(models::NetModel::Action::ADD), APIRequest::POST);
         req.setBody(*body);
         req.execute();
@@ -161,7 +161,7 @@ public:
 
     template <typename T>
     shared_ptr<T> modify(models::NetModel &m){
-        map<string, string> *body = m.getBody(models::NetModel::Action::MODIFY);
+        map<QString, QString> *body = m.getBody(models::NetModel::Action::MODIFY);
         auto req = APIRequest(m.getURL(models::NetModel::Action::MODIFY), APIRequest::POST);
         req.setBody(*body);
         req.execute();
@@ -172,7 +172,7 @@ public:
 
     template <typename T>
     bool remove(models::NetModel &m){
-        map<string, string> *body = m.getBody(models::NetModel::Action::REMOVE);
+        map<QString, QString> *body = m.getBody(models::NetModel::Action::REMOVE);
         auto req = APIRequest(m.getURL(models::NetModel::Action::REMOVE), APIRequest::POST);
         req.setBody(*body);
         req.execute();

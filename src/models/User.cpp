@@ -6,7 +6,7 @@
 
 using namespace models;
 
-User::User(QJsonObject &json) {
+User::User(QJsonValue &json) {
     id = json["id"].toString();
     name = json["name"].toString();
     schoolId = json["school"].toString();

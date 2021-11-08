@@ -27,7 +27,7 @@ namespace models {
          * "id": string,           - ID of school <br/>
          * "name": string,         - Name of school
          */
-        explicit School(QJsonObject &json);
+        explicit School(QJsonValue &json);
 
         /**
          * Get the school's ID

@@ -7,7 +7,7 @@
 using namespace models;
 
 
-Todo::Todo(QJsonObject &json) {
+Todo::Todo(QJsonValue &json) {
     id = json["id"].toString();
     name = json["name"].toString();
     completed = json["completed"].toBool();

@@ -29,7 +29,7 @@ namespace models {
          * "name": string,         - Name of the To-Do<br/>
          * "completed": boolean,   - To-Do completion flag
          */
-        explicit Todo(QJsonObject &json);
+        explicit Todo(QJsonValue &json);
 
         /**
          * Get the To-do's id

@@ -8,7 +8,7 @@
 #include <models/User.h>
 using namespace models;
 
-Course::Course(QJsonObject &json):
+Course::Course(QJsonValue json):
         term(enums::Term::fromDB(json["term"].toString())) {
     id = json["id"].toString();
     name = json["name"].toString();
@@ -105,7 +105,7 @@ map<QString, QString> *Course::getBody(Action a) {
             {"year", QString::fromStdString(to_string(year))},
             {"term", term.toDB()},
             {"prof", prof},
-            {"owner", QString::fromStdString(AuthController::instance()->getLocalUIDOptional().value_or(""))},
+            {"owner", AuthController::instance()->getLocalUIDOptional().value_or("")},
             {"school", schoolId}
     };
 }

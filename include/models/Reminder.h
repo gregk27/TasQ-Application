@@ -26,7 +26,7 @@ namespace models {
          * "id": string,           - ID of the reminder<br/>
          * "event": string         - ID of the event the reminder is for
          */
-        explicit Reminder(QJsonObject &json);
+        explicit Reminder(QJsonValue &json);
 
         /**
          * Get the reminder's id

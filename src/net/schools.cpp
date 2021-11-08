@@ -21,9 +21,8 @@ shared_ptr<vector<School>> schools::getSchools() {
     auto schools = req.getResponse()->getPayload("schools").toArray();
 
     auto *out = new vector<School>;
-    for(auto school : schools){
-        QJsonObject o = school.toObject();
-        out->push_back(School(o));
+    for(QJsonValue school : schools){
+        out->push_back(School(school));
     }
 
     return shared_ptr<vector<School>>(out);
@@ -35,9 +34,8 @@ shared_ptr<vector<Course>> schools::getCourses(QString &schoolId){
     auto courses = req.getResponse()->getPayload("courses").toArray();
 
     auto *out = new vector<Course>;
-    for(auto course : courses){
-        QJsonObject o = course.toObject();
-        out->push_back(Course(o));
+    for(QJsonValue course : courses){
+        out->push_back(Course(course));
     }
 
     return shared_ptr<vector<Course>>(out);

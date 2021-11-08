@@ -41,7 +41,7 @@ namespace models {
          * "endDate": long int,    - Unix timestamp of event ending<br/>
          * "weekly": boolean       - Flag to indicate if the event occurs each week
          */
-        explicit Event(QJsonObject &json);
+        explicit Event(QJsonValue json);
 
         /**
          * Get the event's id

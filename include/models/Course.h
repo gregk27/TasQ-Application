@@ -43,7 +43,7 @@ namespace models {
          * "school": string,           - Updated ID of the course's school<br/>
          * "modified": long int        - Unix timestamp the course or it's children were last modified
          */
-        explicit Course(QJsonObject &json);
+        explicit Course(QJsonValue json);
 
         /**
          * Get the course's id

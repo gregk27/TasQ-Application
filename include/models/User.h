@@ -29,7 +29,7 @@ namespace models {
          * "name": string,             - Registered user's name<br/>
          * "school": string            - Registered user's school's ID
          */
-        explicit User(QJsonObject &json);
+        explicit User(QJsonValue &json);
 
         uuid getId();
 

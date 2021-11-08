@@ -8,7 +8,7 @@
 using namespace models;
 
 
-Reminder::Reminder(QJsonObject &json) {
+Reminder::Reminder(QJsonValue &json) {
     id = json["id"].toString();
     eventId = json["event"].toString();
 }

@@ -13,7 +13,7 @@ namespace net::auth {
     extern optional<string> localUID;
 }
 
-Event::Event(QJsonObject &json):
+Event::Event(QJsonValue json):
         type(enums::EventType::fromDB(json["type"].toString())) {
     id = json["id"].toString();
     courseID = json["course"].toString();

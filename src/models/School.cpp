@@ -13,7 +13,7 @@ QString School::getName() {
     return name;
 }
 
-School::School(QJsonObject &json) {
+School::School(QJsonValue &json) {
     id = json["id"].toString();
     name = json["name"].toString();
 }

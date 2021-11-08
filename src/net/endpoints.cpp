@@ -16,9 +16,8 @@ shared_ptr<vector<Event>> net::getEvents(QString &courseId) {
     auto events = req.getResponse()->getPayload("events").toArray();
 
     auto out = make_shared<vector<Event>>();
-    for(auto event : events){
-        QJsonObject o = event.toObject();
-        out->push_back(Event(o));
+    for(QJsonValue event : events){
+        out->push_back(Event(event));
     }
 
     return out;
@@ -31,9 +30,8 @@ shared_ptr<vector<Todo>> net::getTodos(){
 
     auto out = make_shared<vector<Todo>>();
 
-    for(auto t : todos){
-        QJsonObject o = t.toObject();
-        out->push_back(Todo(o));
+    for(QJsonValue t : todos){
+        out->push_back(Todo(t));
     }
 
     return out;
@@ -46,9 +44,8 @@ shared_ptr<vector<Reminder>> net::getReminders(){
 
     auto out = make_shared<vector<Reminder>>();
 
-    for(auto r : reminders){
-        QJsonObject o = r.toObject();
-        out->push_back(Reminder(o));
+    for(QJsonValue r : reminders){
+        out->push_back(Reminder(r));
     }
 
     return out;

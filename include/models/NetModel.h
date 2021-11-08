@@ -10,6 +10,7 @@
 #include <string>
 #include <QString>
 #include <QJsonObject>
+#include <QJsonValue>
 
 using namespace std;
 

@@ -13,8 +13,10 @@
 #include <net/endpoints.h>
 #include <net/subscriptions.h>
 #include <net/api.h>
+#include <chrono>
 
 using namespace std;
+using namespace std::chrono;
 
 // Add << operator to QString
 std::ostream&  operator <<(std::ostream &stream,const QString &str)
@@ -29,6 +31,8 @@ int main(int argc, char *argv[]) {
     MainWindow window(nullptr);
     QPushButton button("Hello world!", &window);
     window.show();
+
+    milliseconds ms = duration_cast< milliseconds >(system_clock::now().time_since_epoch());
 
     bool netStat = APIController::instance()->getStatus();
     if(netStat && AuthController::instance()->hasSession()) {
@@ -125,5 +129,7 @@ int main(int argc, char *argv[]) {
     cout << "Deleting course" << endl;
     APIController::instance()->remove<Course>(*c);
 
+    milliseconds end = duration_cast< milliseconds >(system_clock::now().time_since_epoch());
+    cout << (end-ms).count() << endl;
     return QApplication::exec();
 }
