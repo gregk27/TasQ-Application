@@ -5,6 +5,8 @@
 #ifndef TASQ_APPLICATION_USER_H
 #define TASQ_APPLICATION_USER_H
 
+#include <QString>
+#include <QJsonObject>
 #include "Models.h"
 
 /**
@@ -17,7 +19,7 @@ namespace models {
     class User {
     private:
         uuid id;
-        string name;
+        QString name;
         uuid schoolId;
     public:
         /**
@@ -27,19 +29,19 @@ namespace models {
          * "name": string,             - Registered user's name<br/>
          * "school": string            - Registered user's school's ID
          */
-        explicit User(json &json);
+        explicit User(QJsonValue &json);
 
         uuid getId();
 
         /**
          * Get the user's name
          */
-        string getName();
+        QString getName();
 
         /**
          * Set the user's name, will be reflected in databases
          */
-        void setName(string &newName);
+        void setName(QString &newName);
 
         /**
          * Get the user's school's id

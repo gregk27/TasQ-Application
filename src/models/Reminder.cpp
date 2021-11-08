@@ -8,9 +8,9 @@
 using namespace models;
 
 
-Reminder::Reminder(json &json) {
-    id = json["id"];
-    eventId = json["event"];
+Reminder::Reminder(QJsonValue &json) {
+    id = json["id"].toString();
+    eventId = json["event"].toString();
 }
 
 uuid Reminder::getId() {
@@ -21,7 +21,7 @@ uuid Reminder::getEventId() {
     return eventId;
 }
 
-string Reminder::getURL(Action a) {
+QString Reminder::getURL(Action a) {
     switch(a){
         case NetModel::ADD:
             return "/users/reminders/add";
@@ -33,8 +33,8 @@ string Reminder::getURL(Action a) {
     throw ActionException("none", "reminder");
 }
 
-map<string, string> *Reminder::getBody(Action a) {
+map<QString, QString> *Reminder::getBody(Action a) {
     if(a == Action::MODIFY)
         throw ActionException("modify", "reminder");
-    return new map<string, string> {{"event", eventId}};
+    return new map<QString, QString> {{"event", eventId}};
 }

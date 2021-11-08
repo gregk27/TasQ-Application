@@ -4,7 +4,7 @@
 
 #ifndef TASQ_APPLICATION_ENUMS_H
 #define TASQ_APPLICATION_ENUMS_H
-#include <string>
+#include <QString>
 
 using namespace std;
 
@@ -13,13 +13,13 @@ namespace models::enums {
      * Exception representing an invalid database string when creating an enum
      */
     class EnumValueException : public exception {
-        string str;
+        QString str;
     public:
         /**
          * Create a new EnumValueException
          * @param str Error message
          */
-        explicit EnumValueException(string str);
+        explicit EnumValueException(QString str);
         const char * what() const noexcept override;
     };
     /**
@@ -31,9 +31,9 @@ namespace models::enums {
         const static int numTerms = 4;
 
         /** Names used by database */
-        const static string dbNames[numTerms];
+        const static QString dbNames[numTerms];
         /** Pretty-print names */
-        const static string prettyNames[numTerms];
+        const static QString prettyNames[numTerms];
         /** Letter short forms */
         const static char letters[numTerms];
 
@@ -60,19 +60,19 @@ namespace models::enums {
          * @param s Database entry
          * @return Term with value based on dbNames
          */
-        static Term fromDB(string s);
+        static Term fromDB(QString s);
 
         /**
          * Get the term's database name
          * @return Database name for term
          */
-        string toDB() const;
+        QString toDB() const;
 
         /**
          * Get the term's pretty-print name
          * @return Pretty-print name for term
          */
-        string toString() const;
+        QString toString() const;
 
         /**
          * Get the term's single-letter name
@@ -99,9 +99,9 @@ namespace models::enums {
         const static int numEventTypes = 6;
 
         /** Names used by database */
-        const static string dbNames[numEventTypes];
+        const static QString dbNames[numEventTypes];
         /** Pretty-print names */
-        const static string prettyNames[numEventTypes];
+        const static QString prettyNames[numEventTypes];
 
         /** Index of this eventType in arrays */
         unsigned char val;
@@ -130,19 +130,19 @@ namespace models::enums {
          * @param s Database entry
          * @return EventType with value based on dbNames
          */
-        static EventType fromDB(string s);
+        static EventType fromDB(QString s);
 
         /**
          * Get the eventType's database name
          * @return Database name for eventType
          */
-        string toDB() const;
+        QString toDB() const;
 
         /**
          * Get the eventType's pretty-print name
          * @return Pretty-print name for eventType
          */
-        string toString() const;
+        QString toString() const;
 
         // Override comparison operators
         // Terms can be equal, but ordering is meaningless

@@ -5,15 +5,15 @@
 #include <models/School.h>
 using namespace models;
 
-string School::getId() {
+QString School::getId() {
     return id;
 }
 
-string School::getName() {
+QString School::getName() {
     return name;
 }
 
-School::School(json &json) {
-    id = json["id"];
-    name = json["name"];
+School::School(QJsonValue &json) {
+    id = json["id"].toString();
+    name = json["name"].toString();
 }

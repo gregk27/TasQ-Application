@@ -6,6 +6,7 @@
 #include <iostream>
 #include <optional>
 #include <string>
+#include <sstream>
 #include <net/auth.h>
 #include <net/api.h>
 
@@ -68,16 +69,16 @@ NetController::~NetController() {
  * This function is local to ensure that get/post methods are used for legibility
  * @param url The URL to request
  * @param body The POST body. If null then will perform GET request
- * @return string with response
+ * @return QString with response
  */
-string NetController::request(string &url, map<string, string> *body){
+QString NetController::request(QString &url, map<QString, QString> *body){
     // Create a memory chunk to use
     MemoryStruct chunk;
     chunk.memory = (char*)malloc(1);
     chunk.size = 0;
 
     // Set URL
-    curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
+    curl_easy_setopt(curl, CURLOPT_URL, url.toLocal8Bit().data());
     // Specify chunk for callback
     curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void *)&chunk);
     // Fail on bad HTTP response
@@ -114,7 +115,7 @@ string NetController::request(string &url, map<string, string> *body){
     }
 
     // Create string from response
-    string out(chunk.memory);
+    QString out(chunk.memory);
     // Free allocated memory to prevent leak
     free(chunk.memory);
 
@@ -127,14 +128,14 @@ NetController *NetController::instance() {
     return _instance;
 }
 
-string NetController::get(string url){
+QString NetController::get(QString url){
     return request(url);
 }
 
-string NetController::post(string url, map<string, string> &body) {
+QString NetController::post(QString url, map<QString, QString> &body) {
     return request(url, &body);
 }
 
 // Build error string and use parent constructor
-NetworkException::NetworkException(std::string endpoint, CURLcode code):
-    std::runtime_error("Request to " + endpoint + " returned code " + to_string(code) + ": " + curl_easy_strerror(code)) { }
+NetworkException::NetworkException(QString endpoint, CURLcode code):
+    std::runtime_error("Request to " + endpoint.toStdString() + " returned code " + to_string(code) + ": " + curl_easy_strerror(code)) { }

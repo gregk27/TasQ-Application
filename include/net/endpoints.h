@@ -22,14 +22,14 @@ namespace net {
      * @param courseId ID of the desired course
      * @return List of events for the course
      */
-    shared_ptr<vector<Event>> getEvents(string &courseId);
+    shared_ptr<vector<Event>> getEvents(QString &courseId);
     /**
      * Get events for a course
      * @param course Desired course
      * @return List of events for the course
      */
     inline shared_ptr<vector<Event>> getEvents(Course &course){
-        string id = course.getId();
+        QString id = course.getId();
         return getEvents(id);
     }
 

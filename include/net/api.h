@@ -7,10 +7,11 @@
 
 #include <string>
 #include <map>
+#include <QJsonDocument>
+#include <QJsonObject>
 #include <net/net.h>
 
 using namespace std;
-using json = nlohmann::json;
 
 // Forward declare APIResponse
 class APIResponse;
@@ -27,19 +28,19 @@ public:
         GET, POST
     };
     /** Base URL for API endpoints */
-    static const std::string BASE_URL;
+    static const QString BASE_URL;
 private:
     /** Endpoint targeted by the request */
-    string endpoint;
+    QString endpoint;
     /** HTTP method used to execute request */
     Method method;
     /** Flag indicating whether authentication token is included */
     bool includeAuth;
 
     /** Parameters to be provided in query string */
-    map<string, string> parameters;
+    map<QString, QString> parameters;
     /** POST body, only used if method is set to post */
-    map<string, string> body;
+    map<QString, QString> body;
     /** Response from API */
     shared_ptr<APIResponse> response = nullptr;
 
@@ -47,7 +48,7 @@ private:
      * Build the request url string
      * @return URL built from members
      */
-    string buildURL();
+    QString buildURL();
 public:
     /**
      * Create a new API Request
@@ -55,21 +56,21 @@ public:
      * @param method HTTP method to use
      * @param includeAuth Flag indicating whether authentication token is included
      */
-    explicit APIRequest(string endpoint, Method method = GET, bool includeAuth = true);
+    explicit APIRequest(QString endpoint, Method method = GET, bool includeAuth = true);
 
     /**
      * Set query string parameters
      * @param parameters Parameters to be included in query string
      * @return the APIRequest object so initialisation can be chained
      */
-    APIRequest *setParameters(map<string, string> &parameters);
+    APIRequest *setParameters(map<QString, QString> &parameters);
 
     /**
      * Set POST body
      * @param body Body to be included in request
      * @return the APIRequest object so initialisation can be chained
      */
-    APIRequest *setBody(map<string, string> &body);
+    APIRequest *setBody(map<QString, QString> &body);
 
     /**
      * Execute the API request
@@ -91,16 +92,16 @@ private:
     /** API response success */
     bool success;
     /** API response error */
-    string error;
+    QString error;
 
     /** API response body */
-    json response;
+    QJsonDocument response;
 public:
     /**
      * Create a new APIResponse
      * @param response Response body as json object
      */
-    explicit APIResponse(json &response);
+    explicit APIResponse(QJsonDocument &response);
 
     /**
      * Get API response success
@@ -110,18 +111,20 @@ public:
     /**
      * Get API response error message
      */
-    string getError();
+    QString getError();
 
     /**
      * Get API response body
+     * @return QJsonDocument, object can be obtained with .object()
      */
-    json getResponse();
+    QJsonDocument getResponse();
 
     /**
      * Get API response payload
      * @param payloadName Name of the payload object in response
+     * @return QJsonValue, which must then be converted as required
      */
-    json getPayload(string payloadName);
+    QJsonValue getPayload(QString payloadName);
 };
 
 class APIController {
@@ -146,7 +149,7 @@ public:
 
     template <typename T>
     shared_ptr<T> add(models::NetModel &m){
-        map<string, string> *body = m.getBody(models::NetModel::Action::ADD);
+        map<QString, QString> *body = m.getBody(models::NetModel::Action::ADD);
         auto req = APIRequest(m.getURL(models::NetModel::Action::ADD), APIRequest::POST);
         req.setBody(*body);
         req.execute();
@@ -157,7 +160,7 @@ public:
 
     template <typename T>
     shared_ptr<T> modify(models::NetModel &m){
-        map<string, string> *body = m.getBody(models::NetModel::Action::MODIFY);
+        map<QString, QString> *body = m.getBody(models::NetModel::Action::MODIFY);
         auto req = APIRequest(m.getURL(models::NetModel::Action::MODIFY), APIRequest::POST);
         req.setBody(*body);
         req.execute();
@@ -168,7 +171,7 @@ public:
 
     template <typename T>
     bool remove(models::NetModel &m){
-        map<string, string> *body = m.getBody(models::NetModel::Action::REMOVE);
+        map<QString, QString> *body = m.getBody(models::NetModel::Action::REMOVE);
         auto req = APIRequest(m.getURL(models::NetModel::Action::REMOVE), APIRequest::POST);
         req.setBody(*body);
         req.execute();
@@ -187,7 +190,7 @@ public:
      * @param endpoint API endpoint returning the response
      * @param message error message provided by API
      */
-    APIResponseException(std::string endpoint, std::string message);
+    APIResponseException(QString endpoint, QString message);
 };
 
 #endif //TASQ_APPLICATION_API_H

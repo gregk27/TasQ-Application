@@ -26,7 +26,7 @@ namespace models {
          * "id": string,           - ID of the reminder<br/>
          * "event": string         - ID of the event the reminder is for
          */
-        explicit Reminder(json &json);
+        explicit Reminder(QJsonValue &json);
 
         /**
          * Get the reminder's id
@@ -38,13 +38,13 @@ namespace models {
          */
         uuid getEventId();
 
-        inline string getPayloadName() override {
+        inline QString getPayloadName() override {
             return "reminder";
         }
 
-        string getURL(Action a) override;
+        QString getURL(Action a) override;
 
-        map<string, string> * getBody(Action a) override;
+        map<QString, QString> * getBody(Action a) override;
     };
 }
 

@@ -20,9 +20,9 @@ private:
     static AuthController *_instance;
 
     /** Session token created on login, used for authorized accesses */
-    optional<string> sessionToken;
+    optional<QString> sessionToken;
     /** ID of last user returned by register or login */
-    optional<string> localUID;
+    optional<QString> localUID;
 
     AuthController();
 
@@ -42,7 +42,7 @@ public:
      * @param schoolId ID of user's selected school
      * @return User created by database
      */
-    shared_ptr<models::User> registerUser(string &username, string &email, string &password, string &schoolId);
+    shared_ptr<models::User> registerUser(QString &username, QString &email, QString &password, QString &schoolId);
 
     /**
      * Log in to a user<br/>
@@ -51,7 +51,7 @@ public:
      * @param password user's password
      * @return User in database
      */
-    shared_ptr<models::User> login(string &email, string &password);
+    shared_ptr<models::User> login(QString &email, QString &password);
 
     /**
      * Get the locally signed in user
@@ -69,20 +69,20 @@ public:
      * Get the session token for current user
      * @throws AuthException if no user logged in
      */
-    string getSessionToken();
+    QString getSessionToken();
     /**
      * Get the sessionToken as a std::optional value
      */
-    optional<string> getSessionTokenOptional();
+    optional<QString> getSessionTokenOptional();
     /**
      * Get the ID for current user
      * @throws AuthException if no user logged in
      */
-    string getLocalUID();
+    QString getLocalUID();
     /**
      * Get the getLocalUID as a std::optional value
      */
-    optional<string> getLocalUIDOptional();
+    optional<QString> getLocalUIDOptional();
 };
 
 /**
@@ -94,7 +94,7 @@ public:
      * Create a new AuthException
      * @param action description of action being performed
      */
-    explicit AuthException(string action = "perform this action");
+    explicit AuthException(QString action = "perform this action");
 };
 
 #endif //TASQ_APPLICATION_AUTH_H

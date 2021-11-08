@@ -21,7 +21,7 @@ namespace models {
     private:
         uuid id;
         uuid courseID;
-        string name;
+        QString name;
         enums::EventType type;
         int weight;
         unsigned long long datetime;
@@ -41,7 +41,7 @@ namespace models {
          * "endDate": long int,    - Unix timestamp of event ending<br/>
          * "weekly": boolean       - Flag to indicate if the event occurs each week
          */
-        explicit Event(json &json);
+        explicit Event(QJsonValue json);
 
         /**
          * Get the event's id
@@ -61,12 +61,12 @@ namespace models {
         /**
          * Get the event's name
          */
-        string getName();
+        QString getName();
 
         /**
          * Set the event's name, will be reflected in databases
          */
-        void setName(string &newName);
+        void setName(QString &newName);
 
         /**
          * Get the event's type
@@ -118,13 +118,13 @@ namespace models {
          */
         void setWeekly(bool newWeekly);
 
-        inline string getPayloadName() override {
+        inline QString getPayloadName() override {
             return "event";
         }
 
-        string getURL(Action a) override;
+        QString getURL(Action a) override;
 
-        map<string, string> * getBody(Action a) override;
+        map<QString, QString> * getBody(Action a) override;
     };
 }
 

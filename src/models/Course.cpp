@@ -8,36 +8,36 @@
 #include <models/User.h>
 using namespace models;
 
-Course::Course(json &json):
-        term(enums::Term::fromDB(json["term"])) {
-    id = json["id"];
-    name = json["name"];
-    code = json["code"];
-    year = json["year"];
-    prof = json["prof"];
-    owner = json["owner"];
-    schoolId = json["school"];
-    modified = json["modified"];
+Course::Course(QJsonValue json):
+        term(enums::Term::fromDB(json["term"].toString())) {
+    id = json["id"].toString();
+    name = json["name"].toString();
+    code = json["code"].toString();
+    year = json["year"].toInt();
+    prof = json["prof"].toString();
+    owner = json["owner"].toString();
+    schoolId = json["school"].toString();
+    modified = json["modified"].toInteger();
 }
 
 uuid Course::getId() {
     return id;
 }
 
-string Course::getName() {
+QString Course::getName() {
     return name;
 }
 
-void Course::setName(string &newName) {
+void Course::setName(QString &newName) {
     // TODO: Add database changes
     name = newName;
 }
 
-string Course::getCode() {
+QString Course::getCode() {
     return code;
 }
 
-void Course::setCode(string &newCode) {
+void Course::setCode(QString &newCode) {
     // TODO: Add database changes
     code = newCode;
 }
@@ -60,16 +60,16 @@ void Course::setTerm(enums::Term &newTerm) {
     term = newTerm;
 }
 
-string Course::getProf() {
+QString Course::getProf() {
     return prof;
 }
 
-void Course::setProf(string &newProf) {
+void Course::setProf(QString &newProf) {
     // TODO: Add database changes
     prof = newProf;
 }
 
-string Course::getOwner() {
+QString Course::getOwner() {
     return owner;
 }
 
@@ -86,7 +86,7 @@ unsigned long long Course::getModified() {
     return modified;
 }
 
-string Course::getURL(Action a) {
+QString Course::getURL(Action a) {
     switch(a){
         case NetModel::ADD:
             return "/courses/add";
@@ -98,11 +98,11 @@ string Course::getURL(Action a) {
     throw ActionException("none", "course");
 }
 
-map<string, string> *Course::getBody(Action a) {
-    return new map<string, string> {
+map<QString, QString> *Course::getBody(Action a) {
+    return new map<QString, QString> {
             {"name", name},
             {"code", code},
-            {"year", to_string(year)},
+            {"year", QString::fromStdString(to_string(year))},
             {"term", term.toDB()},
             {"prof", prof},
             {"owner", AuthController::instance()->getLocalUIDOptional().value_or("")},

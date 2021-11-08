@@ -8,13 +8,16 @@
 #include <map>
 #include <stdexcept>
 #include <string>
+#include <QString>
+#include <QJsonObject>
+#include <QJsonValue>
 
 using namespace std;
 
 namespace models {
     class ActionException: public runtime_error {
     public:
-        explicit ActionException(string action, string model);
+        explicit ActionException(QString action, QString model);
     };
 
     class NetModel {
@@ -22,14 +25,14 @@ namespace models {
         enum Action {
             ADD, MODIFY, REMOVE
         };
-        inline virtual string getPayloadName(){
+        inline virtual QString getPayloadName(){
             throw runtime_error("Payload name function not implemented!");
         }
 
-        virtual string getURL(Action a) {
+        virtual QString getURL(Action a) {
             throw runtime_error("Get URL function not implemented!");
         }
-        virtual map<string, string> *getBody(Action a);
+        virtual map<QString, QString> *getBody(Action a);
     };
 }
 
