@@ -4,7 +4,6 @@
 #include <net/net.h>
 #include <iostream>
 #include <string>
-#include <nlohmann/json.hpp>
 
 #include <models/School.h>
 #include <models/User.h>
