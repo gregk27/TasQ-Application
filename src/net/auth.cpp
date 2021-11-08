@@ -24,8 +24,8 @@ AuthController *AuthController::instance() {
     return _instance;
 }
 
-shared_ptr<User> AuthController::registerUser(string &username, string &email, string &password, string &schoolId) {
-    map<string, string> body {
+shared_ptr<User> AuthController::registerUser(QString &username, QString &email, QString &password, QString &schoolId) {
+    map<QString, QString> body {
         {"name", username},
         {"email", email},
         {"password", password},
@@ -38,16 +38,16 @@ shared_ptr<User> AuthController::registerUser(string &username, string &email, s
 
     auto res = req.getResponse();
 
-    auto payload = res->getPayload("user");
+    auto payload = res->getPayload("user").toObject();
 
     auto out = std::make_shared<User>(payload);
     localUID = out->getId();
-    sessionToken = payload["token"];
+    sessionToken = payload["token"].toString();
     return out;
 }
 
-shared_ptr<User> AuthController::login(string &email, string &password) {
-    map<string, string> body {
+shared_ptr<User> AuthController::login(QString &email, QString &password) {
+    map<QString, QString> body {
             {"email",    email},
             {"password", password}
     };
@@ -58,10 +58,10 @@ shared_ptr<User> AuthController::login(string &email, string &password) {
 
     auto res = req.getResponse();
 
-    auto payload = res->getPayload("user");
+    auto payload = res->getPayload("user").toObject();
     auto out = std::make_shared<User>(payload);
     localUID = out->getId();
-    sessionToken = payload["token"];
+    sessionToken = payload["token"].toString();
     return out;
 }
 
@@ -73,7 +73,7 @@ shared_ptr<User> AuthController::getLocalUser(){
     req.execute();
 
     auto res = req.getResponse();
-    auto payload = res->getPayload("user");
+    auto payload = res->getPayload("user").toObject();
 
     return std::make_shared<User>(payload);
 }
@@ -82,26 +82,26 @@ bool AuthController::hasSession() {
     return sessionToken.has_value() && localUID.has_value();
 }
 
-string AuthController::getSessionToken() {
+QString AuthController::getSessionToken() {
     if(sessionToken.has_value())
         return sessionToken.value();
     throw AuthException();
 }
 
-optional<string> AuthController::getSessionTokenOptional() {
+optional<QString> AuthController::getSessionTokenOptional() {
     return sessionToken;
 }
 
-string AuthController::getLocalUID() {
+QString AuthController::getLocalUID() {
     if(localUID.has_value())
         return localUID.value();
     throw AuthException();
 }
 
-optional<string> AuthController::getLocalUIDOptional() {
+optional<QString> AuthController::getLocalUIDOptional() {
     return localUID;
 }
 
 // Build error string and use parent constructor
-AuthException::AuthException(string action):
-        runtime_error("You must be logged in to "+action){}
+AuthException::AuthException(QString action):
+        runtime_error("You must be logged in to "+action.toStdString()){}
