@@ -9,7 +9,6 @@
 #include <map>
 #include <stdexcept>
 #include <curl/curl.h>
-#include <nlohmann/json.hpp>
 #include <QJsonDocument>
 #include <Qstring>
 #include <models/NetModel.h>

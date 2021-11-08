@@ -12,7 +12,6 @@
 #include <net/net.h>
 
 using namespace std;
-using json = nlohmann::json;
 
 // Forward declare APIResponse
 class APIResponse;

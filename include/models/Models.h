@@ -8,10 +8,8 @@
 #include <string>
 #include <QString>
 #include <QJsonObject>
-#include <nlohmann/json.hpp>
 
 using namespace std;
-using json = nlohmann::json;
 
 /**
  * Classes and functions for handling data models

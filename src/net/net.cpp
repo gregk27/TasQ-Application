@@ -6,6 +6,7 @@
 #include <iostream>
 #include <optional>
 #include <string>
+#include <sstream>
 #include <net/auth.h>
 #include <net/api.h>
 
