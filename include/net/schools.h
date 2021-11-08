@@ -26,14 +26,14 @@ namespace net::schools {
      * @param schoolId ID of school to check
      * @return pointer to vector with list of courses for the school
      */
-    shared_ptr<vector<Course>> getCourses(string &schoolId);
+    shared_ptr<vector<Course>> getCourses(QString &schoolId);
     /**
      * Get a list of courses for a school
      * @param school School to check
      * @return pointer to vector with list of courses for the school
      */
     inline shared_ptr<vector<Course>> getCourses(School &school){
-        string id = school.getId();
+        QString id = school.getId();
         return schools::getCourses(id);
     }
 }

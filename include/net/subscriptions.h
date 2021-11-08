@@ -24,7 +24,7 @@ namespace net::subscriptions {
      * @param courseID ID of the course to unsubscribe from
      * @return True if unsubscription is successful
      */
-    bool removeSubscription(string &courseID);
+    bool removeSubscription(QString &courseID);
     /**
      * Unsubscribe from a course
      * @param course Course to unsubscribe from
@@ -32,7 +32,7 @@ namespace net::subscriptions {
      * @see net::users::removeSubscription(string)
      */
     inline bool removeSubscription(Course &course){
-        string id = course.getId();
+        QString id = course.getId();
         return removeSubscription(id);
     }
 
