@@ -23,6 +23,9 @@ set(PROJECT_WIDGETS
         src/main.cpp
         src/widgets/MainWindow/MainWindow.cpp include/widgets/MainWindow.h src/widgets/MainWindow/MainWindow.ui
         src/widgets/to_do/to_do.cpp include/widgets/to_do.h src/widgets/to_do/to_do.ui
+        src/widgets/monthcalendar/monthcalendar.cpp src/widgets/monthcalendar/monthcalendar.ui include/widgets/monthcalendar.h
+        src/widgets/monthview/monthview.cpp src/widgets/monthview/monthview.ui include/widgets/monthview.h
+        src/widgets/termview/termview.cpp src/widgets/termview/termview.ui include/widgets/termview.h
 )
 
 set(PROJECT_BACKEND
