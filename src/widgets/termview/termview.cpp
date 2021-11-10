@@ -1,4 +1,4 @@
-#include "termview.h"
+#include <widgets/termview.h>
 #include "ui_termview.h"
 
 TermView::TermView(QWidget* parent) :

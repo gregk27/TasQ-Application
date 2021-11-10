@@ -14,7 +14,7 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="widget">
-   <widget class="To_Do" name="todo" native="true">
+   <widget class="TermView" name="todo" native="true">
     <property name="geometry">
      <rect>
       <x>0</x>
@@ -42,9 +42,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>To_Do</class>
+   <class>MonthView</class>
    <extends>QWidget</extends>
-   <header location="global">widgets/to_do.h</header>
+   <header location="global">widgets/termview.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

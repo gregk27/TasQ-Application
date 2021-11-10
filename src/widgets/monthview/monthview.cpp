@@ -1,4 +1,4 @@
-#include "monthview.h"
+#include <widgets/monthview.h>
 #include "ui_monthview.h"
 
 MonthView::MonthView(QWidget* parent) :
