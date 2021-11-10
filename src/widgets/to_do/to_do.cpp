@@ -1,8 +1,8 @@
-#include "to_do.h"
+#include <widgets/to_do.h>
 #include "./ui_to_do.h"
 
 To_Do::To_Do(QWidget *parent)
-    : QMainWindow(parent)
+    : QWidget(parent)
     , ui(new Ui::To_Do)
 {
     ui->setupUi(this);

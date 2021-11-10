@@ -21,9 +21,8 @@ find_package(Qt6 COMPONENTS
 
 set(PROJECT_WIDGETS
         src/main.cpp
-        src/widgets/MainWindow/MainWindow.cpp
-        include/widgets/MainWindow.h
-        src/widgets/MainWindow/MainWindow.ui
+        src/widgets/MainWindow/MainWindow.cpp include/widgets/MainWindow.h src/widgets/MainWindow/MainWindow.ui
+        src/widgets/to_do/to_do.cpp include/widgets/to_do.h src/widgets/to_do/to_do.ui
 )
 
 set(PROJECT_BACKEND

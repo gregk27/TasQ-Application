@@ -1,13 +1,13 @@
 #ifndef TO_DO_H
 #define TO_DO_H
 
-#include <QMainWindow>
+#include <QWidget>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class To_Do; }
 QT_END_NAMESPACE
 
-class To_Do : public QMainWindow
+class To_Do : public QWidget
 {
     Q_OBJECT
 
