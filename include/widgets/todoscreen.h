@@ -1,19 +1,19 @@
-#ifndef TO_DO_H
-#define TO_DO_H
+#ifndef ToDoScreen_H
+#define ToDoScreen_H
 
 #include <QWidget>
 
 QT_BEGIN_NAMESPACE
-namespace Ui { class To_Do; }
+namespace Ui { class ToDoScreen; }
 QT_END_NAMESPACE
 
-class To_Do : public QWidget
+class ToDoScreen : public QWidget
 {
     Q_OBJECT
 
 public:
-    To_Do(QWidget *parent = nullptr);
-    ~To_Do();
+    ToDoScreen(QWidget *parent = nullptr);
+    ~ToDoScreen();
 
 private slots:
     void on_p1_clicked();
@@ -29,6 +29,6 @@ private slots:
     void on_p6_clicked();
 
 private:
-    Ui::To_Do *ui;
+    Ui::ToDoScreen *ui;
 };
-#endif // TO_DO_H
+#endif // ToDoScreen_H

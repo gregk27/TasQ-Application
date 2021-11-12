@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>To_Do</class>
- <widget class="QWidget" name="To_Do">
+ <class>ToDoScreen</class>
+ <widget class="QWidget" name="ToDoScreen">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>To_Do</string>
+   <string>ToDoScreen</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QLabel" name="label">
@@ -231,7 +231,7 @@
      <string>Assignment</string>
     </property>
    </widget>
-   <widget class="QMenu" name="menuTo_Do">
+   <widget class="QMenu" name="menuToDoScreen">
     <property name="title">
      <string>To-Do</string>
     </property>
@@ -239,7 +239,7 @@
    <addaction name="menuProfile"/>
    <addaction name="menuSchedule"/>
    <addaction name="menuAssignment"/>
-   <addaction name="menuTo_Do"/>
+   <addaction name="menuToDoScreen"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>

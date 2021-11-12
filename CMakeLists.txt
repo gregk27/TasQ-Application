@@ -48,7 +48,6 @@ set(PROJECT_WIDGETS
         include/widgets/schedulelistview.h
         src/widgets/ScheduleListView/schedulelistview.cpp
         src/widgets/ScheduleListView/schedulelistview.ui
-        src/widgets/to_do/to_do.cpp include/widgets/to_do.h src/widgets/to_do/to_do.ui
 )
 
 set(PROJECT_BACKEND
