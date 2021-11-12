@@ -48,6 +48,15 @@ set(PROJECT_WIDGETS
         include/widgets/schedulelistview.h
         src/widgets/ScheduleListView/schedulelistview.cpp
         src/widgets/ScheduleListView/schedulelistview.ui
+        include/widgets/monthcalendar.h
+        src/widgets/monthcalendar/monthcalendar.cpp 
+        src/widgets/monthcalendar/monthcalendar.ui 
+        include/widgets/monthview.h
+        src/widgets/monthview/monthview.cpp
+        src/widgets/monthview/monthview.ui 
+        include/widgets/termview.h
+        src/widgets/termview/termview.cpp
+        src/widgets/termview/termview.ui
 )
 
 set(PROJECT_BACKEND
