@@ -6,27 +6,81 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>647</width>
+    <height>459</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QLabel" name="label">
+  <widget class="QTabWidget" name="tabWidget">
    <property name="geometry">
     <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>81</width>
-     <height>16</height>
+     <x>-6</x>
+     <y>-1</y>
+     <width>647</width>
+     <height>459</height>
     </rect>
    </property>
-   <property name="text">
-    <string>Assignments</string>
+   <property name="currentIndex">
+    <number>3</number>
    </property>
+   <widget class="QWidget" name="list">
+    <attribute name="title">
+     <string>List</string>
+    </attribute>
+   </widget>
+   <widget class="QWidget" name="week">
+    <attribute name="title">
+     <string>Week</string>
+    </attribute>
+   </widget>
+   <widget class="QWidget" name="month">
+    <attribute name="title">
+     <string>Month</string>
+    </attribute>
+    <widget class="MonthView" name="monthView" native="true">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>647</width>
+       <height>459</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="term">
+    <attribute name="title">
+     <string>Term</string>
+    </attribute>
+    <widget class="TermView" name="termView" native="true">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>647</width>
+       <height>459</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
   </widget>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>MonthView</class>
+   <extends>QWidget</extends>
+   <header location="global">widgets/monthview.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>TermView</class>
+   <extends>QWidget</extends>
+   <header location="global">widgets/termview.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
