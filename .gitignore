@@ -147,6 +147,7 @@ CMakeLists.txt.user*
 *.dll
 *.exe
 
+CMakeLists.txt.*
 # QT Creator
 # --------
 *.user*

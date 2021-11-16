@@ -6,26 +6,23 @@
 
 using namespace models;
 
+User::User(QJsonValue &json) {
+    id = json["id"].toString();
+    name = json["name"].toString();
+    schoolId = json["school"].toString();
+}
+
 uuid User::getId() {
     return id;
 }
 
-string User::getName() {
+QString User::getName() {
     return name;
 }
 
-void User::setName(string &newName) {
+void User::setName(QString &newName) {
     // TODO: Add database changes
     name = newName;
-}
-
-string User::getEmail() {
-    return email;
-}
-
-void User::setEmail(string &newEmail) {
-    // TODO: Add database changes
-    email = newEmail;
 }
 
 uuid User::getSchoolId() {
