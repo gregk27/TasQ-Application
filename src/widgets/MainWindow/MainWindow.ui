@@ -11,22 +11,17 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>TasQ</string>
   </property>
-  <widget class="QWidget" name="widget">
-   <widget class="TermView" name="todo" native="true">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>800</width>
-      <height>600</height>
-     </rect>
-    </property>
-    <property name="text" stdset="0">
-     <string>PushButton</string>
-    </property>
-   </widget>
+  <widget class="QWidget" name="centralwidget">
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout_2">
+    <item>
+     <widget class="TabNavigator" name="widget" native="true"/>
+    </item>
+   </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -34,17 +29,17 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>20</height>
+     <height>22</height>
     </rect>
    </property>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <customwidgets>
   <customwidget>
-   <class>MonthView</class>
+   <class>TabNavigator</class>
    <extends>QWidget</extends>
-   <header location="global">widgets/termview.h</header>
+   <header>widgets/tabnavigator.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>

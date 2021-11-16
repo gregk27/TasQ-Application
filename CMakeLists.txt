@@ -21,11 +21,42 @@ find_package(Qt6 COMPONENTS
 
 set(PROJECT_WIDGETS
         src/main.cpp
-        src/widgets/MainWindow/MainWindow.cpp include/widgets/MainWindow.h src/widgets/MainWindow/MainWindow.ui
-        src/widgets/to_do/to_do.cpp include/widgets/to_do.h src/widgets/to_do/to_do.ui
-        src/widgets/monthcalendar/monthcalendar.cpp src/widgets/monthcalendar/monthcalendar.ui include/widgets/monthcalendar.h
-        src/widgets/monthview/monthview.cpp src/widgets/monthview/monthview.ui include/widgets/monthview.h
-        src/widgets/termview/termview.cpp src/widgets/termview/termview.ui include/widgets/termview.h
+        src/widgets/MainWindow/MainWindow.cpp
+        include/widgets/MainWindow.h
+        src/widgets/MainWindow/MainWindow.ui
+        include/widgets/tabnavigator.h
+        src/widgets/TabNavigator/tabnavigator.cpp
+        src/widgets/TabNavigator/tabnavigator.ui
+        include/widgets/schedulescreen.h
+        src/widgets/ScheduleScreen/schedulescreen.cpp
+        src/widgets/ScheduleScreen/schedulescreen.ui
+        include/widgets/profilescreen.h
+        src/widgets/ProfileScreen/profilescreen.cpp
+        src/widgets/ProfileScreen/profilescreen.ui
+        include/widgets/assignmentsscreen.h
+        src/widgets/AssignmentsScreen/assignmentsscreen.cpp
+        src/widgets/AssignmentsScreen/assignmentsscreen.ui
+        include/widgets/todoscreen.h
+        src/widgets/ToDoScreen/todoscreen.cpp
+        src/widgets/ToDoScreen/todoscreen.ui
+        include/widgets/schedulefilter.h
+        src/widgets/ScheduleFilter/schedulefilter.cpp
+        src/widgets/ScheduleFilter/schedulefilter.ui
+        include/widgets/scheduleweekview.h
+        src/widgets/ScheduleWeekView/scheduleweekview.cpp
+        src/widgets/ScheduleWeekView/scheduleweekview.ui
+        include/widgets/schedulelistview.h
+        src/widgets/ScheduleListView/schedulelistview.cpp
+        src/widgets/ScheduleListView/schedulelistview.ui
+        include/widgets/monthcalendar.h
+        src/widgets/monthcalendar/monthcalendar.cpp 
+        src/widgets/monthcalendar/monthcalendar.ui 
+        include/widgets/monthview.h
+        src/widgets/monthview/monthview.cpp
+        src/widgets/monthview/monthview.ui 
+        include/widgets/termview.h
+        src/widgets/termview/termview.cpp
+        src/widgets/termview/termview.ui
 )
 
 set(PROJECT_BACKEND
