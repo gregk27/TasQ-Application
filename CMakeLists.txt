@@ -19,6 +19,9 @@ add_executable(TasQ_Application
         src/widgets/MainWindow/MainWindow.cpp
         include/widgets/MainWindow.h
         src/widgets/MainWindow/MainWindow.ui
+        src/widgets/ProfileScreen/profilescreen.cpp
+        include/widgets/profilescreen.h
+        src/widgets/ProfileScreen/profilescreen.ui
         src/models/User.cpp include/models/User.h
         src/models/ModelBase.cpp include/models/ModelBase.h
         src/models/School.cpp include/models/School.h
