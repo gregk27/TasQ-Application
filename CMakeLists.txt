@@ -24,6 +24,9 @@ set(PROJECT_WIDGETS
         src/widgets/MainWindow/MainWindow.cpp
         include/widgets/MainWindow.h
         src/widgets/MainWindow/MainWindow.ui
+        src/widgets/ProfileScreen/profilescreen.cpp
+        include/widgets/profilescreen.h
+        src/widgets/ProfileScreen/profilescreen.ui
         include/widgets/tabnavigator.h
         src/widgets/TabNavigator/tabnavigator.cpp
         src/widgets/TabNavigator/tabnavigator.ui
