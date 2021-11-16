@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="TasQ_Application_autogen" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="TasQ_Application" TARGET_NAME="TasQ_Application_autogen" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="TasQ_Application" RUN_TARGET_NAME="TasQ_Application">
+  <configuration default="false" name="TasQ_Application_autogen" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="TasQ-Application" TARGET_NAME="TasQ_Application_autogen" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="TasQ-Application" RUN_TARGET_NAME="TasQ_Application">
     <envs>
       <env name="path" value="$PROJECT_DIR$/lib/bin" />
     </envs>
