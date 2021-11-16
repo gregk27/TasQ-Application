@@ -13,40 +13,7 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QTabWidget" name="tabWidget">
-   <property name="geometry">
-    <rect>
-     <x>30</x>
-     <y>20</y>
-     <width>1091</width>
-     <height>551</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>1091</width>
-     <height>551</height>
-    </size>
-   </property>
-   <property name="layoutDirection">
-    <enum>Qt::LeftToRight</enum>
-   </property>
-   <property name="tabShape">
-    <enum>QTabWidget::Triangular</enum>
-   </property>
-   <property name="currentIndex">
-    <number>0</number>
-   </property>
-   <property name="usesScrollButtons">
-    <bool>false</bool>
-   </property>
-   <property name="documentMode">
-    <bool>false</bool>
-   </property>
    <widget class="QWidget" name="tab">
-    <attribute name="title">
-     <string>Profile </string>
-    </attribute>
     <widget class="QGroupBox" name="groupBox">
      <property name="geometry">
       <rect>
@@ -270,22 +237,6 @@
      </property>
     </widget>
    </widget>
-   <widget class="QWidget" name="tab_2">
-    <attribute name="title">
-     <string>Schedule</string>
-    </attribute>
-   </widget>
-   <widget class="QWidget" name="tab_3">
-    <attribute name="title">
-     <string>Assignments</string>
-    </attribute>
-   </widget>
-   <widget class="QWidget" name="tab_4">
-    <attribute name="title">
-     <string>To-Do</string>
-    </attribute>
-   </widget>
-  </widget>
  </widget>
  <resources/>
  <connections/>
