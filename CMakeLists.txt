@@ -1,10 +1,15 @@
 cmake_minimum_required(VERSION 3.20)
-project(TasQ_Application)
 
-set(CMAKE_CXX_STANDARD 14)
+project(TasQ-Application VERSION 0.1 LANGUAGES CXX)
+
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+
+set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
-set(CMAKE_AUTOUIC ON)
+
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 include_directories("${PROJECT_SOURCE_DIR}/include")
 
@@ -14,7 +19,7 @@ find_package(Qt6 COMPONENTS
         widgets
         REQUIRED)
 
-add_executable(TasQ_Application
+set(PROJECT_WIDGETS
         src/main.cpp
         src/widgets/MainWindow/MainWindow.cpp
         include/widgets/MainWindow.h
@@ -22,6 +27,42 @@ add_executable(TasQ_Application
         src/widgets/ProfileScreen/profilescreen.cpp
         include/widgets/profilescreen.h
         src/widgets/ProfileScreen/profilescreen.ui
+        include/widgets/tabnavigator.h
+        src/widgets/TabNavigator/tabnavigator.cpp
+        src/widgets/TabNavigator/tabnavigator.ui
+        include/widgets/schedulescreen.h
+        src/widgets/ScheduleScreen/schedulescreen.cpp
+        src/widgets/ScheduleScreen/schedulescreen.ui
+        include/widgets/profilescreen.h
+        src/widgets/ProfileScreen/profilescreen.cpp
+        src/widgets/ProfileScreen/profilescreen.ui
+        include/widgets/assignmentsscreen.h
+        src/widgets/AssignmentsScreen/assignmentsscreen.cpp
+        src/widgets/AssignmentsScreen/assignmentsscreen.ui
+        include/widgets/todoscreen.h
+        src/widgets/ToDoScreen/todoscreen.cpp
+        src/widgets/ToDoScreen/todoscreen.ui
+        include/widgets/schedulefilter.h
+        src/widgets/ScheduleFilter/schedulefilter.cpp
+        src/widgets/ScheduleFilter/schedulefilter.ui
+        include/widgets/scheduleweekview.h
+        src/widgets/ScheduleWeekView/scheduleweekview.cpp
+        src/widgets/ScheduleWeekView/scheduleweekview.ui
+        include/widgets/schedulelistview.h
+        src/widgets/ScheduleListView/schedulelistview.cpp
+        src/widgets/ScheduleListView/schedulelistview.ui
+        include/widgets/monthcalendar.h
+        src/widgets/monthcalendar/monthcalendar.cpp 
+        src/widgets/monthcalendar/monthcalendar.ui 
+        include/widgets/monthview.h
+        src/widgets/monthview/monthview.cpp
+        src/widgets/monthview/monthview.ui 
+        include/widgets/termview.h
+        src/widgets/termview/termview.cpp
+        src/widgets/termview/termview.ui
+)
+
+set(PROJECT_BACKEND
         src/models/User.cpp include/models/User.h
         src/models/ModelBase.cpp include/models/ModelBase.h
         src/models/School.cpp include/models/School.h
@@ -31,13 +72,26 @@ add_executable(TasQ_Application
         src/models/Reminder.cpp include/models/Reminder.h
         src/models/Todo.cpp include/models/Todo.h
         src/models/Application.cpp include/models/Application.h
-        )
+)
 
-target_link_libraries(TasQ_Application
+add_executable(TasQ-Application
+        src/main.cpp
+        ${PROJECT_WIDGETS}
+        ${PROJECT_BACKEND}
+)
+
+
+target_link_libraries(TasQ-Application
         Qt::Core
         Qt::Gui
         Qt::Widgets
-        )
+)
+
+set_target_properties(TasQ-Application PROPERTIES
+    MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com
+    MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
+    MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
+)
 
 if (WIN32)
     set(DEBUG_SUFFIX)
@@ -67,3 +121,7 @@ if (WIN32)
                 "$<TARGET_FILE_DIR:${PROJECT_NAME}>")
     endforeach (QT_LIB)
 endif ()
+
+if(QT_VERSION_MAJOR EQUAL 6)
+    qt_finalize_executable(TasQ-Application)
+endif()
