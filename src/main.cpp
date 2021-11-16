@@ -1,3 +1,5 @@
+#include <widgets/MainWindow.h>
+
 #include <QApplication>
 #include <QPushButton>
 #include <widgets/MainWindow.h>
@@ -25,10 +27,10 @@ std::ostream&  operator <<(std::ostream &stream,const QString &str)
 }
 
 
-int main(int argc, char *argv[]) {
+int main(int argc, char *argv[])
+{
     QApplication a(argc, argv);
     MainWindow window(nullptr);
-    QPushButton button("Hello world!", &window);
     window.show();
 
     milliseconds ms = duration_cast< milliseconds >(system_clock::now().time_since_epoch());
