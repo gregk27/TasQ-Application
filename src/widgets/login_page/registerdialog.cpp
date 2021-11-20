@@ -15,6 +15,14 @@ RegisterDialog::~RegisterDialog()
 
 void RegisterDialog::on_ok_clicked()
 {
+    /*  Need to include data model
+
+      username = ui->l1->text().toStdString();
+    password = ui->l2->text().toStdString();
+     email = ui->l3->text().toStdString();
+     school = ui->l4->text().toStdString();
+
+     */
     close();
 }
 
