@@ -22,13 +22,16 @@ class AddRemoveClass : public QDialog {
     Q_OBJECT
 
 public:
-    explicit AddRemoveClass(QWidget *parent = nullptr);
+    explicit AddRemoveClass(std::vector<models::Course> *courses, QWidget *parent = nullptr);
 
     ~AddRemoveClass() override;
 
     void populateClasses(std::vector<models::Course> *courses);
 private:
     Ui::AddRemoveClass *ui;
+
+public slots:
+    void coursesChanged(std::vector<models::Course> *courses);
 };
 
 

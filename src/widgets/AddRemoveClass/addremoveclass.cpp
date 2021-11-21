@@ -9,10 +9,10 @@
 
 #include <models/Course.h>
 
-AddRemoveClass::AddRemoveClass(QWidget *parent) :
+AddRemoveClass::AddRemoveClass(std::vector<models::Course> *courses, QWidget *parent) :
         QDialog(parent), ui(new Ui::AddRemoveClass) {
     ui->setupUi(this);
-
+    populateClasses(courses);
 }
 
 AddRemoveClass::~AddRemoveClass() {
@@ -20,8 +20,17 @@ AddRemoveClass::~AddRemoveClass() {
 }
 
 void AddRemoveClass::populateClasses(std::vector<models::Course> *courses) {
-    auto layout = new QVBoxLayout(this);
-
+    QVBoxLayout *layout;
+    if(ui->classes->layout()){
+        layout = (QVBoxLayout*) ui->classes->layout();
+        QLayoutItem *child;
+        while ((child = layout->takeAt(0)) != 0) {
+            delete child;
+        }
+    } else {
+        layout = new QVBoxLayout(this);
+        ui->classes->setLayout(layout);
+    }
     for(auto course : *courses){
         auto *c = new QFrame();
 
@@ -42,6 +51,8 @@ void AddRemoveClass::populateClasses(std::vector<models::Course> *courses) {
     }
 
     layout->addItem(new QSpacerItem(1, 1000));
-    ui->classes->setLayout(layout);
 }
 
+void AddRemoveClass::coursesChanged(std::vector<models::Course> *courses) {
+    populateClasses(courses);
+}
