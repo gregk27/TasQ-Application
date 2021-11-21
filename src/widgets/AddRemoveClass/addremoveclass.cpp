@@ -13,6 +13,8 @@ AddRemoveClass::AddRemoveClass(std::vector<models::Course> *courses, QWidget *pa
         QDialog(parent), ui(new Ui::AddRemoveClass) {
     ui->setupUi(this);
     populateClasses(courses);
+
+    connect(ui->addButton, SIGNAL(clicked()), this, SIGNAL(addCourse()));
 }
 
 AddRemoveClass::~AddRemoveClass() {
@@ -46,6 +48,8 @@ void AddRemoveClass::populateClasses(std::vector<models::Course> *courses) {
         btn->setText("Remove");
         btn->setGeometry(QRect(300, 0, 80, 20));
         c->setMinimumHeight(20);
+        // Emit remove course signal when the button is pressed
+        connect(btn, SIGNAL(clicked()), this, SIGNAL(removeCourse(&course)));
 
         layout->addWidget(c);
     }

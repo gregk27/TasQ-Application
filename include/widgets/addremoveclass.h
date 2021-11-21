@@ -26,12 +26,16 @@ public:
 
     ~AddRemoveClass() override;
 
-    void populateClasses(std::vector<models::Course> *courses);
 private:
     Ui::AddRemoveClass *ui;
+    void populateClasses(std::vector<models::Course> *courses);
 
 public slots:
     void coursesChanged(std::vector<models::Course> *courses);
+
+signals:
+    void removeCourse(models::Course *c);
+    void addCourse();
 };
 
 
