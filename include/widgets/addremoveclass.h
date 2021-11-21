@@ -5,14 +5,20 @@
 #ifndef TASQ_APPLICATION_ADDREMOVECLASS_H
 #define TASQ_APPLICATION_ADDREMOVECLASS_H
 
-#include <QWidget>
+#include <QDialog>
+#include <QVBoxLayout>
+#include <QFrame>
 
+
+namespace models {
+    class Course;
+}
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class AddRemoveClass; }
 QT_END_NAMESPACE
 
-class AddRemoveClass : public QWidget {
+class AddRemoveClass : public QDialog {
     Q_OBJECT
 
 public:
@@ -20,8 +26,13 @@ public:
 
     ~AddRemoveClass() override;
 
+    void populateClasses(std::vector<models::Course> *courses);
 private:
     Ui::AddRemoveClass *ui;
+
+    QVBoxLayout *layout;
+    std::vector<QFrame*> classes;
+
 };
 
 
