@@ -29,10 +29,6 @@ public:
     void populateClasses(std::vector<models::Course> *courses);
 private:
     Ui::AddRemoveClass *ui;
-
-    QVBoxLayout *layout;
-    std::vector<QFrame*> classes;
-
 };
 
 
