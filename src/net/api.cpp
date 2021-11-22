@@ -6,7 +6,7 @@
 #include <net/api.h>
 #include <net/auth.h>
 
-const QString APIRequest::BASE_URL = "http://server.lan:120";
+const QString APIRequest::BASE_URL = std::getenv("API_URL");
 
 QString APIRequest::buildURL() {
     stringstream ss;
