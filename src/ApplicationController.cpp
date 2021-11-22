@@ -43,3 +43,15 @@ ApplicationController *ApplicationController::instance() {
 School *ApplicationController::getSchool() {
     return school;
 }
+
+void ApplicationController::unsubscribe(Course *c) {
+    courses.insert(make_pair(c->getId(), c));
+    emitChange<Course>();
+    //TODO: Update database subscription and local storage
+}
+
+void ApplicationController::subscribe(Course *c) {
+    courses.erase(c->getId());
+    emitChange<Course>();
+    //TODO: Update database subscription and local storage
+}
