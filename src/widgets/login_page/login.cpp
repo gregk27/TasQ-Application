@@ -2,20 +2,20 @@
 #include "./ui_login.h"
 #include<QMessageBox>
 
-login::login(QWidget *parent)
+Login::Login(QWidget *parent)
     : QWidget(parent)
-    , ui(new Ui::login)
+    , ui(new Ui::Login)
 {
     ui->setupUi(this);
 }
 
-login::~login()
+Login::~Login()
 {
     delete ui;
 }
 
 
-void login::on_reg_clicked()
+void Login::on_reg_clicked()
 {
     //RegisterDialog regi;
     //regi.setModal(true);
@@ -26,7 +26,7 @@ void login::on_reg_clicked()
 }
 
 
-void login::on_log_clicked()
+void Login::on_log_clicked()
 {
     /*  Need to include login data model
 
