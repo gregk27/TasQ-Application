@@ -38,6 +38,9 @@ private:
     template<typename T>
     inline std::unordered_map<uuid, T*> &getMap() { throw std::runtime_error("Type not supported"); }
 
+    template<typename T>
+    inline void emitChange() { };
+
 public:
     static ApplicationController *instance();
 
@@ -59,24 +62,38 @@ public:
     template<class T>
     void addInstance(T *i){
         getMap<T>().insert(make_pair(i->getId(), i));
+        emitChange<T>();
         // TODO: Update database and local storage
     }
     template<class T>
     void modifyInstance(T *i){
         getMap<T>()[i->getId()] = *i;
+        emitChange<T>();
         // TODO: Update database and local storage
     }
     template<class T>
     void removeInstance(T *i){
         getMap<T>().erase(i->getId());
+        emitChange<T>();
         // TODO: Update database subscription and local storage
         delete i;
     }
 
+public slots:
+    void unsubscribe(Course *c);
+    void subscribe(Course *c);
+
+signals:
+    void coursesChanged();
+    void eventsChanged();
 };
 
 template<> inline std::unordered_map<uuid, Course*> &ApplicationController::getMap<Course>() { return courses; }
 template<> inline std::unordered_map<uuid, Event*> &ApplicationController::getMap<Event>() { return events; }
+
+template<> inline void ApplicationController::emitChange<Course>() { emit coursesChanged(); }
+template<> inline void ApplicationController::emitChange<Event>() { emit eventsChanged(); }
+
 
 
 #endif //TASQ_APPLICATION_APPLICATIONCONTROLLER_H
