@@ -6,6 +6,7 @@
 #include <net/api.h>
 #include <net/subscriptions.h>
 
+using namespace std;
 using namespace net;
 
 bool subscriptions::addSubscription(Course &course) {

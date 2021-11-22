@@ -4,11 +4,12 @@
 
 #include <models/NetModel.h>
 
+using namespace std;
 using namespace models;
 
 ActionException::ActionException(QString action, QString model):
         runtime_error("Invalid action " + action.toStdString() + " for model " + model.toStdString() + "."){}
 
-map<QString, QString> *NetModel::getBody(Action a) {
+std::map<QString, QString> *NetModel::getBody(Action a) {
     throw runtime_error("Payload name function not implemented!");
 }

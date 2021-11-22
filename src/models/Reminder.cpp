@@ -5,6 +5,7 @@
 #include <models/Reminder.h>
 #include <models/User.h>
 
+using namespace std;
 using namespace models;
 
 
@@ -33,7 +34,7 @@ QString Reminder::getURL(Action a) {
     throw ActionException("none", "reminder");
 }
 
-map<QString, QString> *Reminder::getBody(Action a) {
+std::map<QString, QString> *Reminder::getBody(Action a) {
     if(a == Action::MODIFY)
         throw ActionException("modify", "reminder");
     return new map<QString, QString> {{"event", eventId}};
