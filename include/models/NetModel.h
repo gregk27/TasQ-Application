@@ -11,6 +11,9 @@
 #include <QString>
 #include <QJsonObject>
 #include <QJsonValue>
+#include <utility>
+
+typedef QString uuid;
 
 namespace models {
 class ActionException: public std::runtime_error {
@@ -19,10 +22,21 @@ class ActionException: public std::runtime_error {
     };
 
     class NetModel {
+    protected:
+        uuid id;
+        explicit NetModel(QString id);
     public:
         enum Action {
             ADD, MODIFY, REMOVE
         };
+
+        /**
+         * Get the model's unique ID
+         */
+        uuid getId() const {
+            return id;
+        }
+
         inline virtual QString getPayloadName(){
             throw std::runtime_error("Payload name function not implemented!");
         }

@@ -35,7 +35,7 @@ public:
     School *getSchool();
 
     std::unordered_map<uuid, Course*> getCourses();
-    Course *getCourse(uuid courseID);
+    Course *getCourse(uuid courseId);
 
     void addCourse(Course *c);
     void modifyCourse(Course *c);

@@ -8,14 +8,10 @@ using namespace std;
 using namespace models;
 
 
-Todo::Todo(QJsonValue &json) {
-    id = json["id"].toString();
+Todo::Todo(QJsonValue &json):
+    NetModel(json["id"].toString()) {
     name = json["name"].toString();
     completed = json["completed"].toBool();
-}
-
-uuid Todo::getId() {
-    return id;
 }
 
 QString Todo::getName() {

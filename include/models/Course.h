@@ -19,7 +19,6 @@ namespace models {
      */
     class Course : public NetModel {
     private:
-        uuid id;
         QString name;
         QString code;
         unsigned short year;
@@ -44,11 +43,6 @@ namespace models {
          * "modified": long int        - Unix timestamp the course or it's children were last modified
          */
         explicit Course(QJsonValue json);
-
-        /**
-         * Get the course's id
-         */
-        uuid getId();
 
         /**
          * Get the course's name

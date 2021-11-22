@@ -10,8 +10,7 @@ using namespace std;
 using namespace models;
 
 Course::Course(QJsonValue json):
-        term(enums::Term::fromDB(json["term"].toString())) {
-    id = json["id"].toString();
+        NetModel(json["id"].toString()), term(enums::Term::fromDB(json["term"].toString())) {
     name = json["name"].toString();
     code = json["code"].toString();
     year = json["year"].toInt();
@@ -19,10 +18,6 @@ Course::Course(QJsonValue json):
     owner = json["owner"].toString();
     schoolId = json["school"].toString();
     modified = json["modified"].toInteger();
-}
-
-uuid Course::getId() {
-    return id;
 }
 
 QString Course::getName() {
