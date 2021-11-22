@@ -43,28 +43,3 @@ ApplicationController *ApplicationController::instance() {
 School *ApplicationController::getSchool() {
     return school;
 }
-
-unordered_map<uuid, Course*> ApplicationController::getCourses(){
-    return courses;
-}
-Course* ApplicationController::getCourse(uuid courseId){
-    if(courses.count(courseId))
-        return courses[courseId];
-    return nullptr;
-}
-
-void ApplicationController::addCourse(Course *c) {
-    courses.insert(make_pair(c->getId(), c));
-    // TODO: Update database and local storage
-}
-
-void ApplicationController::modifyCourse(Course *c){
-    *courses[c->getId()] = *c;
-    // TODO: Update database and local storage
-}
-
-void ApplicationController::removeCourse(Course *c) {
-    courses.erase(c->getId());
-    // TODO: Update database subscription and local storage
-    delete c;
-}

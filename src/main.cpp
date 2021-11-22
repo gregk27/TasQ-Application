@@ -29,10 +29,10 @@ int main(int argc, char *argv[])
 //    window.show();
 
     cout << ApplicationController::instance()->getSchool()->getId() << endl;
-    for(auto c : ApplicationController::instance()->getCourses()){
+    for(auto c : ApplicationController::instance()->getInstances<Course>()){
         cout << c.first << ": " << c.second->getCode() << endl;
     }
-    cout << ApplicationController::instance()->getCourse("16c6bddb-2de2-11ec-a3fd-0023aea14009")->getCode() << endl;
+    cout << ApplicationController::instance()->getInstance<Course>("16c6bddb-2de2-11ec-a3fd-0023aea14009")->getCode() << endl;
 
     return 0;
 //    return QApplication::exec();
