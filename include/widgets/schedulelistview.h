@@ -17,6 +17,8 @@ public:
 
 private:
     Ui::ScheduleListView *ui;
+
+    void generateUI();
 };
 
 #endif // SCHEDULELISTVIEW_H
