@@ -16,6 +16,8 @@
 #include <net/api.h>
 #include <chrono>
 
+#include <widgets/schedulelistview.h>
+
 using namespace std;
 using namespace std::chrono;
 
@@ -42,6 +44,17 @@ int main(int argc, char *argv[])
     } else {
         cout << "API connection failed" << endl;
     }
+
+    QString cID = "16c6bddb-2de2-11ec-a3fd-0023aea14009";
+    auto events = net::getEvents(cID);
+    cID = "3970e2cd-2de6-11ec-a3fd-0023aea14009";
+    auto e2 = net::getEvents(cID);
+
+    events->insert(events->end(), e2->begin(), e2->end());
+
+    ScheduleListView slv(nullptr);
+    slv.generateUI(events.get());
+    slv.show();
 
 //    auto schools = net::schools::getSchools();
 //    for(auto &school : *schools){
