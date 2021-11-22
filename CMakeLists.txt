@@ -88,7 +88,7 @@ add_executable(TasQ-Application
         src/main.cpp
         ${PROJECT_WIDGETS}
         ${PROJECT_BACKEND}
-)
+        src/ApplicationController.cpp include/ApplicationController.h)
 
 
 target_link_libraries(TasQ-Application
