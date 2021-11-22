@@ -5,7 +5,8 @@
 #ifndef TASQ_APPLICATION_TODO_H
 #define TASQ_APPLICATION_TODO_H
 
-#include "ModelBase.h"
+#include "Models.h"
+#include <models/NetModel.h>
 
 /**
  * Classes and functions for handling data models
@@ -15,12 +16,21 @@ namespace models {
     /**
      * Data model representing a To-do item for the local user
      */
-    class Todo : public ModelBase {
+    class Todo : public NetModel {
     private:
         uuid id;
-        string name;
+        QString name;
         bool completed;
     public:
+        /**
+         * Create a To-Do from a json object with the structure
+         * <pre>
+         * "id": string,           - ID of the To-Do<br/>
+         * "name": string,         - Name of the To-Do<br/>
+         * "completed": boolean,   - To-Do completion flag
+         */
+        explicit Todo(QJsonValue &json);
+
         /**
          * Get the To-do's id
          */
@@ -29,12 +39,12 @@ namespace models {
         /**
          * Get the To-do's name
          */
-        string getName();
+        QString getName();
 
         /**
          * Set the To-do's name, will be reflected in databases
          */
-        void setName(string &newName);
+        void setName(QString &newName);
 
         /**
          * Get the To-do's completion flag
@@ -45,6 +55,14 @@ namespace models {
          * Set the To-do's completion flag, will be reflected in databases
          */
         void setCompleted(bool newCompleted);
+
+        inline QString getPayloadName() override {
+            return "todo";
+        }
+
+        QString getURL(Action a) override;
+
+        std::map<QString, QString> * getBody(Action a) override;
     };
 }
 
