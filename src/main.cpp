@@ -7,6 +7,8 @@
 #include <models/User.h>
 #include <net/api.h>
 #include <widgets/addremoveclass.h>
+#include <widgets/login.h>
+#include <widgets/registerdialog.h>
 
 using namespace std;
 using namespace std::chrono;
@@ -25,6 +27,11 @@ int main(int argc, char *argv[])
     MainWindow window(nullptr);
     window.show();
 
+    Login l;
+    l.show();
+
+    RegisterDialog r;
+    r.show();
 
     return QApplication::exec();
 }

@@ -4,16 +4,16 @@
 #include <QWidget>
 #include "registerdialog.h"
 QT_BEGIN_NAMESPACE
-namespace Ui { class login; }
+namespace Ui { class Login; }
 QT_END_NAMESPACE
 
-class login : public QWidget
+class Login : public QWidget
 {
     Q_OBJECT
 
 public:
-    login(QWidget *parent = nullptr);
-    ~login();
+    Login(QWidget *parent = nullptr);
+    ~Login();
 
 private slots:
 
@@ -23,7 +23,7 @@ private slots:
     void on_log_clicked();
 
 private:
-    Ui::login *ui;
+    Ui::Login *ui;
     RegisterDialog *regi;
 };
 #endif // LOGIN_H
