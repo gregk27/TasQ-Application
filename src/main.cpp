@@ -4,7 +4,10 @@
 #include <net/net.h>
 #include <string>
 
+#include <ApplicationController.h>
 #include <models/User.h>
+#include <models/School.h>
+#include <models/Course.h>
 #include <net/api.h>
 #include <widgets/addremoveclass.h>
 
@@ -21,10 +24,16 @@ std::ostream&  operator <<(std::ostream &stream,const QString &str)
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
-    MainWindow window(nullptr);
-    window.show();
+//    QApplication a(argc, argv);
+//    MainWindow window(nullptr);
+//    window.show();
 
+    cout << ApplicationController::instance()->getSchool()->getId() << endl;
+    for(auto c : ApplicationController::instance()->getCourses()){
+        cout << c.first << ": " << c.second->getCode() << endl;
+    }
+    cout << ApplicationController::instance()->getCourse("16c6bddb-2de2-11ec-a3fd-0023aea14009")->getCode() << endl;
 
-    return QApplication::exec();
+    return 0;
+//    return QApplication::exec();
 }
