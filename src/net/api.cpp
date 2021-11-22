@@ -6,6 +6,8 @@
 #include <net/api.h>
 #include <net/auth.h>
 
+using namespace std;
+
 const QString APIRequest::BASE_URL = "https://tasq.gregk.ca";
 
 QString APIRequest::buildURL() {

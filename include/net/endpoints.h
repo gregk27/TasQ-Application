@@ -14,21 +14,19 @@
 // Assorted endpoints that are not handled elsewhere
 // Separated from main netcode to keep things clean
 
-using namespace models;
-
 namespace net {
     /**
      * Get events for a course
      * @param courseId ID of the desired course
      * @return List of events for the course
      */
-    shared_ptr<vector<Event>> getEvents(QString &courseId);
+    std::shared_ptr<std::vector<models::Event>> getEvents(QString &courseId);
     /**
      * Get events for a course
      * @param course Desired course
      * @return List of events for the course
      */
-    inline shared_ptr<vector<Event>> getEvents(Course &course){
+    inline std::shared_ptr<std::vector<models::Event>> getEvents(models::Course &course){
         QString id = course.getId();
         return getEvents(id);
     }
@@ -37,13 +35,13 @@ namespace net {
      * Get reminders for local user
      * @return List of reminders for the course
      */
-    shared_ptr<vector<Reminder>> getReminders();
+    std::shared_ptr<std::vector<models::Reminder>> getReminders();
 
     /**
      * Get todos for the local user
      * @return  vector with todos for local user
      */
-    shared_ptr<vector<Todo>> getTodos();
+    std::shared_ptr<std::vector<models::Todo>> getTodos();
 }
 
 #endif //TASQ_APPLICATION_ENDPOINTS_H

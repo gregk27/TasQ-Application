@@ -11,8 +11,6 @@
 #include <QJsonObject>
 #include <net/net.h>
 
-using namespace std;
-
 // Forward declare APIResponse
 class APIResponse;
 
@@ -38,11 +36,11 @@ private:
     bool includeAuth;
 
     /** Parameters to be provided in query string */
-    map<QString, QString> parameters;
+    std::map<QString, QString> parameters;
     /** POST body, only used if method is set to post */
-    map<QString, QString> body;
+    std::map<QString, QString> body;
     /** Response from API */
-    shared_ptr<APIResponse> response = nullptr;
+    std::shared_ptr<APIResponse> response = nullptr;
 
     /**
      * Build the request url string
@@ -63,14 +61,14 @@ public:
      * @param parameters Parameters to be included in query string
      * @return the APIRequest object so initialisation can be chained
      */
-    APIRequest *setParameters(map<QString, QString> &parameters);
+    APIRequest *setParameters(std::map<QString, QString> &parameters);
 
     /**
      * Set POST body
      * @param body Body to be included in request
      * @return the APIRequest object so initialisation can be chained
      */
-    APIRequest *setBody(map<QString, QString> &body);
+    APIRequest *setBody(std::map<QString, QString> &body);
 
     /**
      * Execute the API request
@@ -81,7 +79,7 @@ public:
     /**
      * Get the API's response object
      */
-    shared_ptr<APIResponse> getResponse();
+    std::shared_ptr<APIResponse> getResponse();
 };
 
 /**
@@ -148,30 +146,30 @@ public:
     bool getStatus();
 
     template <typename T>
-    shared_ptr<T> add(models::NetModel &m){
-        map<QString, QString> *body = m.getBody(models::NetModel::Action::ADD);
+    std::shared_ptr<T> add(models::NetModel &m){
+        std::map<QString, QString> *body = m.getBody(models::NetModel::Action::ADD);
         auto req = APIRequest(m.getURL(models::NetModel::Action::ADD), APIRequest::POST);
         req.setBody(*body);
         req.execute();
         delete body;
         auto payload = req.getResponse()->getPayload(m.getPayloadName());
-        return make_shared<T>(payload);
+        return std::make_shared<T>(payload);
     }
 
     template <typename T>
-    shared_ptr<T> modify(models::NetModel &m){
-        map<QString, QString> *body = m.getBody(models::NetModel::Action::MODIFY);
+    std::shared_ptr<T> modify(models::NetModel &m){
+        std::map<QString, QString> *body = m.getBody(models::NetModel::Action::MODIFY);
         auto req = APIRequest(m.getURL(models::NetModel::Action::MODIFY), APIRequest::POST);
         req.setBody(*body);
         req.execute();
         delete body;
         auto payload = req.getResponse()->getPayload(m.getPayloadName());
-        return make_shared<T>(payload);
+        return std::make_shared<T>(payload);
     }
 
     template <typename T>
     bool remove(models::NetModel &m){
-        map<QString, QString> *body = m.getBody(models::NetModel::Action::REMOVE);
+        std::map<QString, QString> *body = m.getBody(models::NetModel::Action::REMOVE);
         auto req = APIRequest(m.getURL(models::NetModel::Action::REMOVE), APIRequest::POST);
         req.setBody(*body);
         req.execute();

@@ -4,6 +4,7 @@
 
 #include <models/User.h>
 
+using namespace std;
 using namespace models;
 
 User::User(QJsonValue &json) {

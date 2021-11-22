@@ -13,6 +13,7 @@
 #include <net/schools.h>
 #include <net/api.h>
 
+using namespace std;
 using namespace net;
 
 shared_ptr<vector<School>> schools::getSchools() {

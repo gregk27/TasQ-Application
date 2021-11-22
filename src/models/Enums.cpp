@@ -5,6 +5,7 @@
 #include <models/Enums.h>
 #include <algorithm>
 
+using namespace std;
 using namespace models::enums;
 
 EnumValueException::EnumValueException(QString str) {
