@@ -19,7 +19,6 @@ namespace models {
      */
     class Event : public NetModel {
     private:
-        uuid id;
         uuid courseID;
         QString name;
         enums::EventType type;
@@ -44,14 +43,9 @@ namespace models {
         explicit Event(QJsonValue json);
 
         /**
-         * Get the event's id
-         */
-        uuid getId();
-
-        /**
          * Get the event's courseID
          */
-        uuid getCourseID();
+        uuid getCourseId();
 
         /**
          * Set the event's courseID, will be reflected in databases

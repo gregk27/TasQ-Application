@@ -47,9 +47,9 @@ School *ApplicationController::getSchool() {
 unordered_map<uuid, Course*> ApplicationController::getCourses(){
     return courses;
 }
-Course* ApplicationController::getCourse(uuid courseID){
-    if(courses.count(courseID))
-        return courses[courseID];
+Course* ApplicationController::getCourse(uuid courseId){
+    if(courses.count(courseId))
+        return courses[courseId];
     return nullptr;
 }
 

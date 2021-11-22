@@ -17,7 +17,6 @@ namespace models {
      */
     class Reminder : public NetModel {
     private:
-        uuid id;
         uuid eventId;
     public:
         /**
@@ -27,11 +26,6 @@ namespace models {
          * "event": string         - ID of the event the reminder is for
          */
         explicit Reminder(QJsonValue &json);
-
-        /**
-         * Get the reminder's id
-         */
-        uuid getId();
 
         /**
          * Get the reminder's event's id

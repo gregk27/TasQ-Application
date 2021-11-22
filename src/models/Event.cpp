@@ -15,8 +15,7 @@ namespace net::auth {
 }
 
 Event::Event(QJsonValue json):
-        type(enums::EventType::fromDB(json["type"].toString())) {
-    id = json["id"].toString();
+        NetModel(json["id"].toString()), type(enums::EventType::fromDB(json["type"].toString())) {
     courseID = json["course"].toString();
     name = json["name"].toString();
     weight = json["weight"].toInt();
@@ -29,11 +28,7 @@ Event::Event(QJsonValue json):
     weekly = json["weekly"].toBool();
 }
 
-uuid Event::getId() {
-    return id;
-}
-
-uuid Event::getCourseID() {
+uuid Event::getCourseId() {
     return courseID;
 }
 
