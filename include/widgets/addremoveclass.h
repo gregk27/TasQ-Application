@@ -9,10 +9,9 @@
 #include <QVBoxLayout>
 #include <QFrame>
 
+#include <models/Course.h>
 
-namespace models {
-    class Course;
-}
+Q_DECLARE_METATYPE(models::Course)
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class AddRemoveClass; }
@@ -34,7 +33,7 @@ public slots:
     void coursesChanged(std::vector<models::Course> *courses);
 
 signals:
-    void removeCourse(models::Course *c);
+    void removeCourse(const models::Course *c);
     void addCourse();
 };
 
