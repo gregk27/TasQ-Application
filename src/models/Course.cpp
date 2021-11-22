@@ -6,6 +6,7 @@
 #include <optional>
 #include <models/Course.h>
 #include <models/User.h>
+using namespace std;
 using namespace models;
 
 Course::Course(QJsonValue json):

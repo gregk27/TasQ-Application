@@ -12,10 +12,8 @@
 #include <QJsonObject>
 #include <QJsonValue>
 
-using namespace std;
-
 namespace models {
-    class ActionException: public runtime_error {
+class ActionException: public std::runtime_error {
     public:
         explicit ActionException(QString action, QString model);
     };
@@ -26,13 +24,13 @@ namespace models {
             ADD, MODIFY, REMOVE
         };
         inline virtual QString getPayloadName(){
-            throw runtime_error("Payload name function not implemented!");
+            throw std::runtime_error("Payload name function not implemented!");
         }
 
         virtual QString getURL(Action a) {
-            throw runtime_error("Get URL function not implemented!");
+            throw std::runtime_error("Get URL function not implemented!");
         }
-        virtual map<QString, QString> *getBody(Action a);
+        virtual std::map<QString, QString> *getBody(Action a);
     };
 }
 

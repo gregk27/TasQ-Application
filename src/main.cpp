@@ -15,6 +15,7 @@
 #include <net/subscriptions.h>
 #include <net/api.h>
 #include <chrono>
+#include <widgets/addremoveclass.h>
 
 using namespace std;
 using namespace std::chrono;
@@ -50,6 +51,8 @@ int main(int argc, char *argv[])
         for(auto &course : courses){
             cout << course.getCode() << ":" << course.getName() << endl;
         }
+        AddRemoveClass *arc = new AddRemoveClass(&courses);
+        arc->show();
     }
 
     QJsonObject courseJSON = {

@@ -62,7 +62,7 @@ namespace models {
 
         QString getURL(Action a) override;
 
-        map<QString, QString> * getBody(Action a) override;
+        std::map<QString, QString> * getBody(Action a) override;
     };
 }
 
