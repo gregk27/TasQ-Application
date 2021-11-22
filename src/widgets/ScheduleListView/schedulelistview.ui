@@ -7,190 +7,200 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>300</height>
+    <height>274</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>60</width>
-     <height>16</height>
-    </rect>
+  <layout class="QHBoxLayout" name="horizontalLayout">
+   <property name="leftMargin">
+    <number>0</number>
    </property>
-   <property name="text">
-    <string>List View</string>
+   <property name="topMargin">
+    <number>0</number>
    </property>
-  </widget>
-  <widget class="QTableView" name="tableView">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>60</y>
-     <width>381</width>
-     <height>231</height>
-    </rect>
+   <property name="rightMargin">
+    <number>0</number>
    </property>
-  </widget>
-  <widget class="QTableWidget" name="tableWidget">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>60</y>
-     <width>381</width>
-     <height>231</height>
-    </rect>
-   </property>
-   <row>
-    <property name="text">
-     <string>Monday</string>
-    </property>
-   </row>
-   <row>
-    <property name="text">
-     <string>9:30 - 10:30</string>
-    </property>
-   </row>
-   <row>
-    <property name="text">
-     <string>11:30 - 12:30</string>
-    </property>
-   </row>
-   <row>
-    <property name="text">
-     <string>1:30 - 2:30</string>
-    </property>
-   </row>
-   <row>
-    <property name="text">
-     <string>2:30 - 3:30</string>
-    </property>
-   </row>
-   <row>
-    <property name="text">
-     <string>3:30 - 4:30</string>
-    </property>
-   </row>
-   <row>
-    <property name="text">
-     <string>4:30 - 5:30</string>
-    </property>
-   </row>
-   <row>
-    <property name="text">
-     <string>5:30 - 6:30</string>
-    </property>
-   </row>
-   <column>
-    <property name="text">
-     <string>Class</string>
-    </property>
-   </column>
-   <column>
-    <property name="text">
-     <string>Location</string>
-    </property>
-   </column>
-   <column>
-    <property name="text">
-     <string>Notes</string>
-    </property>
-   </column>
-   <item row="1" column="0">
-    <property name="text">
-     <string>CMPE 320</string>
-    </property>
+   <item>
+    <widget class="QTableWidget" name="tableWidget">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>400</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="horizontalScrollBarPolicy">
+      <enum>Qt::ScrollBarAlwaysOff</enum>
+     </property>
+     <row>
+      <property name="text">
+       <string>Monday</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>9:30 - 10:30</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>11:30 - 12:30</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>1:30 - 2:30</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>2:30 - 3:30</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>3:30 - 4:30</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>4:30 - 5:30</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>5:30 - 6:30</string>
+      </property>
+     </row>
+     <column>
+      <property name="text">
+       <string>Class</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Location</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Notes</string>
+      </property>
+     </column>
+     <item row="1" column="0">
+      <property name="text">
+       <string>CMPE 320</string>
+      </property>
+     </item>
+     <item row="1" column="1">
+      <property name="text">
+       <string>ILC 241</string>
+      </property>
+     </item>
+     <item row="1" column="2">
+      <property name="text">
+       <string>Lecture</string>
+      </property>
+     </item>
+     <item row="2" column="0">
+      <property name="text">
+       <string>CMPE 365</string>
+      </property>
+     </item>
+     <item row="2" column="1">
+      <property name="text">
+       <string>Ellis Aud </string>
+      </property>
+     </item>
+     <item row="2" column="2">
+      <property name="text">
+       <string>Lecture</string>
+      </property>
+     </item>
+     <item row="3" column="0">
+      <property name="text">
+       <string>ELEC 326</string>
+      </property>
+     </item>
+     <item row="3" column="1">
+      <property name="text">
+       <string>Bio Sci 1002</string>
+      </property>
+     </item>
+     <item row="3" column="2">
+      <property name="text">
+       <string>Lab</string>
+      </property>
+     </item>
+     <item row="4" column="0">
+      <property name="text">
+       <string>ELEC 377</string>
+      </property>
+     </item>
+     <item row="4" column="1">
+      <property name="text">
+       <string>Kingston 701</string>
+      </property>
+     </item>
+     <item row="4" column="2">
+      <property name="text">
+       <string>Tutorial</string>
+      </property>
+     </item>
+     <item row="5" column="0">
+      <property name="text">
+       <string>CMPE 365</string>
+      </property>
+     </item>
+     <item row="5" column="1">
+      <property name="text">
+       <string>Ellis Aud</string>
+      </property>
+     </item>
+     <item row="5" column="2">
+      <property name="text">
+       <string>Lab</string>
+      </property>
+     </item>
+     <item row="6" column="0">
+      <property name="text">
+       <string>ELEC 377</string>
+      </property>
+     </item>
+     <item row="6" column="1">
+      <property name="text">
+       <string>Kingston 301</string>
+      </property>
+     </item>
+     <item row="6" column="2">
+      <property name="text">
+       <string>Lecture</string>
+      </property>
+     </item>
+    </widget>
    </item>
-   <item row="1" column="1">
-    <property name="text">
-     <string>ILC 241</string>
-    </property>
+   <item>
+    <spacer name="horizontalSpacer">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>40</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
    </item>
-   <item row="1" column="2">
-    <property name="text">
-     <string>Lecture</string>
-    </property>
-   </item>
-   <item row="2" column="0">
-    <property name="text">
-     <string>CMPE 365</string>
-    </property>
-   </item>
-   <item row="2" column="1">
-    <property name="text">
-     <string>Ellis Aud </string>
-    </property>
-   </item>
-   <item row="2" column="2">
-    <property name="text">
-     <string>Lecture</string>
-    </property>
-   </item>
-   <item row="3" column="0">
-    <property name="text">
-     <string>ELEC 326</string>
-    </property>
-   </item>
-   <item row="3" column="1">
-    <property name="text">
-     <string>Bio Sci 1002</string>
-    </property>
-   </item>
-   <item row="3" column="2">
-    <property name="text">
-     <string>Lab</string>
-    </property>
-   </item>
-   <item row="4" column="0">
-    <property name="text">
-     <string>ELEC 377</string>
-    </property>
-   </item>
-   <item row="4" column="1">
-    <property name="text">
-     <string>Kingston 701</string>
-    </property>
-   </item>
-   <item row="4" column="2">
-    <property name="text">
-     <string>Tutorial</string>
-    </property>
-   </item>
-   <item row="5" column="0">
-    <property name="text">
-     <string>CMPE 365</string>
-    </property>
-   </item>
-   <item row="5" column="1">
-    <property name="text">
-     <string>Ellis Aud</string>
-    </property>
-   </item>
-   <item row="5" column="2">
-    <property name="text">
-     <string>Lab</string>
-    </property>
-   </item>
-   <item row="6" column="0">
-    <property name="text">
-     <string>ELEC 377</string>
-    </property>
-   </item>
-   <item row="6" column="1">
-    <property name="text">
-     <string>Kingston 301</string>
-    </property>
-   </item>
-   <item row="6" column="2">
-    <property name="text">
-     <string>Lecture</string>
-    </property>
-   </item>
-  </widget>
+  </layout>
  </widget>
  <resources/>
  <connections/>
