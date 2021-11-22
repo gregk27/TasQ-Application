@@ -5,7 +5,9 @@
 #ifndef TASQ_APPLICATION_USER_H
 #define TASQ_APPLICATION_USER_H
 
-#include "ModelBase.h"
+#include <QString>
+#include <QJsonObject>
+#include "Models.h"
 
 /**
  * Classes and functions for handling data models
@@ -14,34 +16,32 @@ namespace models {
     /**
      * Data model representing a user account/profile
      */
-    class User : public ModelBase {
+    class User {
     private:
         uuid id;
-        string name;
-        string email;
+        QString name;
         uuid schoolId;
     public:
+        /**
+         * Create a user from a json object with the structure
+         * <pre>
+         * "id": string,               - Registered user's ID<br/>
+         * "name": string,             - Registered user's name<br/>
+         * "school": string            - Registered user's school's ID
+         */
+        explicit User(QJsonValue &json);
+
         uuid getId();
 
         /**
          * Get the user's name
          */
-        string getName();
+        QString getName();
 
         /**
          * Set the user's name, will be reflected in databases
          */
-        void setName(string &newName);
-
-        /**
-         * Get the user's email
-         */
-        string getEmail();
-
-        /**
-         * Set the user's email, will be reflected in databases
-         */
-        void setEmail(string &newEmail);
+        void setName(QString &newName);
 
         /**
          * Get the user's school's id
