@@ -28,6 +28,8 @@ private:
     School *school;
     std::unordered_map<uuid, Course*> courses;
     std::unordered_map<uuid, Event*> events;
+    std::unordered_map<uuid, Reminder*> reminders;
+    std::unordered_map<uuid, ToDo*> todos;
 
     /**
      * Get the map associated with a specific type
@@ -86,14 +88,18 @@ public slots:
 signals:
     void coursesChanged();
     void eventsChanged();
+    void remindersChanged();
+    void todosChanged();
 };
 
 template<> inline std::unordered_map<uuid, Course*> &ApplicationController::getMap<Course>() { return courses; }
 template<> inline std::unordered_map<uuid, Event*> &ApplicationController::getMap<Event>() { return events; }
+template<> inline std::unordered_map<uuid, Reminder*> &ApplicationController::getMap<Reminder>() { return reminders; }
+template<> inline std::unordered_map<uuid, ToDo*> &ApplicationController::getMap<ToDo>() { return todos; }
 
 template<> inline void ApplicationController::emitChange<Course>() { emit coursesChanged(); }
 template<> inline void ApplicationController::emitChange<Event>() { emit eventsChanged(); }
-
-
+template<> inline void ApplicationController::emitChange<Reminder>() { emit remindersChanged(); }
+template<> inline void ApplicationController::emitChange<ToDo>() { emit todosChanged(); }
 
 #endif //TASQ_APPLICATION_APPLICATIONCONTROLLER_H
