@@ -68,7 +68,7 @@ set(PROJECT_WIDGETS
         include/widgets/termview.h
         src/widgets/termview/termview.cpp
         src/widgets/termview/termview.ui
-)
+        src/widgets/AddRemoveClass/addremoveclass.cpp include/widgets/addremoveclass.h src/widgets/AddRemoveClass/addremoveclass.ui)
 
 set(PROJECT_BACKEND
         src/models/User.cpp include/models/User.h
