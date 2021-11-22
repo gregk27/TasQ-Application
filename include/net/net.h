@@ -29,7 +29,7 @@ private:
     NetController();
     ~NetController();
 
-    QString request(QString &url, map<QString, QString> *body=nullptr);
+    QString request(QString &url, std::map<QString, QString> *body=nullptr);
 public:
     /**
      * Get singleton instance
@@ -54,7 +54,7 @@ public:
      * @param s String to escape
      * @return Escaped string
      */
-    inline string escapeString(const QString &s){
+    inline std::string escapeString(const QString &s){
         return curl_easy_escape(curl, s.toLocal8Bit().data(), s.size());
     }
 

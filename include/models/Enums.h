@@ -6,13 +6,11 @@
 #define TASQ_APPLICATION_ENUMS_H
 #include <QString>
 
-using namespace std;
-
 namespace models::enums {
     /**
      * Exception representing an invalid database string when creating an enum
      */
-    class EnumValueException : public exception {
+    class EnumValueException : public std::exception {
         QString str;
     public:
         /**

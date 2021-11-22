@@ -9,8 +9,6 @@
 #include <net/net.h>
 #include <models/User.h>
 
-using namespace std;
-
 /**
  * Singleton controller for user authentication
  */
@@ -20,9 +18,9 @@ private:
     static AuthController *_instance;
 
     /** Session token created on login, used for authorized accesses */
-    optional<QString> sessionToken;
+    std::optional<QString> sessionToken;
     /** ID of last user returned by register or login */
-    optional<QString> localUID;
+    std::optional<QString> localUID;
 
     AuthController();
 
@@ -42,7 +40,7 @@ public:
      * @param schoolId ID of user's selected school
      * @return User created by database
      */
-    shared_ptr<models::User> registerUser(QString &username, QString &email, QString &password, QString &schoolId);
+    std::shared_ptr<models::User> registerUser(QString &username, QString &email, QString &password, QString &schoolId);
 
     /**
      * Log in to a user<br/>
@@ -51,13 +49,13 @@ public:
      * @param password user's password
      * @return User in database
      */
-    shared_ptr<models::User> login(QString &email, QString &password);
+    std::shared_ptr<models::User> login(QString &email, QString &password);
 
     /**
      * Get the locally signed in user
      * @return User in database, nullptr if not logged it
      */
-    shared_ptr<models::User> getLocalUser();
+    std::shared_ptr<models::User> getLocalUser();
 
     /**
      * Get if there's a session credential (may or may not be valid)
@@ -73,7 +71,7 @@ public:
     /**
      * Get the sessionToken as a std::optional value
      */
-    optional<QString> getSessionTokenOptional();
+    std::optional<QString> getSessionTokenOptional();
     /**
      * Get the ID for current user
      * @throws AuthException if no user logged in
@@ -82,13 +80,13 @@ public:
     /**
      * Get the getLocalUID as a std::optional value
      */
-    optional<QString> getLocalUIDOptional();
+    std::optional<QString> getLocalUIDOptional();
 };
 
 /**
  * Exception thrown when there's no localUser to perform an action requiring authorization
  */
-class AuthException : public runtime_error {
+class AuthException : public std::runtime_error {
 public:
     /**
      * Create a new AuthException

@@ -8,6 +8,7 @@
 #include <iostream>
 #include <net/api.h>
 
+using namespace std;
 using namespace models;
 
 AuthController *AuthController::_instance = nullptr;
