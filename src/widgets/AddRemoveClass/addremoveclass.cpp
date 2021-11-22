@@ -4,7 +4,7 @@
 
 // You may need to build the project (run Qt uic code generator) to get "ui_AddRemoveClass.h" resolved
 
-#include "../../../include/widgets/addremoveclass.h"
+#include <widgets/addremoveclass.h>
 #include "ui_AddRemoveClass.h"
 
 #include <models/Course.h>
@@ -12,6 +12,8 @@
 AddRemoveClass::AddRemoveClass(std::vector<models::Course> *courses, QWidget *parent) :
         QDialog(parent), ui(new Ui::AddRemoveClass) {
     ui->setupUi(this);
+    setWindowTitle("Add/Remove Classes");
+    setModal(true);
     populateClasses(courses);
 
     connect(ui->addButton, SIGNAL(clicked()), this, SIGNAL(addCourse()));
@@ -49,7 +51,9 @@ void AddRemoveClass::populateClasses(std::vector<models::Course> *courses) {
         btn->setGeometry(QRect(300, 0, 80, 20));
         c->setMinimumHeight(20);
         // Emit remove course signal when the button is pressed
-        connect(btn, SIGNAL(clicked()), this, SIGNAL(removeCourse(&course)));
+        connect(btn, &QPushButton::clicked, [=]  {
+            emit removeCourse(&course);
+        });
 
         layout->addWidget(c);
     }
