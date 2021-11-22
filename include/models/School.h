@@ -5,7 +5,9 @@
 #ifndef TASQ_APPLICATION_SCHOOL_H
 #define TASQ_APPLICATION_SCHOOL_H
 
-#include "ModelBase.h"
+#include <QJsonObject>
+#include <QString>
+#include "Models.h"
 
 /**
  * Classes and functions for handling data models
@@ -14,15 +16,28 @@ namespace models {
     /**
      * Data model representing a school
      */
-    class School: public ModelBase {
+    class School {
     private:
         uuid id;
-        string name;
+        QString name;
     public:
+        /**
+         * Create a school from a json object with the structure
+         * <pre>
+         * "id": string,           - ID of school <br/>
+         * "name": string,         - Name of school
+         */
+        explicit School(QJsonValue &json);
+
+        /**
+         * Get the school's ID
+         */
+        QString getId();
+
         /**
          * Get the school's name
          */
-        string getName();
+        QString getName();
     };
 }
 

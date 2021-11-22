@@ -4,6 +4,7 @@
 
 #include <models/Application.h>
 
+using namespace std;
 using namespace models;
 
 unsigned long long Application::getLastUpdate() {

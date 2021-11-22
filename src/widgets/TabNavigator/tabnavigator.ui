@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>TabNavigator</class>
+ <widget class="QWidget" name="TabNavigator">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>647</width>
+    <height>459</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="styleSheet">
+      <string notr="true">QTabWidget::pane {
+    border: none;
+}
+
+QTabWidget::tab-bar {
+    alignment: left;
+}</string>
+     </property>
+     <property name="currentIndex">
+      <number>1</number>
+     </property>
+     <widget class="ProfileScreen" name="profile">
+      <attribute name="title">
+       <string>Profile</string>
+      </attribute>
+     </widget>
+     <widget class="ScheduleScreen" name="schedule">
+      <attribute name="title">
+       <string>Schedule</string>
+      </attribute>
+     </widget>
+     <widget class="AssignmentsScreen" name="assignments">
+      <attribute name="title">
+       <string>Assignments</string>
+      </attribute>
+     </widget>
+     <widget class="ToDoScreen" name="todo">
+      <attribute name="title">
+       <string>To-Do</string>
+      </attribute>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>ScheduleScreen</class>
+   <extends>QWidget</extends>
+   <header>widgets/schedulescreen.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ProfileScreen</class>
+   <extends>QWidget</extends>
+   <header>widgets/profilescreen.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>AssignmentsScreen</class>
+   <extends>QWidget</extends>
+   <header>widgets/assignmentsscreen.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ToDoScreen</class>
+   <extends>QWidget</extends>
+   <header>widgets/todoscreen.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>
