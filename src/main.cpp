@@ -15,6 +15,8 @@
 #include <widgets/registerdialog.h>
 
 #include <widgets/schedulelistview.h>
+#include <ApplicationController.h>
+#include <models/Event.h>
 
 using namespace std;
 using namespace std::chrono;
@@ -43,7 +45,9 @@ int main(int argc, char *argv[])
     } else {
         cout << "API connection failed" << endl;
     }
-    
+
+    ApplicationController::instance()->pullData(false);
+
     return QApplication::exec();
 }
 

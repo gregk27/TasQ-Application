@@ -35,7 +35,7 @@ namespace models {
     class Event;
     class Reminder;
     class School;
-    class ToDo;
+    class Todo;
     class User;
 
     namespace enums {
