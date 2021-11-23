@@ -11,8 +11,6 @@
 
 #include <models/Course.h>
 
-Q_DECLARE_METATYPE(models::Course)
-
 QT_BEGIN_NAMESPACE
 namespace Ui { class AddRemoveClass; }
 QT_END_NAMESPACE

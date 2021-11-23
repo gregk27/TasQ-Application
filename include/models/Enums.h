@@ -5,6 +5,7 @@
 #ifndef TASQ_APPLICATION_ENUMS_H
 #define TASQ_APPLICATION_ENUMS_H
 #include <QString>
+#include <QMetaType>
 
 namespace models::enums {
     /**
@@ -152,6 +153,9 @@ namespace models::enums {
         bool operator<=(EventType other) = delete;
     };
 }
+
+Q_DECLARE_METATYPE(models::enums::Term);
+Q_DECLARE_METATYPE(models::enums::EventType);
 
 
 #endif //TASQ_APPLICATION_ENUMS_H

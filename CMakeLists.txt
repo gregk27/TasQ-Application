@@ -86,7 +86,6 @@ set(PROJECT_BACKEND
         src/models/Event.cpp include/models/Event.h
         src/models/Reminder.cpp include/models/Reminder.h
         src/models/Todo.cpp include/models/Todo.h
-        src/models/Application.cpp include/models/Application.h
         include/net/net.h src/net/net.cpp
         src/net/auth.cpp include/net/auth.h src/net/schools.cpp include/net/schools.h src/net/endpoints.cpp src/net/subscriptions.cpp include/models/NetModel.h src/models/NetModel.cpp include/net/endpoints.h include/net/subscriptions.h include/net/api.h src/net/api.cpp
         include/utils.h src/utils.cpp)

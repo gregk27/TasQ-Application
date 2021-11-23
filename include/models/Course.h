@@ -45,6 +45,16 @@ namespace models {
         explicit Course(QJsonValue json);
 
         /**
+         * Get the course's events
+         */
+        std::vector<Event*> getEvents();
+
+        /**
+         * Get the course's owner
+         */
+         User *getOwner();
+
+        /**
          * Get the course's name
          */
         QString getName();
@@ -90,9 +100,9 @@ namespace models {
         void setProf(QString &newProf);
 
         /**
-         * Get the course's owner
+         * Get the course's owner's ID
          */
-        QString getOwner();
+        QString getOwnerId();
 
         /**
          * Get the course's school
@@ -120,5 +130,6 @@ namespace models {
 
 }
 
+Q_DECLARE_METATYPE(models::Course);
 
 #endif //TASQ_APPLICATION_COURSE_H

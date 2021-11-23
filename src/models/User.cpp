@@ -7,14 +7,10 @@
 using namespace std;
 using namespace models;
 
-User::User(QJsonValue &json) {
-    id = json["id"].toString();
+User::User(QJsonValue &json)
+    :ModelBase(json["id"].toString()){
     name = json["name"].toString();
     schoolId = json["school"].toString();
-}
-
-uuid User::getId() {
-    return id;
 }
 
 QString User::getName() {
