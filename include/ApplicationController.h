@@ -9,6 +9,7 @@
 #include <QObject>
 #include <QString>
 #include <models/Models.h>
+#include <net/api.h>
 
 using namespace models;
 
@@ -64,20 +65,32 @@ public:
     template<class T>
     void addInstance(T *i){
         getMap<T>().insert(make_pair(i->getId(), i));
+        // If i is a netmodel, then do appropriate handling
+        if(static_cast<NetModel*>(i)){
+            APIController::instance()->add<T>(*i);
+        }
         emitChange<T>();
-        // TODO: Update database and local storage
+        // TODO: Update local storage
     }
     template<class T>
     void modifyInstance(T *i){
         getMap<T>()[i->getId()] = *i;
+        // If i is a netmodel, then do appropriate handling
+        if(static_cast<NetModel*>(i)){
+            APIController::instance()->modify<T>(*i);
+        }
         emitChange<T>();
-        // TODO: Update database and local storage
+        // TODO: Update local storage
     }
     template<class T>
     void removeInstance(T *i){
         getMap<T>().erase(i->getId());
+        // If i is a netmodel, then do appropriate handling
+        if(static_cast<NetModel*>(i)){
+            APIController::instance()->remove<T>(*i);
+        }
         emitChange<T>();
-        // TODO: Update database subscription and local storage
+        // TODO: Update local storage
         delete i;
     }
 

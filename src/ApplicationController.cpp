@@ -8,6 +8,7 @@
 #include <models/Models.h>
 #include <models/School.h>
 #include <models/Course.h>
+#include <net/subscriptions.h>
 
 ApplicationController *ApplicationController::_instance = nullptr;
 
@@ -47,11 +48,13 @@ School *ApplicationController::getSchool() {
 void ApplicationController::unsubscribe(Course *c) {
     courses.insert(make_pair(c->getId(), c));
     emitChange<Course>();
-    //TODO: Update database subscription and local storage
+    net::subscriptions::removeSubscription(*c);
+    //TODO: Update local storage
 }
 
 void ApplicationController::subscribe(Course *c) {
     courses.erase(c->getId());
     emitChange<Course>();
-    //TODO: Update database subscription and local storage
+    net::subscriptions::addSubscription(*c);
+    //TODO: Update local storage
 }
