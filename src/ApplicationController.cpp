@@ -38,28 +38,28 @@ void ApplicationController::pullData() {
     // Pull the user's courses
     auto subs = net::subscriptions::getSubscriptions();
     for(const auto& c : *subs){
-        courses.insert({c.getId(), new Course(c)});
+        insertOrUpdate<Course>(new Course(c));
     }
     // Pull events for the user's courses
     for(auto [cId, c] : courses){
         auto es = *net::getEvents(*c);
         for(const auto &e : es){
-            events.insert({e.getId(), new Event(e)});
+            insertOrUpdate<Event>( new Event(e));
         }
         auto oId = c->getOwnerId();
         auto user = net::getUser(oId);
         // Create a new user instance since the shared_ptr will delete it
-        users.insert({user->getId(), new User(*user)});
+        insertOrUpdate<User>(new User(*user));
     }
     // Pull user's reminders
     auto rs = *net::getReminders();
     for(const auto &r : rs){
-        reminders.insert({r.getId(), new Reminder(r)});
+        insertOrUpdate<Reminder>(new Reminder(r));
     }
     // Pull user's to-dos
     auto ts = *net::getTodos();
     for(const auto &t : ts){
-        todos.insert({t.getId(), new Todo(t)});
+        insertOrUpdate<Todo>(new Todo(t));
     }
 
     emit coursesChanged();
