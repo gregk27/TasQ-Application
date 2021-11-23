@@ -8,6 +8,7 @@
 #include <models/Models.h>
 #include <models/School.h>
 #include <models/Course.h>
+#include <net/endpoints.h>
 #include <net/subscriptions.h>
 
 ApplicationController *ApplicationController::_instance = nullptr;
@@ -15,18 +16,6 @@ ApplicationController *ApplicationController::_instance = nullptr;
 using namespace std;
 
 ApplicationController::ApplicationController() {
-    // Get the first school
-    school = new School(net::schools::getSchools()->operator[](0));
-    uuid sid = school->getId();
-    auto cs = net::schools::getCourses(sid);
-    // Populate with courses from school
-    for(auto c : *cs){
-        if(courses.count(c.getId())){
-            *courses[c.getId()] = c;
-        } else {
-            courses.insert({c.getId(), new Course(c)});
-        }
-    }
 }
 
 ApplicationController::~ApplicationController(){
@@ -39,6 +28,32 @@ ApplicationController *ApplicationController::instance() {
     if(_instance == nullptr)
         _instance = new ApplicationController();
     return _instance;
+}
+
+void ApplicationController::pullData() {
+    // Can't pull data if the user isn't registered
+    if(AuthController::instance()->getLocalUser() == nullptr){
+        return;
+    }
+    // Pull the user's courses
+    auto subs = net::subscriptions::getSubscriptions();
+    for(const auto& c : *subs){
+        courses.insert({c.getId(), new Course(c)});
+    }
+    // Pull events for the user's courses
+    for(auto [cId, c] : courses){
+        for(const auto &e : *net::getEvents(*c)){
+            events.insert({e.getId(), new Event(e)});
+        }
+    }
+    // Pull user's reminders
+    for(const auto &r : *net::getReminders()){
+        reminders.insert({r.getId(), new Reminder(r)});
+    }
+    // Pull user's to-dos
+    for(const auto &t : *net::getTodos()){
+        todos.insert({t.getId(), new Todo(t)});
+    }
 }
 
 School *ApplicationController::getSchool() {

@@ -30,7 +30,7 @@ private:
     std::unordered_map<uuid, Course*> courses;
     std::unordered_map<uuid, Event*> events;
     std::unordered_map<uuid, Reminder*> reminders;
-    std::unordered_map<uuid, ToDo*> todos;
+    std::unordered_map<uuid, Todo*> todos;
 
     /**
      * Get the map associated with a specific type
@@ -94,6 +94,8 @@ public:
         delete i;
     }
 
+    void pullData();
+
 public slots:
     void unsubscribe(Course *c);
     void subscribe(Course *c);
@@ -108,11 +110,11 @@ signals:
 template<> inline std::unordered_map<uuid, Course*> &ApplicationController::getMap<Course>() { return courses; }
 template<> inline std::unordered_map<uuid, Event*> &ApplicationController::getMap<Event>() { return events; }
 template<> inline std::unordered_map<uuid, Reminder*> &ApplicationController::getMap<Reminder>() { return reminders; }
-template<> inline std::unordered_map<uuid, ToDo*> &ApplicationController::getMap<ToDo>() { return todos; }
+template<> inline std::unordered_map<uuid, Todo*> &ApplicationController::getMap<Todo>() { return todos; }
 
 template<> inline void ApplicationController::emitChange<Course>() { emit coursesChanged(); }
 template<> inline void ApplicationController::emitChange<Event>() { emit eventsChanged(); }
 template<> inline void ApplicationController::emitChange<Reminder>() { emit remindersChanged(); }
-template<> inline void ApplicationController::emitChange<ToDo>() { emit todosChanged(); }
+template<> inline void ApplicationController::emitChange<Todo>() { emit todosChanged(); }
 
 #endif //TASQ_APPLICATION_APPLICATIONCONTROLLER_H
