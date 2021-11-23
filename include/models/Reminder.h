@@ -42,5 +42,6 @@ namespace models {
     };
 }
 
+Q_DECLARE_METATYPE(models::Reminder);
 
 #endif //TASQ_APPLICATION_REMINDER_H

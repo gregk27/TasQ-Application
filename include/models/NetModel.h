@@ -40,4 +40,6 @@ class ActionException: public std::runtime_error {
     };
 }
 
+Q_DECLARE_METATYPE(models::NetModel);
+
 #endif //TASQ_APPLICATION_NETMODEL_H

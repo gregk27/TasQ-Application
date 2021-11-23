@@ -35,4 +35,6 @@ namespace models {
     };
 }
 
+Q_DECLARE_METATYPE(models::School);
+
 #endif //TASQ_APPLICATION_SCHOOL_H

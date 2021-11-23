@@ -125,5 +125,6 @@ namespace models {
 
 }
 
+Q_DECLARE_METATYPE(models::Course);
 
 #endif //TASQ_APPLICATION_COURSE_H

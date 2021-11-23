@@ -60,5 +60,6 @@ namespace models {
     };
 }
 
+Q_DECLARE_METATYPE(models::Todo);
 
 #endif //TASQ_APPLICATION_TODO_H
