@@ -43,6 +43,11 @@ namespace models {
         explicit Event(QJsonValue json);
 
         /**
+         * Get the event's course
+         */
+        Course *getCourse();
+
+        /**
          * Get the event's courseID
          */
         uuid getCourseId();
