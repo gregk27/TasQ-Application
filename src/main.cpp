@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     MainWindow window(nullptr);
-    if(strcmp(getenv("theme"), "light") != 0)
+    if(!getenv("theme") || strcmp(getenv("theme"), "light") != 0)
         setStyle(a);
     window.show();
 
