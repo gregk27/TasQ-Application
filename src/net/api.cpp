@@ -6,6 +6,7 @@
 #include <net/api.h>
 #include <net/auth.h>
 
+using namespace std;
 const QString APIRequest::BASE_URL = std::getenv("API_URL");
 
 QString APIRequest::buildURL() {
