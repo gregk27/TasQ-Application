@@ -23,6 +23,8 @@ private:
     /** Singleton instance of ApplicationController */
     static ApplicationController *_instance;
 
+    static const unsigned long long UPDATE_INTERVAL;
+
     ApplicationController();
     ~ApplicationController() override;
 
@@ -114,9 +116,10 @@ public:
         delete i;
     }
 
-    void pullData();
+    bool pullData(bool async=true);
 
 public slots:
+    inline void update() {pullData();};
     void unsubscribe(Course *c);
     void subscribe(Course *c);
 

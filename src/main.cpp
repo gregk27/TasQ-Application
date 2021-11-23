@@ -46,7 +46,7 @@ int main(int argc, char *argv[])
         cout << "API connection failed" << endl;
     }
 
-    ApplicationController::instance()->pullData();
+    ApplicationController::instance()->pullData(false);
 
     cout << ApplicationController::instance()->getInstances<Event>().size() << endl;
 
