@@ -41,13 +41,13 @@ namespace net::subscriptions {
      * @param lastModified Timestamp to filter courses which have not been udpated
      * @return Vector of courses which have been updated
      */
-    shared_ptr<vector<Course>> updateSubscriptions(unsigned long long lastModified);
+    std::shared_ptr<std::vector<Course>> updateSubscriptions(unsigned long long lastModified);
     /**
      * Get the courses the current user is subscribed to
      * @return Vector of courses the user is subscribed to
      * @see net::users::updateSubscriptions(unsigned long long)
      */
-    inline shared_ptr<vector<Course>> getSubscriptions() {
+    inline std::shared_ptr<std::vector<Course>> getSubscriptions() {
         return updateSubscriptions(0);
     }
 }

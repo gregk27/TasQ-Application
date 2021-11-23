@@ -3,6 +3,7 @@
 //
 
 #include <models/School.h>
+using namespace std;
 using namespace models;
 
 QString School::getId() {
