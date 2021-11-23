@@ -28,6 +28,11 @@ namespace models {
         explicit Reminder(QJsonValue &json);
 
         /**
+         * Get the reminder's event
+         */
+        Event* getEvent();
+
+        /**
          * Get the reminder's event's id
          */
         uuid getEventId();
@@ -42,5 +47,6 @@ namespace models {
     };
 }
 
+Q_DECLARE_METATYPE(models::Reminder);
 
 #endif //TASQ_APPLICATION_REMINDER_H

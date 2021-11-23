@@ -43,6 +43,11 @@ namespace models {
         explicit Event(QJsonValue json);
 
         /**
+         * Get the event's course
+         */
+        Course *getCourse();
+
+        /**
          * Get the event's courseID
          */
         uuid getCourseId();
@@ -121,5 +126,7 @@ namespace models {
         std::map<QString, QString> * getBody(Action a) override;
     };
 }
+
+Q_DECLARE_METATYPE(models::Event);
 
 #endif //TASQ_APPLICATION_EVENT_H

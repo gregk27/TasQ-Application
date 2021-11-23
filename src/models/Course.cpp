@@ -6,6 +6,9 @@
 #include <optional>
 #include <models/Course.h>
 #include <models/User.h>
+#include <models/Event.h>
+#include <ApplicationController.h>
+
 using namespace std;
 using namespace models;
 
@@ -19,6 +22,22 @@ Course::Course(QJsonValue json):
     schoolId = json["school"].toString();
     modified = json["modified"].toInteger();
 }
+
+vector<Event*> Course::getEvents(){
+    auto events = ApplicationController::instance()->getInstances<Event>();
+    vector<Event*> out;
+    for(auto [eId, e] : events){
+        if(e->getCourseId() == id){
+            out.push_back(e);
+        }
+    }
+    return out;
+}
+
+User* Course::getOwner(){
+    return ApplicationController::instance()->getInstance<User>(owner);
+}
+
 
 QString Course::getName() {
     return name;
@@ -65,7 +84,7 @@ void Course::setProf(QString &newProf) {
     prof = newProf;
 }
 
-QString Course::getOwner() {
+QString Course::getOwnerId() {
     return owner;
 }
 
