@@ -63,11 +63,18 @@ set(PROJECT_WIDGETS
         src/widgets/monthcalendar/monthcalendar.cpp 
         src/widgets/monthcalendar/monthcalendar.ui 
         include/widgets/monthview.h
+        include/widgets/monthview.h
         src/widgets/monthview/monthview.cpp
-        src/widgets/monthview/monthview.ui 
+        src/widgets/monthview/monthview.ui
         include/widgets/termview.h
         src/widgets/termview/termview.cpp
         src/widgets/termview/termview.ui
+        src/widgets/login_page/login.cpp
+        src/widgets/login_page/login.ui
+        include/widgets/login.h
+        src/widgets/login_page/registerdialog.cpp
+        src/widgets/login_page/registerdialog.ui
+        include/widgets/registerdialog.h
         src/widgets/AddRemoveClass/addremoveclass.cpp include/widgets/addremoveclass.h src/widgets/AddRemoveClass/addremoveclass.ui)
 
 set(PROJECT_BACKEND
@@ -82,7 +89,7 @@ set(PROJECT_BACKEND
         src/models/Application.cpp include/models/Application.h
         include/net/net.h src/net/net.cpp
         src/net/auth.cpp include/net/auth.h src/net/schools.cpp include/net/schools.h src/net/endpoints.cpp src/net/subscriptions.cpp include/models/NetModel.h src/models/NetModel.cpp include/net/endpoints.h include/net/subscriptions.h include/net/api.h src/net/api.cpp
-)
+        include/utils.h src/utils.cpp)
 
 add_executable(TasQ-Application
         src/main.cpp
