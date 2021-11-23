@@ -40,10 +40,29 @@ private:
      * @return map if type is supported
      */
     template<typename T>
-    inline std::unordered_map<uuid, T*> &getMap() { throw std::runtime_error("Type not supported"); }
+    inline std::unordered_map<uuid, T*> *getMap() { throw std::runtime_error("Type not supported"); }
 
     template<typename T>
     inline void emitChange() { };
+
+    /**
+     * Insert a new model instance into a map, or update the existing one in-place
+     * @note: If an existing instance is updated, this will delete t and return a pointer to that instance
+     * @return pointer to data in map
+     */
+    template<typename T>
+    T* insertOrUpdate(T* t){
+        auto map = getMap<T>();
+        if(map->count(t->getId())){
+            auto inst = map->operator[](t->getId());
+            *inst = *t;
+            delete t;
+            return inst;
+        } else {
+            map->insert({t->getId(), t});
+        }
+        return t;
+    }
 
 public:
     static ApplicationController *instance();
