@@ -42,6 +42,13 @@ namespace net {
      * @return  vector with todos for local user
      */
     std::shared_ptr<std::vector<models::Todo>> getTodos();
+
+    /**
+     * Get a user by their id
+     * @param userId Id of user to get
+     * @return pointer to desired user
+     */
+    std::shared_ptr<models::User> getUser(QString &userId);
 }
 
 #endif //TASQ_APPLICATION_ENDPOINTS_H

@@ -51,7 +51,7 @@ int main(int argc, char *argv[])
     cout << ApplicationController::instance()->getInstances<Event>().size() << endl;
 
     for(auto [id, e] : ApplicationController::instance()->getInstances<Event>()){
-        cout << e->getCourseId() << " " << e->getName() << endl;
+        cout << e->getCourseId() << " " << e->getName() << " " << e->getCourse()->getOwner()->getName() << endl;
     }
 
     return QApplication::exec();

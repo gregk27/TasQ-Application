@@ -46,6 +46,10 @@ void ApplicationController::pullData() {
         for(const auto &e : es){
             events.insert({e.getId(), new Event(e)});
         }
+        auto oId = c->getOwnerId();
+        auto user = net::getUser(oId);
+        // Create a new user instance since the shared_ptr will delete it
+        users.insert({user->getId(), new User(*user)});
     }
     // Pull user's reminders
     auto rs = *net::getReminders();
@@ -62,6 +66,7 @@ void ApplicationController::pullData() {
     emit eventsChanged();
     emit remindersChanged();
     emit todosChanged();
+    emit usersChanged();
 }
 
 School *ApplicationController::getSchool() {
