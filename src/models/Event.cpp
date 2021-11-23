@@ -5,6 +5,7 @@
 #include <net/auth.h>
 #include <models/Event.h>
 #include <models/User.h>
+#include <ApplicationController.h>
 
 using namespace std;
 using namespace models;
@@ -26,6 +27,10 @@ Event::Event(QJsonValue json):
         endDate = json["endDate"].toInteger();
     }
     weekly = json["weekly"].toBool();
+}
+
+Course *Event::getCourse(){
+    return ApplicationController::instance()->getInstance<Course>(courseID);
 }
 
 uuid Event::getCourseId() {
