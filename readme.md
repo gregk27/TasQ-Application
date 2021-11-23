@@ -40,4 +40,4 @@ CMake needs the path to your Qt installation. This can be configured by adding `
 ### Build configuration
 To ensure your application can find the binaries for required libraries, your build configuration should have the environment variable `PATH` set to `$PROJECT_DIR$/lib/bin`.
 
-CLion configurations are included for **TasQ_Application** and **TasQ_Application_autogen** which include these settings.
+To connect to the API, a URL must be provided. For most purposes, this will point to https://tasq.gregk.ca. This should be set as an environment variable with the name `API_URL`.

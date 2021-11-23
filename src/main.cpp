@@ -6,9 +6,12 @@
 
 #include <models/User.h>
 #include <net/api.h>
+#include <net/auth.h>
 #include <widgets/addremoveclass.h>
 #include <widgets/login.h>
 #include <widgets/registerdialog.h>
+
+#include <widgets/schedulelistview.h>
 
 using namespace std;
 using namespace std::chrono;
@@ -30,6 +33,14 @@ int main(int argc, char *argv[])
         setStyle(a);
     window.show();
 
+    bool netStat = APIController::instance()->getStatus();
+    if(netStat && AuthController::instance()->hasSession()) {
+        auto u = AuthController::instance()->getLocalUser();
+        cout << "Authenticated as " << u->getName() << ", token: " << AuthController::instance()->getSessionToken() << endl;
+    } else {
+        cout << "API connection failed" << endl;
+    }
+    
     return QApplication::exec();
 }
 
