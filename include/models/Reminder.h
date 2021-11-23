@@ -28,6 +28,11 @@ namespace models {
         explicit Reminder(QJsonValue &json);
 
         /**
+         * Get the reminder's event
+         */
+        Event* getEvent();
+
+        /**
          * Get the reminder's event's id
          */
         uuid getEventId();

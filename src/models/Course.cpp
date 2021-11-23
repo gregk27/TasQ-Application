@@ -34,6 +34,10 @@ vector<Event*> Course::getEvents(){
     return out;
 }
 
+User* Course::getOwner(){
+    return ApplicationController::instance()->getInstance<User>(owner);
+}
+
 
 QString Course::getName() {
     return name;
@@ -80,7 +84,7 @@ void Course::setProf(QString &newProf) {
     prof = newProf;
 }
 
-QString Course::getOwner() {
+QString Course::getOwnerId() {
     return owner;
 }
 
