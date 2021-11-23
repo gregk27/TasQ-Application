@@ -52,20 +52,20 @@ public:
 
     template<class T>
     std::unordered_map<uuid, T*> getInstances(){
-        return getMap<T>();
+        return *getMap<T>();
     }
 
     template<class T>
     T *getInstance(uuid id){
         auto map = getMap<T>();
-        if(map.count(id))
-            return map[id];
+        if(map->count(id))
+            return map->operator[](id);
         return nullptr;
     }
 
     template<class T>
     void addInstance(T *i){
-        getMap<T>().insert(make_pair(i->getId(), i));
+        getMap<T>()->insert(make_pair(i->getId(), i));
         // If i is a netmodel, then do appropriate handling
         if(static_cast<NetModel*>(i)){
             APIController::instance()->add<T>(*i);
@@ -75,7 +75,7 @@ public:
     }
     template<class T>
     void modifyInstance(T *i){
-        getMap<T>()[i->getId()] = *i;
+        getMap<T>()->operator[](i->getId()) = *i;
         // If i is a netmodel, then do appropriate handling
         if(static_cast<NetModel*>(i)){
             APIController::instance()->modify<T>(*i);
@@ -85,7 +85,7 @@ public:
     }
     template<class T>
     void removeInstance(T *i){
-        getMap<T>().erase(i->getId());
+        getMap<T>()->erase(i->getId());
         // If i is a netmodel, then do appropriate handling
         if(static_cast<NetModel*>(i)){
             APIController::instance()->remove<T>(*i);
@@ -109,11 +109,11 @@ signals:
     void usersChanged();
 };
 
-template<> inline std::unordered_map<uuid, Course*> &ApplicationController::getMap<Course>() { return courses; }
-template<> inline std::unordered_map<uuid, Event*> &ApplicationController::getMap<Event>() { return events; }
-template<> inline std::unordered_map<uuid, Reminder*> &ApplicationController::getMap<Reminder>() { return reminders; }
-template<> inline std::unordered_map<uuid, Todo*> &ApplicationController::getMap<Todo>() { return todos; }
-template<> inline std::unordered_map<uuid, User*> &ApplicationController::getMap<User>() { return users; }
+template<> inline std::unordered_map<uuid, Course*> *ApplicationController::getMap<Course>() { return &courses; }
+template<> inline std::unordered_map<uuid, Event*> *ApplicationController::getMap<Event>() { return &events; }
+template<> inline std::unordered_map<uuid, Reminder*> *ApplicationController::getMap<Reminder>() { return &reminders; }
+template<> inline std::unordered_map<uuid, Todo*> *ApplicationController::getMap<Todo>() { return &todos; }
+template<> inline std::unordered_map<uuid, User*> *ApplicationController::getMap<User>() { return &users; }
 
 template<> inline void ApplicationController::emitChange<Course>() { emit coursesChanged(); }
 template<> inline void ApplicationController::emitChange<Event>() { emit eventsChanged(); }
