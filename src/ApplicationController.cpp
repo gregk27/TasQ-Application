@@ -42,18 +42,26 @@ void ApplicationController::pullData() {
     }
     // Pull events for the user's courses
     for(auto [cId, c] : courses){
-        for(const auto &e : *net::getEvents(*c)){
+        auto es = *net::getEvents(*c);
+        for(const auto &e : es){
             events.insert({e.getId(), new Event(e)});
         }
     }
     // Pull user's reminders
-    for(const auto &r : *net::getReminders()){
+    auto rs = *net::getReminders();
+    for(const auto &r : rs){
         reminders.insert({r.getId(), new Reminder(r)});
     }
     // Pull user's to-dos
-    for(const auto &t : *net::getTodos()){
+    auto ts = *net::getTodos();
+    for(const auto &t : ts){
         todos.insert({t.getId(), new Todo(t)});
     }
+
+    emit coursesChanged();
+    emit eventsChanged();
+    emit remindersChanged();
+    emit todosChanged();
 }
 
 School *ApplicationController::getSchool() {
