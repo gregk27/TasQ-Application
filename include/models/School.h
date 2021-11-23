@@ -16,9 +16,8 @@ namespace models {
     /**
      * Data model representing a school
      */
-    class School {
+    class School : public ModelBase {
     private:
-        uuid id;
         QString name;
     public:
         /**
@@ -28,11 +27,6 @@ namespace models {
          * "name": string,         - Name of school
          */
         explicit School(QJsonValue &json);
-
-        /**
-         * Get the school's ID
-         */
-        QString getId();
 
         /**
          * Get the school's name

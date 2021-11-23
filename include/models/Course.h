@@ -50,11 +50,6 @@ namespace models {
         std::vector<Event*> getEvents();
 
         /**
-         * Get the course's owner
-         */
-        User* getOwner();
-
-        /**
          * Get the course's name
          */
         QString getName();
@@ -102,7 +97,7 @@ namespace models {
         /**
          * Get the course's owner's ID
          */
-        QString getOwnerID();
+        QString getOwner();
 
         /**
          * Get the course's school

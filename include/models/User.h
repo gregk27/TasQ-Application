@@ -16,9 +16,8 @@ namespace models {
     /**
      * Data model representing a user account/profile
      */
-    class User {
+    class User : public ModelBase {
     private:
-        uuid id;
         QString name;
         uuid schoolId;
     public:
@@ -30,8 +29,6 @@ namespace models {
          * "school": string            - Registered user's school's ID
          */
         explicit User(QJsonValue &json);
-
-        uuid getId();
 
         /**
          * Get the user's name
