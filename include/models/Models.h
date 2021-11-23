@@ -9,8 +9,6 @@
 #include <QString>
 #include <QJsonObject>
 
-using namespace std;
-
 /**
  * Classes and functions for handling data models
  */

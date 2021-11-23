@@ -6,6 +6,7 @@
 #include <models/Event.h>
 #include <models/User.h>
 
+using namespace std;
 using namespace models;
 
 // Forward declare localUID since cannot import auth

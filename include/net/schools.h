@@ -19,20 +19,20 @@ namespace net::schools {
      * Get a list of supported schools
      * @return pointer to vector with list of supported schools
      */
-    shared_ptr<vector<School>> getSchools();
+    std::shared_ptr<std::vector<School>> getSchools();
 
     /**
      * Get a list of courses for a school
      * @param schoolId ID of school to check
      * @return pointer to vector with list of courses for the school
      */
-    shared_ptr<vector<Course>> getCourses(QString &schoolId);
+    std::shared_ptr<std::vector<Course>> getCourses(QString &schoolId);
     /**
      * Get a list of courses for a school
      * @param school School to check
      * @return pointer to vector with list of courses for the school
      */
-    inline shared_ptr<vector<Course>> getCourses(School &school){
+    inline std::shared_ptr<std::vector<Course>> getCourses(School &school){
         QString id = school.getId();
         return schools::getCourses(id);
     }

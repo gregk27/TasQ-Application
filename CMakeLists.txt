@@ -63,12 +63,19 @@ set(PROJECT_WIDGETS
         src/widgets/monthcalendar/monthcalendar.cpp 
         src/widgets/monthcalendar/monthcalendar.ui 
         include/widgets/monthview.h
+        include/widgets/monthview.h
         src/widgets/monthview/monthview.cpp
-        src/widgets/monthview/monthview.ui 
+        src/widgets/monthview/monthview.ui
         include/widgets/termview.h
         src/widgets/termview/termview.cpp
         src/widgets/termview/termview.ui
-)
+        src/widgets/login_page/login.cpp
+        src/widgets/login_page/login.ui
+        include/widgets/login.h
+        src/widgets/login_page/registerdialog.cpp
+        src/widgets/login_page/registerdialog.ui
+        include/widgets/registerdialog.h
+        src/widgets/AddRemoveClass/addremoveclass.cpp include/widgets/addremoveclass.h src/widgets/AddRemoveClass/addremoveclass.ui)
 
 set(PROJECT_BACKEND
         src/models/User.cpp include/models/User.h
