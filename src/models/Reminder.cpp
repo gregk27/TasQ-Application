@@ -4,6 +4,7 @@
 
 #include <models/Reminder.h>
 #include <models/User.h>
+#include <ApplicationController.h>
 
 using namespace std;
 using namespace models;
@@ -12,6 +13,10 @@ using namespace models;
 Reminder::Reminder(QJsonValue &json):
     NetModel(json["id"].toString()) {
     eventId = json["event"].toString();
+}
+
+Event* Reminder::getEvent() {
+    return ApplicationController::instance()->getInstance<Event>(eventId);
 }
 
 uuid Reminder::getEventId() {
