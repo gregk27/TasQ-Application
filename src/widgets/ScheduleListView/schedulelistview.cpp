@@ -130,7 +130,7 @@ QFrame *ScheduleListView::createFrameForEvent(models::Event *e) {
     eventTime->setContentsMargins(0, 2, 0, 2);
     eventFrame->layout()->addWidget(eventTime);
 
-    int *colour = utils::getColourForCourse(e->getCourseID());
+    int *colour = utils::getColourForCourse(e->getCourseId());
 
     auto colourBox = new QFrame();
     colourBox->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
@@ -142,7 +142,7 @@ QFrame *ScheduleListView::createFrameForEvent(models::Event *e) {
 
     delete[] colour;
 
-    auto eventInfo = new QLabel(e->getCourseID()+"\n"+e->getName());
+    auto eventInfo = new QLabel(e->getCourseId()+"\n"+e->getName());
     eventInfo->setContentsMargins(15, 2, 0, 2);
     eventInfo->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     eventFrame->layout()->addWidget((eventInfo));
