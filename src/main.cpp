@@ -6,6 +6,7 @@
 
 #include <models/User.h>
 #include <net/api.h>
+#include <net/auth.h>
 #include <widgets/addremoveclass.h>
 #include <widgets/login.h>
 #include <widgets/registerdialog.h>
