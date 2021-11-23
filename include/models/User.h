@@ -52,4 +52,6 @@ namespace models {
     };
 }
 
+Q_DECLARE_METATYPE(models::User);
+
 #endif //TASQ_APPLICATION_USER_H

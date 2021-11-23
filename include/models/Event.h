@@ -127,4 +127,6 @@ namespace models {
     };
 }
 
+Q_DECLARE_METATYPE(models::Event);
+
 #endif //TASQ_APPLICATION_EVENT_H
