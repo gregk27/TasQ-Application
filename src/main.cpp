@@ -17,6 +17,7 @@
 #include <widgets/schedulelistview.h>
 #include <ApplicationController.h>
 #include <models/Event.h>
+#include <models/StorageController.h>
 
 using namespace std;
 using namespace std::chrono;
@@ -37,6 +38,8 @@ int main(int argc, char *argv[])
     if(!getenv("theme") || strcmp(getenv("theme"), "light") != 0)
         setStyle(a);
     window.show();
+
+    StorageController::instance();
 
     bool netStat = APIController::instance()->getStatus();
     if(netStat && AuthController::instance()->hasSession()) {
