@@ -1,4 +1,5 @@
 #include <widgets/monthcalendar.h>
+#include <utils.h>
 #include "ui_monthcalendar.h"
 
 MonthCalendar::MonthCalendar(int month, QWidget* parent) :
@@ -90,6 +91,7 @@ MonthCalendar::MonthCalendar(int month, QWidget* parent) :
         mdue[i] = new QVBoxLayout;
         num[i] = new QLabel(QString::number(i + 1));
         day[i]->addWidget(num[i]);
+        day[i]->addItem(new QSpacerItem(5, 5, QSizePolicy::Minimum, QSizePolicy::Expanding));
         day[i]->addLayout(mdue[i]);
         day[i]->addLayout(tdue[i]);
         cell[i]->setLayout(day[i]);
@@ -120,6 +122,7 @@ MonthCalendar::~MonthCalendar()
 // Purpose: Adds assignments to the calendar for month view
 void MonthCalendar::AddMAssign(QString courseid, QString assign, QString type, QDateTime* due, QString colour) {
     QRadioButton* circle = new QRadioButton(assign);
+    circle->setEnabled(false);
     circle->setStyleSheet("QRadioButton::indicator::unchecked{ border: 1px solid " + colour + "; border-radius: 6px; background-color: " + colour + "; width: 10px; height: 10px; margin-left: 5px;}");
     mdue[due->date().day()]->addWidget(circle);
     QString* description = new QString(courseid + "\n" + assign + "\n" + type + "\n" + due->toString());
@@ -130,8 +133,20 @@ void MonthCalendar::AddMAssign(QString courseid, QString assign, QString type, Q
 // Purpose: Adds assignments to the calendar for term view
 void MonthCalendar::AddTAssign(QString courseid, QString assign, QString type, QDateTime* due, QString colour) {
     QRadioButton* circle = new QRadioButton;
+    circle->setEnabled(false);
     circle->setStyleSheet("QRadioButton::indicator::unchecked{ border: 1px solid " + colour + "; border-radius: 6px; background-color: " + colour + "; width: 10px; height: 10px; margin-left: 5px;}");
     tdue[due->date().day()]->addWidget(circle);
     QString* description = new QString(courseid + "\n" + assign + "\n" + type + "\n" + due->toString());
     circle->setToolTip(*description);
+}
+
+void MonthCalendar::clear() {
+    for(auto layout : mdue){
+        if(layout)
+            utils::clearLayout(layout);
+    }
+    for(auto layout : tdue){
+        if(layout)
+            utils::clearLayout(layout);
+    }
 }
