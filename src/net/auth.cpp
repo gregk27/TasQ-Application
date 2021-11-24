@@ -7,6 +7,10 @@
 #include <memory>
 #include <iostream>
 #include <net/api.h>
+#include <QSettings>
+
+#define SESSION_TOKEN_KEY "session"
+#define LOCAL_UID_KEY "localUID"
 
 using namespace std;
 using namespace models;
@@ -14,9 +18,14 @@ using namespace models;
 AuthController *AuthController::_instance = nullptr;
 
 AuthController::AuthController() {
-    // TODO: Hardcoded values used until proper local storage is established
-    sessionToken = "e859b1a3-38e8-11ec-a3fd-0023aea14009";
-    localUID = "6df88578-3526-11ec-a3fd-0023aea14009";
+    // Get auth properties if available
+    if((sessionToken = settings.value(SESSION_TOKEN_KEY, "").toString()) == ""){
+        sessionToken.reset();
+    }
+    if((localUID = settings.value(LOCAL_UID_KEY, "").toString()) == ""){
+        localUID.reset();
+    }
+
 }
 
 AuthController *AuthController::instance() {
@@ -44,6 +53,8 @@ shared_ptr<User> AuthController::registerUser(QString &username, QString &email,
     auto out = std::make_shared<User>(payload);
     localUID = out->getId();
     sessionToken = payload["token"].toString();
+    settings.setValue(LOCAL_UID_KEY, localUID.value());
+    settings.setValue(SESSION_TOKEN_KEY, sessionToken.value());
     return out;
 }
 
@@ -63,6 +74,8 @@ shared_ptr<User> AuthController::login(QString &email, QString &password) {
     auto out = std::make_shared<User>(payload);
     localUID = out->getId();
     sessionToken = payload["token"].toString();
+    settings.setValue(LOCAL_UID_KEY, localUID.value());
+    settings.setValue(SESSION_TOKEN_KEY, sessionToken.value());
     return out;
 }
 

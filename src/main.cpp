@@ -33,6 +33,9 @@ void setStyle(QApplication &a);
 
 int main(int argc, char *argv[])
 {
+    QCoreApplication::setOrganizationName("WH");
+    QCoreApplication::setApplicationName("tasq");
+
     QApplication a(argc, argv);
     MainWindow window(nullptr);
     if(!getenv("theme") || strcmp(getenv("theme"), "light") != 0)

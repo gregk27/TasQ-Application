@@ -8,6 +8,7 @@
 #include <optional>
 #include <net/net.h>
 #include <models/User.h>
+#include <QSettings>
 
 /**
  * Singleton controller for user authentication
@@ -23,6 +24,8 @@ private:
     std::optional<QString> localUID;
 
     AuthController();
+
+    QSettings settings;
 
 public:
     /**
