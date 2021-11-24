@@ -17,6 +17,7 @@
 #include <widgets/schedulelistview.h>
 #include <ApplicationController.h>
 #include <models/Event.h>
+#include <models/StorageController.h>
 
 using namespace std;
 using namespace std::chrono;
@@ -32,18 +33,23 @@ void setStyle(QApplication &a);
 
 int main(int argc, char *argv[])
 {
+    QCoreApplication::setOrganizationName("WH");
+    QCoreApplication::setApplicationName("tasq");
+
     QApplication a(argc, argv);
     MainWindow window(nullptr);
     if(!getenv("theme") || strcmp(getenv("theme"), "light") != 0)
         setStyle(a);
     window.show();
 
+    StorageController::instance();
+
     bool netStat = APIController::instance()->getStatus();
     if(netStat && AuthController::instance()->hasSession()) {
         auto u = AuthController::instance()->getLocalUser();
         cout << "Authenticated as " << u->getName() << ", token: " << AuthController::instance()->getSessionToken() << endl;
     } else {
-        cout << "API connection failed" << endl;
+        cout << "Authentication failed" << endl;
     }
 
     ApplicationController::instance()->pullData(false);

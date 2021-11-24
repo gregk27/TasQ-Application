@@ -8,6 +8,7 @@
 #include <optional>
 #include <net/net.h>
 #include <models/User.h>
+#include <QSettings>
 
 /**
  * Singleton controller for user authentication
@@ -24,12 +25,21 @@ private:
 
     AuthController();
 
+    QSettings settings;
+
 public:
     /**
      * Get singleton instance
      * @return Singleton instance of the AuthController
      */
     static AuthController *instance();
+
+    /**
+     * Validate the current session against the database
+     * @note This will clear sessionToken and UID if the session is invalid
+     * @return True if session is valid, false if not
+     */
+    bool validateSession();
 
     /**
      * Register a new user in the database<br/>
