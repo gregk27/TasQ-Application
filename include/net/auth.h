@@ -35,6 +35,13 @@ public:
     static AuthController *instance();
 
     /**
+     * Validate the current session against the database
+     * @note This will clear sessionToken and UID if the session is invalid
+     * @return True if session is valid, false if not
+     */
+    bool validateSession();
+
+    /**
      * Register a new user in the database<br/>
      * This will update sessionToken and localUID
      * @param username user's username

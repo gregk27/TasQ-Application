@@ -7,6 +7,7 @@
 #include <memory>
 #include <iostream>
 #include <net/api.h>
+#include <net/subscriptions.h>
 #include <QSettings>
 
 #define SESSION_TOKEN_KEY "session"
@@ -21,18 +22,33 @@ AuthController::AuthController() {
     // Get auth properties if available
     if((sessionToken = settings.value(SESSION_TOKEN_KEY, "").toString()) == ""){
         sessionToken.reset();
-    }
-    if((localUID = settings.value(LOCAL_UID_KEY, "").toString()) == ""){
+    } else if((localUID = settings.value(LOCAL_UID_KEY, "").toString()) == ""){
         localUID.reset();
     }
-
 }
 
 AuthController *AuthController::instance() {
-    if(!_instance)
+    if(!_instance) {
         _instance = new AuthController();
+        // Validate the session, must be called after instance is created
+        _instance->validateSession();
+    }
     return _instance;
 }
+
+bool AuthController::validateSession() {
+    try {
+        net::subscriptions::getSubscriptions();
+        return true;
+    } catch (APIResponseException &e){
+        sessionToken.reset();
+        settings.remove(SESSION_TOKEN_KEY);
+        localUID.reset();
+        settings.remove(LOCAL_UID_KEY);
+        return false;
+    }
+}
+
 
 shared_ptr<User> AuthController::registerUser(QString &username, QString &email, QString &password, QString &schoolId) {
     map<QString, QString> body {
