@@ -48,11 +48,10 @@ int main(int argc, char *argv[])
     if(netStat && AuthController::instance()->hasSession()) {
         auto u = AuthController::instance()->getLocalUser();
         cout << "Authenticated as " << u->getName() << ", token: " << AuthController::instance()->getSessionToken() << endl;
+        ApplicationController::instance()->pullData(false);
     } else {
         cout << "Authentication failed" << endl;
     }
-
-    ApplicationController::instance()->pullData(false);
 
     return QApplication::exec();
 }
