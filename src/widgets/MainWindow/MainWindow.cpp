@@ -10,8 +10,8 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     connect(AuthController::instance(), &AuthController::authStateChanged, this, &MainWindow::authStateChanged);
-    // This is bad practice, but needed for this circumstance
-    emit AuthController::instance()->authStateChanged();
+    // Pump the authStateChanged event to update any widgets listening for it (bad practice, but necessary)
+    emit AuthController::instance()->authStateChanged(AuthController::instance()->getLocalUser().get());
 }
 
 MainWindow::~MainWindow()

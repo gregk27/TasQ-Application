@@ -103,7 +103,7 @@ public slots:
         registerUser(username, email, password, schoolId);
     }
 signals:
-    void authStateChanged();
+    void authStateChanged(models::User* localUser);
 };
 
 /**
