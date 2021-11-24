@@ -6,6 +6,7 @@
 #define TASQ_APPLICATION_UTILS_H
 
 #include <models/Course.h>
+#include <QLayout>
 
 namespace utils {
     /**
@@ -14,6 +15,12 @@ namespace utils {
      * @return int[3] with RGB values, must be deleted when done
      */
     int *getColourForCourse(QString courseID);
+
+    /**
+     * Clear all children of a QT Layout recursively
+     * @param layout The layout to clear
+     */
+    void clearLayout(QLayout *layout);
 }
 
 #endif //TASQ_APPLICATION_UTILS_H
