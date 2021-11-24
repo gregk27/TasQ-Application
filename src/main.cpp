@@ -49,7 +49,7 @@ int main(int argc, char *argv[])
         auto u = AuthController::instance()->getLocalUser();
         cout << "Authenticated as " << u->getName() << ", token: " << AuthController::instance()->getSessionToken() << endl;
     } else {
-        cout << "API connection failed" << endl;
+        cout << "Authentication failed" << endl;
     }
 
     ApplicationController::instance()->pullData(false);
