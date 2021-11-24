@@ -71,6 +71,7 @@ shared_ptr<User> AuthController::registerUser(QString &username, QString &email,
     sessionToken = payload["token"].toString();
     settings.setValue(LOCAL_UID_KEY, localUID.value());
     settings.setValue(SESSION_TOKEN_KEY, sessionToken.value());
+    emit authStateChanged();
     return out;
 }
 
@@ -92,6 +93,7 @@ shared_ptr<User> AuthController::login(QString &email, QString &password) {
     sessionToken = payload["token"].toString();
     settings.setValue(LOCAL_UID_KEY, localUID.value());
     settings.setValue(SESSION_TOKEN_KEY, sessionToken.value());
+    emit authStateChanged();
     return out;
 }
 
