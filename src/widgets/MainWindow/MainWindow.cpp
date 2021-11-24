@@ -25,7 +25,7 @@ void MainWindow::authStateChanged(){
         ApplicationController::instance()->pullData();
     } else {
         // Open a login dialog
-        Login *l = new Login();
+        Login *l = new Login(this);
         l->show();
     }
 }
