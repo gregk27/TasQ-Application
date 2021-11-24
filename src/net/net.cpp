@@ -110,7 +110,6 @@ QString NetController::request(QString &url, map<QString, QString> *body){
     }
 
     CURLcode res = curl_easy_perform(curl);
-    cout << url.toStdString() << endl;
     // If the code is anything but okay, throw an exception
     if(res != CURLE_OK){
         throw NetworkException(url, res);
