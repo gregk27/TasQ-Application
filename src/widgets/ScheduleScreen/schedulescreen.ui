@@ -54,7 +54,7 @@ QTabWidget::tab-bar {
        <string>Week View</string>
       </attribute>
      </widget>
-     <widget class="ScheduleListView" name="list_view">
+     <widget class="ListView" name="list_view">
       <attribute name="title">
        <string>List View</string>
       </attribute>
@@ -77,9 +77,9 @@ QTabWidget::tab-bar {
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>ScheduleListView</class>
+   <class>ListView</class>
    <extends>QWidget</extends>
-   <header>widgets/schedulelistview.h</header>
+   <header>widgets/listview.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
