@@ -5,6 +5,7 @@
 #include <utils.h>
 #include <iostream>
 #include "ui_schedulelistview.h"
+#include <ApplicationController.h>
 
 using namespace std;
 
@@ -13,8 +14,7 @@ ScheduleListView::ScheduleListView(QWidget *parent) :
     ui(new Ui::ScheduleListView)
 {
     ui->setupUi(this);
-    std::vector<models::Event> e;
-    generateUI(&e);
+    connect(ApplicationController::instance(), &ApplicationController::eventsChanged, this, &ScheduleListView::onEventsChanged);
 }
 
 ScheduleListView::~ScheduleListView()
@@ -22,15 +22,17 @@ ScheduleListView::~ScheduleListView()
     delete ui;
 }
 
-void ScheduleListView::generateUI(vector<models::Event> *events){
-    auto layout = ui->rootLayout;
-    QLayoutItem *child;
-    while ((child = layout->takeAt(0)) != 0) {
-        delete child;
-    }
+void ScheduleListView::onEventsChanged(){
+    generateUI(ApplicationController::instance()->getInstances<Event>());
+}
 
-    for(auto e : *events){
-        auto dateTime = QDateTime::fromSecsSinceEpoch(e.getDatetime(), QTimeZone::systemTimeZone());
+
+void ScheduleListView::generateUI(unordered_map<QString, Event*> events){
+    auto layout = ui->rootLayout;
+    if(layout) utils::clearLayout(layout);
+
+    for(auto [eId, e] : events){
+        auto dateTime = QDateTime::fromSecsSinceEpoch(e->getDatetime(), QTimeZone::systemTimeZone());
         auto date = dateTime.date();
         QFrame *frame = nullptr;
         int i=0;
@@ -64,8 +66,8 @@ void ScheduleListView::generateUI(vector<models::Event> *events){
             }
         }
 
-        auto event = createFrameForEvent(&e);
-        cout << e.getName().toStdString() << endl;
+        auto event = createFrameForEvent(e);
+        cout << e->getName().toStdString() << endl;
         cout << i << endl;
         qobject_cast<QVBoxLayout*>(frame->findChild<QFrame*>("events")->layout())->insertWidget(i, event);
     }

@@ -20,12 +20,15 @@ public:
     explicit ScheduleListView(QWidget *parent = nullptr);
     ~ScheduleListView();
 
-    void generateUI(std::vector<models::Event> *events);
+    void generateUI(std::unordered_map<QString, models::Event*> events);
 private:
 
     Ui::ScheduleListView *ui;
     QFrame *createFrameForDate(QDate date);
     QFrame *createFrameForEvent(models::Event *e);
+
+public slots:
+    void onEventsChanged();
 };
 
 #endif // SCHEDULELISTVIEW_H
