@@ -22,7 +22,9 @@ AssignmentsScreen::~AssignmentsScreen()
 void AssignmentsScreen::onEventsChange(){
     auto events = ApplicationController::instance()->getInstances<Event>();
     ui->monthView->cal->clear();
-    auto currDate = QDate::currentDate();
+    ui->listView->clear();
+    auto currDatetime = QDateTime::currentDateTime();
+    auto currDate = currDatetime.date();
     for(auto [eId, e] : events){
         // Don't show lect/lab/tut
         if(e->getType() == models::enums::EventType::LECTURE ||
@@ -35,5 +37,9 @@ void AssignmentsScreen::onEventsChange(){
             auto colour = utils::getColourForCourse(e->getCourse()->getId());
             ui->monthView->cal->AddMAssign(e->getCourse()->getCode(), e->getName(), e->getType().toString(), &dateTime, QString("rgb(%1,%2,%3)").arg(colour[0]).arg(colour[1]).arg(colour[2]));
         }
+
+        // Don't show past events in list
+        if(dateTime > currDatetime)
+            ui->listView->addEvent(e);
     }
 }
