@@ -20,7 +20,6 @@ public:
     explicit ListView(QWidget *parent = nullptr);
     ~ListView();
 
-    void generateUI(std::unordered_map<QString, models::Event*> events);
     /**
      * Clear the list in preparation of new events
      */
@@ -35,9 +34,6 @@ private:
     Ui::ListView *ui;
     QFrame *createFrameForDate(QDate date);
     QFrame *createFrameForEvent(models::Event *e);
-
-public slots:
-    void onEventsChanged();
 };
 
 #endif // LISTVIEW_H
