@@ -14,7 +14,7 @@
 #include <widgets/login.h>
 #include <widgets/registerdialog.h>
 
-#include <widgets/schedulelistview.h>
+#include <widgets/listview.h>
 #include <ApplicationController.h>
 #include <models/Event.h>
 #include <models/StorageController.h>

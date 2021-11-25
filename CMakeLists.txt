@@ -56,9 +56,9 @@ set(PROJECT_WIDGETS
         include/widgets/scheduleweekview.h
         src/widgets/ScheduleWeekView/scheduleweekview.cpp
         src/widgets/ScheduleWeekView/scheduleweekview.ui
-        include/widgets/schedulelistview.h
-        src/widgets/ScheduleListView/schedulelistview.cpp
-        src/widgets/ScheduleListView/schedulelistview.ui
+        include/widgets/listview.h
+        src/widgets/ListView/listview.cpp
+        src/widgets/ListView/listview.ui
         include/widgets/monthcalendar.h
         src/widgets/monthcalendar/monthcalendar.cpp 
         src/widgets/monthcalendar/monthcalendar.ui 

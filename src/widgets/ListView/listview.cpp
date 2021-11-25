@@ -1,33 +1,33 @@
-#include <widgets/schedulelistview.h>
+#include <widgets/listview.h>
 #include <QLabel>
 #include <QTimeZone>
 #include <models/Event.h>
 #include <utils.h>
 #include <iostream>
-#include "ui_schedulelistview.h"
+#include "ui_listview.h"
 #include <ApplicationController.h>
 
 using namespace std;
 
-ScheduleListView::ScheduleListView(QWidget *parent) :
+ListView::ListView(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::ScheduleListView)
+    ui(new Ui::ListView)
 {
     ui->setupUi(this);
-    connect(ApplicationController::instance(), &ApplicationController::eventsChanged, this, &ScheduleListView::onEventsChanged);
+    connect(ApplicationController::instance(), &ApplicationController::eventsChanged, this, &ListView::onEventsChanged);
 }
 
-ScheduleListView::~ScheduleListView()
+ListView::~ListView()
 {
     delete ui;
 }
 
-void ScheduleListView::onEventsChanged(){
+void ListView::onEventsChanged(){
     generateUI(ApplicationController::instance()->getInstances<Event>());
 }
 
 
-void ScheduleListView::generateUI(unordered_map<QString, Event*> events){
+void ListView::generateUI(unordered_map<QString, Event*> events){
     auto layout = ui->rootLayout;
     if(layout) utils::clearLayout(layout);
 
@@ -73,7 +73,7 @@ void ScheduleListView::generateUI(unordered_map<QString, Event*> events){
     }
 }
 
-QFrame *ScheduleListView::createFrameForDate(QDate date){
+QFrame *ListView::createFrameForDate(QDate date){
     auto dayFrame = new QFrame(ui->root);
     dayFrame->setObjectName(date.toString());
     dayFrame->setFrameShape(QFrame::Box);
@@ -113,7 +113,7 @@ QFrame *ScheduleListView::createFrameForDate(QDate date){
     return dayFrame;
 }
 
-QFrame *ScheduleListView::createFrameForEvent(models::Event *e) {
+QFrame *ListView::createFrameForEvent(models::Event *e) {
     auto dateTime = QDateTime::fromSecsSinceEpoch(e->getDatetime(), QTimeZone::systemTimeZone());
     auto eventFrame = new QFrame();
     eventFrame->setFrameShape(QFrame::Box);
