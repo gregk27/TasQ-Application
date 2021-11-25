@@ -4,6 +4,7 @@
 #include <models/Course.h>
 #include <utils.h>
 #include <ApplicationController.h>
+#include <widgets/addremoveclass.h>
 #include "ui_profilescreen.h"
 
 ProfileScreen::ProfileScreen(QWidget *parent) :
@@ -39,4 +40,9 @@ void ProfileScreen::onCoursesChanged(){
         layout->addWidget(widget);
     }
     layout->addItem(new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding));
+}
+
+void ProfileScreen::onAddRemoveButtonPressed() {
+    AddRemoveClass *arc = new AddRemoveClass(this);
+    arc->show();
 }

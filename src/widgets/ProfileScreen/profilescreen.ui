@@ -167,8 +167,8 @@
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>612</width>
-           <height>153</height>
+           <width>616</width>
+           <height>154</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -280,8 +280,8 @@
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>612</width>
-           <height>152</height>
+           <width>616</width>
+           <height>154</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -412,5 +412,25 @@
   </layout>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>pushButton_2</sender>
+   <signal>clicked()</signal>
+   <receiver>ProfileScreen</receiver>
+   <slot>onAddRemoveButtonPressed()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>563</x>
+     <y>231</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>632</x>
+     <y>46</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>onAddRemoveButtonPressed()</slot>
+ </slots>
 </ui>

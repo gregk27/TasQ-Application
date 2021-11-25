@@ -19,19 +19,19 @@ class AddRemoveClass : public QDialog {
     Q_OBJECT
 
 public:
-    explicit AddRemoveClass(std::vector<models::Course> *courses, QWidget *parent = nullptr);
+    explicit AddRemoveClass(QWidget *parent = nullptr);
 
     ~AddRemoveClass() override;
 
 private:
     Ui::AddRemoveClass *ui;
-    void populateClasses(std::vector<models::Course> *courses);
+    void populateClasses(std::unordered_map<QString, models::Course*> courses);
 
 public slots:
-    void coursesChanged(std::vector<models::Course> *courses);
+    void coursesChanged();
 
 signals:
-    void removeCourse(const models::Course *c);
+    void removeCourse(models::Course *c);
     void addCourse();
 };
 
