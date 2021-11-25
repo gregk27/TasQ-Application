@@ -21,6 +21,15 @@ public:
     ~ListView();
 
     void generateUI(std::unordered_map<QString, models::Event*> events);
+    /**
+     * Clear the list in preparation of new events
+     */
+    void clear();
+    /**
+     * Add an event to the list, will be placed in correct spot based on date and time
+     * @param e Event to be added
+     */
+    void addEvent(models::Event *e);
 private:
 
     Ui::ListView *ui;
