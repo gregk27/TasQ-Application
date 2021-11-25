@@ -87,16 +87,21 @@ School *ApplicationController::getSchool() {
     return school;
 }
 
-void ApplicationController::unsubscribe(Course *c) {
+void ApplicationController::subscribe(Course *c) {
+    net::subscriptions::addSubscription(*c);
     courses.insert(make_pair(c->getId(), c));
     emitChange<Course>();
-    net::subscriptions::removeSubscription(*c);
     //TODO: Update local storage
 }
 
-void ApplicationController::subscribe(Course *c) {
+void ApplicationController::unsubscribe(Course *c) {
+    net::subscriptions::removeSubscription(*c);
+    auto es = c->getEvents();
+    for(auto e : es){
+        events.erase(e->getId());
+    }
     courses.erase(c->getId());
     emitChange<Course>();
-    net::subscriptions::addSubscription(*c);
+    emitChange<Event>();
     //TODO: Update local storage
 }
