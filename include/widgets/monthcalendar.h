@@ -27,8 +27,8 @@ public:
 
 private:
     Ui::MonthCalendar* ui;
-    QVBoxLayout* mdue[31];   // Layout to hold assignments in month view
-    QHBoxLayout* tdue[31];   // Layout to hold assignments in term view
+    QVBoxLayout* mdue[31] = {nullptr};   // Layout to hold assignments in month view
+    QHBoxLayout* tdue[31] = {nullptr};   // Layout to hold assignments in term view
 };
 
 #endif // MONTHCALENDAR_H
