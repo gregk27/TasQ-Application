@@ -26,9 +26,13 @@ public:
 private:
     Ui::AddRemoveClass *ui;
     void populateClasses(std::unordered_map<QString, models::Course*> courses);
+    QFrame *buildFrameForCourse(models::Course *c, QPushButton **btn);
+
+    std::shared_ptr<std::vector<models::Course>> courses;
 
 public slots:
     void coursesChanged();
+    void showSearchResults(QString search);
 
 signals:
     void removeCourse(models::Course *c);

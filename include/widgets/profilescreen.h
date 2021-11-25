@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <models/User.h>
+#include <QFrame>
 
 namespace Ui {
 class ProfileScreen;
