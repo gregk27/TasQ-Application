@@ -22,9 +22,12 @@ AssignmentsScreen::~AssignmentsScreen()
 void AssignmentsScreen::onEventsChange(){
     auto events = ApplicationController::instance()->getInstances<Event>();
     ui->monthView->cal->clear();
+    ui->termView->clear();
     ui->listView->clear();
     auto currDatetime = QDateTime::currentDateTime();
     auto currDate = currDatetime.date();
+    auto termStartDate = QDate(2021, 9, 7);
+    auto termEndDate = QDate(2021, 12, 3);
     for(auto [eId, e] : events){
         // Don't show lect/lab/tut
         if(e->getType() == models::enums::EventType::LECTURE ||
@@ -32,10 +35,14 @@ void AssignmentsScreen::onEventsChange(){
             e->getType() == models::enums::EventType::LAB) continue;
         auto dateTime = e->getQDatetime();
         auto date = dateTime.date();
+        auto colour = utils::getColourForCourse(e->getCourse()->getId());
 
         if(date.month() == currDate.month() && date.year() == currDate.year()){
-            auto colour = utils::getColourForCourse(e->getCourse()->getId());
             ui->monthView->cal->AddMAssign(e->getCourse()->getCode(), e->getName(), e->getType().toString(), &dateTime, QString("rgb(%1,%2,%3)").arg(colour[0]).arg(colour[1]).arg(colour[2]));
+        }
+
+        if(date > termStartDate && date < termEndDate){
+            ui->termView->addAssignment(e->getCourse()->getCode(), e->getName(), e->getType().toString(), &dateTime, QString("rgb(%1,%2,%3)").arg(colour[0]).arg(colour[1]).arg(colour[2]));
         }
 
         // Don't show past events in list
