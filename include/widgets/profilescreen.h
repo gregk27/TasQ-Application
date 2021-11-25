@@ -22,6 +22,7 @@ private:
 public slots:
     void onAuthStateChanged(models::User *localUser);
     void onCoursesChanged();
+    void onAddRemoveButtonPressed();
 };
 
 #endif // PROFILESCREEN_H
