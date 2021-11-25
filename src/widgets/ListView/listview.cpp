@@ -3,7 +3,6 @@
 #include <QTimeZone>
 #include <models/Event.h>
 #include <utils.h>
-#include <iostream>
 #include "ui_listview.h"
 #include <ApplicationController.h>
 
@@ -14,7 +13,6 @@ ListView::ListView(QWidget *parent) :
     ui(new Ui::ListView)
 {
     ui->setupUi(this);
-    connect(ApplicationController::instance(), &ApplicationController::eventsChanged, this, &ListView::onEventsChanged);
 }
 
 ListView::~ListView()
@@ -22,21 +20,9 @@ ListView::~ListView()
     delete ui;
 }
 
-void ListView::onEventsChanged(){
-    generateUI(ApplicationController::instance()->getInstances<Event>());
-}
-
-
-void ListView::generateUI(unordered_map<QString, Event*> events){
-    auto layout = ui->rootLayout;
-    if(layout) utils::clearLayout(layout);
-    for(auto [eId, e] : events){
-        addEvent(e);
-    }
-}
-
 void ListView::clear(){
     if(ui->rootLayout) utils::clearLayout(ui->rootLayout);
+    ui->rootLayout->addItem(new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding));
 }
 
 void ListView::addEvent(Event *e){
@@ -76,8 +62,6 @@ void ListView::addEvent(Event *e){
     }
 
     auto event = createFrameForEvent(e);
-    cout << e->getName().toStdString() << endl;
-    cout << i << endl;
     qobject_cast<QVBoxLayout*>(frame->findChild<QFrame*>("events")->layout())->insertWidget(i, event);
 }
 

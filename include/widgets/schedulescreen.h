@@ -17,6 +17,9 @@ public:
 
 private:
     Ui::ScheduleScreen *ui;
+
+public slots:
+    void onEventsChanged();
 };
 
 #endif // SCHEDULESCREEN_H
