@@ -59,9 +59,13 @@ void AddRemoveClass::populateClasses(std::unordered_map<QString, models::Course*
 
 void AddRemoveClass::showSearchResults(QString search){
     utils::clearLayout(ui->searchResults->layout());
+    auto local = ApplicationController::instance()->getInstances<Course>();
+    ui->searchResults->layout()->setSpacing(0);
     for(auto c : *courses){
+        // Don't show if it's already added locally
+        if(local.count(c.getId())) continue;
+        // Show if it matches the search criteria
         if(search == "" || c.getCode().toLower().startsWith(search.toLower()) || c.getName().toLower().startsWith(search.toLower())){
-            // TODO: Hide if already subscribed
             QPushButton *btn;
             ui->searchResults->layout()->addWidget(buildFrameForCourse(&c, &btn));
             btn->setText("Subscribe");
