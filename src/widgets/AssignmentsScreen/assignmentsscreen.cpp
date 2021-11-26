@@ -33,20 +33,26 @@ void AssignmentsScreen::onEventsChange(){
         if(e->getType() == models::enums::EventType::LECTURE ||
             e->getType() == models::enums::EventType::TUTORIAL ||
             e->getType() == models::enums::EventType::LAB) continue;
-        auto dateTime = e->getQDatetime();
-        auto date = dateTime.date();
         auto colour = utils::getColourForCourse(e->getCourse()->getId());
 
-        if(date.month() == currDate.month() && date.year() == currDate.year()){
-            ui->monthView->cal->AddMAssign(e->getCourse()->getCode(), e->getName(), e->getType().toString(), &dateTime, QString("rgb(%1,%2,%3)").arg(colour[0]).arg(colour[1]).arg(colour[2]));
-        }
+        auto colourString = QString("rgb(%1,%2,%3)").arg(colour[0]).arg(colour[1]).arg(colour[2]);
 
-        if(date > termStartDate && date < termEndDate){
-            ui->termView->addAssignment(e->getCourse()->getCode(), e->getName(), e->getType().toString(), &dateTime, QString("rgb(%1,%2,%3)").arg(colour[0]).arg(colour[1]).arg(colour[2]));
-        }
+        // Compute the weekly occurrences for the event
+        auto weekly = utils::computeWeekly(e, termEndDate);
+        for(auto we : *weekly){
+            auto dateTime = we.getQDatetime();
+            auto date = dateTime.date();
+            if(date.month() == currDate.month() && date.year() == currDate.year()){
+                ui->monthView->cal->AddMAssign(we.getCourse()->getCode(), we.getName(), we.getType().toString(), &dateTime, colourString);
+            }
 
-        // Don't show past events in list
-        if(dateTime > currDatetime)
-            ui->listView->addEvent(e);
+            if(date > termStartDate && date < termEndDate){
+                ui->termView->addAssignment(we.getCourse()->getCode(), we.getName(), we.getType().toString(), &dateTime, colourString);
+            }
+
+            // Don't show past events in list
+            if(dateTime > currDatetime)
+                ui->listView->addEvent(&we);
+        }
     }
 }
