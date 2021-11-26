@@ -36,14 +36,8 @@ AddRemoveClass::~AddRemoveClass() {
 }
 
 void AddRemoveClass::populateClasses(std::unordered_map<QString, models::Course*> courses) {
-    QVBoxLayout *layout;
-    if(ui->classes->layout()){
-        layout = (QVBoxLayout*) ui->classes->layout();
-        utils::clearLayout(layout);
-    } else {
-        layout = new QVBoxLayout(this);
-        ui->classes->setLayout(layout);
-    }
+    QVBoxLayout *layout = ui->classLayout;
+    utils::clearLayout(layout);
     for(auto [cId, c] : courses){
         QPushButton *btn;
         layout->addWidget(buildFrameForCourse(c, &btn));
@@ -54,7 +48,7 @@ void AddRemoveClass::populateClasses(std::unordered_map<QString, models::Course*
         });
     }
 
-    layout->addItem(new QSpacerItem(1, 1000));
+    layout->addItem(new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding));
 }
 
 void AddRemoveClass::showSearchResults(QString search){
