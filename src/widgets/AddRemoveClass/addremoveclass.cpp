@@ -77,6 +77,7 @@ void AddRemoveClass::showSearchResults(QString search){
 QFrame *AddRemoveClass::buildFrameForCourse(Course *c, QPushButton **btn){
     auto *frame = new QFrame();
     frame->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+    frame->setFixedHeight(25);
     auto layout = new QHBoxLayout();
     frame->setLayout(layout);
     layout->setContentsMargins(0, 0, 0, 0);
@@ -111,7 +112,6 @@ QFrame *AddRemoveClass::buildFrameForCourse(Course *c, QPushButton **btn){
     *btn = new QPushButton(frame);
     (*btn)->setText("BUTTON");
     (*btn)->setGeometry(QRect(300, 0, 80, 20));
-    frame->setMinimumHeight(20);
     layout->addWidget(*btn);
 
     return frame;
