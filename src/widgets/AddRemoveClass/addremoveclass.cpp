@@ -58,24 +58,25 @@ void AddRemoveClass::populateClasses(std::unordered_map<QString, models::Course*
 }
 
 void AddRemoveClass::showSearchResults(QString search){
-    utils::clearLayout(ui->searchResults->layout());
+    utils::clearLayout(ui->searchLayout);
     auto local = ApplicationController::instance()->getInstances<Course>();
-    ui->searchResults->layout()->setSpacing(0);
+    ui->searchLayout->setSpacing(0);
     for(auto c : *courses){
         // Don't show if it's already added locally
         if(local.count(c.getId())) continue;
         // Show if it matches the search criteria
         if(search == "" || c.getCode().toLower().startsWith(search.toLower()) || c.getName().toLower().startsWith(search.toLower())){
             QPushButton *btn;
-            ui->searchResults->layout()->addWidget(buildFrameForCourse(&c, &btn));
+            ui->searchLayout->addWidget(buildFrameForCourse(&c, &btn));
             btn->setText("Subscribe");
         }
     }
-    ui->searchResults->layout()->addItem(new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding));
+    ui->searchLayout->addItem(new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding));
 }
 
 QFrame *AddRemoveClass::buildFrameForCourse(Course *c, QPushButton **btn){
     auto *frame = new QFrame();
+    frame->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
     auto layout = new QHBoxLayout();
     frame->setLayout(layout);
     layout->setContentsMargins(0, 0, 0, 0);
@@ -96,7 +97,7 @@ QFrame *AddRemoveClass::buildFrameForCourse(Course *c, QPushButton **btn){
     l->setText(c->getTerm().toString() + " " + QString::number(c->getYear()));
     layout->addWidget(l);
     l->setFixedWidth(70);
-    l->setAlignment(Qt::AlignmentFlag::AlignRight);
+    l->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
     l->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
 
     l = new QLabel(frame);
