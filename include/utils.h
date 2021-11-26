@@ -6,7 +6,9 @@
 #define TASQ_APPLICATION_UTILS_H
 
 #include <models/Course.h>
+#include <models/Event.h>
 #include <QLayout>
+#include <QDate>
 
 namespace utils {
     /**
@@ -21,6 +23,8 @@ namespace utils {
      * @param layout The layout to clear
      */
     void clearLayout(QLayout *layout);
+
+    std::shared_ptr<std::vector<models::Event>> computeWeekly(models::Event *e, QDate endDate);
 }
 
 #endif //TASQ_APPLICATION_UTILS_H

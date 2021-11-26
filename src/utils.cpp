@@ -6,6 +6,11 @@
 #include <QCryptographicHash>
 #include <QWidget>
 #include <QSpacerItem>
+#include <vector>
+#include <models/Event.h>
+
+using namespace std;
+using namespace models;
 
 int *utils::getColourForCourse(QString courseID) {
     auto hash = QCryptographicHash::hash(courseID.toLocal8Bit(), QCryptographicHash::Md5);
@@ -24,4 +29,24 @@ void utils::clearLayout(QLayout *layout){
             delete item->widget();
         delete item;
     }
+}
+
+shared_ptr<vector<Event>> utils::computeWeekly(Event *baseEvent, QDate endDate){
+    auto endDT = QDateTime(endDate, QTime(11, 59, 59));
+    auto out = make_shared<vector<Event>>();
+    if(!baseEvent->getWeekly()) {
+        out->push_back(*baseEvent);
+        return out;
+    };
+    QDateTime dt = baseEvent->getQDatetime();
+    while(dt < endDT){
+        // Create a new event with new timestamp
+        Event e(*baseEvent);
+        unsigned long long timestamp = dt.toSecsSinceEpoch();
+        e.setDatetime(timestamp);
+        out->push_back(e);
+        // Update to next week
+        dt = dt.addDays(7);
+    }
+    return out;
 }

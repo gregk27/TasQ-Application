@@ -2,6 +2,7 @@
 #include <ApplicationController.h>
 #include <models/Enums.h>
 #include <models/Event.h>
+#include <utils.h>
 #include "ui_schedulescreen.h"
 
 ScheduleScreen::ScheduleScreen(QWidget *parent) :
@@ -22,6 +23,7 @@ void ScheduleScreen::onEventsChanged() {
     ui->list_view->clear();
     auto currDatetime = QDateTime::currentDateTime();
     auto currDate = currDatetime.date();
+    auto termEndDate = QDate(2021, 12, 3);
     for(auto [eId, e] : events){
         // Don't show assignment/quiz/test
         if(e->getType() == models::enums::EventType::ASSIGNMENT ||
@@ -29,8 +31,13 @@ void ScheduleScreen::onEventsChanged() {
            e->getType() == models::enums::EventType::TEST) continue;
         auto dateTime = e->getQDatetime();
 
-        // Don't show past events in list
-        if(dateTime > currDatetime)
-            ui->list_view->addEvent(e);
+        // Compute the weekly occurrences for the event
+        auto weekly = utils::computeWeekly(e, termEndDate);
+        for(auto we : *weekly){
+            // Don't show past events in list
+            if(we.getQDatetime() > currDatetime) {
+                ui->list_view->addEvent(&we);
+            }
+        }
     }
 }
