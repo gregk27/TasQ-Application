@@ -66,7 +66,7 @@ MonthCalendar::MonthCalendar(int month, QWidget* parent) :
     }
 
     //Determine the day of the week that the month starts on
-    int start = (date->dayOfWeek());
+    int start = ((date->dayOfWeek())-1)%7;
 
     //Create a table to act as the calendar
     QTableWidget* cal = new QTableWidget((((monthdays + start)) / 7 + 1), 7);
@@ -124,7 +124,7 @@ void MonthCalendar::AddMAssign(QString courseid, QString assign, QString type, Q
     QRadioButton* circle = new QRadioButton(assign);
     circle->setEnabled(false);
     circle->setStyleSheet("QRadioButton::indicator::unchecked{ border: 1px solid " + colour + "; border-radius: 6px; background-color: " + colour + "; width: 10px; height: 10px; margin-left: 5px;}");
-    mdue[due->date().day()]->addWidget(circle);
+    mdue[due->date().day()-1]->addWidget(circle);
     QString* description = new QString(courseid + "\n" + assign + "\n" + type + "\n" + due->toString());
     circle->setToolTip(*description);
 }
@@ -135,7 +135,7 @@ void MonthCalendar::AddTAssign(QString courseid, QString assign, QString type, Q
     QRadioButton* circle = new QRadioButton;
     circle->setEnabled(false);
     circle->setStyleSheet("QRadioButton::indicator::unchecked{ border: 1px solid " + colour + "; border-radius: 6px; background-color: " + colour + "; width: 10px; height: 10px; margin-left: 5px;}");
-    tdue[due->date().day()]->addWidget(circle);
+    tdue[due->date().day()-1]->addWidget(circle);
     QString* description = new QString(courseid + "\n" + assign + "\n" + type + "\n" + due->toString());
     circle->setToolTip(*description);
 }
