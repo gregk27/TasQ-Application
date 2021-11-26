@@ -88,6 +88,7 @@ School *ApplicationController::getSchool() {
 }
 
 void ApplicationController::subscribe(Course *c) {
+    cout << c->getId().toStdString() << endl;
     net::subscriptions::addSubscription(*c);
     courses.insert(make_pair(c->getId(), c));
     emitChange<Course>();

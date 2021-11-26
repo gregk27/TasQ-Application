@@ -36,7 +36,7 @@ public slots:
 
 signals:
     void removeCourse(models::Course *c);
-    void addCourse();
+    void addCourse(models::Course *c);
 };
 
 

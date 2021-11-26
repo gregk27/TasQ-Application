@@ -20,15 +20,15 @@ AddRemoveClass::AddRemoveClass(QWidget *parent) :
     ui->setupUi(this);
     setWindowTitle("Add/Remove Classes");
     setModal(true);
-    coursesChanged();
 
     QString schoolId = AuthController::instance()->getLocalUser()->getSchoolId();
     courses = net::schools::getCourses(schoolId);
 
-//    connect(ui->addButton, SIGNAL(clicked()), this, SIGNAL(addCourse()));
+    coursesChanged();
+
     connect(this, &AddRemoveClass::removeCourse, ApplicationController::instance(), &ApplicationController::unsubscribe);
+    connect(this, &AddRemoveClass::addCourse, ApplicationController::instance(), &ApplicationController::subscribe);
     connect(ApplicationController::instance(), &ApplicationController::coursesChanged, this, &AddRemoveClass::coursesChanged);
-    showSearchResults("");
 }
 
 AddRemoveClass::~AddRemoveClass() {
@@ -61,7 +61,9 @@ void AddRemoveClass::showSearchResults(QString search){
     utils::clearLayout(ui->searchLayout);
     auto local = ApplicationController::instance()->getInstances<Course>();
     ui->searchLayout->setSpacing(0);
-    for(auto c : *courses){
+    auto itr = courses->begin();
+    for(; itr != courses->end(); itr++){
+        auto c = *itr;
         // Don't show if it's already added locally
         if(local.count(c.getId())) continue;
         // Show if it matches the search criteria
@@ -69,6 +71,10 @@ void AddRemoveClass::showSearchResults(QString search){
             QPushButton *btn;
             ui->searchLayout->addWidget(buildFrameForCourse(&c, &btn));
             btn->setText("Subscribe");
+            // Emit add course signal when the button is pressed
+            connect(btn, &QPushButton::clicked, [&, course=&(*itr)]  {
+                emit addCourse(course);
+            });
         }
     }
     ui->searchLayout->addItem(new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding));
@@ -119,4 +125,5 @@ QFrame *AddRemoveClass::buildFrameForCourse(Course *c, QPushButton **btn){
 
 void AddRemoveClass::coursesChanged() {
     populateClasses(ApplicationController::instance()->getInstances<Course>());
+    showSearchResults(ui->searchText->text());
 }
