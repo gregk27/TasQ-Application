@@ -115,26 +115,6 @@
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
-        <item>
-         <property name="text">
-          <string>Fall</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Winter</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Spring</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Summer</string>
-         </property>
-        </item>
        </widget>
       </item>
       <item row="0" column="1" colspan="2">
@@ -146,7 +126,7 @@
          </sizepolicy>
         </property>
         <property name="maxLength">
-         <number>8</number>
+         <number>9</number>
         </property>
        </widget>
       </item>
@@ -197,9 +177,26 @@
        </widget>
       </item>
       <item row="4" column="1" colspan="3">
-       <widget class="QLineEdit" name="lineEdit"/>
+       <widget class="QLineEdit" name="profInput"/>
       </item>
      </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="errorLabel">
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
     </widget>
    </item>
    <item>
