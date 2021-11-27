@@ -6,6 +6,7 @@
 #define TASQ_APPLICATION_WEEKVIEW_H
 
 #include <QWidget>
+#include <widgets/weekday.h>
 
 
 QT_BEGIN_NAMESPACE
@@ -20,8 +21,13 @@ public:
 
     ~WeekView() override;
 
+    void clear();
+    void addEvent(models::Event *e);
+
 private:
     Ui::WeekView *ui;
+
+    WeekDay *days[7];
 };
 
 

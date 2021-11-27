@@ -7,6 +7,7 @@
 #include <widgets/weekday.h>
 #include "ui_WeekDay.h"
 #include <utils.h>
+#include <QLabel>
 
 
 WeekDay::WeekDay(QWidget *parent) :
@@ -48,13 +49,4 @@ void WeekDay::addEvent(models::Event *e) {
 //    layout->addWidget(new QLabel(e->getCourse()->getCode()));
 
     ui->eventLayout->addWidget(frame, row, 0, 4, 1);
-}
-
-bool WeekDay::event(QEvent *e) {
-    if(e->type() == QEvent::DynamicPropertyChange){
-        if(property("day").isValid()){
-            ui->label->setText(property("day").toString());
-        }
-    }
-    return QFrame::event(e);
 }

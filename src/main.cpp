@@ -18,7 +18,7 @@
 #include <ApplicationController.h>
 #include <models/Event.h>
 #include <models/StorageController.h>
-#include <widgets/weekday.h>
+#include <widgets/weekview.h>
 
 using namespace std;
 using namespace std::chrono;
@@ -66,20 +66,9 @@ int main(int argc, char *argv[])
 
     Event e(js);
 
-    WeekDay w;
-    w.setProperty("day", "Monday");
+    WeekView w;
     w.show();
     w.addEvent(&e);
-    unsigned long long dt = 1638020700l;
-    e.setDatetime(dt);
-    w.addEvent(&e);
-    dt = 1638075599l;
-    e.setDatetime(dt);
-    e.setDatetime(dt);
-    w.addEvent(&e);
-    WeekDay w2;
-    w2.setProperty("day", "Tuesday");
-    w2.show();
 
     return QApplication::exec();
 }
