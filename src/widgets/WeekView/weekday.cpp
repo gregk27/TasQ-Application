@@ -25,7 +25,7 @@ WeekDay::~WeekDay() {
 void WeekDay::clear() {
     utils::clearLayout(ui->eventLayout);
     // Rebuild day structure
-    for(int i=startTime; i<(endTime-startTime)*blocksPerHour; i++){
+    for(int i=0; i<(endTime-startTime)*blocksPerHour; i++){
         ui->eventLayout->addItem(new QSpacerItem(10, blockHeight, QSizePolicy::Fixed, QSizePolicy::Fixed), i, 0);
     }
 }
@@ -33,7 +33,7 @@ void WeekDay::clear() {
 void WeekDay::addEvent(models::Event *e) {
     auto time = e->getQDatetime().time();
     int row = ((time.hour() - startTime) * blocksPerHour) + (int) (time.minute() * (blocksPerHour/60.0));
-    auto frame = new QFrame();
+    auto frame = new QFrame(ui->events);
     frame->setFrameStyle(QFrame::Box);
     frame->setFrameShadow(QFrame::Plain);
     frame->setFixedHeight(4*blockHeight);

@@ -58,6 +58,12 @@
      <property name="frameShadow">
       <enum>QFrame::Plain</enum>
      </property>
+     <property name="verticalScrollBarPolicy">
+      <enum>Qt::ScrollBarAlwaysOn</enum>
+     </property>
+     <property name="horizontalScrollBarPolicy">
+      <enum>Qt::ScrollBarAlwaysOff</enum>
+     </property>
      <property name="widgetResizable">
       <bool>true</bool>
      </property>
@@ -66,7 +72,7 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>839</width>
+        <width>825</width>
         <height>629</height>
        </rect>
       </property>
