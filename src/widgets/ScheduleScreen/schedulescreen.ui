@@ -47,9 +47,9 @@ QTabWidget::tab-bar {
       <enum>QTabWidget::North</enum>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
-     <widget class="ScheduleWeekView" name="week_view">
+     <widget class="WeekView" name="week_view">
       <attribute name="title">
        <string>Week View</string>
       </attribute>
@@ -71,15 +71,15 @@ QTabWidget::tab-bar {
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>ScheduleWeekView</class>
-   <extends>QWidget</extends>
-   <header>widgets/scheduleweekview.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
    <class>ListView</class>
    <extends>QWidget</extends>
    <header>widgets/listview.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>WeekView</class>
+   <extends>QWidget</extends>
+   <header location="global">widgets/weekview.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

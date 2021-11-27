@@ -54,22 +54,6 @@ int main(int argc, char *argv[])
         cout << "Authentication failed" << endl;
     }
 
-    QJsonObject js = {
-            {"id", "1234"},
-            {"course", "3970e2cd-2de6-11ec-a3fd-0023aea14009"},
-            {"type", "LECTURE"},
-            {"name", "Test 1"},
-            {"weight", 0},
-            {"datetime", 1638018000},
-            {"weekly", false}
-    };
-
-    Event e(js);
-
-    WeekView w;
-    w.show();
-    w.addEvent(&e);
-
     return QApplication::exec();
 }
 

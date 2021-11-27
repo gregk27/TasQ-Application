@@ -32,7 +32,7 @@
    <item row="0" column="0">
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="list">
       <attribute name="title">
@@ -79,6 +79,9 @@
        <property name="bottomMargin">
         <number>0</number>
        </property>
+       <item>
+        <widget class="WeekView" name="weekView" native="true"/>
+       </item>
       </layout>
      </widget>
      <widget class="QWidget" name="month">
@@ -137,6 +140,18 @@
  </widget>
  <customwidgets>
   <customwidget>
+   <class>ListView</class>
+   <extends>QWidget</extends>
+   <header location="global">widgets/listview.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>WeekView</class>
+   <extends>QWidget</extends>
+   <header location="global">widgets/weekview.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
    <class>MonthView</class>
    <extends>QWidget</extends>
    <header location="global">widgets/monthview.h</header>
@@ -146,12 +161,6 @@
    <class>TermView</class>
    <extends>QWidget</extends>
    <header location="global">widgets/termview.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>ListView</class>
-   <extends>QWidget</extends>
-   <header location="global">widgets/listview.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
