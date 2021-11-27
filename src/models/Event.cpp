@@ -26,7 +26,7 @@ Event::Event(QJsonValue json):
     } else {
         endDate = json["endDate"].toInteger();
     }
-    weekly = (bool) json["weekly"].toInt();
+    weekly = (bool) json["weekly"].toInt() == 1 || json["weekly"].toBool();
 }
 
 Course *Event::getCourse(){

@@ -100,7 +100,7 @@ public:
         if(static_cast<NetModel*>(i)){
             *i = *APIController::instance()->modify<T>(*i);
         }
-        getMap<T>()->operator[](i->getId()) = *i;
+        *(getMap<T>()->operator[](i->getId())) = *i;
         emitChange<T>();
         // TODO: Update local storage
     }

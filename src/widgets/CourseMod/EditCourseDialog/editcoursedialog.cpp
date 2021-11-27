@@ -4,7 +4,8 @@
 
 // You may need to build the project (run Qt uic code generator) to get "ui_EditCourseDialog.h" resolved
 
-#include "include/widgets/coursemod/editcoursedialog.h"
+#include <widgets/coursemod/editcoursedialog.h>
+#include <widgets/coursemod/editeventdialog.h>
 #include "ui_EditCourseDialog.h"
 #include <utils.h>
 #include <models/Event.h>
@@ -59,8 +60,8 @@ void EditCourseDialog::populateEvents(){
         auto btn = new QPushButton(frame);
         btn->setText("Edit");
         btn->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
-        connect(btn, &QPushButton::clicked, [&, event=e] {
-            // TODO: Create dialog to edit
+        connect(btn, &QPushButton::clicked, [&, course=c, event=e] {
+            (new EditEventDialog(course, event))->show();
         });
         layout->addWidget(btn);
 
@@ -78,5 +79,5 @@ void EditCourseDialog::populateEvents(){
 }
 
 void EditCourseDialog::createEvent(){
-    // TODO: Implement dialog to create event
+    (new EditEventDialog(c))->show();
 }
