@@ -11,7 +11,7 @@ AssignmentsScreen::AssignmentsScreen(QWidget *parent) :
     ui(new Ui::AssignmentsScreen)
 {
     ui->setupUi(this);
-    connect(ApplicationController::instance(), &ApplicationController::coursesChanged, this, &AssignmentsScreen::onEventsChange);
+    connect(ApplicationController::instance(), &ApplicationController::eventsChanged, this, &AssignmentsScreen::onEventsChange);
 }
 
 AssignmentsScreen::~AssignmentsScreen()
