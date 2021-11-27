@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>WeekView</class>
+ <widget class="QWidget" name="WeekView">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1162</width>
+    <height>629</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>WeekView</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_2"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
