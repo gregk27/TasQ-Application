@@ -38,6 +38,11 @@ void ScheduleScreen::onEventsChanged() {
             if(we.getQDatetime() > currDatetime) {
                 ui->list_view->addEvent(&we);
             }
+
+            if(we.getQDatetime().date().weekNumber() == currDate.weekNumber()){
+                ui->week_view->addEvent(&we);
+            }
+
         }
     }
 }

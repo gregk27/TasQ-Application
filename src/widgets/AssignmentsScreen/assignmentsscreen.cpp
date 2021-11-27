@@ -50,6 +50,10 @@ void AssignmentsScreen::onEventsChange(){
                 ui->termView->addAssignment(we.getCourse()->getCode(), we.getName(), we.getType().toString(), &dateTime, colourString);
             }
 
+            if(date.weekNumber() == currDate.weekNumber()){
+                ui->weekView->addEvent(&we);
+            }
+
             // Don't show past events in list
             if(dateTime > currDatetime)
                 ui->listView->addEvent(&we);
