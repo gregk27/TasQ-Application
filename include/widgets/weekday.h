@@ -23,8 +23,6 @@ public:
 
     void clear();
     void addEvent(models::Event *e);
-
-    bool event(QEvent *e) override;
 private:
     Ui::WeekDay *ui;
 
