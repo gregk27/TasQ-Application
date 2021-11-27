@@ -27,7 +27,7 @@ void AssignmentsScreen::onEventsChange(){
     auto currDatetime = QDateTime::currentDateTime();
     auto currDate = currDatetime.date();
     auto termStartDate = QDate(2021, 9, 7);
-    auto termEndDate = QDate(2021, 12, 3);
+    auto termEndDate = QDate(2021, 12, 4);
     for(auto [eId, e] : events){
         // Don't show lect/lab/tut
         if(e->getType() == models::enums::EventType::LECTURE ||
@@ -46,7 +46,7 @@ void AssignmentsScreen::onEventsChange(){
                 ui->monthView->cal->AddMAssign(we.getCourse()->getCode(), we.getName(), we.getType().toString(), &dateTime, colourString);
             }
 
-            if(date > termStartDate && date < termEndDate){
+            if(date > termStartDate && date.month() <= termEndDate.month() && date.year()<=termEndDate.year()){
                 ui->termView->addAssignment(we.getCourse()->getCode(), we.getName(), we.getType().toString(), &dateTime, colourString);
             }
 
