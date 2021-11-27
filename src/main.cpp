@@ -18,6 +18,7 @@
 #include <ApplicationController.h>
 #include <models/Event.h>
 #include <models/StorageController.h>
+#include <widgets/weekday.h>
 
 using namespace std;
 using namespace std::chrono;
@@ -52,6 +53,33 @@ int main(int argc, char *argv[])
     } else {
         cout << "Authentication failed" << endl;
     }
+
+    QJsonObject js = {
+            {"id", "1234"},
+            {"course", "3970e2cd-2de6-11ec-a3fd-0023aea14009"},
+            {"type", "LECTURE"},
+            {"name", "Test 1"},
+            {"weight", 0},
+            {"datetime", 1638018000},
+            {"weekly", false}
+    };
+
+    Event e(js);
+
+    WeekDay w;
+    w.setProperty("day", "Monday");
+    w.show();
+    w.addEvent(&e);
+    unsigned long long dt = 1638020700l;
+    e.setDatetime(dt);
+    w.addEvent(&e);
+    dt = 1638075599l;
+    e.setDatetime(dt);
+    e.setDatetime(dt);
+    w.addEvent(&e);
+    WeekDay w2;
+    w2.setProperty("day", "Tuesday");
+    w2.show();
 
     return QApplication::exec();
 }
