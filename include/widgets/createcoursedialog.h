@@ -6,6 +6,7 @@
 #define TASQ_APPLICATION_CREATECOURSEDIALOG_H
 
 #include <QDialog>
+#include <models/Models.h>
 
 
 QT_BEGIN_NAMESPACE
@@ -22,6 +23,12 @@ public:
 
 private:
     Ui::CreateCourseDialog *ui;
+
+signals:
+    void createCourse(models::Course *c);
+
+public slots:
+    void createCourse();
 };
 
 
