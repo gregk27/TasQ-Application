@@ -9,6 +9,7 @@
 
 #include <models/Course.h>
 #include <utils.h>
+#include <widgets/createcoursedialog.h>
 #include <net/auth.h>
 #include <net/schools.h>
 #include <net/endpoints.h>
@@ -120,4 +121,9 @@ QFrame *AddRemoveClass::buildFrameForCourse(Course *c, QPushButton **btn){
 void AddRemoveClass::coursesChanged() {
     populateClasses(ApplicationController::instance()->getInstances<Course>());
     showSearchResults(ui->searchText->text());
+}
+
+void AddRemoveClass::showCreateCourse(){
+    auto ccd = new CreateCourseDialog();
+    ccd->show();
 }

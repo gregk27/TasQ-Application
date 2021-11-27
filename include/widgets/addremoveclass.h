@@ -33,6 +33,7 @@ private:
 public slots:
     void coursesChanged();
     void showSearchResults(QString search);
+    void showCreateCourse();
 
 signals:
     void removeCourse(models::Course *c);
