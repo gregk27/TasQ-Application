@@ -1,0 +1,28 @@
+//
+// Created by Greg on 2021-11-26.
+//
+
+#ifndef TASQ_APPLICATION_CREATECOURSEDIALOG_H
+#define TASQ_APPLICATION_CREATECOURSEDIALOG_H
+
+#include <QDialog>
+
+
+QT_BEGIN_NAMESPACE
+namespace Ui { class CreateCourseDialog; }
+QT_END_NAMESPACE
+
+class CreateCourseDialog : public QDialog {
+    Q_OBJECT
+
+public:
+    explicit CreateCourseDialog(QWidget *parent = nullptr);
+
+    ~CreateCourseDialog() override;
+
+private:
+    Ui::CreateCourseDialog *ui;
+};
+
+
+#endif //TASQ_APPLICATION_CREATECOURSEDIALOG_H

@@ -283,8 +283,25 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>createClassButton</sender>
+   <signal>clicked()</signal>
+   <receiver>AddRemoveClass</receiver>
+   <slot>showCreateCourse()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>671</x>
+     <y>24</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>707</x>
+     <y>19</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>showSearchResults(QString)</slot>
+  <slot>showCreateCourse()</slot>
  </slots>
 </ui>
