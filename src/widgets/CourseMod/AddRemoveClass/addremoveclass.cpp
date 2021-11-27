@@ -18,10 +18,9 @@
 #include <ApplicationController.h>
 
 AddRemoveClass::AddRemoveClass(QWidget *parent) :
-        QDialog(parent), ui(new Ui::AddRemoveClass) {
+        QWidget(parent), ui(new Ui::AddRemoveClass) {
     ui->setupUi(this);
     setWindowTitle("Add/Remove Classes");
-    setModal(true);
 
     QString schoolId = AuthController::instance()->getLocalUser()->getSchoolId();
     courses = net::schools::getCourses(schoolId);
