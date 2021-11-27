@@ -5,11 +5,11 @@
 #ifndef TASQ_APPLICATION_ADDREMOVECLASS_H
 #define TASQ_APPLICATION_ADDREMOVECLASS_H
 
-#include <QDialog>
-#include <QVBoxLayout>
-#include <QFrame>
+#include "../../../../../../../../../Qt/6.2.0/mingw81_64/include/QtWidgets/QDialog"
+#include "../../../../../../../../../Qt/6.2.0/mingw81_64/include/QtWidgets/QVBoxLayout"
+#include "../../../../../../../../../Qt/6.2.0/mingw81_64/include/QtWidgets/QFrame"
 
-#include <models/Course.h>
+#include "../../models/Course.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class AddRemoveClass; }

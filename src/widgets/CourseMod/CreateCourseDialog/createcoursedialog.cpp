@@ -4,7 +4,7 @@
 
 // You may need to build the project (run Qt uic code generator) to get "ui_CreateClassDialog.h" resolved
 
-#include <widgets/createcoursedialog.h>
+#include <include/widgets/coursemod/createcoursedialog.h>
 #include "ui_CreateCourseDialog.h"
 #include <QComboBox>
 #include <net/schools.h>

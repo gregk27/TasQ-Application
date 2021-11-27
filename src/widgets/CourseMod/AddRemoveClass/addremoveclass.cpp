@@ -4,12 +4,12 @@
 
 // You may need to build the project (run Qt uic code generator) to get "ui_AddRemoveClass.h" resolved
 
-#include <widgets/addremoveclass.h>
+#include <include/widgets/coursemod/addremoveclass.h>
 #include "ui_AddRemoveClass.h"
 
 #include <models/Course.h>
 #include <utils.h>
-#include <widgets/createcoursedialog.h>
+#include <include/widgets/coursemod/createcoursedialog.h>
 #include <net/auth.h>
 #include <net/schools.h>
 #include <net/endpoints.h>

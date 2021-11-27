@@ -75,7 +75,7 @@ set(PROJECT_WIDGETS
         src/widgets/login_page/registerdialog.cpp
         src/widgets/login_page/registerdialog.ui
         include/widgets/registerdialog.h
-        src/widgets/AddRemoveClass/addremoveclass.cpp include/widgets/addremoveclass.h src/widgets/AddRemoveClass/addremoveclass.ui src/widgets/CreateCourseDialog/createcoursedialog.cpp include/widgets/createcoursedialog.h src/widgets/CreateCourseDialog/createcoursedialog.ui)
+        src/widgets/CourseMod/AddRemoveClass/addremoveclass.cpp include/widgets/coursemod/addremoveclass.h src/widgets/CourseMod/AddRemoveClass/addremoveclass.ui src/widgets/CourseMod/CreateCourseDialog/createcoursedialog.cpp include/widgets/coursemod/createcoursedialog.h src/widgets/CourseMod/CreateCourseDialog/createcoursedialog.ui)
 
 set(PROJECT_BACKEND
         src/models/User.cpp include/models/User.h

@@ -4,7 +4,7 @@
 #include <models/Course.h>
 #include <utils.h>
 #include <ApplicationController.h>
-#include <widgets/addremoveclass.h>
+#include <include/widgets/coursemod/addremoveclass.h>
 #include "ui_profilescreen.h"
 
 ProfileScreen::ProfileScreen(QWidget *parent) :
