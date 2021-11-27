@@ -10,6 +10,7 @@
 #include <models/Course.h>
 #include <utils.h>
 #include <include/widgets/coursemod/createcoursedialog.h>
+#include <widgets/coursemod/editcoursedialog.h>
 #include <net/auth.h>
 #include <net/schools.h>
 #include <net/endpoints.h>
@@ -42,11 +43,19 @@ void AddRemoveClass::populateClasses(std::unordered_map<QString, models::Course*
     for(auto [cId, c] : courses){
         QPushButton *btn;
         layout->addWidget(buildFrameForCourse(c, &btn));
-        btn->setText("Remove");
-        // Emit remove c signal when the button is pressed
-        connect(btn, &QPushButton::clicked, [&, course=c]  {
-            emit removeCourse(course);
-        });
+        if(c->getOwnerId() == AuthController::instance()->getLocalUID()){
+            btn->setText("Edit");
+            connect(btn, &QPushButton::clicked, [&, course=c] {
+                auto ecd = new EditCourseDialog(course);
+                ecd->show();
+            });
+        } else {
+            btn->setText("Remove");
+            // Emit remove c signal when the button is pressed
+            connect(btn, &QPushButton::clicked, [&, course=c]  {
+                emit removeCourse(course);
+            });
+        }
     }
 
     layout->addItem(new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding));

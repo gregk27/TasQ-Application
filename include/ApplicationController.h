@@ -45,7 +45,7 @@ private:
     inline std::unordered_map<uuid, T*> *getMap() { throw std::runtime_error("Type not supported"); }
 
     template<typename T>
-    inline void emitChange() { };
+    inline void emitChange() { throw std::runtime_error("Type not supported"); };
 
     /**
      * Insert a new model instance into a map, or update the existing one in-place
