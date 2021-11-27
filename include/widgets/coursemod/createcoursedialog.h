@@ -5,8 +5,8 @@
 #ifndef TASQ_APPLICATION_CREATECOURSEDIALOG_H
 #define TASQ_APPLICATION_CREATECOURSEDIALOG_H
 
-#include <QDialog>
-#include <models/Models.h>
+#include "../../../../../../../../../Qt/6.2.0/mingw81_64/include/QtWidgets/QDialog"
+#include "../../models/Models.h"
 
 
 QT_BEGIN_NAMESPACE

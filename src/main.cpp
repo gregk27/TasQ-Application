@@ -10,7 +10,7 @@
 #include <models/Course.h>
 #include <net/api.h>
 #include <net/auth.h>
-#include <widgets/addremoveclass.h>
+#include <include/widgets/coursemod/addremoveclass.h>
 #include <widgets/login.h>
 #include <widgets/registerdialog.h>
 
