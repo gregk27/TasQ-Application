@@ -106,6 +106,8 @@ QFrame *ListView::createFrameForDate(QDate date){
 }
 
 QFrame *ListView::createFrameForEvent(models::Event *e) {
+    Course *course = e->getCourse();
+
     auto dateTime = QDateTime::fromSecsSinceEpoch(e->getDatetime(), QTimeZone::systemTimeZone());
     auto eventFrame = new QFrame();
     eventFrame->setFrameShape(QFrame::Box);
@@ -132,7 +134,7 @@ QFrame *ListView::createFrameForEvent(models::Event *e) {
     colourBox->setMinimumSize(20, 0);
     eventFrame->layout()->addWidget(colourBox);
 
-    auto eventInfo = new QLabel(e->getCourseId()+"\n"+e->getName());
+    auto eventInfo = new QLabel(course->getCode()+" - "+course->getName()+"\n"+e->getName()+" ["+e->getType().toString()+"]");
     eventInfo->setContentsMargins(15, 2, 0, 2);
     eventInfo->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     eventFrame->layout()->addWidget((eventInfo));
