@@ -232,6 +232,16 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>nameInput</tabstop>
+  <tabstop>weightInput</tabstop>
+  <tabstop>typeInput</tabstop>
+  <tabstop>startInput</tabstop>
+  <tabstop>endInput</tabstop>
+  <tabstop>weeklyInput</tabstop>
+  <tabstop>pushButton</tabstop>
+  <tabstop>actionButton</tabstop>
+ </tabstops>
  <resources/>
  <connections>
   <connection>
