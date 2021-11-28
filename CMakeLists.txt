@@ -56,9 +56,9 @@ set(PROJECT_WIDGETS
         include/widgets/scheduleweekview.h
         src/widgets/ScheduleWeekView/scheduleweekview.cpp
         src/widgets/ScheduleWeekView/scheduleweekview.ui
-        include/widgets/schedulelistview.h
-        src/widgets/ScheduleListView/schedulelistview.cpp
-        src/widgets/ScheduleListView/schedulelistview.ui
+        include/widgets/listview.h
+        src/widgets/ListView/listview.cpp
+        src/widgets/ListView/listview.ui
         include/widgets/monthcalendar.h
         src/widgets/monthcalendar/monthcalendar.cpp 
         src/widgets/monthcalendar/monthcalendar.ui 
@@ -75,7 +75,7 @@ set(PROJECT_WIDGETS
         src/widgets/login_page/registerdialog.cpp
         src/widgets/login_page/registerdialog.ui
         include/widgets/registerdialog.h
-        src/widgets/AddRemoveClass/addremoveclass.cpp include/widgets/addremoveclass.h src/widgets/AddRemoveClass/addremoveclass.ui)
+        src/widgets/CourseMod/AddRemoveClass/addremoveclass.cpp include/widgets/coursemod/addremoveclass.h src/widgets/CourseMod/AddRemoveClass/addremoveclass.ui src/widgets/CourseMod/CreateCourseDialog/createcoursedialog.cpp include/widgets/coursemod/createcoursedialog.h src/widgets/CourseMod/CreateCourseDialog/createcoursedialog.ui src/widgets/CourseMod/EditCourseDialog/editcoursedialog.cpp include/widgets/coursemod/editcoursedialog.h src/widgets/CourseMod/EditCourseDialog/editcoursedialog.ui src/widgets/CourseMod/EditEventDialog/editeventdialog.cpp include/widgets/coursemod/editeventdialog.h src/widgets/CourseMod/EditEventDialog/editeventdialog.ui src/widgets/WeekView/weekview.cpp include/widgets/weekview.h src/widgets/WeekView/weekview.ui src/widgets/WeekView/weekday.cpp include/widgets/weekday.h src/widgets/WeekView/weekday.ui src/widgets/ScrollWidget/scrollwidget.cpp include/widgets/scrollwidget.h src/widgets/ScrollWidget/scrollwidget.ui)
 
 set(PROJECT_BACKEND
         src/models/User.cpp include/models/User.h
@@ -86,16 +86,15 @@ set(PROJECT_BACKEND
         src/models/Event.cpp include/models/Event.h
         src/models/Reminder.cpp include/models/Reminder.h
         src/models/Todo.cpp include/models/Todo.h
-        src/models/Application.cpp include/models/Application.h
         include/net/net.h src/net/net.cpp
         src/net/auth.cpp include/net/auth.h src/net/schools.cpp include/net/schools.h src/net/endpoints.cpp src/net/subscriptions.cpp include/models/NetModel.h src/models/NetModel.cpp include/net/endpoints.h include/net/subscriptions.h include/net/api.h src/net/api.cpp
-        include/utils.h src/utils.cpp)
+        include/utils.h src/utils.cpp src/models/StorageController.cpp include/models/StorageController.h)
 
 add_executable(TasQ-Application
         src/main.cpp
         ${PROJECT_WIDGETS}
         ${PROJECT_BACKEND}
-)
+        src/ApplicationController.cpp include/ApplicationController.h)
 
 
 target_link_libraries(TasQ-Application
@@ -110,6 +109,7 @@ set_target_properties(TasQ-Application PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
     MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
+    LINK_FLAGS "-mwindows"
 )
 
 #add_executable(TasQ_NoQt

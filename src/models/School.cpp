@@ -6,15 +6,11 @@
 using namespace std;
 using namespace models;
 
-QString School::getId() {
-    return id;
-}
-
 QString School::getName() {
     return name;
 }
 
-School::School(QJsonValue &json) {
-    id = json["id"].toString();
+School::School(QJsonValue &json)
+    : ModelBase(json["id"].toString()){
     name = json["name"].toString();
 }

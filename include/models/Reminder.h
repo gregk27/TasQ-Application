@@ -17,7 +17,6 @@ namespace models {
      */
     class Reminder : public NetModel {
     private:
-        uuid id;
         uuid eventId;
     public:
         /**
@@ -29,9 +28,9 @@ namespace models {
         explicit Reminder(QJsonValue &json);
 
         /**
-         * Get the reminder's id
+         * Get the reminder's event
          */
-        uuid getId();
+        Event* getEvent();
 
         /**
          * Get the reminder's event's id
@@ -48,5 +47,6 @@ namespace models {
     };
 }
 
+Q_DECLARE_METATYPE(models::Reminder);
 
 #endif //TASQ_APPLICATION_REMINDER_H

@@ -35,21 +35,21 @@ TermView::TermView(QWidget* parent) :
 
     //Creating four calendars, one for each month in the term
 
-    QDate* date1 = new QDate;
+    date1 = new QDate;
     date1->setDate(QDate::currentDate().year(), mon1, 1);
-    MonthCalendar* month1 = new MonthCalendar(date1->month());
+    month1 = new MonthCalendar(date1->month());
 
-    QDate* date2 = new QDate;
+    date2 = new QDate;
     date2->setDate(QDate::currentDate().year(), mon2, 1);
-    MonthCalendar* month2 = new MonthCalendar(date2->month());
+    month2 = new MonthCalendar(date2->month());
 
-    QDate* date3 = new QDate;
+    date3 = new QDate;
     date3->setDate(QDate::currentDate().year(), mon3, 1);
-    MonthCalendar* month3 = new MonthCalendar(date3->month());
+    month3 = new MonthCalendar(date3->month());
 
-    QDate* date4 = new QDate;
+    date4 = new QDate;
     date4->setDate(QDate::currentDate().year(), mon4, 1);
-    MonthCalendar* month4 = new MonthCalendar(date4->month());
+    month4 = new MonthCalendar(date4->month());
 
     QGridLayout* termlay = new QGridLayout;
 
@@ -107,4 +107,25 @@ TermView::TermView(QWidget* parent) :
 TermView::~TermView()
 {
     delete ui;
+}
+
+void TermView::addAssignment(QString classid, QString assign, QString type, QDateTime* due, QString colour){
+    QDate date = due->date();
+    // Add assignment to appropriate calendar
+    if(date >= *date4){
+        month4->AddMAssign(classid, assign, type, due, colour);
+    } else if(date >= *date3){
+        month3->AddMAssign(classid, assign, type, due, colour);
+    } else if(date >= *date2){
+        month2->AddMAssign(classid, assign, type, due, colour);
+    } else if(date >= *date1){
+        month1->AddMAssign(classid, assign, type, due, colour);
+    }
+}
+
+void TermView::clear(){
+    month1->clear();
+    month2->clear();
+    month3->clear();
+    month4->clear();
 }

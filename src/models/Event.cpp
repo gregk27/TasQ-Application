@@ -5,6 +5,7 @@
 #include <net/auth.h>
 #include <models/Event.h>
 #include <models/User.h>
+#include <ApplicationController.h>
 
 using namespace std;
 using namespace models;
@@ -15,8 +16,7 @@ namespace net::auth {
 }
 
 Event::Event(QJsonValue json):
-        type(enums::EventType::fromDB(json["type"].toString())) {
-    id = json["id"].toString();
+        NetModel(json["id"].toString()), type(enums::EventType::fromDB(json["type"].toString())) {
     courseID = json["course"].toString();
     name = json["name"].toString();
     weight = json["weight"].toInt();
@@ -26,14 +26,14 @@ Event::Event(QJsonValue json):
     } else {
         endDate = json["endDate"].toInteger();
     }
-    weekly = json["weekly"].toBool();
+    weekly = (bool) json["weekly"].toInt() == 1 || json["weekly"].toBool();
 }
 
-uuid Event::getId() {
-    return id;
+Course *Event::getCourse(){
+    return ApplicationController::instance()->getInstance<Course>(courseID);
 }
 
-uuid Event::getCourseID() {
+uuid Event::getCourseId() {
     return courseID;
 }
 
@@ -105,7 +105,7 @@ QString Event::getURL(Action a)  {
 }
 
 map<QString, QString> *Event::getBody(Action a) {
-    return new map<QString, QString>{
+    auto m = new map<QString, QString>{
             {"id", id},
             {"course", courseID},
             {"name", name},
@@ -115,4 +115,8 @@ map<QString, QString> *Event::getBody(Action a) {
             {"weekly", QString::fromStdString(to_string(weekly))},
             {"user", AuthController::instance()->getLocalUIDOptional().value_or("")}
     };
+    if(endDate.has_value()){
+        m->operator[]("endDate") = QString::fromStdString(to_string(endDate.value()));
+    }
+    return m;
 }
