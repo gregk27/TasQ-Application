@@ -12,9 +12,22 @@
 using namespace std;
 using namespace models;
 
-int *utils::getColourForCourse(QString courseID) {
+QString utils::getColourForCourse(QString courseID, bool fullCss) {
     auto hash = QCryptographicHash::hash(courseID.toLocal8Bit(), QCryptographicHash::Md5);
-    return new int[3] {hash[0]+127, hash[1]+127, hash[2]+127};
+    int colour[] = {hash[0]+127, hash[1]+127, hash[2]+127};
+    QString fontColour = "black";
+    // Make text white if background too dark
+    if((colour[0]+colour[1]+colour[2])/3 < 127) {
+        fontColour = "white";
+    }
+
+    if(fullCss) {
+        return QString("background-color: rgb(%1, %2, %3); color: %4;")
+                .arg(colour[0]).arg(colour[1]).arg(colour[2]).arg(fontColour);
+    } else {
+        return QString("rgb(%1, %2, %3)")
+                .arg(colour[0]).arg(colour[1]).arg(colour[2]);
+    }
 }
 
 // Implementation from SO: https://stackoverflow.com/questions/4857188/clearing-a-layout-in-qt

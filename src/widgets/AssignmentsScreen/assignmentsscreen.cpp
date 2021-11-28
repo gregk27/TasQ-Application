@@ -33,9 +33,7 @@ void AssignmentsScreen::onEventsChange(){
         if(e->getType() == models::enums::EventType::LECTURE ||
             e->getType() == models::enums::EventType::TUTORIAL ||
             e->getType() == models::enums::EventType::LAB) continue;
-        auto colour = utils::getColourForCourse(e->getCourse()->getId());
-
-        auto colourString = QString("rgb(%1,%2,%3)").arg(colour[0]).arg(colour[1]).arg(colour[2]);
+        auto colourString = utils::getColourForCourse(e->getCourse()->getId(), false);
 
         // Compute the weekly occurrences for the event
         auto weekly = utils::computeWeekly(e, termEndDate);

@@ -38,8 +38,7 @@ void WeekDay::addEvent(models::Event *e) {
     frame->setFrameShadow(QFrame::Plain);
     frame->setFixedHeight(4*blockHeight);
     frame->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
-    auto colours = utils::getColourForCourse(e->getCourseId());
-    frame->setStyleSheet(QString("background-color:rgb(%1,%2,%3)").arg(colours[0]).arg(colours[1]).arg(colours[2]));
+    frame->setStyleSheet(utils::getColourForCourse(e->getCourseId()));
 
     auto layout = new QHBoxLayout();
     frame->setLayout(layout);
