@@ -34,10 +34,11 @@ void WeekDay::clear() {
 void WeekDay::addEvent(models::Event *e) {
     auto time = e->getQDatetime().time();
     int row = ((time.hour() - startTime) * blocksPerHour) + (int) (time.minute() * (blocksPerHour/60.0));
+    int blocks = e->getEndDate().has_value() ? (e->getEndDate().value() - e->getDatetime()) * (blocksPerHour / 3600.0): 1;
     auto frame = new QFrame(ui->events);
     frame->setFrameStyle(QFrame::Box);
     frame->setFrameShadow(QFrame::Plain);
-    frame->setFixedHeight(4*blockHeight);
+    frame->setFixedHeight(blocks*blockHeight);
     frame->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
     frame->setStyleSheet(utils::getColourForCourse(e->getCourseId()));
 
@@ -50,5 +51,5 @@ void WeekDay::addEvent(models::Event *e) {
 
     frame->setToolTip(e->getCourse()->getCode() + "\n" + e->getName() + "\n" + e->getType().toString() + "\n" + e->getQDatetime().toString());
 
-    ui->eventLayout->addWidget(frame, row, 0, 4, 1);
+    ui->eventLayout->addWidget(frame, row, 0, blocks, 1);
 }

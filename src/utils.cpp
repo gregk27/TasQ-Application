@@ -46,6 +46,7 @@ void utils::clearLayout(QLayout *layout){
 
 shared_ptr<vector<Event>> utils::computeWeekly(Event *baseEvent, QDate endDate){
     auto endDT = QDateTime(endDate, QTime(11, 59, 59));
+    unsigned long long duration = baseEvent->getEndDate().value_or(baseEvent->getDatetime()) - baseEvent->getDatetime();
     auto out = make_shared<vector<Event>>();
     if(!baseEvent->getWeekly()) {
         out->push_back(*baseEvent);
@@ -57,6 +58,10 @@ shared_ptr<vector<Event>> utils::computeWeekly(Event *baseEvent, QDate endDate){
         Event e(*baseEvent);
         unsigned long long timestamp = dt.toSecsSinceEpoch();
         e.setDatetime(timestamp);
+        if(duration > 0){
+            optional<unsigned long long> opt = dt.addSecs(duration).toSecsSinceEpoch();
+            e.setEndDate(opt);
+        }
         out->push_back(e);
         // Update to next week
         dt = dt.addDays(7);
