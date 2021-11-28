@@ -101,8 +101,12 @@ APIController *APIController::instance() {
 }
 
 bool APIController::getStatus() {
-    QString result = NetController::instance()->get(APIRequest::BASE_URL + "/status");
-    return result == R"({"status": "Alive"})";
+    try{
+        QString result = NetController::instance()->get(APIRequest::BASE_URL + "/status", 500);
+        return result == R"({"status": "Alive"})";
+    } catch (NetworkException &e) {
+        return false;
+    }
 }
 
 // Build error string and use parent constructor

@@ -70,9 +70,10 @@ NetController::~NetController() {
  * This function is local to ensure that get/post methods are used for legibility
  * @param url The URL to request
  * @param body The POST body. If null then will perform GET request
+ * @param timeout Optional request timeout, in milliseconds
  * @return QString with response
  */
-QString NetController::request(QString &url, map<QString, QString> *body){
+QString NetController::request(QString &url, map<QString, QString> *body, int timeout){
     lock_guard<std::mutex> guard(mutex);
     // Create a memory chunk to use
     MemoryStruct chunk;
@@ -85,6 +86,8 @@ QString NetController::request(QString &url, map<QString, QString> *body){
     curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void *)&chunk);
     // Fail on bad HTTP response
     curl_easy_setopt(curl, CURLOPT_FAILONERROR, 1);
+    // Set timeout
+    curl_easy_setopt(curl, CURLOPT_TIMEOUT_MS, timeout);
 
     // If the body is set, then perform POST request
     // Otherwise perform GET request
@@ -129,8 +132,8 @@ NetController *NetController::instance() {
     return _instance;
 }
 
-QString NetController::get(QString url){
-    return request(url);
+QString NetController::get(QString url, int timeout){
+    return request(url, nullptr, timeout);
 }
 
 QString NetController::post(QString url, map<QString, QString> &body) {
