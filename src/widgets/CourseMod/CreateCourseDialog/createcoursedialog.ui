@@ -255,6 +255,16 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>codeInput</tabstop>
+  <tabstop>schoolInput</tabstop>
+  <tabstop>nameInput</tabstop>
+  <tabstop>termInput</tabstop>
+  <tabstop>yearInput</tabstop>
+  <tabstop>profInput</tabstop>
+  <tabstop>pushButton</tabstop>
+  <tabstop>pushButton_2</tabstop>
+ </tabstops>
  <resources/>
  <connections>
   <connection>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>login</class>
+ <class>Login</class>
  <widget class="QWidget" name="login">
   <property name="geometry">
    <rect>
@@ -119,6 +119,12 @@
    </layout>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>em1</tabstop>
+  <tabstop>pass1</tabstop>
+  <tabstop>log</tabstop>
+  <tabstop>reg</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
