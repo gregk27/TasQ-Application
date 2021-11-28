@@ -22,14 +22,10 @@ AddRemoveClass::AddRemoveClass(QWidget *parent) :
     ui->setupUi(this);
     setWindowTitle("Add/Remove Classes");
 
-    QString schoolId = AuthController::instance()->getLocalUser()->getSchoolId();
-    courses = net::schools::getCourses(schoolId);
-
-    coursesChanged();
-
     connect(this, &AddRemoveClass::removeCourse, ApplicationController::instance(), &ApplicationController::unsubscribe);
     connect(this, &AddRemoveClass::addCourse, ApplicationController::instance(), &ApplicationController::subscribe);
     connect(ApplicationController::instance(), &ApplicationController::coursesChanged, this, &AddRemoveClass::coursesChanged);
+    connect(AuthController::instance(), &AuthController::authStateChanged, this, &AddRemoveClass::authStateChanged);
 }
 
 AddRemoveClass::~AddRemoveClass() {
@@ -129,6 +125,14 @@ QFrame *AddRemoveClass::buildFrameForCourse(Course *c, QPushButton **btn){
 void AddRemoveClass::coursesChanged() {
     populateClasses(ApplicationController::instance()->getInstances<Course>());
     showSearchResults(ui->searchText->text());
+}
+
+void AddRemoveClass::authStateChanged(models::User *u) {
+    if(!u) return;
+    QString schoolId = u->getSchoolId();
+    courses = net::schools::getCourses(schoolId);
+
+    coursesChanged();
 }
 
 void AddRemoveClass::showCreateCourse(){
