@@ -9,11 +9,14 @@
 #include <net/net.h>
 #include <models/User.h>
 #include <QSettings>
+#include <QObject>
 
 /**
  * Singleton controller for user authentication
  */
-class AuthController {
+class AuthController: public QObject {
+
+    Q_OBJECT
 private:
     /** Singleton instance of AuthController */
     static AuthController *_instance;
@@ -91,6 +94,16 @@ public:
      * Get the getLocalUID as a std::optional value
      */
     std::optional<QString> getLocalUIDOptional();
+
+public slots:
+    inline void loginSlot(QString email, QString password){
+        login(email, password);
+    };
+    inline void registerSlot(QString &username, QString &email, QString &password, QString &schoolId){
+        registerUser(username, email, password, schoolId);
+    }
+signals:
+    void authStateChanged(models::User* localUser);
 };
 
 /**

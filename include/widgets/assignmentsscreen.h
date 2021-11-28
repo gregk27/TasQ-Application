@@ -17,6 +17,9 @@ public:
 
 private:
     Ui::AssignmentsScreen *ui;
+
+public slots:
+    void onEventsChange();
 };
 
 #endif // ASSIGNMENTSSCREEN_H

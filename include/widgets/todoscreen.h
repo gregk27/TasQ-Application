@@ -2,6 +2,7 @@
 #define ToDoScreen_H
 
 #include <QWidget>
+#include <models/Todo.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class ToDoScreen; }
@@ -16,19 +17,12 @@ public:
     ~ToDoScreen();
 
 private slots:
-    void on_p1_clicked();
+    void createTodo();
 
-    void on_p2_clicked();
-
-    void on_p3_clicked();
-
-    void on_p4_clicked();
-
-    void on_p5_clicked();
-
-    void on_p6_clicked();
-
+    void update();
 private:
     Ui::ToDoScreen *ui;
+
+    QWidget *createTodoWidget(models::Todo *t);
 };
 #endif // ToDoScreen_H
