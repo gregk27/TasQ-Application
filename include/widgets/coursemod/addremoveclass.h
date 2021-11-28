@@ -33,6 +33,7 @@ private:
 
 public slots:
     void coursesChanged();
+    void authStateChanged(models::User *u);
     void showSearchResults(QString search);
     void showCreateCourse();
 
