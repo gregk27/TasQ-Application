@@ -1,4 +1,5 @@
 #include <widgets/monthview.h>
+#include <utils.h>
 #include "ui_monthview.h"
 
 MonthView::MonthView(QWidget* parent) :
@@ -8,7 +9,7 @@ MonthView::MonthView(QWidget* parent) :
     ui->setupUi(this);
 
     // Create a single month calendar
-    MonthCalendar* cal = new MonthCalendar(QDate::currentDate().month());
+    cal = new MonthCalendar(QDate::currentDate().month());
 
     /*
     *  Example for adding assignments

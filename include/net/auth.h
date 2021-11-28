@@ -8,11 +8,15 @@
 #include <optional>
 #include <net/net.h>
 #include <models/User.h>
+#include <QSettings>
+#include <QObject>
 
 /**
  * Singleton controller for user authentication
  */
-class AuthController {
+class AuthController: public QObject {
+
+    Q_OBJECT
 private:
     /** Singleton instance of AuthController */
     static AuthController *_instance;
@@ -24,12 +28,21 @@ private:
 
     AuthController();
 
+    QSettings settings;
+
 public:
     /**
      * Get singleton instance
      * @return Singleton instance of the AuthController
      */
     static AuthController *instance();
+
+    /**
+     * Validate the current session against the database
+     * @note This will clear sessionToken and UID if the session is invalid
+     * @return True if session is valid, false if not
+     */
+    bool validateSession();
 
     /**
      * Register a new user in the database<br/>
@@ -81,6 +94,16 @@ public:
      * Get the getLocalUID as a std::optional value
      */
     std::optional<QString> getLocalUIDOptional();
+
+public slots:
+    inline void loginSlot(QString email, QString password){
+        login(email, password);
+    };
+    inline void registerSlot(QString &username, QString &email, QString &password, QString &schoolId){
+        registerUser(username, email, password, schoolId);
+    }
+signals:
+    void authStateChanged(models::User* localUser);
 };
 
 /**

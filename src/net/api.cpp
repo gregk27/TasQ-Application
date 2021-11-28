@@ -7,7 +7,13 @@
 #include <net/auth.h>
 
 using namespace std;
-const QString APIRequest::BASE_URL = std::getenv("API_URL");
+
+QString getAPIUrl(){
+    const char* url = getenv("API_URL");
+    return url ? url : "https://tasq.gregk.ca";
+}
+
+const QString APIRequest::BASE_URL = getAPIUrl();
 
 QString APIRequest::buildURL() {
     stringstream ss;
@@ -95,8 +101,12 @@ APIController *APIController::instance() {
 }
 
 bool APIController::getStatus() {
-    QString result = NetController::instance()->get(APIRequest::BASE_URL + "/status");
-    return result == R"({"status": "Alive"})";
+    try{
+        QString result = NetController::instance()->get(APIRequest::BASE_URL + "/status", 500);
+        return result == R"({"status": "Alive"})";
+    } catch (NetworkException &e) {
+        return false;
+    }
 }
 
 // Build error string and use parent constructor

@@ -16,5 +16,8 @@ public:
 
 private:
     Ui::MainWindow *ui;
+
+public slots:
+    void authStateChanged();
 };
 #endif // MAINWINDOW_H

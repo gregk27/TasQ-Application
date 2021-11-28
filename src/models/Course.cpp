@@ -6,12 +6,14 @@
 #include <optional>
 #include <models/Course.h>
 #include <models/User.h>
+#include <models/Event.h>
+#include <ApplicationController.h>
+
 using namespace std;
 using namespace models;
 
 Course::Course(QJsonValue json):
-        term(enums::Term::fromDB(json["term"].toString())) {
-    id = json["id"].toString();
+        NetModel(json["id"].toString()), term(enums::Term::fromDB(json["term"].toString())) {
     name = json["name"].toString();
     code = json["code"].toString();
     year = json["year"].toInt();
@@ -21,9 +23,21 @@ Course::Course(QJsonValue json):
     modified = json["modified"].toInteger();
 }
 
-uuid Course::getId() {
-    return id;
+vector<Event*> Course::getEvents(){
+    auto events = ApplicationController::instance()->getInstances<Event>();
+    vector<Event*> out;
+    for(auto [eId, e] : events){
+        if(e->getCourseId() == id){
+            out.push_back(e);
+        }
+    }
+    return out;
 }
+
+User* Course::getOwner(){
+    return ApplicationController::instance()->getInstance<User>(owner);
+}
+
 
 QString Course::getName() {
     return name;
@@ -70,7 +84,7 @@ void Course::setProf(QString &newProf) {
     prof = newProf;
 }
 
-QString Course::getOwner() {
+QString Course::getOwnerId() {
     return owner;
 }
 

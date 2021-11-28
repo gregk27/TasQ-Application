@@ -1,13 +1,13 @@
 #ifndef LOGIN_H
 #define LOGIN_H
 
-#include <QWidget>
+#include <QDialog>
 #include "registerdialog.h"
 QT_BEGIN_NAMESPACE
 namespace Ui { class Login; }
 QT_END_NAMESPACE
 
-class Login : public QWidget
+class Login : public QDialog
 {
     Q_OBJECT
 
@@ -25,5 +25,8 @@ private slots:
 private:
     Ui::Login *ui;
     RegisterDialog *regi;
+
+signals:
+    void login(QString email, QString password);
 };
 #endif // LOGIN_H

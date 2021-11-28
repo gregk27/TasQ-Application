@@ -19,7 +19,6 @@ namespace models {
      */
     class Event : public NetModel {
     private:
-        uuid id;
         uuid courseID;
         QString name;
         enums::EventType type;
@@ -44,14 +43,14 @@ namespace models {
         explicit Event(QJsonValue json);
 
         /**
-         * Get the event's id
+         * Get the event's course
          */
-        uuid getId();
+        Course *getCourse();
 
         /**
          * Get the event's courseID
          */
-        uuid getCourseID();
+        uuid getCourseId();
 
         /**
          * Set the event's courseID, will be reflected in databases
@@ -92,6 +91,10 @@ namespace models {
          * Get the event's start date/time
          */
         unsigned long long getDatetime();
+        /**
+         * Get the event's QDateTime
+         */
+         inline QDateTime getQDatetime() { return QDateTime::fromSecsSinceEpoch(getDatetime()); }
 
         /**
          * Set the event's start date/time, will be reflected in databases
@@ -127,5 +130,7 @@ namespace models {
         std::map<QString, QString> * getBody(Action a) override;
     };
 }
+
+Q_DECLARE_METATYPE(models::Event);
 
 #endif //TASQ_APPLICATION_EVENT_H

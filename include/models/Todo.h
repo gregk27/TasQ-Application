@@ -18,7 +18,6 @@ namespace models {
      */
     class Todo : public NetModel {
     private:
-        uuid id;
         QString name;
         bool completed;
     public:
@@ -29,12 +28,7 @@ namespace models {
          * "name": string,         - Name of the To-Do<br/>
          * "completed": boolean,   - To-Do completion flag
          */
-        explicit Todo(QJsonValue &json);
-
-        /**
-         * Get the To-do's id
-         */
-        uuid getId();
+        explicit Todo(QJsonValue json);
 
         /**
          * Get the To-do's name
@@ -66,5 +60,6 @@ namespace models {
     };
 }
 
+Q_DECLARE_METATYPE(models::Todo);
 
 #endif //TASQ_APPLICATION_TODO_H

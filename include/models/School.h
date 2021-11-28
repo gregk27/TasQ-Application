@@ -16,9 +16,8 @@ namespace models {
     /**
      * Data model representing a school
      */
-    class School {
+    class School : public ModelBase {
     private:
-        uuid id;
         QString name;
     public:
         /**
@@ -30,15 +29,12 @@ namespace models {
         explicit School(QJsonValue &json);
 
         /**
-         * Get the school's ID
-         */
-        QString getId();
-
-        /**
          * Get the school's name
          */
         QString getName();
     };
 }
+
+Q_DECLARE_METATYPE(models::School);
 
 #endif //TASQ_APPLICATION_SCHOOL_H

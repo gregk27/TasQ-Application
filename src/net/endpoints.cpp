@@ -50,3 +50,11 @@ shared_ptr<vector<Reminder>> net::getReminders(){
 
     return out;
 }
+
+shared_ptr<User> net::getUser(QString &userId) {
+    auto req = APIRequest("/users/"+userId);
+    req.execute();
+    auto user = req.getResponse()->getPayload("user");
+
+    return make_shared<User>(user);
+}

@@ -1,12 +1,15 @@
 #include <widgets/login.h>
 #include "./ui_login.h"
 #include<QMessageBox>
+#include <net/auth.h>
 
 Login::Login(QWidget *parent)
-    : QWidget(parent)
+    : QDialog(parent)
     , ui(new Ui::Login)
 {
     ui->setupUi(this);
+    setModal(true);
+    connect(this, &Login::login, AuthController::instance(), &AuthController::loginSlot);
 }
 
 Login::~Login()
@@ -17,30 +20,16 @@ Login::~Login()
 
 void Login::on_reg_clicked()
 {
-    //RegisterDialog regi;
-    //regi.setModal(true);
-    //regi.exec();
     regi = new RegisterDialog(this);
     regi->show();
-
 }
 
 
 void Login::on_log_clicked()
 {
-    /*  Need to include login data model
-
-    email = ui->em1->text().toStdString();
-    password = ui->pass1->text().toStdString();
-    int valids;
-    valids = User.query.filter_by(email=email, password=password).all()
-    if (valids.length() != 1){
-            QMessageBox::critical(this,"Error","Log in failed")
-    }
-
-    */
-
-    QMessageBox::information(this,"Messgae","Need to include login data model");
-
+    QString email = ui->em1->text();
+    QString pass = ui->pass1->text();
+    emit login(email, pass);
+    close();
 }
 
