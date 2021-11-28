@@ -5,20 +5,22 @@
 #ifndef TASQ_APPLICATION_SCROLLWIDGET_H
 #define TASQ_APPLICATION_SCROLLWIDGET_H
 
-#include <QScrollArea>
+#include <QFrame>
 
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class ScrollWidget; }
 QT_END_NAMESPACE
 
-class ScrollWidget : public QScrollArea {
+class ScrollWidget : public QFrame {
     Q_OBJECT
 
 public:
     explicit ScrollWidget(QWidget *parent = nullptr);
 
     ~ScrollWidget() override;
+
+    bool event(QEvent *e) override;
 
 public slots:
     void clearContent();

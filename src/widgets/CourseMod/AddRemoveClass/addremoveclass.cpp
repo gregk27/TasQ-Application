@@ -33,11 +33,10 @@ AddRemoveClass::~AddRemoveClass() {
 }
 
 void AddRemoveClass::populateClasses(std::unordered_map<QString, models::Course*> courses) {
-    QVBoxLayout *layout = ui->classLayout;
-    utils::clearLayout(layout);
+    ui->classList->clearContent();
     for(auto [cId, c] : courses){
         QPushButton *btn;
-        layout->addWidget(buildFrameForCourse(c, &btn));
+        ui->classList->addWidget(buildFrameForCourse(c, &btn));
         if(c->getOwnerId() == AuthController::instance()->getLocalUID()){
             btn->setText("Edit");
             connect(btn, &QPushButton::clicked, [&, course=c] {
@@ -52,14 +51,11 @@ void AddRemoveClass::populateClasses(std::unordered_map<QString, models::Course*
             });
         }
     }
-
-    layout->addItem(new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding));
 }
 
 void AddRemoveClass::showSearchResults(QString search){
-    utils::clearLayout(ui->searchLayout);
     auto local = ApplicationController::instance()->getInstances<Course>();
-    ui->searchLayout->setSpacing(0);
+    ui->search->clearContent();
     auto itr = courses->begin();
     for(; itr != courses->end(); itr++){
         auto c = *itr;
@@ -68,7 +64,7 @@ void AddRemoveClass::showSearchResults(QString search){
         // Show if it matches the search criteria
         if(search == "" || c.getCode().toLower().startsWith(search.toLower()) || c.getName().toLower().startsWith(search.toLower())){
             QPushButton *btn;
-            ui->searchLayout->addWidget(buildFrameForCourse(&c, &btn));
+            ui->search->addWidget(buildFrameForCourse(&c, &btn));
             btn->setText("Subscribe");
             // Emit add course signal when the button is pressed
             connect(btn, &QPushButton::clicked, [&, course=&(*itr)]  {
@@ -76,7 +72,6 @@ void AddRemoveClass::showSearchResults(QString search){
             });
         }
     }
-    ui->searchLayout->addItem(new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding));
 }
 
 QFrame *AddRemoveClass::buildFrameForCourse(Course *c, QPushButton **btn){

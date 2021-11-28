@@ -48,7 +48,7 @@
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_3">
       <property name="spacing">
-       <number>0</number>
+       <number>2</number>
       </property>
       <property name="leftMargin">
        <number>0</number>
@@ -68,13 +68,7 @@
          <property name="spacing">
           <number>0</number>
          </property>
-         <property name="leftMargin">
-          <number>0</number>
-         </property>
          <property name="topMargin">
-          <number>0</number>
-         </property>
-         <property name="rightMargin">
           <number>0</number>
          </property>
          <property name="bottomMargin">
@@ -133,9 +127,16 @@
        </widget>
       </item>
       <item>
-       <widget class="QScrollArea" name="scrollArea_2">
+       <widget class="Line" name="line">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="ScrollWidget" name="classList">
         <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
+         <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
@@ -146,30 +147,15 @@
           <height>50</height>
          </size>
         </property>
-        <property name="verticalScrollBarPolicy">
-         <enum>Qt::ScrollBarAlwaysOn</enum>
+        <property name="frameShape">
+         <enum>QFrame::NoFrame</enum>
         </property>
-        <property name="horizontalScrollBarPolicy">
-         <enum>Qt::ScrollBarAlwaysOff</enum>
+        <property name="frameShadow">
+         <enum>QFrame::Plain</enum>
         </property>
-        <property name="widgetResizable">
+        <property name="showScroll" stdset="0">
          <bool>true</bool>
         </property>
-        <widget class="QWidget" name="scrollAreaWidgetContents_2">
-         <property name="geometry">
-          <rect>
-           <x>0</x>
-           <y>0</y>
-           <width>691</width>
-           <height>114</height>
-          </rect>
-         </property>
-         <layout class="QVBoxLayout" name="classLayout">
-          <property name="spacing">
-           <number>0</number>
-          </property>
-         </layout>
-        </widget>
        </widget>
       </item>
      </layout>
@@ -191,7 +177,7 @@
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <property name="spacing">
-       <number>0</number>
+       <number>2</number>
       </property>
       <property name="leftMargin">
        <number>0</number>
@@ -208,13 +194,7 @@
       <item>
        <widget class="QWidget" name="widget_3" native="true">
         <layout class="QHBoxLayout" name="horizontalLayout_3">
-         <property name="leftMargin">
-          <number>0</number>
-         </property>
          <property name="topMargin">
-          <number>0</number>
-         </property>
-         <property name="rightMargin">
           <number>0</number>
          </property>
          <property name="bottomMargin">
@@ -255,20 +235,16 @@
        </widget>
       </item>
       <item>
-       <widget class="QWidget" name="widget" native="true">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
+       <widget class="Line" name="line_2">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
         </property>
-        <layout class="QHBoxLayout" name="horizontalLayout"/>
        </widget>
       </item>
       <item>
-       <widget class="QScrollArea" name="scrollArea">
+       <widget class="ScrollWidget" name="search">
         <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
+         <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
@@ -279,30 +255,9 @@
           <height>100</height>
          </size>
         </property>
-        <property name="verticalScrollBarPolicy">
-         <enum>Qt::ScrollBarAlwaysOn</enum>
-        </property>
-        <property name="horizontalScrollBarPolicy">
-         <enum>Qt::ScrollBarAlwaysOff</enum>
-        </property>
-        <property name="widgetResizable">
+        <property name="showScroll" stdset="0">
          <bool>true</bool>
         </property>
-        <widget class="QWidget" name="searchResults">
-         <property name="geometry">
-          <rect>
-           <x>0</x>
-           <y>0</y>
-           <width>691</width>
-           <height>239</height>
-          </rect>
-         </property>
-         <layout class="QVBoxLayout" name="searchLayout">
-          <property name="spacing">
-           <number>0</number>
-          </property>
-         </layout>
-        </widget>
        </widget>
       </item>
      </layout>
@@ -310,6 +265,14 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>ScrollWidget</class>
+   <extends>QFrame</extends>
+   <header location="global">widgets/scrollwidget.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections>
   <connection>
