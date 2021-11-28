@@ -20,11 +20,15 @@ public:
     void AddMAssign(QString classid, QString assign, QString type, QDateTime* due, QString colour);
     // Function to add assignments for term view
     void AddTAssign(QString classid, QString assign, QString type, QDateTime* due, QString colour);
+    /**
+     * Clear events in the calendar
+     */
+    void clear();
 
 private:
     Ui::MonthCalendar* ui;
-    QVBoxLayout* mdue[31];   // Layout to hold assignments in month view
-    QHBoxLayout* tdue[31];   // Layout to hold assignments in term view
+    QVBoxLayout* mdue[31] = {nullptr};   // Layout to hold assignments in month view
+    QHBoxLayout* tdue[31] = {nullptr};   // Layout to hold assignments in term view
 };
 
 #endif // MONTHCALENDAR_H

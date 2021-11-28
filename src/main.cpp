@@ -10,14 +10,15 @@
 #include <models/Course.h>
 #include <net/api.h>
 #include <net/auth.h>
-#include <widgets/addremoveclass.h>
+#include <include/widgets/coursemod/addremoveclass.h>
 #include <widgets/login.h>
 #include <widgets/registerdialog.h>
 
-#include <widgets/schedulelistview.h>
+#include <widgets/listview.h>
 #include <ApplicationController.h>
 #include <models/Event.h>
 #include <models/StorageController.h>
+#include <widgets/weekview.h>
 
 using namespace std;
 using namespace std::chrono;
@@ -48,11 +49,10 @@ int main(int argc, char *argv[])
     if(netStat && AuthController::instance()->hasSession()) {
         auto u = AuthController::instance()->getLocalUser();
         cout << "Authenticated as " << u->getName() << ", token: " << AuthController::instance()->getSessionToken() << endl;
+        ApplicationController::instance()->pullData(false);
     } else {
         cout << "Authentication failed" << endl;
     }
-
-    ApplicationController::instance()->pullData(false);
 
     return QApplication::exec();
 }

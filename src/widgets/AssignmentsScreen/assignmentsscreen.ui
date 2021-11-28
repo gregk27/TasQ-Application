@@ -32,17 +32,57 @@
    <item row="0" column="0">
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>2</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="list">
       <attribute name="title">
        <string>List</string>
       </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="ListView" name="listView" native="true"/>
+       </item>
+      </layout>
      </widget>
      <widget class="QWidget" name="week">
       <attribute name="title">
        <string>Week</string>
       </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="WeekView" name="weekView" native="true"/>
+       </item>
+      </layout>
      </widget>
      <widget class="QWidget" name="month">
       <attribute name="title">
@@ -99,6 +139,18 @@
   </layout>
  </widget>
  <customwidgets>
+  <customwidget>
+   <class>ListView</class>
+   <extends>QWidget</extends>
+   <header location="global">widgets/listview.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>WeekView</class>
+   <extends>QWidget</extends>
+   <header location="global">widgets/weekview.h</header>
+   <container>1</container>
+  </customwidget>
   <customwidget>
    <class>MonthView</class>
    <extends>QWidget</extends>

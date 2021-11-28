@@ -45,7 +45,7 @@ private:
     inline std::unordered_map<uuid, T*> *getMap() { throw std::runtime_error("Type not supported"); }
 
     template<typename T>
-    inline void emitChange() { };
+    inline void emitChange() { throw std::runtime_error("Type not supported"); };
 
     /**
      * Insert a new model instance into a map, or update the existing one in-place
@@ -86,21 +86,21 @@ public:
 
     template<class T>
     void addInstance(T *i){
-        getMap<T>()->insert(make_pair(i->getId(), i));
         // If i is a netmodel, then do appropriate handling
         if(static_cast<NetModel*>(i)){
-            APIController::instance()->add<T>(*i);
+            *i = *APIController::instance()->add<T>(*i);
         }
+        getMap<T>()->insert({i->getId(), i});
         emitChange<T>();
         // TODO: Update local storage
     }
     template<class T>
     void modifyInstance(T *i){
-        getMap<T>()->operator[](i->getId()) = *i;
         // If i is a netmodel, then do appropriate handling
         if(static_cast<NetModel*>(i)){
-            APIController::instance()->modify<T>(*i);
+            *i = *APIController::instance()->modify<T>(*i);
         }
+        *(getMap<T>()->operator[](i->getId())) = *i;
         emitChange<T>();
         // TODO: Update local storage
     }
