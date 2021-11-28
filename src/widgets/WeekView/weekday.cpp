@@ -13,7 +13,8 @@
 WeekDay::WeekDay(QWidget *parent) :
         QFrame(parent), ui(new Ui::WeekDay) {
     ui->setupUi(this);
-
+    setFrameShape(QFrame::Box);
+    setFrameShadow(QFrame::Sunken);
     ui->events->setFixedHeight(blockHeight * (endTime-startTime)*blocksPerHour);
     clear();
 }
@@ -46,6 +47,8 @@ void WeekDay::addEvent(models::Event *e) {
     layout->addWidget(new QLabel(e->getName()));
     layout->addWidget(new QLabel(time.toString("h:mm AP")));
 //    layout->addWidget(new QLabel(e->getCourse()->getCode()));
+
+    frame->setToolTip(e->getCourse()->getCode() + "\n" + e->getName() + "\n" + e->getType().toString() + "\n" + e->getQDatetime().toString());
 
     ui->eventLayout->addWidget(frame, row, 0, 4, 1);
 }
