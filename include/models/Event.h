@@ -91,6 +91,10 @@ namespace models {
          * Get the event's start date/time
          */
         unsigned long long getDatetime();
+        /**
+         * Get the event's QDateTime
+         */
+         inline QDateTime getQDatetime() { return QDateTime::fromSecsSinceEpoch(getDatetime()); }
 
         /**
          * Set the event's start date/time, will be reflected in databases

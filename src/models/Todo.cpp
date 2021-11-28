@@ -8,10 +8,10 @@ using namespace std;
 using namespace models;
 
 
-Todo::Todo(QJsonValue &json):
+Todo::Todo(QJsonValue json):
     NetModel(json["id"].toString()) {
     name = json["name"].toString();
-    completed = json["completed"].toBool();
+    completed = (bool) json["completed"].toInt() == 1 || json["completed"].toBool();
 }
 
 QString Todo::getName() {
@@ -47,6 +47,6 @@ QString Todo::getURL(Action a) {
 map<QString, QString> *Todo::getBody(Action a) {
     return new map<QString, QString>{
             {"name", name},
-            {"completed0", QString::fromStdString(to_string(completed))}
+            {"completed", QString::fromStdString(to_string(completed))}
     };
 }

@@ -13,6 +13,7 @@
 #include <Qstring>
 #include <models/NetModel.h>
 #include <iostream>
+#include <mutex>
 
 
 /**
@@ -25,6 +26,9 @@ private:
 
     /** Curl handle used for networking */
     CURL *curl = nullptr;
+
+    /** Mutex to ensure only one request happens at once*/
+    std::mutex mutex;
 
     NetController();
     ~NetController();

@@ -56,9 +56,9 @@ set(PROJECT_WIDGETS
         include/widgets/scheduleweekview.h
         src/widgets/ScheduleWeekView/scheduleweekview.cpp
         src/widgets/ScheduleWeekView/scheduleweekview.ui
-        include/widgets/schedulelistview.h
-        src/widgets/ScheduleListView/schedulelistview.cpp
-        src/widgets/ScheduleListView/schedulelistview.ui
+        include/widgets/listview.h
+        src/widgets/ListView/listview.cpp
+        src/widgets/ListView/listview.ui
         include/widgets/monthcalendar.h
         src/widgets/monthcalendar/monthcalendar.cpp 
         src/widgets/monthcalendar/monthcalendar.ui 
@@ -75,7 +75,7 @@ set(PROJECT_WIDGETS
         src/widgets/login_page/registerdialog.cpp
         src/widgets/login_page/registerdialog.ui
         include/widgets/registerdialog.h
-        src/widgets/AddRemoveClass/addremoveclass.cpp include/widgets/addremoveclass.h src/widgets/AddRemoveClass/addremoveclass.ui)
+        src/widgets/CourseMod/AddRemoveClass/addremoveclass.cpp include/widgets/coursemod/addremoveclass.h src/widgets/CourseMod/AddRemoveClass/addremoveclass.ui src/widgets/CourseMod/CreateCourseDialog/createcoursedialog.cpp include/widgets/coursemod/createcoursedialog.h src/widgets/CourseMod/CreateCourseDialog/createcoursedialog.ui src/widgets/CourseMod/EditCourseDialog/editcoursedialog.cpp include/widgets/coursemod/editcoursedialog.h src/widgets/CourseMod/EditCourseDialog/editcoursedialog.ui src/widgets/CourseMod/EditEventDialog/editeventdialog.cpp include/widgets/coursemod/editeventdialog.h src/widgets/CourseMod/EditEventDialog/editeventdialog.ui src/widgets/WeekView/weekview.cpp include/widgets/weekview.h src/widgets/WeekView/weekview.ui src/widgets/WeekView/weekday.cpp include/widgets/weekday.h src/widgets/WeekView/weekday.ui src/widgets/ScrollWidget/scrollwidget.cpp include/widgets/scrollwidget.h src/widgets/ScrollWidget/scrollwidget.ui)
 
 set(PROJECT_BACKEND
         src/models/User.cpp include/models/User.h

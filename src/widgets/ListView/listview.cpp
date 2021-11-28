@@ -1,77 +1,71 @@
-#include <widgets/schedulelistview.h>
+#include <widgets/listview.h>
 #include <QLabel>
 #include <QTimeZone>
 #include <models/Event.h>
 #include <utils.h>
-#include <iostream>
-#include "ui_schedulelistview.h"
+#include "ui_listview.h"
+#include <ApplicationController.h>
 
 using namespace std;
 
-ScheduleListView::ScheduleListView(QWidget *parent) :
+ListView::ListView(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::ScheduleListView)
+    ui(new Ui::ListView)
 {
     ui->setupUi(this);
-    std::vector<models::Event> e;
-    generateUI(&e);
 }
 
-ScheduleListView::~ScheduleListView()
+ListView::~ListView()
 {
     delete ui;
 }
 
-void ScheduleListView::generateUI(vector<models::Event> *events){
-    auto layout = ui->rootLayout;
-    QLayoutItem *child;
-    while ((child = layout->takeAt(0)) != 0) {
-        delete child;
-    }
-
-    for(auto e : *events){
-        auto dateTime = QDateTime::fromSecsSinceEpoch(e.getDatetime(), QTimeZone::systemTimeZone());
-        auto date = dateTime.date();
-        QFrame *frame = nullptr;
-        int i=0;
-        for(auto d : ui->root->children()){
-            QFrame *f;
-            if((f = qobject_cast<QFrame*>(d))){
-                if(f->property("date").toDate() == date){
-                    frame = f;
-                    break;
-                } else if (f->property("date").toDate() > date){
-                    break;
-                }
-                i++;
-            }
-        }
-
-
-        if(!frame){
-            frame = createFrameForDate(date);
-            layout->insertWidget(i, frame);
-        }
-
-        i=0;
-        for(auto d : frame->findChild<QFrame*>("events")->children()){
-            QFrame *f;
-            if((f = qobject_cast<QFrame*>(d))){
-                if (f->property("datetime").toDateTime() > dateTime){
-                    break;
-                }
-                i++;
-            }
-        }
-
-        auto event = createFrameForEvent(&e);
-        cout << e.getName().toStdString() << endl;
-        cout << i << endl;
-        qobject_cast<QVBoxLayout*>(frame->findChild<QFrame*>("events")->layout())->insertWidget(i, event);
-    }
+void ListView::clear(){
+    if(ui->rootLayout) utils::clearLayout(ui->rootLayout);
+    ui->rootLayout->addItem(new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding));
 }
 
-QFrame *ScheduleListView::createFrameForDate(QDate date){
+void ListView::addEvent(Event *e){
+    auto layout = ui->rootLayout;
+    auto dateTime = QDateTime::fromSecsSinceEpoch(e->getDatetime(), QTimeZone::systemTimeZone());
+    auto date = dateTime.date();
+    QFrame *frame = nullptr;
+    int i=0;
+    for(auto d : ui->root->children()){
+        QFrame *f;
+        if((f = qobject_cast<QFrame*>(d))){
+            if(f->property("date").toDate() == date){
+                frame = f;
+                break;
+            } else if (f->property("date").toDate() > date){
+                break;
+            }
+            i++;
+        }
+    }
+
+
+    if(!frame){
+        frame = createFrameForDate(date);
+        layout->insertWidget(i, frame);
+    }
+
+    i=0;
+    for(auto d : frame->findChild<QFrame*>("events")->children()){
+        QFrame *f;
+        if((f = qobject_cast<QFrame*>(d))){
+            if (f->property("datetime").toDateTime() > dateTime){
+                break;
+            }
+            i++;
+        }
+    }
+
+    auto event = createFrameForEvent(e);
+    qobject_cast<QVBoxLayout*>(frame->findChild<QFrame*>("events")->layout())->insertWidget(i, event);
+}
+
+QFrame *ListView::createFrameForDate(QDate date){
     auto dayFrame = new QFrame(ui->root);
     dayFrame->setObjectName(date.toString());
     dayFrame->setFrameShape(QFrame::Box);
@@ -111,7 +105,7 @@ QFrame *ScheduleListView::createFrameForDate(QDate date){
     return dayFrame;
 }
 
-QFrame *ScheduleListView::createFrameForEvent(models::Event *e) {
+QFrame *ListView::createFrameForEvent(models::Event *e) {
     auto dateTime = QDateTime::fromSecsSinceEpoch(e->getDatetime(), QTimeZone::systemTimeZone());
     auto eventFrame = new QFrame();
     eventFrame->setFrameShape(QFrame::Box);
