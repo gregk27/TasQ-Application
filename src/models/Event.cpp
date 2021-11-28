@@ -105,7 +105,7 @@ QString Event::getURL(Action a)  {
 }
 
 map<QString, QString> *Event::getBody(Action a) {
-    return new map<QString, QString>{
+    auto m = new map<QString, QString>{
             {"id", id},
             {"course", courseID},
             {"name", name},
@@ -115,4 +115,8 @@ map<QString, QString> *Event::getBody(Action a) {
             {"weekly", QString::fromStdString(to_string(weekly))},
             {"user", AuthController::instance()->getLocalUIDOptional().value_or("")}
     };
+    if(endDate.has_value()){
+        m->operator[]("endDate") = QString::fromStdString(to_string(endDate.value()));
+    }
+    return m;
 }
