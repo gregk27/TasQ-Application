@@ -28,11 +28,10 @@ EditCourseDialog::~EditCourseDialog() {
 }
 
 void EditCourseDialog::populateEvents(){
-    utils::clearLayout(ui->eventLayout);
     auto events = c->getEvents();
-    ui->eventLayout->setSpacing(0);
+    ui->events->clearContent();
     for(auto e : events){
-        QFrame *frame = new QFrame(ui->scrollArea);
+        QFrame *frame = new QFrame();
         frame->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
         frame->setFixedHeight(25);
         auto layout = new QHBoxLayout();
@@ -73,9 +72,8 @@ void EditCourseDialog::populateEvents(){
         });
         layout->addWidget(btn);
 
-        ui->eventLayout->addWidget(frame);
+        ui->events->addWidget(frame);
     }
-    ui->eventLayout->addItem(new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding));
 }
 
 void EditCourseDialog::createEvent(){
