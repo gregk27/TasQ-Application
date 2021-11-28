@@ -33,7 +33,7 @@ private:
     NetController();
     ~NetController();
 
-    QString request(QString &url, std::map<QString, QString> *body=nullptr);
+    QString request(QString &url, std::map<QString, QString> *body=nullptr, int timeout=0);
 public:
     /**
      * Get singleton instance
@@ -65,18 +65,20 @@ public:
     /**
      * Execute an HTTP or HTTPS GET request
      * @param url The URL to request
+     * @param timeout Optional request timeout, in ms
      * @return string with response
      */
-    QString get(QString url);
+    QString get(QString url, int timeout=0);
 
     /**
      * Execute an HTTP or HTTPS GET request and get JSON response
      * @param url The URL to request
+     * @param timeout Optional request timeout, in ms
      * @return json object generated from response
      * @see net::get(std::string)
      */
-    inline QJsonDocument getJSON(QString url){
-        return QJsonDocument::fromJson(get(url).toUtf8());
+    inline QJsonDocument getJSON(QString url, int timeout=0){
+        return QJsonDocument::fromJson(get(url, timeout).toUtf8());
     }
 
     /**

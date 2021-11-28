@@ -1,6 +1,7 @@
 #include <widgets/MainWindow.h>
 
 #include <QApplication>
+#include <QMessageBox>
 #include <net/net.h>
 #include <string>
 
@@ -38,22 +39,29 @@ int main(int argc, char *argv[])
     QCoreApplication::setApplicationName("tasq");
 
     QApplication a(argc, argv);
-    MainWindow window(nullptr);
     if(!getenv("theme") || strcmp(getenv("theme"), "light") != 0)
         setStyle(a);
-    window.show();
 
     StorageController::instance();
 
     bool netStat = APIController::instance()->getStatus();
-    if(netStat && AuthController::instance()->hasSession()) {
+    if(!netStat) {
+        cout << "API Connection Failed" << endl;
+        // If there's no API connection, can't do anything
+        QMessageBox::critical(nullptr, "Connection Error", "Unable to connect to server: "+APIRequest::BASE_URL+"\nCannot start application");
+        QApplication::exit(1);
+        return 1;
+    }
+
+    MainWindow window(nullptr);
+    if(AuthController::instance()->hasSession()) {
         auto u = AuthController::instance()->getLocalUser();
         cout << "Authenticated as " << u->getName() << ", token: " << AuthController::instance()->getSessionToken() << endl;
         ApplicationController::instance()->pullData(false);
     } else {
         cout << "Authentication failed" << endl;
     }
-
+    window.show();
     return QApplication::exec();
 }
 
