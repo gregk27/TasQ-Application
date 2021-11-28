@@ -7,7 +7,13 @@
 #include <net/auth.h>
 
 using namespace std;
-const QString APIRequest::BASE_URL = std::getenv("API_URL");
+
+QString getAPIUrl(){
+    const char* url = getenv("API_URL");
+    return url ? url : "https://tasq.gregk.ca";
+}
+
+const QString APIRequest::BASE_URL = getAPIUrl();
 
 QString APIRequest::buildURL() {
     stringstream ss;
