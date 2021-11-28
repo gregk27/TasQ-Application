@@ -24,16 +24,18 @@ EditEventDialog::EditEventDialog(models::Course *c, models::Event *e, QWidget *p
     ui->typeInput->addItem(models::enums::EventType::TEST.toString(), models::enums::EventType::TEST.toDB());
 
     if(e != nullptr){
+        auto dateTime = e->getQDatetime();
         ui->title->setText(c->getCode()+": "+e->getName());
         ui->nameInput->setText(e->getName());
         ui->weightInput->setValue(e->getWeight());
-        ui->startInput->setDateTime(e->getQDatetime());
+        ui->startInput->setTime(dateTime.time());
         ui->typeInput->setCurrentText(e->getType().toString());
         if(e->getEndDate().has_value()){
-            ui->endInput->setDateTime(QDateTime::fromSecsSinceEpoch(e->getEndDate().value()));
+            ui->endInput->setTime(QDateTime::fromSecsSinceEpoch(e->getEndDate().value()).time());
         } else {
-            ui->endInput->setDateTime(e->getQDatetime());
+            ui->endInput->setTime(dateTime.time());
         }
+        ui->dateInput->setSelectedDate(dateTime.date());
         ui->weeklyInput->setChecked(e->getWeekly());
         ui->actionButton->setText("Update");
     } else {
@@ -52,9 +54,9 @@ void EditEventDialog::saveEvent() {
     js["name"] = ui->nameInput->text();
     js["type"] = ui->typeInput->currentData().toString();
     js["weight"] = ui->weightInput->value();
-    js["datetime"] = ui->startInput->dateTime().toSecsSinceEpoch();
-    if(ui->startInput->dateTime() != ui->endInput->dateTime()){
-        js["endDate"] = ui->endInput->dateTime().toSecsSinceEpoch();
+    js["datetime"] = QDateTime(ui->dateInput->selectedDate(), ui->startInput->time()).toSecsSinceEpoch();
+    if(ui->startInput->time() != ui->endInput->time()){
+        js["endDate"] = QDateTime(ui->dateInput->selectedDate(), ui->endInput->time()).toSecsSinceEpoch();
     }
     js["weekly"] = ui->weeklyInput->isChecked();
     if(event){
@@ -64,4 +66,21 @@ void EditEventDialog::saveEvent() {
         ApplicationController::instance()->addInstance<Event>(new Event(js));
     }
     close();
+}
+
+void EditEventDialog::startChanged(QTime t) {
+    if(ui->endInput->property("delta").isValid()){
+        ui->endInput->setTime(t.addMSecs(ui->endInput->property("delta").toInt()));
+    } else {
+        ui->endInput->setTime(t);
+    }
+}
+
+void EditEventDialog::endChanged(QTime t) {
+    if(t < ui->startInput->time()){
+        ui->endInput->setTime(ui->startInput->time());
+        ui->endInput->setProperty("delta", 0);
+        return;
+    }
+    ui->endInput->setProperty("delta", t.msecsSinceStartOfDay() - ui->startInput->time().msecsSinceStartOfDay());
 }

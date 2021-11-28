@@ -29,6 +29,8 @@ private:
 
 public slots:
     void saveEvent();
+    void startChanged(QTime t);
+    void endChanged(QTime t);
 };
 
 
