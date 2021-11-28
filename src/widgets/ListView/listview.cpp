@@ -124,17 +124,13 @@ QFrame *ListView::createFrameForEvent(models::Event *e) {
     eventTime->setContentsMargins(0, 2, 0, 2);
     eventFrame->layout()->addWidget(eventTime);
 
-    int *colour = utils::getColourForCourse(e->getCourseId());
-
     auto colourBox = new QFrame();
     colourBox->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
     colourBox->setFrameShape(QFrame::NoFrame);
     colourBox->setFrameShadow(QFrame::Plain);
-    colourBox->setStyleSheet(QString("background-color: rgb(%1, %2, %3);").arg(colour[0]).arg(colour[1]).arg(colour[2]));
+    colourBox->setStyleSheet(utils::getColourForCourse(e->getCourseId()));
     colourBox->setMinimumSize(20, 0);
     eventFrame->layout()->addWidget(colourBox);
-
-    delete[] colour;
 
     auto eventInfo = new QLabel(e->getCourseId()+"\n"+e->getName());
     eventInfo->setContentsMargins(15, 2, 0, 2);
