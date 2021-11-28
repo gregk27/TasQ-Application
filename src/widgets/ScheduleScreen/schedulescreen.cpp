@@ -21,6 +21,7 @@ ScheduleScreen::~ScheduleScreen()
 void ScheduleScreen::onEventsChanged() {
     auto events = ApplicationController::instance()->getInstances<Event>();
     ui->list_view->clear();
+    ui->week_view->clear();
     auto currDatetime = QDateTime::currentDateTime();
     auto currDate = currDatetime.date();
     auto termEndDate = QDate(2021, 12, 3);

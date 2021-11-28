@@ -24,6 +24,27 @@ ApplicationController::ApplicationController() {
     QTimer *timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &ApplicationController::update);
     timer->start(UPDATE_INTERVAL);
+
+    // Update events and users whenever courses change
+    connect(this, &ApplicationController::coursesChanged, [=] {
+        std::thread t([=]{
+            for(auto [cId, c] : courses){
+                // Pull events for the user's courses
+                auto es = *net::getEvents(*c);
+                for(const auto &e : es){
+                    insertOrUpdate<Event>( new Event(e));
+                }
+                // Get owners of the courses
+                auto oId = c->getOwnerId();
+                auto user = net::getUser(oId);
+                // Create a new user instance since the shared_ptr will delete it
+                insertOrUpdate<User>(new User(*user));
+            }
+            emitChange<Event>();
+            emitChange<User>();
+        });
+        t.detach();
+    });
 }
 
 ApplicationController::~ApplicationController(){
@@ -49,17 +70,8 @@ bool ApplicationController::pullData(bool async) {
         for(const auto& c : *subs){
             insertOrUpdate<Course>(new Course(c));
         }
-        // Pull events for the user's courses
-        for(auto [cId, c] : courses){
-            auto es = *net::getEvents(*c);
-            for(const auto &e : es){
-                insertOrUpdate<Event>( new Event(e));
-            }
-            auto oId = c->getOwnerId();
-            auto user = net::getUser(oId);
-            // Create a new user instance since the shared_ptr will delete it
-            insertOrUpdate<User>(new User(*user));
-        }
+        emit coursesChanged();
+
         // Pull user's reminders
         auto rs = *net::getReminders();
         for (const auto &r: rs) {
@@ -71,11 +83,8 @@ bool ApplicationController::pullData(bool async) {
             insertOrUpdate<Todo>(new Todo(t));
         }
 
-        emit coursesChanged();
-        emit eventsChanged();
         emit remindersChanged();
         emit todosChanged();
-        emit usersChanged();
     });
 
     if(!async) t.join();
