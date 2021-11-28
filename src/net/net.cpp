@@ -48,6 +48,7 @@ static size_t WriteMemoryCallback(void *contents, size_t size, size_t nmemb, voi
 NetController *NetController::_instance = nullptr;
 
 NetController::NetController() {
+    cout << "Global init" << endl;
     curl_global_init(CURL_GLOBAL_ALL);
     curl = curl_easy_init();
 
@@ -72,6 +73,7 @@ NetController::~NetController() {
  * @return QString with response
  */
 QString NetController::request(QString &url, map<QString, QString> *body){
+    lock_guard<std::mutex> guard(mutex);
     // Create a memory chunk to use
     MemoryStruct chunk;
     chunk.memory = (char*)malloc(1);
@@ -108,7 +110,6 @@ QString NetController::request(QString &url, map<QString, QString> *body){
     }
 
     CURLcode res = curl_easy_perform(curl);
-
     // If the code is anything but okay, throw an exception
     if(res != CURLE_OK){
         throw NetworkException(url, res);

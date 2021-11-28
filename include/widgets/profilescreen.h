@@ -2,6 +2,8 @@
 #define PROFILESCREEN_H
 
 #include <QWidget>
+#include <models/User.h>
+#include <QFrame>
 
 namespace Ui {
 class ProfileScreen;
@@ -17,6 +19,9 @@ public:
 
 private:
     Ui::ProfileScreen *ui;
+
+public slots:
+    void onAuthStateChanged(models::User *localUser);
 };
 
 #endif // PROFILESCREEN_H

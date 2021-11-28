@@ -22,6 +22,9 @@ private slots:
 
 private:
     Ui::RegisterDialog *ui;
+
+signals:
+    void registerUser(QString &username, QString &email, QString &password, QString &schoolId);
 };
 
 #endif // REGISTERDIALOG_H
