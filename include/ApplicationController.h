@@ -9,6 +9,7 @@
 #include <QObject>
 #include <QString>
 #include <models/Models.h>
+#include <models/Course.h>
 #include <net/api.h>
 
 using namespace models;
@@ -142,5 +143,13 @@ template<> inline void ApplicationController::emitChange<Event>() { emit eventsC
 template<> inline void ApplicationController::emitChange<Reminder>() { emit remindersChanged(); }
 template<> inline void ApplicationController::emitChange<Todo>() { emit todosChanged(); }
 template<> inline void ApplicationController::emitChange<User>() { emit usersChanged(); }
+
+// Specialisation of addInstance to subscribe to new course automatically
+template<> inline void ApplicationController::addInstance<Course>(Course *i) {
+    *i = *APIController::instance()->add<Course>(*i);
+    courses.insert({i->getId(), i});
+    subscribe(i);
+    emitChange<Course>();
+}
 
 #endif //TASQ_APPLICATION_APPLICATIONCONTROLLER_H

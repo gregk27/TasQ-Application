@@ -6,6 +6,7 @@ TabNavigator::TabNavigator(QWidget *parent) :
     ui(new Ui::TabNavigator)
 {
     ui->setupUi(this);
+    ui->date->setText(QDate::currentDate().toString());
 }
 
 TabNavigator::~TabNavigator()
