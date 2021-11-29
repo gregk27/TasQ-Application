@@ -152,3 +152,6 @@ CMakeLists.txt.*
 # QT Creator
 # --------
 *.user*
+
+# Allow icon resource file
+!TasQ.rc

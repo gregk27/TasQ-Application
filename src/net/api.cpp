@@ -102,7 +102,7 @@ APIController *APIController::instance() {
 
 bool APIController::getStatus() {
     try{
-        QString result = NetController::instance()->get(APIRequest::BASE_URL + "/status", 500);
+        QString result = NetController::instance()->get(APIRequest::BASE_URL + "/status", 1000);
         return result == R"({"status": "Alive"})";
     } catch (NetworkException &e) {
         return false;

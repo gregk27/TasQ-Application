@@ -90,11 +90,14 @@ set(PROJECT_BACKEND
         src/net/auth.cpp include/net/auth.h src/net/schools.cpp include/net/schools.h src/net/endpoints.cpp src/net/subscriptions.cpp include/models/NetModel.h src/models/NetModel.cpp include/net/endpoints.h include/net/subscriptions.h include/net/api.h src/net/api.cpp
         include/utils.h src/utils.cpp src/models/StorageController.cpp include/models/StorageController.h)
 
+set(APP_ICON_RESOURCE_WINDOWS "${PROJECT_SOURCE_DIR}/TasQ.rc")
+
 add_executable(TasQ-Application
         src/main.cpp
         ${PROJECT_WIDGETS}
         ${PROJECT_BACKEND}
-        src/ApplicationController.cpp include/ApplicationController.h)
+        src/ApplicationController.cpp include/ApplicationController.h
+        ${APP_ICON_RESOURCE_WINDOWS})
 
 
 target_link_libraries(TasQ-Application
