@@ -25,44 +25,50 @@ void ListView::clear(){
     ui->rootLayout->addItem(new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding));
 }
 
+#include <iostream>
+
 void ListView::addEvent(Event *e){
-    auto layout = ui->rootLayout;
+    QBoxLayout *layout = ui->rootLayout;
     auto dateTime = QDateTime::fromSecsSinceEpoch(e->getDatetime(), QTimeZone::systemTimeZone());
     auto date = dateTime.date();
     QFrame *frame = nullptr;
-    int i=0;
-    for(auto d : ui->root->children()){
-        QFrame *f;
-        if((f = qobject_cast<QFrame*>(d))){
-            if(f->property("date").toDate() == date){
-                frame = f;
+    int insertPos = 0;
+
+    QLayoutItem *item;
+    for(int i=0; i<layout->count(); i++) {
+        item = layout->itemAt(i);
+        if(item->widget()){
+            if(item->widget()->property("date").toDate() == date){
+                frame = static_cast<QFrame*>(item->widget());
                 break;
-            } else if (f->property("date").toDate() > date){
+            } else if (item->widget()->property("date").toDate() > date){
                 break;
             }
-            i++;
+            insertPos ++;
         }
     }
 
 
     if(!frame){
+        cout << "Creating frame for date " << date.toString().toStdString() << endl;
         frame = createFrameForDate(date);
-        layout->insertWidget(i, frame);
+        layout->insertWidget(insertPos, frame);
     }
 
-    i=0;
-    for(auto d : frame->findChild<QFrame*>("events")->children()){
-        QFrame *f;
-        if((f = qobject_cast<QFrame*>(d))){
-            if (f->property("datetime").toDateTime() > dateTime){
+    layout = (QBoxLayout *) frame->findChild<QFrame*>("events")->layout();
+    insertPos = 0;
+    for(int i=0; i<layout->count(); i++) {
+        item = layout->itemAt(i);
+        if(item->widget()){
+            if(item->widget()->property("datetime").toDateTime() > dateTime){
                 break;
             }
-            i++;
+            insertPos ++;
         }
     }
 
     auto event = createFrameForEvent(e);
-    qobject_cast<QVBoxLayout*>(frame->findChild<QFrame*>("events")->layout())->insertWidget(i, event);
+    qobject_cast<QVBoxLayout*>(frame->findChild<QFrame*>("events")->layout())->insertWidget(insertPos, event);
 }
 
 QFrame *ListView::createFrameForDate(QDate date){
