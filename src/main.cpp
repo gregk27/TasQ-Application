@@ -39,8 +39,8 @@ int main(int argc, char *argv[])
     QCoreApplication::setApplicationName("tasq");
 
     QApplication a(argc, argv);
-    if(!getenv("theme") || strcmp(getenv("theme"), "light") != 0)
-        setStyle(a);
+//    if(!getenv("theme") || strcmp(getenv("theme"), "light") != 0)
+//        setStyle(a);
 
     StorageController::instance();
 

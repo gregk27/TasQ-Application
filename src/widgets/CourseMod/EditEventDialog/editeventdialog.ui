@@ -258,6 +258,9 @@
   <tabstop>weightInput</tabstop>
   <tabstop>typeInput</tabstop>
   <tabstop>startInput</tabstop>
+  <tabstop>endInput</tabstop>
+  <tabstop>dateInput</tabstop>
+  <tabstop>weeklyInput</tabstop>
   <tabstop>pushButton</tabstop>
   <tabstop>actionButton</tabstop>
  </tabstops>
