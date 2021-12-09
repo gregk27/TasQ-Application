@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Wooden Heads : Gregory Kelly</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Wooden Heads</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Wooden-Heads-Home_113344682.html">Wooden Heads Home</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Dev-Diaries_127729694.html">Dev Diaries</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Wooden Heads : Gregory Kelly
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Gregory Kelly</span>, last modified on Dec 01, 2021
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <h1 id="GregoryKelly-PreliminaryPlanning">Preliminary Planning</h1><h2 id="GregoryKelly-2021-10-04">2021-10-04</h2><p>Idea finalization meeting</p><ul><li>Agree to pursue task management system</li><li>Explain rough tech stack required for implementation</li><li>Agree to research libraries for database and API communication</li><li>Agree to work on Functional Requirements for RAD</li></ul><p><strong>TODO:</strong> Research libraries</p><h2 id="GregoryKelly-2021-10-05">2021-10-05</h2><p>Research libraries</p><ul><li><a href="https://github.com/jpbarrette/curlpp" class="external-link" rel="nofollow">cURLpp</a> for API requests<ul><li>Depends on <a href="https://github.com/curl/curl" class="external-link" rel="nofollow">Curl</a></li></ul></li><li><a href="https://www.sqlite.org/" class="external-link" rel="nofollow">SQLite3</a> for local cache</li><li><a href="https://github.com/nlohmann/json" class="external-link" rel="nofollow">nlohmann/json</a> for parsing API responses</li></ul><p>Configure test project for libraries (see <a href="http://jira.caslab.queensu.ca:7990/projects/WH/repos/lib-testing/browse" class="external-link" rel="nofollow">Lib Testing repo</a>)</p><ul><li>Build libraries from source</li><li>Sort executables, headers, and DLLs into project folders</li><li>Configure CMakeLists.txt to detect and link libraries</li><li>Add executables folder to path when running application</li></ul><p>RAD Work meeting</p><ul><li>Report findings from researching libraries to confirm feasibility of idea</li><li>Plan format of Functional Requirements section of RAD</li><li>Begin working on RAD</li></ul><h2 id="GregoryKelly-2021-19-06">2021-19-06</h2><p>Work on RAD</p><ul><li>Fill out rough details for assigned functional requirements<ul><li>Assignments/Events</li><li>Filtering &amp; Sorting</li><li>Profiles/Crowdsourcing</li></ul></li></ul><p><strong>TODO:</strong> Determine configuration for libraries on Mac</p><h2 id="GregoryKelly-2021-10-08">2021-10-08</h2><p>RAD finalization meeting</p><ul><li>Reformat RAD sections to focus more on user stories</li><li>Agree to create issues in Jira for pre-dev and first dev sprints</li></ul><p><strong>TODO:</strong> Create issues in Jira</p><h2 id="GregoryKelly-2021-10-10">2021-10-10</h2><p>Create Jira issues</p><ul><li>Create issues related to preparing for development and beginning project development</li><li>Self-assign backend and database related issues</li><li>Load issues into pre-dev and development sprints</li><li>Request team approval before beginning sprints</li></ul><p><strong>TODO:</strong> Wait for team approval before beginning sprints</p><h1 id="GregoryKelly-Pre-Dev">Pre-Dev</h1><h2 id="GregoryKelly-2021-10-12">2021-10-12</h2><p>Receive approval from project manager to begin sprints</p><p>Familiarize with creating database (
+<span class="jira-issue resolved" data-jira-key="WH-8" >
+                    <a href="http://jira.caslab.queensu.ca:9080/browse/WH-8?src=confmacro" class="jira-issue-key"><img class="icon"
+                                                                                      src="http://jira.caslab.queensu.ca:9080/images/icons/issuetypes/story.svg"/>WH-8</a>
+                            -
+            <span class="summary">Familiarize with making a Database</span>
+                                                <span class="aui-lozenge aui-lozenge-subtle             aui-lozenge-success
+     jira-macro-single-issue-export-pdf">Done</span>
+                </span>
+)</p><ul><li>Due to significant experience working with MySQL databases, no work needed</li></ul><p>Begin deriving data models (
+<span class="jira-issue resolved" data-jira-key="WH-9" >
+                    <a href="http://jira.caslab.queensu.ca:9080/browse/WH-9?src=confmacro" class="jira-issue-key"><img class="icon"
+                                                                                      src="http://jira.caslab.queensu.ca:9080/images/icons/issuetypes/story.svg"/>WH-9</a>
+                            -
+            <span class="summary">Derive required data models</span>
+                                                <span class="aui-lozenge aui-lozenge-subtle             aui-lozenge-success
+     jira-macro-single-issue-export-pdf">Done</span>
+                </span>
+)</p><ul><li>Create <a href="http://confluence.caslab.queensu.ca:8090/display/WH/Data+Models" rel="nofollow">documentation page</a> in confluence</li><li>Use modeled outlined in RAD</li><li>Document model properties<ul><li>Brief description of models</li><li>SQL Table name</li><li>SQL Table columns</li></ul></li></ul><h2 id="GregoryKelly-2021-10-13">2021-10-13</h2><p>Continue deriving data models (
+<span class="jira-issue resolved" data-jira-key="WH-9" >
+                    <a href="http://jira.caslab.queensu.ca:9080/browse/WH-9?src=confmacro" class="jira-issue-key"><img class="icon"
+                                                                                      src="http://jira.caslab.queensu.ca:9080/images/icons/issuetypes/story.svg"/>WH-9</a>
+                            -
+            <span class="summary">Derive required data models</span>
+                                                <span class="aui-lozenge aui-lozenge-subtle             aui-lozenge-success
+     jira-macro-single-issue-export-pdf">Done</span>
+                </span>
+)</p><ul><li>Update models to better meet requirements</li><li>Create SQL commands to create tables for models</li></ul><p>Derive API structure (
+<span class="jira-issue resolved" data-jira-key="WH-14" >
+                    <a href="http://jira.caslab.queensu.ca:9080/browse/WH-14?src=confmacro" class="jira-issue-key"><img class="icon"
+                                                                                      src="http://jira.caslab.queensu.ca:9080/images/icons/issuetypes/story.svg"/>WH-14</a>
+                            -
+            <span class="summary">Derive API structure</span>
+                                                <span class="aui-lozenge aui-lozenge-subtle             aui-lozenge-success
+     jira-macro-single-issue-export-pdf">Done</span>
+                </span>
+)</p><ul><li>Create <a href="http://confluence.caslab.queensu.ca:8090/display/WH/API+Structure" rel="nofollow">documentation page</a> in confluence</li><li>Create endpoints for setting and getting data from models</li><li>Document endpoint properties<ul><li>Path</li><li>Brief description</li><li>Parameters (path, request body, and query string)</li><li>Response body (JSON)</li></ul></li></ul><h2 id="GregoryKelly-2021-10-14">2021-10-14</h2><p>Determine application project structure (
+<span class="jira-issue resolved" data-jira-key="WH-20" >
+                    <a href="http://jira.caslab.queensu.ca:9080/browse/WH-20?src=confmacro" class="jira-issue-key"><img class="icon"
+                                                                                      src="http://jira.caslab.queensu.ca:9080/images/icons/issuetypes/story.svg"/>WH-20</a>
+                            -
+            <span class="summary">Determine frontend project structure</span>
+                                                <span class="aui-lozenge aui-lozenge-subtle             aui-lozenge-success
+     jira-macro-single-issue-export-pdf">Done</span>
+                </span>
+)</p><ul><li>Create <a href="http://confluence.caslab.queensu.ca:8090/display/WH/Application+Project+Structure" rel="nofollow">documentation page</a> in confluence</li><li>Learn Qt project structure</li><li>Split code across 3 folders<ul><li>net/ for code to interface with backend API</li><li>models/ for model code and middleware communicate between frontend and local storage/backend</li><li>widgets/ for Qt models</li></ul></li><li>lib/ folder for library files based on preliminary research</li></ul><h2 id="GregoryKelly-2021-10-15(Morning)">2021-10-15 (Morning)</h2><p>Create backend repository (
+<span class="jira-issue resolved" data-jira-key="WH-12" >
+                    <a href="http://jira.caslab.queensu.ca:9080/browse/WH-12?src=confmacro" class="jira-issue-key"><img class="icon"
+                                                                                      src="http://jira.caslab.queensu.ca:9080/secure/viewavatar?size=xsmall&amp;avatarId=10318&amp;avatarType=issuetype"/>WH-12</a>
+                            -
+            <span class="summary">Create backend repository in bitbucket</span>
+                                                <span class="aui-lozenge aui-lozenge-subtle             aui-lozenge-success
+     jira-macro-single-issue-export-pdf">Done</span>
+                </span>
+)</p><ul><li>Create <a href="http://jira.caslab.queensu.ca:7990/projects/WH/repos/tasq-backend" class="external-link" rel="nofollow">repo in bitbucket</a></li><li>Initialize project in JetBrains PHPStorm</li><li>Create Docker and <a href="https://github.com/gregk27/DDeploy" class="external-link" rel="nofollow">DDeploy</a> configurations for running/deploying backend application</li></ul><p>Create frontend repository (
+<span class="jira-issue resolved" data-jira-key="WH-13" >
+                    <a href="http://jira.caslab.queensu.ca:9080/browse/WH-13?src=confmacro" class="jira-issue-key"><img class="icon"
+                                                                                      src="http://jira.caslab.queensu.ca:9080/secure/viewavatar?size=xsmall&amp;avatarId=10318&amp;avatarType=issuetype"/>WH-13</a>
+                            -
+            <span class="summary">Create frontend repository in bitbucket</span>
+                                                <span class="aui-lozenge aui-lozenge-subtle             aui-lozenge-success
+     jira-macro-single-issue-export-pdf">Done</span>
+                </span>
+)</p><ul><li>Create <a href="http://jira.caslab.queensu.ca:7990/projects/WH/repos/tasq-application" class="external-link" rel="nofollow">repo in bitbucket</a></li><li>Initialize Qt6 Widgets project in JetBrains CLion</li><li>Format project structure based on earlier planning</li><li>Create basic sample window widget</li></ul><p>Research testing frameworks (
+<span class="jira-issue resolved" data-jira-key="WH-19" >
+                    <a href="http://jira.caslab.queensu.ca:9080/browse/WH-19?src=confmacro" class="jira-issue-key"><img class="icon"
+                                                                                      src="http://jira.caslab.queensu.ca:9080/images/icons/issuetypes/story.svg"/>WH-19</a>
+                            -
+            <span class="summary">Research testing frameworks</span>
+                                                <span class="aui-lozenge aui-lozenge-subtle             aui-lozenge-success
+     jira-macro-single-issue-export-pdf">Done</span>
+                </span>
+)</p><ul><li><a href="https://github.com/catchorg/Catch2" class="external-link" rel="nofollow">Catch2</a> appears to be popular header-only option</li><li>Split application repo into src/ and test/ folders</li></ul><h1 id="GregoryKelly-Development">Development</h1><h2 id="GregoryKelly-2021-10-15(Afternoon)">2021-10-15 (Afternoon)</h2><p>Create database tables (
+<span class="jira-issue resolved" data-jira-key="WH-11" >
+                    <a href="http://jira.caslab.queensu.ca:9080/browse/WH-11?src=confmacro" class="jira-issue-key"><img class="icon"
+                                                                                      src="http://jira.caslab.queensu.ca:9080/secure/viewavatar?size=xsmall&amp;avatarId=10318&amp;avatarType=issuetype"/>WH-11</a>
+                            -
+            <span class="summary">Create database tables</span>
+                                                <span class="aui-lozenge aui-lozenge-subtle             aui-lozenge-success
+     jira-macro-single-issue-export-pdf">Done</span>
+                </span>
+)</p><ul><li>Build compound SQL statement from snippets in <a href="Data-Models_125730846.html">Data Models</a> document</li><li>Make minor alterations for implementation</li></ul><p>Implement API endpoints (
+<span class="jira-issue resolved" data-jira-key="WH-15" >
+                    <a href="http://jira.caslab.queensu.ca:9080/browse/WH-15?src=confmacro" class="jira-issue-key"><img class="icon"
+                                                                                      src="http://jira.caslab.queensu.ca:9080/images/icons/issuetypes/story.svg"/>WH-15</a>
+                            -
+            <span class="summary">Implement API endpoints</span>
+                                                <span class="aui-lozenge aui-lozenge-subtle             aui-lozenge-success
+     jira-macro-single-issue-export-pdf">Done</span>
+                </span>
+)</p><ul><li>Setup basic PHP database connection and common code</li><li>Write PHP code for all <a href="http://confluence.caslab.queensu.ca:8090/display/WH/API+Structure" rel="nofollow">documented endpoints</a><ul><li>Configure routing</li><li>Validate provided parameters</li><li>Create and execute relevant database query</li><li>Send response in JSON format</li></ul></li><li>Update documentation to reflect actual implementation</li></ul><p>Deploy backend</p><ul><li>Deploy docker container to server</li><li>Configure proxy for <code>tasq.gregk.ca</code></li></ul><h2 id="GregoryKelly-2021-10-19">2021-10-19</h2><p>Implement data models in C++ (
+<span class="jira-issue resolved" data-jira-key="WH-10" >
+                    <a href="http://jira.caslab.queensu.ca:9080/browse/WH-10?src=confmacro" class="jira-issue-key"><img class="icon"
+                                                                                      src="http://jira.caslab.queensu.ca:9080/images/icons/issuetypes/story.svg"/>WH-10</a>
+                            -
+            <span class="summary">Implement data models in C++</span>
+                                                <span class="aui-lozenge aui-lozenge-subtle             aui-lozenge-success
+     jira-macro-single-issue-export-pdf">Done</span>
+                </span>
+)</p><ul><li>Create class for each model<ul><li>All members private</li><li>Setters/Getters for access and modification where applicable</li><li>No constructors, will be created from JSON responses only</li></ul></li><li>Create classes to parse, store, and output SQL Enums<ul><li>Create from SQL value</li><li>Store as integer</li><li>Output pretty-print value for use in frontend</li></ul></li></ul><p>Team meeting</p><ul><li>Report progress on backend API</li><li>Discuss project framework going forward</li><li>Agree to continue backend development for this week</li><li>Agree to create Jira issues for next sprint</li></ul><p>Create Jira issues</p><ul><li>Derive from rough work assignments at meeting, RAD, and documentation</li><li>Create some extra tasks for widgets which can be shared between pages</li></ul><p><strong>TODO:</strong> Start sprint, begin connecting application to API</p><h2 id="GregoryKelly-2021-10-20">2021-10-20</h2><p>Start Development 2 sprint</p><p>Begin experimenting with Http requests in C++ (for 
+<span class="jira-issue resolved" data-jira-key="WH-16" >
+                    <a href="http://jira.caslab.queensu.ca:9080/browse/WH-16?src=confmacro" class="jira-issue-key"><img class="icon"
+                                                                                      src="http://jira.caslab.queensu.ca:9080/images/icons/issuetypes/story.svg"/>WH-16</a>
+                            -
+            <span class="summary">Connect models in application to API</span>
+                                                <span class="aui-lozenge aui-lozenge-subtle             aui-lozenge-success
+     jira-macro-single-issue-export-pdf">Done</span>
+                </span>
+)</p><ul><li> Experiment with QNetworkAccessManager, an Http system provided by Qt<ul><li>Uses signal/slot model, which is not applicable for backend</li></ul></li><li>Experiment with cURLpp, a C++ wrapper for cURL<ul><li>Would not work with https requests, which are required for security</li></ul></li><li>Experiment with cURL<ul><li>C library, so requires more manual operation</li><li>Strong documentation supplied majority of code</li><li>Supports https with some additional configuration</li></ul></li></ul><h2 id="GregoryKelly-2021-10-21">2021-10-21</h2><p>Implement JSON parsing for data models (for 
+<span class="jira-issue resolved" data-jira-key="WH-23" >
+                    <a href="http://jira.caslab.queensu.ca:9080/browse/WH-23?src=confmacro" class="jira-issue-key"><img class="icon"
+                                                                                      src="http://jira.caslab.queensu.ca:9080/secure/viewavatar?size=xsmall&amp;avatarId=10316&amp;avatarType=issuetype"/>WH-23</a>
+                            -
+            <span class="summary">Implement JSON parsing in model classes</span>
+                                                <span class="aui-lozenge aui-lozenge-subtle             aui-lozenge-success
+     jira-macro-single-issue-export-pdf">Done</span>
+                </span>
+)</p><ul><li>Add library header to lib/include</li><li>Debug errors from std::filesystem<ul><li>Requires updating gcc to &gt; 9.0 (mingw64 has 8.1.0)</li><li>Install msys2</li><li>Install mingw64 package in msys2</li><li>Update configurations to use msys2 installation</li></ul></li><li>Create JSON parsing functions in models</li></ul><p>Begin experimenting with Catch2 testing framework (for 
+<span class="jira-issue resolved" data-jira-key="WH-22" >
+                    <a href="http://jira.caslab.queensu.ca:9080/browse/WH-22?src=confmacro" class="jira-issue-key"><img class="icon"
+                                                                                      src="http://jira.caslab.queensu.ca:9080/images/icons/issuetypes/story.svg"/>WH-22</a>
+                            -
+            <span class="summary">Setup Catch2 testing</span>
+                                                <span class="aui-lozenge aui-lozenge-subtle             aui-lozenge-success
+     jira-macro-single-issue-export-pdf">Done</span>
+                </span>
+, will be used in 
+<span class="jira-issue resolved" data-jira-key="WH-23" >
+                    <a href="http://jira.caslab.queensu.ca:9080/browse/WH-23?src=confmacro" class="jira-issue-key"><img class="icon"
+                                                                                      src="http://jira.caslab.queensu.ca:9080/secure/viewavatar?size=xsmall&amp;avatarId=10316&amp;avatarType=issuetype"/>WH-23</a>
+                            -
+            <span class="summary">Implement JSON parsing in model classes</span>
+                                                <span class="aui-lozenge aui-lozenge-subtle             aui-lozenge-success
+     jira-macro-single-issue-export-pdf">Done</span>
+                </span>
+)</p><ul><li>Add catch2 header to lib/include</li><li>Create basic example test with UserModel</li></ul><p>Debug Qt Creator configuration issues</p><ul><li>Create Qt creator project on top of existing CLion project</li><li>Merge configuration files</li><li>Create testing branch on bitbucket</li></ul><h2 id="GregoryKelly-2021-10-23">2021-10-23</h2><p>Experiment Qt project configuration</p><ul><li>Attempt to create widgets in creator<ul><li>Unable to get working</li></ul></li><li>Attempt Create widgets in CLion<ul><li> Needs some extra steps, but seems to work well</li></ul></li><li>Create example widgets extending QWidget and QPushButton</li><li>Add example widgets to main window</li><li>Create documentation page explaining <a href="Creating-Widgets_130646049.html">Creating Widgets</a></li></ul><h2 id="GregoryKelly-2021-10-24">2021-10-24</h2><p>Tweak base network code (for 
+<span class="jira-issue resolved" data-jira-key="WH-16" >
+                    <a href="http://jira.caslab.queensu.ca:9080/browse/WH-16?src=confmacro" class="jira-issue-key"><img class="icon"
+                                                                                      src="http://jira.caslab.queensu.ca:9080/images/icons/issuetypes/story.svg"/>WH-16</a>
+                            -
+            <span class="summary">Connect models in application to API</span>
+                                                <span class="aui-lozenge aui-lozenge-subtle             aui-lozenge-success
+     jira-macro-single-issue-export-pdf">Done</span>
+                </span>
+)</p><ul><li>Add post request handling to network code</li><li>Move common POST and GET code into dedicated local function</li></ul><p>Implement functions for login and register (for 
+<span class="jira-issue resolved" data-jira-key="WH-26" >
+                    <a href="http://jira.caslab.queensu.ca:9080/browse/WH-26?src=confmacro" class="jira-issue-key"><img class="icon"
+                                                                                      src="http://jira.caslab.queensu.ca:9080/secure/viewavatar?size=xsmall&amp;avatarId=10316&amp;avatarType=issuetype"/>WH-26</a>
+                            -
+            <span class="summary">Create functions to register and log in user</span>
+                                                <span class="aui-lozenge aui-lozenge-subtle             aui-lozenge-success
+     jira-macro-single-issue-export-pdf">Done</span>
+                </span>
+)</p><ul><li>Create function to register via API<ul><li>Takes username, email, password, and school ID as parameters</li></ul></li><li>Create function to login via API<ul><li>Takes email and password as parameters</li></ul></li><li>Store a global account variable for authentication</li><li>Update main function to log into dummy account</li></ul><p>Begin implementing backend network code (for 
+<span class="jira-issue resolved" data-jira-key="WH-24" >
+                    <a href="http://jira.caslab.queensu.ca:9080/browse/WH-24?src=confmacro" class="jira-issue-key"><img class="icon"
+                                                                                      src="http://jira.caslab.queensu.ca:9080/secure/viewavatar?size=xsmall&amp;avatarId=10316&amp;avatarType=issuetype"/>WH-24</a>
+                            -
+            <span class="summary">Create network functions to pull model data from API</span>
+                                                <span class="aui-lozenge aui-lozenge-subtle             aui-lozenge-success
+     jira-macro-single-issue-export-pdf">Done</span>
+                </span>
+ and 
+<span class="jira-issue resolved" data-jira-key="WH-25" >
+                    <a href="http://jira.caslab.queensu.ca:9080/browse/WH-25?src=confmacro" class="jira-issue-key"><img class="icon"
+                                                                                      src="http://jira.caslab.queensu.ca:9080/secure/viewavatar?size=xsmall&amp;avatarId=10316&amp;avatarType=issuetype"/>WH-25</a>
+                            -
+            <span class="summary">Create network functions to push model data through API</span>
+                                                <span class="aui-lozenge aui-lozenge-subtle             aui-lozenge-success
+     jira-macro-single-issue-export-pdf">Done</span>
+                </span>
+)</p><ul><li>Create functions for school endpoints (see <a href="API-Structure_126124070.html">API Structure</a>)</li><li>Create auth exception</li><li>Minor bugfixing</li></ul><h2 id="GregoryKelly-2021-10-25">2021-10-25</h2><p>Continue implementing backend network code (for 
+<span class="jira-issue resolved" data-jira-key="WH-24" >
+                    <a href="http://jira.caslab.queensu.ca:9080/browse/WH-24?src=confmacro" class="jira-issue-key"><img class="icon"
+                                                                                      src="http://jira.caslab.queensu.ca:9080/secure/viewavatar?size=xsmall&amp;avatarId=10316&amp;avatarType=issuetype"/>WH-24</a>
+                            -
+            <span class="summary">Create network functions to pull model data from API</span>
+                                                <span class="aui-lozenge aui-lozenge-subtle             aui-lozenge-success
+     jira-macro-single-issue-export-pdf">Done</span>
+                </span>
+ and 
+<span class="jira-issue resolved" data-jira-key="WH-25" >
+                    <a href="http://jira.caslab.queensu.ca:9080/browse/WH-25?src=confmacro" class="jira-issue-key"><img class="icon"
+                                                                                      src="http://jira.caslab.queensu.ca:9080/secure/viewavatar?size=xsmall&amp;avatarId=10316&amp;avatarType=issuetype"/>WH-25</a>
+                            -
+            <span class="summary">Create network functions to push model data through API</span>
+                                                <span class="aui-lozenge aui-lozenge-subtle             aui-lozenge-success
+     jira-macro-single-issue-export-pdf">Done</span>
+                </span>
+)</p><ul><li>Fix POST body storage in network functions</li><li>Create network functions for course endpoints (see <a href="API-Structure_126124070.html">API Structure</a>)</li><li>Add network functions which raise exceptions on API errrors<ul><li>Update existing code to use functions where applicable</li></ul></li></ul><h2 id="GregoryKelly-2021-10-27">2021-10-27</h2><p>Begin converting backend to session-based authentication (for 
+<span class="jira-issue resolved" data-jira-key="WH-43" >
+                    <a href="http://jira.caslab.queensu.ca:9080/browse/WH-43?src=confmacro" class="jira-issue-key"><img class="icon"
+                                                                                      src="http://jira.caslab.queensu.ca:9080/images/icons/issuetypes/story.svg"/>WH-43</a>
+                            -
+            <span class="summary">Convert to session-based authentication</span>
+                                                <span class="aui-lozenge aui-lozenge-subtle             aui-lozenge-success
+     jira-macro-single-issue-export-pdf">Done</span>
+                </span>
+)</p><ul><li>Create table in backend for session tokens<ul><li>Update <a href="Data-Models_125730846.html">Data Models</a> accordingly</li></ul></li><li>Create utility functions to validate tokens</li><li>Update login and register functions to set and get tokens</li><li>Update endpoints to use token authenication</li></ul><h2 id="GregoryKelly-2021-10-29">2021-10-29</h2><p>Finish converting backend to session-based authentication (for 
+<span class="jira-issue resolved" data-jira-key="WH-43" >
+                    <a href="http://jira.caslab.queensu.ca:9080/browse/WH-43?src=confmacro" class="jira-issue-key"><img class="icon"
+                                                                                      src="http://jira.caslab.queensu.ca:9080/images/icons/issuetypes/story.svg"/>WH-43</a>
+                            -
+            <span class="summary">Convert to session-based authentication</span>
+                                                <span class="aui-lozenge aui-lozenge-subtle             aui-lozenge-success
+     jira-macro-single-issue-export-pdf">Done</span>
+                </span>
+)</p><ul><li>Create function to get user id from provided token</li><li>Remove user ID from paths where token can be used<ul><li>Update documentation accordingly</li></ul></li></ul><h2 id="GregoryKelly-2021-11-01">2021-11-01</h2><p>Write persistent data management and access control and security sections in SDD (for 
+<span class="jira-issue resolved" data-jira-key="WH-58" >
+                    <a href="http://jira.caslab.queensu.ca:9080/browse/WH-58?src=confmacro" class="jira-issue-key"><img class="icon"
+                                                                                      src="http://jira.caslab.queensu.ca:9080/secure/viewavatar?size=xsmall&amp;avatarId=10316&amp;avatarType=issuetype"/>WH-58</a>
+                            -
+            <span class="summary">Persistent data management</span>
+                                                <span class="aui-lozenge aui-lozenge-subtle             aui-lozenge-success
+     jira-macro-single-issue-export-pdf">Done</span>
+                </span>
+ and 
+<span class="jira-issue resolved" data-jira-key="WH-59" >
+                    <a href="http://jira.caslab.queensu.ca:9080/browse/WH-59?src=confmacro" class="jira-issue-key"><img class="icon"
+                                                                                      src="http://jira.caslab.queensu.ca:9080/secure/viewavatar?size=xsmall&amp;avatarId=10316&amp;avatarType=issuetype"/>WH-59</a>
+                            -
+            <span class="summary">Access control</span>
+                                                <span class="aui-lozenge aui-lozenge-subtle             aui-lozenge-success
+     jira-macro-single-issue-export-pdf">Done</span>
+                </span>
+)</p><h2 id="GregoryKelly-2021-11-04">2021-11-04</h2><p>Write subsystem decomposition, global software control, and boundary conditions sections (for 
+<span class="jira-issue resolved" data-jira-key="WH-57" >
+                    <a href="http://jira.caslab.queensu.ca:9080/browse/WH-57?src=confmacro" class="jira-issue-key"><img class="icon"
+                                                                                      src="http://jira.caslab.queensu.ca:9080/secure/viewavatar?size=xsmall&amp;avatarId=10316&amp;avatarType=issuetype"/>WH-57</a>
+                            -
+            <span class="summary">Subsystem decomposition</span>
+                                                <span class="aui-lozenge aui-lozenge-subtle             aui-lozenge-success
+     jira-macro-single-issue-export-pdf">Done</span>
+                </span>
+, 
+<span class="jira-issue resolved" data-jira-key="WH-60" >
+                    <a href="http://jira.caslab.queensu.ca:9080/browse/WH-60?src=confmacro" class="jira-issue-key"><img class="icon"
+                                                                                      src="http://jira.caslab.queensu.ca:9080/secure/viewavatar?size=xsmall&amp;avatarId=10316&amp;avatarType=issuetype"/>WH-60</a>
+                            -
+            <span class="summary">Global software control</span>
+                                                <span class="aui-lozenge aui-lozenge-subtle             aui-lozenge-success
+     jira-macro-single-issue-export-pdf">Done</span>
+                </span>
+, 
+<span class="jira-issue resolved" data-jira-key="WH-61" >
+                    <a href="http://jira.caslab.queensu.ca:9080/browse/WH-61?src=confmacro" class="jira-issue-key"><img class="icon"
+                                                                                      src="http://jira.caslab.queensu.ca:9080/secure/viewavatar?size=xsmall&amp;avatarId=10316&amp;avatarType=issuetype"/>WH-61</a>
+                            -
+            <span class="summary">Boundary conditions</span>
+                                                <span class="aui-lozenge aui-lozenge-subtle             aui-lozenge-success
+     jira-macro-single-issue-export-pdf">Done</span>
+                </span>
+)</p><p>Create sequence diagram for login process (for 
+<span class="jira-issue resolved" data-jira-key="WH-47" >
+                    <a href="http://jira.caslab.queensu.ca:9080/browse/WH-47?src=confmacro" class="jira-issue-key"><img class="icon"
+                                                                                      src="http://jira.caslab.queensu.ca:9080/images/icons/issuetypes/story.svg"/>WH-47</a>
+                            -
+            <span class="summary">Sequence diagrams</span>
+                                                <span class="aui-lozenge aui-lozenge-subtle             aui-lozenge-success
+     jira-macro-single-issue-export-pdf">Done</span>
+                </span>
+)</p><h2 id="GregoryKelly-2021-11-05">2021-11-05</h2><p>Create sequence diagram for event creation process (for 
+<span class="jira-issue resolved" data-jira-key="WH-47" >
+                    <a href="http://jira.caslab.queensu.ca:9080/browse/WH-47?src=confmacro" class="jira-issue-key"><img class="icon"
+                                                                                      src="http://jira.caslab.queensu.ca:9080/images/icons/issuetypes/story.svg"/>WH-47</a>
+                            -
+            <span class="summary">Sequence diagrams</span>
+                                                <span class="aui-lozenge aui-lozenge-subtle             aui-lozenge-success
+     jira-macro-single-issue-export-pdf">Done</span>
+                </span>
+)</p><p><span style="font-size: 20.0px;letter-spacing: -0.008em;">2021-11-06</span></p><p>Final changes to SDD</p><p>Convert backend to better follow Object-Oriented model from SDD (for 
+<span class="jira-issue resolved" data-jira-key="WH-63" >
+                    <a href="http://jira.caslab.queensu.ca:9080/browse/WH-63?src=confmacro" class="jira-issue-key"><img class="icon"
+                                                                                      src="http://jira.caslab.queensu.ca:9080/images/icons/issuetypes/story.svg"/>WH-63</a>
+                            -
+            <span class="summary">Convert netcode to follow object-oriented principles based on SDD</span>
+                                                <span class="aui-lozenge aui-lozenge-subtle             aui-lozenge-success
+     jira-macro-single-issue-export-pdf">Done</span>
+                </span>
+)</p><ul><li>Convert some namespaces to singletons</li></ul><h2 id="GregoryKelly-2021-11-07">2021-11-07</h2><p>Convert from nlohmann/json to QJson to remove requirement for gcc &gt; 9.0. Also converted uses of std::string to QString for compatibility</p><h2 id="GregoryKelly-2021-11-11">2021-11-11</h2><p>Merge first round of widgets (for 
+<span class="jira-issue resolved" data-jira-key="WH-64" >
+                    <a href="http://jira.caslab.queensu.ca:9080/browse/WH-64?src=confmacro" class="jira-issue-key"><img class="icon"
+                                                                                      src="http://jira.caslab.queensu.ca:9080/images/icons/issuetypes/story.svg"/>WH-64</a>
+                            -
+            <span class="summary">Merge branches from previous sprints</span>
+                                                <span class="aui-lozenge aui-lozenge-subtle             aui-lozenge-success
+     jira-macro-single-issue-export-pdf">Done</span>
+                </span>
+)</p><h2 id="GregoryKelly-2021-11-20">2021-11-20</h2><p>Merge second round of widgets (for 
+<span class="jira-issue resolved" data-jira-key="WH-64" >
+                    <a href="http://jira.caslab.queensu.ca:9080/browse/WH-64?src=confmacro" class="jira-issue-key"><img class="icon"
+                                                                                      src="http://jira.caslab.queensu.ca:9080/images/icons/issuetypes/story.svg"/>WH-64</a>
+                            -
+            <span class="summary">Merge branches from previous sprints</span>
+                                                <span class="aui-lozenge aui-lozenge-subtle             aui-lozenge-success
+     jira-macro-single-issue-export-pdf">Done</span>
+                </span>
+)</p><h2 id="GregoryKelly-2021-11-21">2021-11-21</h2><p>Begin overhauling UI to be more responsive</p><p>Create widget to add/remove classes (for 
+<span class="jira-issue resolved" data-jira-key="WH-69" >
+                    <a href="http://jira.caslab.queensu.ca:9080/browse/WH-69?src=confmacro" class="jira-issue-key"><img class="icon"
+                                                                                      src="http://jira.caslab.queensu.ca:9080/images/icons/issuetypes/story.svg"/>WH-69</a>
+                            -
+            <span class="summary">Create common add/remove class widget</span>
+                                                <span class="aui-lozenge aui-lozenge-subtle             aui-lozenge-success
+     jira-macro-single-issue-export-pdf">Done</span>
+                </span>
+)</p><h2 id="GregoryKelly-2021-11-22">2021-11-22</h2><p>Create ApplicationController class (for 
+<span class="jira-issue resolved" data-jira-key="WH-84" >
+                    <a href="http://jira.caslab.queensu.ca:9080/browse/WH-84?src=confmacro" class="jira-issue-key"><img class="icon"
+                                                                                      src="http://jira.caslab.queensu.ca:9080/images/icons/issuetypes/story.svg"/>WH-84</a>
+                            -
+            <span class="summary">Create ApplicationController class based on SDD</span>
+                                                <span class="aui-lozenge aui-lozenge-subtle             aui-lozenge-success
+     jira-macro-single-issue-export-pdf">Done</span>
+                </span>
+)</p><p>Continue tweaking UI to improve responsiveness</p><p>Create relationships between data models in C++ (for 
+<span class="jira-issue resolved" data-jira-key="WH-83" >
+                    <a href="http://jira.caslab.queensu.ca:9080/browse/WH-83?src=confmacro" class="jira-issue-key"><img class="icon"
+                                                                                      src="http://jira.caslab.queensu.ca:9080/images/icons/issuetypes/story.svg"/>WH-83</a>
+                            -
+            <span class="summary">Create relationships between data models based on database</span>
+                                                <span class="aui-lozenge aui-lozenge-subtle             aui-lozenge-success
+     jira-macro-single-issue-export-pdf">Done</span>
+                </span>
+)</p><h2 id="GregoryKelly-2021-11-23">2021-11-23</h2><p>Connect ApplicationController class to the network code (for 
+<span class="jira-issue resolved" data-jira-key="WH-89" >
+                    <a href="http://jira.caslab.queensu.ca:9080/browse/WH-89?src=confmacro" class="jira-issue-key"><img class="icon"
+                                                                                      src="http://jira.caslab.queensu.ca:9080/images/icons/issuetypes/story.svg"/>WH-89</a>
+                            -
+            <span class="summary">Connect ApplicationController to netcode</span>
+                                                <span class="aui-lozenge aui-lozenge-subtle             aui-lozenge-success
+     jira-macro-single-issue-export-pdf">Done</span>
+                </span>
+)</p><ul><li>Make some changes to the network code where required</li></ul><p>Connect login and register functionality to backend</p><h2 id="GregoryKelly-2021-11-24">2021-11-24</h2><p>Connect frontend to ApplicationController (for 
+<span class="jira-issue resolved" data-jira-key="WH-86" >
+                    <a href="http://jira.caslab.queensu.ca:9080/browse/WH-86?src=confmacro" class="jira-issue-key"><img class="icon"
+                                                                                      src="http://jira.caslab.queensu.ca:9080/images/icons/issuetypes/story.svg"/>WH-86</a>
+                            -
+            <span class="summary">Connect widgets to ApplicationController using signals/slots</span>
+                                                <span class="aui-lozenge aui-lozenge-subtle             aui-lozenge-success
+     jira-macro-single-issue-export-pdf">Done</span>
+                </span>
+)</p><ul><li>Display username on profile screen</li><li>Month, list, and week views generated procedurally</li><li>Split list view into own widget</li></ul><h2 id="GregoryKelly-2021-11-25">2021-11-25</h2><p>Continue connecting frontend to ApplicationController (for 
+<span class="jira-issue resolved" data-jira-key="WH-86" >
+                    <a href="http://jira.caslab.queensu.ca:9080/browse/WH-86?src=confmacro" class="jira-issue-key"><img class="icon"
+                                                                                      src="http://jira.caslab.queensu.ca:9080/images/icons/issuetypes/story.svg"/>WH-86</a>
+                            -
+            <span class="summary">Connect widgets to ApplicationController using signals/slots</span>
+                                                <span class="aui-lozenge aui-lozenge-subtle             aui-lozenge-success
+     jira-macro-single-issue-export-pdf">Done</span>
+                </span>
+)</p><ul><li>Overhaul add/remove class widget</li><li>Implement subscribing/unsubscribing</li><li>Various bugfixes</li></ul><h2 id="GregoryKelly-2021-11-26">2021-11-26</h2><p>Continue connecting frontend to ApplicationController (for 
+<span class="jira-issue resolved" data-jira-key="WH-86" >
+                    <a href="http://jira.caslab.queensu.ca:9080/browse/WH-86?src=confmacro" class="jira-issue-key"><img class="icon"
+                                                                                      src="http://jira.caslab.queensu.ca:9080/images/icons/issuetypes/story.svg"/>WH-86</a>
+                            -
+            <span class="summary">Connect widgets to ApplicationController using signals/slots</span>
+                                                <span class="aui-lozenge aui-lozenge-subtle             aui-lozenge-success
+     jira-macro-single-issue-export-pdf">Done</span>
+                </span>
+)</p><ul><li>Create dialogs for editing courses/events</li><li>Connect dialogs to backend</li></ul><h2 id="GregoryKelly-2021-11-27">2021-11-27</h2><p>Overhaul and create various widgets (for 
+<span class="jira-issue resolved" data-jira-key="WH-87" >
+                    <a href="http://jira.caslab.queensu.ca:9080/browse/WH-87?src=confmacro" class="jira-issue-key"><img class="icon"
+                                                                                      src="http://jira.caslab.queensu.ca:9080/images/icons/issuetypes/story.svg"/>WH-87</a>
+                            -
+            <span class="summary">Fill in gaps in GUI</span>
+                                                <span class="aui-lozenge aui-lozenge-subtle             aui-lozenge-success
+     jira-macro-single-issue-export-pdf">Done</span>
+                </span>
+)</p><ul><li>Merge add/remove class into profile page</li><li>Create layouts for week view</li><li>Create modular widget for scrolling lists</li></ul><h2 id="GregoryKelly-2021-11-28">2021-11-28</h2><p>Final development push</p><ul><li>Various bugfixes</li><li>Overhaul event editing</li><li>Minor UI tweaks</li><li>Create deploy build</li></ul><p>Create homepage (<a href="https://tasq.gregk.ca)" class="external-link" rel="nofollow">https://tasq.gregk.ca)</a></p><p>Record audio for assigned slides (for 
+<span class="jira-issue resolved" data-jira-key="WH-73" >
+                    <a href="http://jira.caslab.queensu.ca:9080/browse/WH-73?src=confmacro" class="jira-issue-key"><img class="icon"
+                                                                                      src="http://jira.caslab.queensu.ca:9080/images/icons/issuetypes/story.svg"/>WH-73</a>
+                            -
+            <span class="summary">[Presentation] Difficulties faced and overcome</span>
+                                                <span class="aui-lozenge aui-lozenge-subtle             aui-lozenge-success
+     jira-macro-single-issue-export-pdf">Done</span>
+                </span>
+, 
+<span class="jira-issue resolved" data-jira-key="WH-74" >
+                    <a href="http://jira.caslab.queensu.ca:9080/browse/WH-74?src=confmacro" class="jira-issue-key"><img class="icon"
+                                                                                      src="http://jira.caslab.queensu.ca:9080/images/icons/issuetypes/story.svg"/>WH-74</a>
+                            -
+            <span class="summary">[Presentation] Good/Bad library use</span>
+                                                <span class="aui-lozenge aui-lozenge-subtle             aui-lozenge-success
+     jira-macro-single-issue-export-pdf">Done</span>
+                </span>
+)</p><p>Record application demo footage</p><h2 id="GregoryKelly-2021-11-29">2021-11-29</h2><p>Create slides and record audio for additional content</p><ul><li>Criteria/Objectives</li><li>Functional requirements</li><li>Non-functional requirements</li><li>Tech stack</li></ul><p><br/></p>
+                    </div>
+
+                                        
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Dec 04, 2021 19:03</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

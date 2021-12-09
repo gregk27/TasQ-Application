@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Wooden Heads : Creating Widgets</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Wooden Heads</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Wooden-Heads-Home_113344682.html">Wooden Heads Home</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Documentation_125730850.html">Documentation</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Wooden Heads : Creating Widgets
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Gregory Kelly</span>, last modified on Oct 23, 2021
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p>Due to the number of files required for each widget (a .cpp, .h and .ui), the <a href="Application-Project-Structure_126582823.html">Application Project Structure</a> is broken into several subfolders for organization. <br/>In order to use CLion (one of the most powerful IDEs available), the project is configured using the CMake toolchain, instead of the proprietary QMake toolchain.</p><p>Unfortunately Qt Creator doesn't play nice with this setup, so the below instructions are required for creating a widget.</p><h2 id="CreatingWidgets-1.CreatefilesinCLion">1. Create files in CLion</h2><p>In CLion's file explorer, right-click the project root and select New &gt; Qt UI Class</p><p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image" height="250" src="attachments/130646049/130646051.png" data-image-src="attachments/130646049/130646051.png" data-unresolved-comment-count="0" data-linked-resource-id="130646051" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image2021-10-23_15-47-27.png" data-base-url="http://confluence.caslab.queensu.ca:8090" data-linked-resource-content-type="image/png" data-linked-resource-container-id="130646049" data-linked-resource-container-version="2"></span></p><p>In the dialog that appears, enter the widget name in PascalCase, and ensure that the only selected target is <code>${PROJECT_WIDGETS}</code></p><p>The parent class can be changed to extend an existing Qt widget</p><p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image" height="400" src="attachments/130646049/130646052.png" data-image-src="attachments/130646049/130646052.png" data-unresolved-comment-count="0" data-linked-resource-id="130646052" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image2021-10-23_15-48-43.png" data-base-url="http://confluence.caslab.queensu.ca:8090" data-linked-resource-content-type="image/png" data-linked-resource-container-id="130646049" data-linked-resource-container-version="2"></span></p><h2 id="CreatingWidgets-2.Placefilesincorrectlocations">2. Place files in correct locations</h2><p>CLion will have created the files in the root folder, however this is not the correct place.</p><p>The generated header file (in this example <code>mywidget.h</code>), should be placed in <code>include/widgets</code>. It can also be placed in a subfolder in order to group widgets.</p><p>The generated source and UI files (in this example <code>mywidget.cpp</code> and <code>mywidget.ui</code>) should be placed in a new subfolder of <code>src/widgets</code> (in this case <code>src/widgets/mywidget</code>). If the header is placed in a subfolder, the new subfolder should follow the same pattern.</p><p><strong>The move operations should be performed in CLion</strong> as this will automatically update references in CMakeLists.txt. Ensure &quot;Search for references&quot; is checked so the refactor occurs.</p><p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image" height="193" src="attachments/130646049/130646053.png" data-image-src="attachments/130646049/130646053.png" data-unresolved-comment-count="0" data-linked-resource-id="130646053" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image2021-10-23_16-4-42.png" data-base-url="http://confluence.caslab.queensu.ca:8090" data-linked-resource-content-type="image/png" data-linked-resource-container-id="130646049" data-linked-resource-container-version="2"></span></p><h2 id="CreatingWidgets-3.AddwidgetstoQtCreator">3. Add widgets to Qt Creator</h2><p>Open a widget, right click in empty space, and select &quot;Promoted Widgets&quot;.</p><p>In the dialog that opens:</p><ul><li><span style="letter-spacing: 0.0px;">Select the widget's base class (in this case <code>QWidget</code>)</span></li><li><span style="letter-spacing: 0.0px;">Enter the widget's class name (in this case <code>MyWidget</code>)</span></li><li>Enter the include path for the header (in this case <code>widgets/mywidget.h</code>)</li><li>Select global include</li></ul><p>Click add to register the widget</p><p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image" height="400" src="attachments/130646049/130646054.png" data-image-src="attachments/130646049/130646054.png" data-unresolved-comment-count="0" data-linked-resource-id="130646054" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image2021-10-23_16-16-11.png" data-base-url="http://confluence.caslab.queensu.ca:8090" data-linked-resource-content-type="image/png" data-linked-resource-container-id="130646049" data-linked-resource-container-version="2"></span></p>
+                    </div>
+
+                                                            <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/130646049/130646051.png">image2021-10-23_15-47-27.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/130646049/130646052.png">image2021-10-23_15-48-43.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/130646049/130646053.png">image2021-10-23_16-4-42.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/130646049/130646054.png">image2021-10-23_16-16-11.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Dec 04, 2021 19:03</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

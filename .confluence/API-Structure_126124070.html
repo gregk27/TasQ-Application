@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Wooden Heads : API Structure</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Wooden Heads</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Wooden-Heads-Home_113344682.html">Wooden Heads Home</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Documentation_125730850.html">Documentation</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Wooden Heads : API Structure
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Gregory Kelly</span>, last modified on Oct 29, 2021
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p class="auto-cursor-target">The backend is accessible through a REST API, with responses provided in JSON format</p><h2 class="auto-cursor-target" id="APIStructure-General">General</h2><div id="expander-435172056" class="expand-container"><div id="expander-control-435172056" class="expand-control" aria-expanded="true"><span class="expand-icon aui-icon aui-icon-small aui-iconfont-chevron-down"></span><span class="expand-control-text">/status (GET)</span></div><div id="expander-content-435172056" class="expand-content"><h1 id="APIStructure-/status(GET)">/status (GET)</h1><p>Get the list of supported schools</p><h2 id="APIStructure-Parameters">Parameters</h2><p>None</p><h2 id="APIStructure-Response">Response</h2><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>API Response Data</b></div><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: false; theme: Confluence" data-theme="Confluence">{
+	&quot;status&quot;: string		- &quot;Alive&quot; on success
+}</pre>
+</div></div></div></div><h2 class="auto-cursor-target" id="APIStructure-UserEndpoints">User Endpoints</h2><div id="expander-207951192" class="expand-container"><div id="expander-control-207951192" class="expand-control" aria-expanded="true"><span class="expand-icon aui-icon aui-icon-small aui-iconfont-chevron-down"></span><span class="expand-control-text">/users/{user} (GET)</span></div><div id="expander-content-207951192" class="expand-content"><h1 id="APIStructure-/users/{user}(GET)">/users/{user} (GET)</h1><p>Get a user by id</p><h2 id="APIStructure-Parameters.1">Parameters</h2><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/><col/><col/></colgroup><tbody><tr><th class="confluenceTh">Name</th><th class="confluenceTh">Location</th><th class="confluenceTh">Description</th></tr><tr><td colspan="1" class="confluenceTd">id</td><td colspan="1" class="confluenceTd">path</td><td colspan="1" class="confluenceTd">User's id</td></tr></tbody></table></div><h2 id="APIStructure-Response.1">Response</h2><p>On failure, returns error message.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>API Response Data</b></div><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: false; theme: Confluence" data-theme="Confluence">{
+	&quot;success&quot;: bool,			- True on success, otherwise false
+	&quot;error&quot;: string,			- Error message on failure, &#39;&#39; on success
+	&quot;user&quot;: {					- Payload, undefined on failure
+		&quot;id&quot;: string,				- Registered user&#39;s ID
+		&quot;name&quot;: string,				- Registered user&#39;s name
+		&quot;school&quot;: string			- Registered user&#39;s school&#39;s ID
+	}
+}</pre>
+</div></div></div></div><div id="expander-1104967157" class="expand-container"><div id="expander-control-1104967157" class="expand-control" aria-expanded="true"><span class="expand-icon aui-icon aui-icon-small aui-iconfont-chevron-down"></span><span class="expand-control-text">/users/{user}/courses (GET)</span></div><div id="expander-content-1104967157" class="expand-content"><h1 id="APIStructure-/users/{user}/courses(GET)">/users/{user}/courses (GET)</h1><p>Get courses owned by a user</p><h2 id="APIStructure-Parameters.2">Parameters</h2><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/><col/><col/></colgroup><tbody><tr><th class="confluenceTh">Name</th><th class="confluenceTh">Location</th><th class="confluenceTh">Description</th></tr><tr><td colspan="1" class="confluenceTd">id</td><td colspan="1" class="confluenceTd">path</td><td colspan="1" class="confluenceTd">User's id</td></tr></tbody></table></div><h2 id="APIStructure-Response.2">Response</h2><p>On failure, returns error message.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>API Response Data</b></div><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: false; theme: Confluence" data-theme="Confluence">{
+	&quot;success&quot;: bool,			- True on success, otherwise false
+	&quot;error&quot;: string,			- Error message on failure, &#39;&#39; on success
+	&quot;courses&quot;: [				- Payload, undefined on failure 
+		{
+			&quot;id&quot;: string,			- ID of the course
+			&quot;name&quot;: string,			- Name of the course
+			&quot;code&quot;: string,			- Course code of the course
+			&quot;year&quot;: int,			- Academic year of the course
+			&quot;term&quot;: string,			- Term of the course
+			&quot;prof&quot;: string,			- Professor teaching the course
+			&quot;owner&quot;: string,		- ID of the user who maintains the course
+			&quot;school&quot;: string,		- ID of the course&#39;s school 
+			&quot;modified&quot;: long int	- Unix timestamp the course or it&#39;s children were last modified
+		}
+	]
+}</pre>
+</div></div></div></div><h3 id="APIStructure-Authentication">Authentication</h3><div id="expander-492456424" class="expand-container"><div id="expander-control-492456424" class="expand-control" aria-expanded="true"><span class="expand-icon aui-icon aui-icon-small aui-iconfont-chevron-down"></span><span class="expand-control-text">/users/register (POST)</span></div><div id="expander-content-492456424" class="expand-content"><h1 id="APIStructure-/users/register(POST)">/users/register (POST)</h1><p>Register a new user</p><h2 id="APIStructure-Parameters.3">Parameters</h2><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/><col/><col/></colgroup><tbody><tr><th class="confluenceTh">Name</th><th class="confluenceTh">Location</th><th class="confluenceTh">Description</th></tr><tr><td colspan="1" class="confluenceTd">name</td><td colspan="1" class="confluenceTd">post</td><td colspan="1" class="confluenceTd">User's name</td></tr><tr><td colspan="1" class="confluenceTd">email</td><td colspan="1" class="confluenceTd">post</td><td colspan="1" class="confluenceTd">User's email</td></tr><tr><td colspan="1" class="confluenceTd">password</td><td colspan="1" class="confluenceTd">post</td><td colspan="1" class="confluenceTd">User's password</td></tr><tr><td colspan="1" class="confluenceTd">school</td><td colspan="1" class="confluenceTd">post</td><td colspan="1" class="confluenceTd">ID of user's chosen school</td></tr></tbody></table></div><h2 id="APIStructure-Response.3">Response</h2><p>On failure, returns error message.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>API Response Data</b></div><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: false; theme: Confluence" data-theme="Confluence">{
+	&quot;success&quot;: bool,			- True on success, otherwise false
+	&quot;error&quot;: string,			- Error message on failure, &#39;&#39; on success
+	&quot;user&quot;: {					- Payload, undefined on failure
+		&quot;id&quot;: string,				- Registered user&#39;s ID
+		&quot;name&quot;: string,				- Registered user&#39;s name
+		&quot;email&quot;: string,			- Registered user&#39;s email
+		&quot;school&quot;: string			- Registered user&#39;s school&#39;s ID,
+		&quot;token&quot;: string				- Authentication token for the user&#39;s session 
+	}
+}</pre>
+</div></div></div></div><div id="expander-754995495" class="expand-container"><div id="expander-control-754995495" class="expand-control" aria-expanded="true"><span class="expand-icon aui-icon aui-icon-small aui-iconfont-chevron-down"></span><span class="expand-control-text">/users/login (POST)</span></div><div id="expander-content-754995495" class="expand-content"><h1 id="APIStructure-/users/login(POST)">/users/login (POST)</h1><p>Log in to a user account</p><h2 id="APIStructure-Parameters.4">Parameters</h2><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/><col/><col/></colgroup><tbody><tr><th class="confluenceTh">Name</th><th class="confluenceTh">Location</th><th class="confluenceTh">Description</th></tr><tr><td colspan="1" class="confluenceTd">email</td><td colspan="1" class="confluenceTd">post</td><td colspan="1" class="confluenceTd">Email being used to log in</td></tr><tr><td colspan="1" class="confluenceTd">password</td><td colspan="1" class="confluenceTd">post</td><td colspan="1" class="confluenceTd">Password being used to log in</td></tr></tbody></table></div><h2 id="APIStructure-Response.4">Response</h2><p>On success, returns information about logged in user. On failure, returns error message.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>API Response Data</b></div><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: false; theme: Confluence" data-theme="Confluence">{
+	&quot;success&quot;: bool,			- True on success, otherwise false
+	&quot;error&quot;: string,			- Error message on failure, &#39;&#39; on success 
+	&quot;user&quot;: {				 	- Payload, undefined on failure
+		&quot;id&quot;: string,				- Registered user&#39;s ID
+		&quot;name&quot;: string,				- Registered user&#39;s name
+		&quot;email&quot;: string,			- Registered user&#39;s email
+		&quot;school&quot;: string			- Registered user&#39;s school&#39;s ID 
+		&quot;token&quot;: string				- Authentication token for the user&#39;s session 
+  }
+}</pre>
+</div></div></div></div><h3 class="auto-cursor-target" id="APIStructure-CourseSubscriptions">Course Subscriptions</h3><div id="expander-1138705964" class="expand-container"><div id="expander-control-1138705964" class="expand-control" aria-expanded="true"><span class="expand-icon aui-icon aui-icon-small aui-iconfont-chevron-down"></span><span class="expand-control-text">/users/subscriptions/get (GET)</span></div><div id="expander-content-1138705964" class="expand-content"><h1 id="APIStructure-/users/subscriptions/get(GET)">/users/subscriptions/get (GET)</h1><p>Get courses subscribed to by a user, can be filtered by date modified</p><h2 id="APIStructure-Parameters.5">Parameters</h2><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/><col/><col/></colgroup><tbody><tr><th class="confluenceTh">Name</th><th class="confluenceTh">Location</th><th class="confluenceTh">Description</th></tr><tr><td colspan="1" class="confluenceTd">since</td><td colspan="1" class="confluenceTd">query</td><td colspan="1" class="confluenceTd">Timestamp to ignore courses modified before</td></tr><tr><td colspan="1" class="confluenceTd">token</td><td colspan="1" class="confluenceTd">cookie</td><td colspan="1" class="confluenceTd">Session token to get and authenticate user</td></tr></tbody></table></div><h2 id="APIStructure-Response.5">Response</h2><p>List of courses subscribed to by the user</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>API Response Data</b></div><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: false; theme: Confluence" data-theme="Confluence">{
+	&quot;success&quot;: bool,			- True on success, otherwise false
+	&quot;error&quot;: string,			- Error message on failure, &#39;&#39; on success 
+	&quot;courses&quot;: [				- Payload, undefined on failure 
+		{
+			&quot;id&quot;: string,			- ID of the course
+			&quot;name&quot;: string,			- Name of the course
+			&quot;code&quot;: string,			- Course code of the course
+			&quot;year&quot;: int,			- Academic year of the course
+			&quot;term&quot;: string,			- Term of the course
+			&quot;prof&quot;: string,			- Professor teaching the course
+			&quot;owner&quot;: string,		- ID of the user who maintains the course
+			&quot;school&quot;: string,		- ID of the course&#39;s school 
+			&quot;modified&quot;: long int	- Unix timestamp the course or it&#39;s children were last modified
+		}
+	]
+}</pre>
+</div></div></div></div><div id="expander-1221945223" class="expand-container"><div id="expander-control-1221945223" class="expand-control" aria-expanded="true"><span class="expand-icon aui-icon aui-icon-small aui-iconfont-chevron-down"></span><span class="expand-control-text">/users/subscriptions/add (POST)</span></div><div id="expander-content-1221945223" class="expand-content"><h1 id="APIStructure-/users/subscriptions/add(POST)">/users/subscriptions/add (POST)</h1><p>Subscribe to a new course</p><h2 id="APIStructure-Parameters.6">Parameters</h2><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/><col/><col/></colgroup><tbody><tr><th class="confluenceTh">Name</th><th class="confluenceTh">Location</th><th class="confluenceTh">Description</th></tr><tr><td colspan="1" class="confluenceTd">course</td><td colspan="1" class="confluenceTd">post</td><td colspan="1" class="confluenceTd">ID of the course to subscribe to</td></tr><tr><td colspan="1" class="confluenceTd">token</td><td colspan="1" class="confluenceTd">cookie</td><td colspan="1" class="confluenceTd">Session token to get and authenticate user</td></tr></tbody></table></div><h2 id="APIStructure-Response.6">Response</h2><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>API Response Data</b></div><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: false; theme: Confluence" data-theme="Confluence">{
+	&quot;success&quot;: bool,			- True on success, otherwise false
+	&quot;error&quot;: string,			- Error message on failure, &#39;&#39; on success 
+	&quot;subscription&quot;: {			- Payload, undefined on failure 
+		&quot;user&quot;: string,				- ID of the user subscribing
+		&quot;course&quot;: string			- ID of the course subscribed to
+	}
+}</pre>
+</div></div></div></div><div id="expander-850230721" class="expand-container"><div id="expander-control-850230721" class="expand-control" aria-expanded="true"><span class="expand-icon aui-icon aui-icon-small aui-iconfont-chevron-down"></span><span class="expand-control-text">/users/subscriptions/{course}/remove (POST)</span></div><div id="expander-content-850230721" class="expand-content"><h1 id="APIStructure-/users/subscriptions/{course}/remove(POST)">/users/subscriptions/{course}/remove (POST)</h1><p>Unsubscribe from a course</p><h2 id="APIStructure-Parameters.7">Parameters</h2><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/><col/><col/></colgroup><tbody><tr><th class="confluenceTh">Name</th><th class="confluenceTh">Location</th><th class="confluenceTh">Description</th></tr><tr><td colspan="1" class="confluenceTd">course</td><td colspan="1" class="confluenceTd">path</td><td colspan="1" class="confluenceTd">ID of the course to unsubscribe from</td></tr><tr><td colspan="1" class="confluenceTd">token</td><td colspan="1" class="confluenceTd">cookie</td><td colspan="1" class="confluenceTd">Session token to get and authenticate user</td></tr></tbody></table></div><h2 id="APIStructure-Response.7">Response</h2><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>API Response Data</b></div><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: false; theme: Confluence" data-theme="Confluence">{
+	&quot;success&quot;: bool,			- True on success, otherwise false
+	&quot;error&quot;: string				- Error message on failure, &#39;&#39; on success
+}</pre>
+</div></div></div></div><h3 class="auto-cursor-target" id="APIStructure-To-Dos">To-Dos</h3><div id="expander-2032557906" class="expand-container"><div id="expander-control-2032557906" class="expand-control" aria-expanded="true"><span class="expand-icon aui-icon aui-icon-small aui-iconfont-chevron-down"></span><span class="expand-control-text">/users/todos/get (GET)</span></div><div id="expander-content-2032557906" class="expand-content"><h1 id="APIStructure-/users/todos/get(GET)">/users/todos/get (GET)</h1><p>Get To-Dos for a user</p><h2 id="APIStructure-Parameters.8">Parameters</h2><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/><col/><col/></colgroup><tbody><tr><th class="confluenceTh">Name</th><th class="confluenceTh">Location</th><th class="confluenceTh">Description</th></tr><tr><td colspan="1" class="confluenceTd">token</td><td colspan="1" class="confluenceTd">cookie</td><td colspan="1" class="confluenceTd">Session token to authenticate user</td></tr></tbody></table></div><h2 id="APIStructure-Response.8">Response</h2><p>List of To-Dos for the user</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>API Response Data</b></div><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: false; theme: Confluence" data-theme="Confluence">{
+	&quot;success&quot;: bool,			- True on success, otherwise false
+	&quot;error&quot;: string,			- Error message on failure, &#39;&#39; on success  
+	&quot;todos&quot;: [					- Payload, undefined on failure
+		{
+			&quot;id&quot;: string,			- ID of the todo
+			&quot;user&quot;: string,			- ID of the todo&#39;s user
+			&quot;name&quot;: string,			- Name of the todo
+			&quot;completed&quot;: boolean,	- Todo completion flag
+		}
+	]
+}</pre>
+</div></div></div></div><div id="expander-377816834" class="expand-container"><div id="expander-control-377816834" class="expand-control" aria-expanded="true"><span class="expand-icon aui-icon aui-icon-small aui-iconfont-chevron-down"></span><span class="expand-control-text">/users/todos/add (POST)</span></div><div id="expander-content-377816834" class="expand-content"><h1 id="APIStructure-/users/todos/add(POST)">/users/todos/add (POST)</h1><p>Create a To-Do for a user</p><h2 id="APIStructure-Parameters.9">Parameters</h2><div class="table-wrap"><table class="wrapped relative-table confluenceTable" style="width: 29.2614%;"><colgroup><col style="width: 20.9246%;"/><col style="width: 18.9781%;"/><col style="width: 60.0973%;"/></colgroup><tbody><tr><th class="confluenceTh">Name</th><th class="confluenceTh">Location</th><th class="confluenceTh">Description</th></tr><tr><td colspan="1" class="confluenceTd">name</td><td colspan="1" class="confluenceTd">post</td><td colspan="1" class="confluenceTd">Name of To-Do</td></tr><tr><td colspan="1" class="confluenceTd">token</td><td colspan="1" class="confluenceTd">cookie</td><td colspan="1" class="confluenceTd">Session token to get and authenticate user</td></tr></tbody></table></div><h2 id="APIStructure-Response.9">Response</h2><p>On success, created To-Do. On failure error message.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>API Response Data</b></div><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: false; theme: Confluence" data-theme="Confluence">{
+	&quot;success&quot;: bool,			- True on success, otherwise false
+	&quot;error&quot;: string,			- Error message on failure, &#39;&#39; on success  
+	&quot;todo&quot;: {				 	- Payload, undefined on failure
+		&quot;id&quot;: string,				- ID of the created todo
+		&quot;user&quot;: string,				- ID of the todo&#39;s user
+		&quot;name&quot;: string,				- Name of the created todo
+		&quot;completed&quot;: boolean		- Todo completion flag
+	}
+}</pre>
+</div></div></div></div><div id="expander-2002486933" class="expand-container"><div id="expander-control-2002486933" class="expand-control" aria-expanded="true"><span class="expand-icon aui-icon aui-icon-small aui-iconfont-chevron-down"></span><span class="expand-control-text">/users/todos/{todo}/modify (POST)</span></div><div id="expander-content-2002486933" class="expand-content"><h1 id="APIStructure-/users/todos/{todo}/modify(POST)">/users/todos/{todo}/modify (POST)</h1><p>Modify a To-Do for a user</p><h2 id="APIStructure-Parameters.10">Parameters</h2><div class="table-wrap"><table class="relative-table wrapped confluenceTable" style="width: 29.2614%;"><colgroup><col style="width: 21.1648%;"/><col style="width: 18.9781%;"/><col style="width: 59.8571%;"/></colgroup><tbody><tr><th class="confluenceTh">Name</th><th class="confluenceTh">Location</th><th class="confluenceTh">Description</th></tr><tr><td colspan="1" class="confluenceTd">todo</td><td colspan="1" class="confluenceTd">path</td><td colspan="1" class="confluenceTd">ID of target To-Do</td></tr><tr><td colspan="1" class="confluenceTd">name</td><td colspan="1" class="confluenceTd">post</td><td colspan="1" class="confluenceTd">Name of To-Do</td></tr><tr><td colspan="1" class="confluenceTd">completed</td><td colspan="1" class="confluenceTd">post</td><td colspan="1" class="confluenceTd">Completion state of To-Do</td></tr><tr><td colspan="1" class="confluenceTd">token</td><td colspan="1" class="confluenceTd">cookie</td><td colspan="1" class="confluenceTd">Session token to get and authenticate user</td></tr></tbody></table></div><h2 id="APIStructure-Response.10">Response</h2><p>On success, updated To-Do. On failure error message.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>API Response Data</b></div><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: false; theme: Confluence" data-theme="Confluence">{
+	&quot;success&quot;: bool,			- True on success, otherwise false
+	&quot;error&quot;: string,			- Error message on failure, &#39;&#39; on success  
+	&quot;todo&quot;: {				 	- Payload, undefined on failure
+		&quot;id&quot;: string,				- ID of the todo
+		&quot;user&quot;: string,				- ID of the todo&#39;s user
+		&quot;name&quot;: string,				- Updated name of the created todo
+		&quot;completed&quot;: boolean		- Updated todo completion flag
+	}
+}</pre>
+</div></div></div></div><div id="expander-164220567" class="expand-container"><div id="expander-control-164220567" class="expand-control" aria-expanded="true"><span class="expand-icon aui-icon aui-icon-small aui-iconfont-chevron-down"></span><span class="expand-control-text">/users/todos/{todo}/remove (POST)</span></div><div id="expander-content-164220567" class="expand-content"><h1 id="APIStructure-/users/todos/{todo}/remove(POST)">/users/todos/{todo}/remove (POST)</h1><p>Delete a To-Do for a user</p><h2 id="APIStructure-Parameters.11">Parameters</h2><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/><col/><col/></colgroup><tbody><tr><th class="confluenceTh">Name</th><th class="confluenceTh">Location</th><th class="confluenceTh">Description</th></tr><tr><td colspan="1" class="confluenceTd">todo</td><td colspan="1" class="confluenceTd">path</td><td colspan="1" class="confluenceTd">ID of the To-Do to delete</td></tr><tr><td colspan="1" class="confluenceTd">token</td><td colspan="1" class="confluenceTd">cookie</td><td colspan="1" class="confluenceTd">Session token to get and authenticate user</td></tr></tbody></table></div><h2 id="APIStructure-Response.11">Response</h2><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>API Response Data</b></div><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: false; theme: Confluence" data-theme="Confluence">{
+	&quot;success&quot;: bool,			- True on success, otherwise false
+	&quot;error&quot;: string				- Error message on failure, &#39;&#39; on success   
+}</pre>
+</div></div></div></div><h3 class="auto-cursor-target" id="APIStructure-Reminders">Reminders</h3><div id="expander-1052503825" class="expand-container"><div id="expander-control-1052503825" class="expand-control" aria-expanded="true"><span class="expand-icon aui-icon aui-icon-small aui-iconfont-chevron-down"></span><span class="expand-control-text">/users/reminders/get (GET)</span></div><div id="expander-content-1052503825" class="expand-content"><h1 id="APIStructure-/users/reminders/get(GET)">/users/reminders/get (GET)</h1><p>Get reminders for a user</p><h2 id="APIStructure-Parameters.12">Parameters</h2><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/><col/><col/></colgroup><tbody><tr><th class="confluenceTh">Name</th><th class="confluenceTh">Location</th><th class="confluenceTh">Description</th></tr><tr><td colspan="1" class="confluenceTd">token</td><td colspan="1" class="confluenceTd">cookie</td><td colspan="1" class="confluenceTd">Session token to get and authenticate user</td></tr></tbody></table></div><h2 id="APIStructure-Response.12">Response</h2><p>List of reminders for the user</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>API Response Data</b></div><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: false; theme: Confluence" data-theme="Confluence">{
+	&quot;success&quot;: bool,			- True on success, otherwise false
+	&quot;error&quot;: string,			- Error message on failure, &#39;&#39; on success   
+	&quot;reminders&quot;: [				- Payload, undefined on failure
+		{
+			&quot;id&quot;: string,			- ID of the reminder
+			&quot;user&quot;: string,			- ID of the reminder&#39;s user
+			&quot;event&quot;: string			- ID of the event the reminder is for
+		}
+	]
+}</pre>
+</div></div></div></div><div id="expander-286058322" class="expand-container"><div id="expander-control-286058322" class="expand-control" aria-expanded="true"><span class="expand-icon aui-icon aui-icon-small aui-iconfont-chevron-down"></span><span class="expand-control-text">/users/reminders/add (POST)</span></div><div id="expander-content-286058322" class="expand-content"><h1 id="APIStructure-/users/reminders/add(POST)">/users/reminders/add (POST)</h1><p>Create a reminder for a user</p><h2 id="APIStructure-Parameters.13">Parameters</h2><div class="table-wrap"><table class="relative-table wrapped confluenceTable" style="width: 27.8057%;"><colgroup><col style="width: 16.2978%;"/><col style="width: 19.9195%;"/><col style="width: 63.7827%;"/></colgroup><tbody><tr><th class="confluenceTh">Name</th><th class="confluenceTh">Location</th><th class="confluenceTh">Description</th></tr><tr><td colspan="1" class="confluenceTd">event</td><td colspan="1" class="confluenceTd">post</td><td colspan="1" class="confluenceTd">Event reminder is for</td></tr><tr><td colspan="1" class="confluenceTd">token</td><td colspan="1" class="confluenceTd">cookie</td><td colspan="1" class="confluenceTd">Session token to get and authenticate user</td></tr></tbody></table></div><h2 id="APIStructure-Response.13">Response</h2><p>On success, created reminder.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>API Response Data</b></div><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: false; theme: Confluence" data-theme="Confluence">{
+	&quot;success&quot;: bool,			- True on success, otherwise false
+	&quot;error&quot;: string,			- Error message on failure, &#39;&#39; on success   
+	&quot;reminder&quot;: {				- Payload, undefined on failure
+		&quot;id&quot;: string,			- ID of the created reminder
+		&quot;user&quot;: string,			- ID of the reminder&#39;s user
+		&quot;event&quot;: string			- ID of the event the reminder is for
+	}
+}</pre>
+</div></div></div></div><div id="expander-1721717384" class="expand-container"><div id="expander-control-1721717384" class="expand-control" aria-expanded="true"><span class="expand-icon aui-icon aui-icon-small aui-iconfont-chevron-down"></span><span class="expand-control-text">/users/reminders/{reminder}/remove (POST)</span></div><div id="expander-content-1721717384" class="expand-content"><h1 id="APIStructure-/users/reminders/{reminder}/remove(POST)">/users/reminders/{reminder}/remove (POST)</h1><p>Delete a reminder for a user</p><h2 id="APIStructure-Parameters.14">Parameters</h2><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/><col/><col/></colgroup><tbody><tr><th class="confluenceTh">Name</th><th class="confluenceTh">Location</th><th class="confluenceTh">Description</th></tr><tr><td colspan="1" class="confluenceTd">id</td><td colspan="1" class="confluenceTd">post</td><td colspan="1" class="confluenceTd">ID of the reminder to delete</td></tr><tr><td colspan="1" class="confluenceTd">token</td><td colspan="1" class="confluenceTd">cookie</td><td colspan="1" class="confluenceTd">Session token to get and authenticate user</td></tr></tbody></table></div><h2 id="APIStructure-Response.14">Response</h2><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>API Response Data</b></div><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: false; theme: Confluence" data-theme="Confluence">{
+	&quot;success&quot;: bool,			- True on success, otherwise false
+	&quot;error&quot;: string				- Error message on failure, &#39;&#39; on success   
+}</pre>
+</div></div></div></div><h2 id="APIStructure-SchoolEndpoints">School Endpoints</h2><div id="expander-53713097" class="expand-container"><div id="expander-control-53713097" class="expand-control" aria-expanded="true"><span class="expand-icon aui-icon aui-icon-small aui-iconfont-chevron-down"></span><span class="expand-control-text">/schools/get (GET)</span></div><div id="expander-content-53713097" class="expand-content"><h1 id="APIStructure-/schools/get(GET)">/schools/get (GET)</h1><p>Get the list of supported schools</p><h2 id="APIStructure-Parameters.15">Parameters</h2><p>None</p><h2 id="APIStructure-Response.15">Response</h2><p>List of schools in database</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>API Response Data</b></div><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: false; theme: Confluence" data-theme="Confluence">{
+	&quot;success&quot;: bool,			- True on success, otherwise false
+	&quot;error&quot;: string,			- Error message on failure, &#39;&#39; on success   
+	&quot;schools&quot;: [				- Payload, undefined on failure
+		{
+			&quot;id&quot;: string,			- ID of school
+			&quot;name&quot;: string,			- Name of school
+		}
+	]
+}</pre>
+</div></div></div></div><div id="expander-364917585" class="expand-container"><div id="expander-control-364917585" class="expand-control" aria-expanded="true"><span class="expand-icon aui-icon aui-icon-small aui-iconfont-chevron-down"></span><span class="expand-control-text">/schools/{school}/courses/get (GET)</span></div><div id="expander-content-364917585" class="expand-content"><h1 id="APIStructure-/schools/{school}/courses/get(GET)">/schools/{school}/courses/get (GET)</h1><p>Get courses for a specific school, can also filter by year and term.</p><h2 id="APIStructure-Parameters.16">Parameters</h2><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/><col/><col/></colgroup><tbody><tr><th class="confluenceTh">Name</th><th class="confluenceTh">Location</th><th colspan="1" class="confluenceTh">Description</th></tr><tr><td class="confluenceTd">school</td><td class="confluenceTd">path</td><td colspan="1" class="confluenceTd">ID of school to get courses for</td></tr><tr><td class="confluenceTd">year</td><td class="confluenceTd">query</td><td colspan="1" class="confluenceTd">Year of returned courses</td></tr><tr><td class="confluenceTd">term</td><td class="confluenceTd">query</td><td colspan="1" class="confluenceTd">Term of returned courses</td></tr></tbody></table></div><h2 id="APIStructure-Response.16">Response</h2><p>List with all courses for specified school</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>API Response Data</b></div><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: false; theme: Confluence" data-theme="Confluence">{
+	&quot;success&quot;: bool,			- True on success, otherwise false
+	&quot;error&quot;: string,			- Error message on failure, &#39;&#39; on success   
+	&quot;courses&quot;: [				- Payload, undefined on failure
+		{
+			&quot;id&quot;: string,			- ID of the course
+			&quot;name&quot;: string,			- Name of the course
+			&quot;code&quot;: string,			- Course code of the course
+			&quot;year&quot;: int,			- Academic year of the course
+			&quot;term&quot;: string,			- Term of the course
+			&quot;prof&quot;: string,			- Professor teaching the course
+			&quot;owner&quot;: string,		- ID of the user who maintains the course
+			&quot;school&quot;: string,		- ID of the course&#39;s school 
+			&quot;modified&quot;: long int	- Unix timestamp the course or it&#39;s children were last modified 
+		}
+	]
+}</pre>
+</div></div></div></div><h2 class="auto-cursor-target" id="APIStructure-CourseEndpoints">Course Endpoints</h2><div id="expander-774237543" class="expand-container"><div id="expander-control-774237543" class="expand-control" aria-expanded="true"><span class="expand-icon aui-icon aui-icon-small aui-iconfont-chevron-down"></span><span class="expand-control-text">/courses/add (POST)</span></div><div id="expander-content-774237543" class="expand-content"><h1 id="APIStructure-/courses/add(POST)">/courses/add (POST)</h1><p>Create a new course</p><h2 id="APIStructure-Parameters.17">Parameters</h2><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/><col/><col/></colgroup><tbody><tr><th class="confluenceTh">Name</th><th class="confluenceTh">Location</th><th class="confluenceTh">Description</th></tr><tr><td colspan="1" class="confluenceTd">name</td><td colspan="1" class="confluenceTd">post</td><td colspan="1" class="confluenceTd">Name of course</td></tr><tr><td colspan="1" class="confluenceTd">code</td><td colspan="1" class="confluenceTd">post</td><td colspan="1" class="confluenceTd">Course code</td></tr><tr><td colspan="1" class="confluenceTd">year</td><td colspan="1" class="confluenceTd">post</td><td colspan="1" class="confluenceTd">Course's academic year</td></tr><tr><td colspan="1" class="confluenceTd">term</td><td colspan="1" class="confluenceTd">post</td><td colspan="1" class="confluenceTd">Course term, one of 'Wint', 'Spri', 'Summ', 'Fall'</td></tr><tr><td colspan="1" class="confluenceTd">prof</td><td colspan="1" class="confluenceTd">post</td><td colspan="1" class="confluenceTd">Course professor</td></tr><tr><td colspan="1" class="confluenceTd">owner</td><td colspan="1" class="confluenceTd">post</td><td colspan="1" class="confluenceTd">ID of user creating course</td></tr><tr><td colspan="1" class="confluenceTd">school</td><td colspan="1" class="confluenceTd">post</td><td colspan="1" class="confluenceTd">ID of course's school</td></tr><tr><td colspan="1" class="confluenceTd">token</td><td colspan="1" class="confluenceTd">cookie</td><td colspan="1" class="confluenceTd">Session token to authenticate user</td></tr></tbody></table></div><h2 id="APIStructure-Response.17">Response</h2><p>On success, returns information about created course. On failure, returns error message.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>API Response Data</b></div><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: false; theme: Confluence" data-theme="Confluence">{
+	&quot;success&quot;: bool,			- True on success, otherwise false
+	&quot;error&quot;: string,			- Error message on failure, &#39;&#39; on success   
+	&quot;course&quot;: {					- Payload, undefined on failure
+		&quot;id&quot;: string,				- ID of the created course
+		&quot;name&quot;: string,				- Name of the course
+		&quot;code&quot;: string,				- Course code of the course
+		&quot;year&quot;: int,				- Academic year of the course
+		&quot;term&quot;: string,				- Term of the course
+		&quot;prof&quot;: string,				- Professor teaching the course
+		&quot;owner&quot;: string,			- ID of the user who maintains the course
+		&quot;school&quot;: string,			- ID of the course&#39;s school 
+		&quot;modified&quot;: long int		- Unix timestamp the course or it&#39;s children were last modified   
+	}
+}</pre>
+</div></div></div></div><div id="expander-539150534" class="expand-container"><div id="expander-control-539150534" class="expand-control" aria-expanded="true"><span class="expand-icon aui-icon aui-icon-small aui-iconfont-chevron-down"></span><span class="expand-control-text">/courses/{course}/modify (POST)</span></div><div id="expander-content-539150534" class="expand-content"><h1 id="APIStructure-/courses/{course}/modify(POST)">/courses/{course}/modify (POST)</h1><p>Modify an existing course</p><h2 id="APIStructure-Parameters.18">Parameters</h2><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/><col/><col/></colgroup><tbody><tr><th class="confluenceTh">Name</th><th class="confluenceTh">Location</th><th class="confluenceTh">Description</th></tr><tr><td colspan="1" class="confluenceTd">course</td><td colspan="1" class="confluenceTd">path</td><td colspan="1" class="confluenceTd">ID of target course</td></tr><tr><td colspan="1" class="confluenceTd">name</td><td colspan="1" class="confluenceTd">post</td><td colspan="1" class="confluenceTd">Name of course</td></tr><tr><td colspan="1" class="confluenceTd">code</td><td colspan="1" class="confluenceTd">post</td><td colspan="1" class="confluenceTd">Course code</td></tr><tr><td colspan="1" class="confluenceTd">year</td><td colspan="1" class="confluenceTd">post</td><td colspan="1" class="confluenceTd">Course's academic year</td></tr><tr><td colspan="1" class="confluenceTd">term</td><td colspan="1" class="confluenceTd">post</td><td colspan="1" class="confluenceTd">Course term, one of 'Wint', 'Spri', 'Summ', 'Fall'</td></tr><tr><td colspan="1" class="confluenceTd">prof</td><td colspan="1" class="confluenceTd">post</td><td colspan="1" class="confluenceTd">Course professor</td></tr><tr><td colspan="1" class="confluenceTd">school</td><td colspan="1" class="confluenceTd">post</td><td colspan="1" class="confluenceTd">ID of course's school</td></tr><tr><td colspan="1" class="confluenceTd">token</td><td colspan="1" class="confluenceTd">cookie</td><td colspan="1" class="confluenceTd">Session token to authenticate user</td></tr></tbody></table></div><h2 id="APIStructure-Response.18">Response</h2><p>On success, returns updated course. On failure, returns error message.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>API Response Data</b></div><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: false; theme: Confluence" data-theme="Confluence">{
+	&quot;success&quot;: bool,			- True on success, otherwise false
+	&quot;error&quot;: string,			- Error message on failure, &#39;&#39; on success   
+	&quot;course&quot;: {					- Payload, undefined on failure
+		&quot;id&quot;: string,				- ID of the course
+		&quot;name&quot;: string,				- Updated name of the course
+		&quot;code&quot;: string,				- Updated course code
+		&quot;year&quot;: int,				- Updated academic year of the course
+		&quot;term&quot;: string,				- Updated term of the course
+		&quot;prof&quot;: string,				- Updated professor teaching the course
+ 		&quot;owner&quot;: string,			- ID of the user who maintains the course
+ 		&quot;school&quot;: string,			- Updated ID of the course&#39;s school 
+		&quot;modified&quot;: long int		- Unix timestamp the course or it&#39;s children were last modified   
+	}
+}</pre>
+</div></div></div></div><div id="expander-780706518" class="expand-container"><div id="expander-control-780706518" class="expand-control" aria-expanded="true"><span class="expand-icon aui-icon aui-icon-small aui-iconfont-chevron-down"></span><span class="expand-control-text">/courses/{course}/remove (POST)</span></div><div id="expander-content-780706518" class="expand-content"><h1 id="APIStructure-/courses/{course}/remove(POST)">/courses/{course}/remove (POST)</h1><p>Delete a existing course</p><h2 id="APIStructure-Parameters.19">Parameters</h2><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/><col/><col/></colgroup><tbody><tr><th class="confluenceTh">Name</th><th class="confluenceTh">Location</th><th class="confluenceTh">Description</th></tr><tr><td colspan="1" class="confluenceTd">course</td><td colspan="1" class="confluenceTd">path</td><td colspan="1" class="confluenceTd">ID of target course</td></tr><tr><td class="confluenceTd">token</td><td class="confluenceTd">cookie</td><td class="confluenceTd">Session token to authenticate user</td></tr></tbody></table></div><h2 id="APIStructure-Response.19">Response</h2><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>API Response Data</b></div><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: false; theme: Confluence" data-theme="Confluence">{
+	&quot;success&quot;: bool,			- True on success, otherwise false
+	&quot;error&quot;: string,			- Error message on failure, &#39;&#39; on success   
+}</pre>
+</div></div></div></div><h3 class="auto-cursor-target" id="APIStructure-CourseEvents">Course Events</h3><div id="expander-1383885872" class="expand-container"><div id="expander-control-1383885872" class="expand-control" aria-expanded="true"><span class="expand-icon aui-icon aui-icon-small aui-iconfont-chevron-down"></span><span class="expand-control-text">/courses/{course}/events/get (GET)</span></div><div id="expander-content-1383885872" class="expand-content"><h1 id="APIStructure-/courses/{course}/events/get(GET)">/courses/{course}/events/get (GET)</h1><p>Get events corresponding to a course</p><h2 id="APIStructure-Parameters.20">Parameters</h2><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/><col/><col/></colgroup><tbody><tr><th class="confluenceTh">Name</th><th class="confluenceTh">Location</th><th class="confluenceTh">Description</th></tr><tr><td colspan="1" class="confluenceTd">course</td><td colspan="1" class="confluenceTd">path</td><td colspan="1" class="confluenceTd">ID of target course</td></tr></tbody></table></div><h2 id="APIStructure-Response.20">Response</h2><p>List of events corresponding to the course</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>API Response Data</b></div><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: false; theme: Confluence" data-theme="Confluence">{
+	&quot;success&quot;: bool,			- True on success, otherwise false
+	&quot;error&quot;: string,			- Error message on failure, &#39;&#39; on success   
+	&quot;events&quot;: [					- Payload, undefined on failure
+		{
+			&quot;id&quot;: string,			- ID of the event
+			&quot;course&quot;: string,		- ID of the event&#39;s course
+			&quot;name&quot;: string,			- Name of the event
+			&quot;type&quot;: string,			- Type of event
+			&quot;weight&quot;: int,			- Grade weight of event
+			&quot;datetime&quot;: long int,	- Unix timestamp of event start
+			&quot;endDate&quot;: long int,	- Unix timestamp of event ending
+			&quot;weekly&quot;: boolean		- Flag to indicate if the event occurs each week
+		}
+	]
+}</pre>
+</div></div></div></div><div id="expander-572685787" class="expand-container"><div id="expander-control-572685787" class="expand-control" aria-expanded="true"><span class="expand-icon aui-icon aui-icon-small aui-iconfont-chevron-down"></span><span class="expand-control-text">/courses/{course}/events/add (POST)</span></div><div id="expander-content-572685787" class="expand-content"><h1 id="APIStructure-/courses/{course}/events/add(POST)">/courses/{course}/events/add (POST)</h1><p>Create an event for a course</p><h2 id="APIStructure-Parameters.21">Parameters</h2><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/><col/><col/></colgroup><tbody><tr><th class="confluenceTh">Name</th><th class="confluenceTh">Location</th><th class="confluenceTh">Description</th></tr><tr><td colspan="1" class="confluenceTd">course</td><td colspan="1" class="confluenceTd">path</td><td colspan="1" class="confluenceTd">ID of target course</td></tr><tr><td colspan="1" class="confluenceTd">name</td><td colspan="1" class="confluenceTd">post</td><td colspan="1" class="confluenceTd">Name of the event</td></tr><tr><td colspan="1" class="confluenceTd">type</td><td colspan="1" class="confluenceTd">post</td><td colspan="1" class="confluenceTd">Type of event, one of <span style="color: rgb(23,43,77);">&quot;LECTURE&quot;, &quot;TUTORIAL&quot;, &quot;LAB&quot;, &quot;TEST&quot;, &quot;QUIZ&quot;, or &quot;ASSIGNMENT&quot;</span></td></tr><tr><td colspan="1" class="confluenceTd"><p>weight</p></td><td colspan="1" class="confluenceTd">post</td><td colspan="1" class="confluenceTd"><p>Grade weight in course</p></td></tr><tr><td colspan="1" class="confluenceTd">datetime</td><td colspan="1" class="confluenceTd">post</td><td colspan="1" class="confluenceTd"><p>Date/time of event, as unix timestamp</p></td></tr><tr><td colspan="1" class="confluenceTd">endDate</td><td colspan="1" class="confluenceTd">post</td><td colspan="1" class="confluenceTd"><p>Date/time of event end, as unix timestamp or omitted for instantaneous events</p></td></tr><tr><td colspan="1" class="confluenceTd">weekly</td><td colspan="1" class="confluenceTd">post</td><td colspan="1" class="confluenceTd"><p>True/False indicating if event should be repeated weekly</p></td></tr><tr><td colspan="1" class="confluenceTd">token</td><td colspan="1" class="confluenceTd">cookie</td><td colspan="1" class="confluenceTd">Session token to authenticate user</td></tr></tbody></table></div><h2 id="APIStructure-Response.21">Response</h2><p>On success, returns created event. On failure, returns error message.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>API Response Data</b></div><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: false; theme: Confluence" data-theme="Confluence">{
+	&quot;success&quot;: bool,			- True on success, otherwise false
+	&quot;error&quot;: string,			- Error message on failure, &#39;&#39; on success   
+	&quot;event&quot;: {					- Payload, undefined on failure
+		&quot;id&quot;: string,				- ID of the created event
+		&quot;course&quot;: string,			- ID of the event&#39;s course
+		&quot;name&quot;: string,				- Name of the event
+		&quot;type&quot;: string,				- Type of event
+		&quot;weight&quot;: int,				- Grade weight of event
+		&quot;datetime&quot;: long int,		- Unix timestamp of event start
+		&quot;endDate&quot;: long int,		- Unix timestamp of event ending
+		&quot;weekly&quot;: boolean			- Flag to indicate if the event occurs each week
+	}
+}</pre>
+</div></div></div></div><div id="expander-735073611" class="expand-container"><div id="expander-control-735073611" class="expand-control" aria-expanded="true"><span class="expand-icon aui-icon aui-icon-small aui-iconfont-chevron-down"></span><span class="expand-control-text">/courses/{course}/events/{event}/modify (POST)</span></div><div id="expander-content-735073611" class="expand-content"><h1 id="APIStructure-/courses/{course}/events/{event}/modify(POST)">/courses/{course}/events/{event}/modify (POST)</h1><p>Modify an event for a course</p><h2 id="APIStructure-Parameters.22">Parameters</h2><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/><col/><col/></colgroup><tbody><tr><th class="confluenceTh">Name</th><th class="confluenceTh">Location</th><th class="confluenceTh">Description</th></tr><tr><td colspan="1" class="confluenceTd">course</td><td colspan="1" class="confluenceTd">path</td><td colspan="1" class="confluenceTd">ID of target course</td></tr><tr><td colspan="1" class="confluenceTd">event</td><td colspan="1" class="confluenceTd">path</td><td colspan="1" class="confluenceTd">ID of target event</td></tr><tr><td colspan="1" class="confluenceTd">name</td><td colspan="1" class="confluenceTd">post</td><td colspan="1" class="confluenceTd">Name of the event</td></tr><tr><td colspan="1" class="confluenceTd">type</td><td colspan="1" class="confluenceTd">post</td><td colspan="1" class="confluenceTd">Type of event, one of <span style="color: rgb(23,43,77);">&quot;LECTURE&quot;, &quot;TUTORIAL&quot;, &quot;LAB&quot;, &quot;TEST&quot;, &quot;QUIZ&quot;, or &quot;ASSIGNMENT&quot;</span></td></tr><tr><td colspan="1" class="confluenceTd"><p>weight</p></td><td colspan="1" class="confluenceTd">post</td><td colspan="1" class="confluenceTd"><p>Grade weight in course</p></td></tr><tr><td colspan="1" class="confluenceTd">datetime</td><td colspan="1" class="confluenceTd">post</td><td colspan="1" class="confluenceTd"><p>Date/time of event, as unix timestamp</p></td></tr><tr><td colspan="1" class="confluenceTd">endDate</td><td colspan="1" class="confluenceTd">post</td><td colspan="1" class="confluenceTd"><p>Date/time of event end, as unix timestamp or omitted for instantaneous events</p></td></tr><tr><td colspan="1" class="confluenceTd">weekly</td><td colspan="1" class="confluenceTd">post</td><td colspan="1" class="confluenceTd"><p>True/False indicating if event should be repeated weekly</p></td></tr><tr><td colspan="1" class="confluenceTd">token</td><td colspan="1" class="confluenceTd">cookie</td><td colspan="1" class="confluenceTd">Session token to authenticate user</td></tr></tbody></table></div><h2 id="APIStructure-Response.22">Response</h2><p>On success, returns modified event. On failure, returns error message.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>API Response Data</b></div><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: false; theme: Confluence" data-theme="Confluence">{
+	&quot;success&quot;: bool,			- True on success, otherwise false
+	&quot;error&quot;: string,			- Error message on failure, &#39;&#39; on success   
+	&quot;event&quot;: {					- Payload, undefined on failure
+		&quot;id&quot;: string,				- ID of the event
+		&quot;course&quot;: string,			- ID of the event&#39;s course
+		&quot;name&quot;: string,				- Updated name of the event
+		&quot;type&quot;: string,				- Updated type of event
+		&quot;weight&quot;: int,				- Updated grade weight of event
+		&quot;datetime&quot;: long int,		- Updated unix timestamp of event start
+		&quot;endDate&quot;: long int,		- Updated unix timestamp of event ending
+		&quot;weekly&quot;: boolean			- Updated flag to indicate if the event occurs each week
+	}
+}</pre>
+</div></div></div></div><div id="expander-256583211" class="expand-container"><div id="expander-control-256583211" class="expand-control" aria-expanded="true"><span class="expand-icon aui-icon aui-icon-small aui-iconfont-chevron-down"></span><span class="expand-control-text">/courses/{course}/events/{event}/remove (POST)</span></div><div id="expander-content-256583211" class="expand-content"><h1 id="APIStructure-/courses/{course}/events/{event}/remove(POST)">/courses/{course}/events/{event}/remove (POST)</h1><p>Delete and event from a course</p><h2 id="APIStructure-Parameters.23">Parameters</h2><div class="table-wrap"><table class="relative-table wrapped confluenceTable" style="width: 29.1193%;"><colgroup><col style="width: 15.1589%;"/><col style="width: 19.0709%;"/><col style="width: 65.7702%;"/></colgroup><tbody><tr><th class="confluenceTh">Name</th><th class="confluenceTh">Location</th><th class="confluenceTh">Description</th></tr><tr><td colspan="1" class="confluenceTd">course</td><td colspan="1" class="confluenceTd">path</td><td colspan="1" class="confluenceTd">ID of target course</td></tr><tr><td colspan="1" class="confluenceTd">event</td><td colspan="1" class="confluenceTd">path</td><td colspan="1" class="confluenceTd">ID of event to delete </td></tr><tr><td colspan="1" class="confluenceTd">token</td><td colspan="1" class="confluenceTd">cookie</td><td colspan="1" class="confluenceTd">Session token to authenticate user</td></tr></tbody></table></div><h2 id="APIStructure-Response.23">Response</h2><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>API Response Data</b></div><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: false; theme: Confluence" data-theme="Confluence">{
+	&quot;success&quot;: bool,			- True on success, otherwise false
+	&quot;error&quot;: string 			- Error message on failure, &#39;&#39; on success   
+}</pre>
+</div></div></div></div>
+                    </div>
+
+                                        
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Dec 04, 2021 19:03</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

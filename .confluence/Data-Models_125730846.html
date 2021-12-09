@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Wooden Heads : Data Models</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Wooden Heads</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Wooden-Heads-Home_113344682.html">Wooden Heads Home</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Documentation_125730850.html">Documentation</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Wooden Heads : Data Models
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Gregory Kelly</span>, last modified on Nov 01, 2021
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div id="expander-834793900" class="expand-container"><div id="expander-control-834793900" class="expand-control" aria-expanded="true"><span class="expand-icon aui-icon aui-icon-small aui-iconfont-chevron-down"></span><span class="expand-control-text">User</span></div><div id="expander-content-834793900" class="expand-content"><h1 style="margin-top: 10.0px;color: rgb(23,43,77);" id="DataModels-User">User</h1><p>The user model represents a registered user</p><h2 style="color: rgb(23,43,77);" id="DataModels-SQLTable">SQL Table</h2><p><strong>Name:</strong> users</p><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/><col/><col/><col/><col/><col/></colgroup><tbody><tr><th class="confluenceTh"><p>Field</p></th><th class="confluenceTh"><p>Type</p></th><th class="confluenceTh"><p>Null</p></th><th class="confluenceTh"><p>Key</p></th><th class="confluenceTh"><p>Default</p></th><th class="confluenceTh"><p>Description</p></th></tr><tr><td class="confluenceTd"><p>id</p></td><td class="confluenceTd"><p>varchar(36)</p></td><td class="confluenceTd"><p>NO</p></td><td class="confluenceTd"><p>PRI</p></td><td class="confluenceTd"><p>uuid()</p></td><td class="confluenceTd"><p>Unique ID</p></td></tr><tr><td class="confluenceTd"><p>name</p></td><td class="confluenceTd"><p>varchar(50)</p></td><td class="confluenceTd"><p>NO</p></td><td class="confluenceTd"><p>UNI</p></td><td class="confluenceTd"><p><br/></p></td><td class="confluenceTd"><p>User's Name</p></td></tr><tr><td colspan="1" class="confluenceTd">email</td><td colspan="1" class="confluenceTd">varchar(254)</td><td colspan="1" class="confluenceTd">NO</td><td colspan="1" class="confluenceTd">UNI</td><td colspan="1" class="confluenceTd"><br/></td><td colspan="1" class="confluenceTd">User's Email</td></tr><tr><td class="confluenceTd"><p>pass</p></td><td class="confluenceTd"><p>varchar(60)</p></td><td class="confluenceTd"><p>NO</p></td><td class="confluenceTd"><p><br/></p></td><td class="confluenceTd"><p><br/></p></td><td class="confluenceTd"><p>Salted+Hashed Password</p></td></tr><tr><td class="confluenceTd"><p>school</p></td><td class="confluenceTd"><p>varchar(36)</p></td><td class="confluenceTd"><p>NO</p></td><td class="confluenceTd"><p>schools(id); UC/DR</p></td><td class="confluenceTd"><p><br/></p></td><td class="confluenceTd"><p>User's school</p></td></tr></tbody></table></div><div class="code panel pdl" style="border-width: 1px;">
+ <div class="codeHeader panelHeader pdl hide-border-bottom" style="border-bottom-width: 1px;">
+  <b class="code-title">Creation Statement</b>
+  <span class="collapse-source expand-control" style="display:none;"><span class="expand-control-icon icon">&nbsp;</span><span class="expand-control-text">Expand source</span></span>
+  <span class="collapse-spinner-wrapper"></span>
+ </div>
+ <div class="codeContent panelContent pdl hide-toolbar"> 
+  <pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: sql; gutter: false; first-line: 0001; theme: Eclipse; collapse: true" data-theme="Eclipse">CREATE TABLE `users` (
+    `id`      VARCHAR(36) PRIMARY KEY DEFAULT (uuid())
+                COMMENT 'Unique ID',
+    `name`    VARCHAR(50) NOT NULL
+                COMMENT 'User\'s Name',
+    `email`   VARCHAR(254) NOT NULL
+                COMMENT 'User\'s Email', 
+  &nbsp; `pass`    VARCHAR(60) NOT NULL
+                COMMENT 'Salted+Hashed Password',
+    `school`  VARCHAR(36) NOT NULL
+                COMMENT 'User\'s school',
+    
+    FOREIGN KEY (`school`)
+                   REFERENCES `schools`(`id`)
+                   ON UPDATE CASCADE ON DELETE RESTRICT
+);</pre> 
+ </div>
+</div></div></div><div id="expander-1281757235" class="expand-container"><div id="expander-control-1281757235" class="expand-control" aria-expanded="true"><span class="expand-icon aui-icon aui-icon-small aui-iconfont-chevron-down"></span><span class="expand-control-text">School</span></div><div id="expander-content-1281757235" class="expand-content"><h1 id="DataModels-School"><span>School</span></h1><p>The school model represents a supported school</p><h2 id="DataModels-SQLTable.1">SQL Table</h2><p><strong>Name:</strong> schools</p><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/><col/><col/><col/><col/><col/></colgroup><tbody><tr><th class="confluenceTh"><p>Field</p></th><th class="confluenceTh"><p>Type</p></th><th class="confluenceTh"><p>Null</p></th><th class="confluenceTh"><p>Key</p></th><th class="confluenceTh"><p>Default</p></th><th class="confluenceTh"><p>Description</p></th></tr><tr><td class="confluenceTd"><p>id</p></td><td class="confluenceTd"><p>varchar(36)</p></td><td class="confluenceTd"><p>NO</p></td><td class="confluenceTd"><p>PRI</p></td><td class="confluenceTd"><p>uuid()</p></td><td class="confluenceTd"><p>Unique ID</p></td></tr><tr><td class="confluenceTd"><p>name</p></td><td class="confluenceTd"><p>varchar(64)</p></td><td class="confluenceTd"><p>NO</p></td><td class="confluenceTd"><p><br/></p></td><td class="confluenceTd"><p><br/></p></td><td class="confluenceTd"><p>School's Name</p></td></tr></tbody></table></div><div class="code panel pdl" style="border-width: 1px;">
+ <div class="codeHeader panelHeader pdl hide-border-bottom" style="border-bottom-width: 1px;">
+  <b class="code-title">Creation Statement</b>
+  <span class="collapse-source expand-control" style="display:none;"><span class="expand-control-icon icon">&nbsp;</span><span class="expand-control-text">Expand source</span></span>
+  <span class="collapse-spinner-wrapper"></span>
+ </div>
+ <div class="codeContent panelContent pdl hide-toolbar"> 
+  <pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: sql; gutter: false; first-line: 0001; theme: Eclipse; collapse: true" data-theme="Eclipse">CREATE TABLE `schools` (
+    `id`      VARCHAR(36) PRIMARY KEY DEFAULT (uuid())
+                COMMENT 'Unique ID',
+    `name`    VARCHAR(64) NOT NULL
+                COMMENT 'School\'s Name' 
+);
+</pre> 
+ </div>
+</div></div></div><div id="expander-773835971" class="expand-container"><div id="expander-control-773835971" class="expand-control" aria-expanded="true"><span class="expand-icon aui-icon aui-icon-small aui-iconfont-chevron-down"></span><span class="expand-control-text">Course</span></div><div id="expander-content-773835971" class="expand-content"><h1 id="DataModels-Course">Course</h1><p>The course model represents an uploaded course</p><h2 id="DataModels-SQLTable.2">SQL Table</h2><p><strong>Name:</strong> courses</p><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/><col/><col/><col/><col/><col/></colgroup><tbody><tr><th class="confluenceTh"><p>Field</p></th><th class="confluenceTh"><p>Type</p></th><th class="confluenceTh"><p>Null</p></th><th class="confluenceTh"><p>Key</p></th><th class="confluenceTh"><p>Default</p></th><th class="confluenceTh"><p>Description</p></th></tr><tr><td class="confluenceTd"><p>id</p></td><td class="confluenceTd"><p>varchar(36)</p></td><td class="confluenceTd"><p>NO</p></td><td class="confluenceTd"><p>PRI</p></td><td class="confluenceTd"><p>uuid()</p></td><td class="confluenceTd"><p>Unique ID</p></td></tr><tr><td colspan="1" class="confluenceTd">name</td><td colspan="1" class="confluenceTd">varchar(64)</td><td colspan="1" class="confluenceTd">NO</td><td colspan="1" class="confluenceTd"><br/></td><td colspan="1" class="confluenceTd"><br/></td><td colspan="1" class="confluenceTd">Course name</td></tr><tr><td colspan="1" class="confluenceTd">code</td><td colspan="1" class="confluenceTd">varchar(16)</td><td colspan="1" class="confluenceTd">NO</td><td colspan="1" class="confluenceTd"><br/></td><td colspan="1" class="confluenceTd"><br/></td><td colspan="1" class="confluenceTd">Course code</td></tr><tr><td colspan="1" class="confluenceTd">year</td><td colspan="1" class="confluenceTd">year</td><td colspan="1" class="confluenceTd">NO</td><td colspan="1" class="confluenceTd"><br/></td><td colspan="1" class="confluenceTd">now()</td><td colspan="1" class="confluenceTd">Academic year</td></tr><tr><td colspan="1" class="confluenceTd">term</td><td colspan="1" class="confluenceTd">enum('Wint', 'Spri', 'Summ', 'Fall')</td><td colspan="1" class="confluenceTd">NO</td><td colspan="1" class="confluenceTd"><br/></td><td colspan="1" class="confluenceTd"><br/></td><td colspan="1" class="confluenceTd">Course term</td></tr><tr><td colspan="1" class="confluenceTd">prof</td><td colspan="1" class="confluenceTd">varchar(32)</td><td colspan="1" class="confluenceTd">NO</td><td colspan="1" class="confluenceTd"><br/></td><td colspan="1" class="confluenceTd">''</td><td colspan="1" class="confluenceTd">Course professor</td></tr><tr><td class="confluenceTd"><p>owner</p></td><td class="confluenceTd"><p>varchar(36)</p></td><td class="confluenceTd"><p>NO</p></td><td class="confluenceTd"><p>users(id); UC/DR</p></td><td class="confluenceTd"><p><br/></p></td><td class="confluenceTd"><p>User who created/maintains course information</p></td></tr><tr><td class="confluenceTd"><p>school</p></td><td class="confluenceTd"><p>varchar(36)</p></td><td class="confluenceTd"><p>NO</p></td><td class="confluenceTd"><p>schools(id); UC/DR</p></td><td class="confluenceTd"><p><br/></p></td><td class="confluenceTd"><p>School course is at</p></td></tr><tr><td colspan="1" class="confluenceTd">modified</td><td colspan="1" class="confluenceTd">datetime</td><td colspan="1" class="confluenceTd">NO</td><td colspan="1" class="confluenceTd"><br/></td><td colspan="1" class="confluenceTd">CURRENT_TIMESTAMP</td><td colspan="1" class="confluenceTd">Date and time of last modification, updates on changes to connected events</td></tr></tbody></table></div><p class="auto-cursor-target">To prevent duplicate entries for a course by a user, the combination of code, owner, year, and term must be unique.</p><div class="code panel pdl" style="border-width: 1px;">
+ <div class="codeHeader panelHeader pdl hide-border-bottom" style="border-bottom-width: 1px;">
+  <b class="code-title">Creation Statement</b>
+  <span class="collapse-source expand-control" style="display:none;"><span class="expand-control-icon icon">&nbsp;</span><span class="expand-control-text">Expand source</span></span>
+  <span class="collapse-spinner-wrapper"></span>
+ </div>
+ <div class="codeContent panelContent pdl hide-toolbar"> 
+  <pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: sql; gutter: false; first-line: 0001; theme: Eclipse; collapse: true" data-theme="Eclipse">CREATE TABLE `courses` (
+    `id`      VARCHAR(36) PRIMARY KEY DEFAULT (uuid())
+                COMMENT 'Unique ID',
+    `name`    VARCHAR(64) NOT NULL
+                COMMENT 'Course name', 
+    `code`    VARCHAR(16) NOT NULL
+                COMMENT 'Course code', 
+	`year`	  YEAR NOT NULL
+				COMMENT 'Academic year',
+	`term` &nbsp;  ENUM('Wint', 'Spri', 'Summ', 'Fall') NOT NULL
+				COMMENT 'Course term',
+    `prof`    VARCHAR(32) NOT NULL
+                COMMENT 'Course professor',  &nbsp; &nbsp; 
+	`owner`   VARCHAR(36) NOT NULL
+                COMMENT 'User who created/maintains course information',
+    `school`  VARCHAR(36) NOT NULL
+                COMMENT 'School course is at',
+	`modified` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+				COMMENT 'Date and time of last modification, updates on changes to connected events', 
+
+    -- User can only have one entry for each course, to prevent accidental duplicates
+    UNIQUE (`code`, `owner`, `year`, `term`),
+
+ &nbsp; &nbsp;FOREIGN KEY (`owner`)
+                   REFERENCES `profiles`(`id`)
+                   ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (`school`)
+                   REFERENCES `schools`(`id`)
+                   ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
+-- Configure updating for modified, should be run after creation of events table
+CREATE TRIGGER `course_mod_ins` AFTER INSERT on `events`
+	FOR EACH ROW UPDATE courses SET modified=CURRENT_TIMESTAMP WHERE `id`=NEW.`course`;
+CREATE TRIGGER `course_mod_upd` AFTER UPDATE on `events`
+	FOR EACH ROW UPDATE courses SET modified=CURRENT_TIMESTAMP WHERE `id`=NEW.`course`;
+CREATE TRIGGER `course_mod_del` AFTER DELETE on `events`
+	FOR EACH ROW UPDATE courses SET modified=CURRENT_TIMESTAMP WHERE `id`=OLD.`course`;</pre> 
+ </div>
+</div></div></div><div id="expander-1624140394" class="expand-container"><div id="expander-control-1624140394" class="expand-control" aria-expanded="true"><span class="expand-icon aui-icon aui-icon-small aui-iconfont-chevron-down"></span><span class="expand-control-text">Subscription</span></div><div id="expander-content-1624140394" class="expand-content"><h2 id="DataModels-Subscription"><span>Subscription</span></h2><p>The subscription model represents a subscription to a course by a user</p><p><strong>This table is not reflected in the application</strong></p><h2 id="DataModels-SQLTable.3">SQL Table</h2><p><strong>Name:</strong> subscriptions</p><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/><col/><col/><col/><col/><col/></colgroup><tbody><tr><th class="confluenceTh"><p>Field</p></th><th class="confluenceTh"><p>Type</p></th><th class="confluenceTh"><p>Null</p></th><th class="confluenceTh"><p>Key</p></th><th class="confluenceTh"><p>Default</p></th><th class="confluenceTh"><p>Description</p></th></tr><tr><td class="confluenceTd"><p>user</p></td><td class="confluenceTd"><p>varchar(36)</p></td><td class="confluenceTd"><p>NO</p></td><td class="confluenceTd"><p>users(id); UC/DC</p></td><td class="confluenceTd"><p><br/></p></td><td class="confluenceTd"><p>The user subscribed to the course</p></td></tr><tr><td class="confluenceTd"><p>course</p></td><td class="confluenceTd"><p>varchar(36)</p></td><td class="confluenceTd"><p>NO</p></td><td class="confluenceTd"><p>courses(id); UC/DR</p></td><td class="confluenceTd"><p><br/></p></td><td class="confluenceTd"><p>The course the user is subscribed to</p></td></tr></tbody></table></div><p>Primary key is hybrid key with user and course</p><div class="code panel pdl" style="border-width: 1px;">
+ <div class="codeHeader panelHeader pdl hide-border-bottom" style="border-bottom-width: 1px;">
+  <b class="code-title">Creation Statement</b>
+  <span class="collapse-source expand-control" style="display:none;"><span class="expand-control-icon icon">&nbsp;</span><span class="expand-control-text">Expand source</span></span>
+  <span class="collapse-spinner-wrapper"></span>
+ </div>
+ <div class="codeContent panelContent pdl hide-toolbar"> 
+  <pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: sql; gutter: false; first-line: 0001; theme: Eclipse; collapse: true" data-theme="Eclipse">CREATE TABLE `subscriptions` (
+    `user`    VARCHAR(36) NOT NULL
+                COMMENT 'The user subscribed to the course',
+    `course`  VARCHAR(36) NOT NULL
+                COMMENT 'The course the user is subscribed to',
+
+    PRIMARY KEY (`user`, `course`),
+
+    FOREIGN KEY (`user`)
+                   REFERENCES `users`(`id`)
+                   ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (`course`)
+                   REFERENCES `courses`(`id`)
+                   ON UPDATE CASCADE ON DELETE RESTRICT
+);</pre> 
+ </div>
+</div></div></div><div id="expander-1359728416" class="expand-container"><div id="expander-control-1359728416" class="expand-control" aria-expanded="true"><span class="expand-icon aui-icon aui-icon-small aui-iconfont-chevron-down"></span><span class="expand-control-text">Event</span></div><div id="expander-content-1359728416" class="expand-content"><h1 id="DataModels-Event">Event</h1><p>The event model represents an event or assignment</p><h2 id="DataModels-SQLTable.4">SQL Table</h2><p><strong>Name:</strong> events</p><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/><col/><col/><col/><col/><col/></colgroup><tbody><tr><th class="confluenceTh"><p>Field</p></th><th class="confluenceTh"><p>Type</p></th><th class="confluenceTh"><p>Null</p></th><th class="confluenceTh"><p>Key</p></th><th class="confluenceTh"><p>Default</p></th><th class="confluenceTh"><p>Description</p></th></tr><tr><td class="confluenceTd"><p>id</p></td><td class="confluenceTd"><p>varchar(36)</p></td><td class="confluenceTd"><p>NO</p></td><td class="confluenceTd"><p>PRI</p></td><td class="confluenceTd"><p>uuid()</p></td><td class="confluenceTd"><p>Unique ID</p></td></tr><tr><td class="confluenceTd"><p>course</p></td><td class="confluenceTd"><p>varchar(36)</p></td><td class="confluenceTd"><p>NO</p></td><td class="confluenceTd"><p>courses(id); UD/DC</p></td><td class="confluenceTd"><p><br/></p></td><td class="confluenceTd"><p>Course the event is for</p></td></tr><tr><td class="confluenceTd"><p>name</p></td><td class="confluenceTd"><p>varchar(64)</p></td><td class="confluenceTd"><p>NO</p></td><td class="confluenceTd"><p><br/></p></td><td class="confluenceTd"><p><br/></p></td><td class="confluenceTd"><p>Name of the event</p></td></tr><tr><td class="confluenceTd"><p>type</p></td><td class="confluenceTd"><p>enum('LECTURE','TUTORIAL','LAB','TEST','QUIZ','ASSIGNMENT')</p></td><td class="confluenceTd"><p>NO</p></td><td class="confluenceTd"><p><br/></p></td><td class="confluenceTd"><p><br/></p></td><td class="confluenceTd"><p>Type of event</p></td></tr><tr><td class="confluenceTd"><p>weight</p></td><td class="confluenceTd"><p>int</p></td><td class="confluenceTd"><p>NO</p></td><td class="confluenceTd"><p><br/></p></td><td class="confluenceTd"><p>0</p></td><td class="confluenceTd"><p>Grade weight in course</p></td></tr><tr><td class="confluenceTd"><p>datetime</p></td><td class="confluenceTd"><p>datetime</p></td><td class="confluenceTd"><p>NO</p></td><td class="confluenceTd"><p><br/></p></td><td class="confluenceTd"><p><br/></p></td><td class="confluenceTd"><p>Date/time of event</p></td></tr><tr><td class="confluenceTd"><p>endDate</p></td><td class="confluenceTd"><p>datetime</p></td><td class="confluenceTd"><p>YES</p></td><td class="confluenceTd"><p><br/></p></td><td class="confluenceTd"><p>NULL</p></td><td class="confluenceTd"><p>Date/time of event end</p></td></tr><tr><td class="confluenceTd"><p>weekly</p></td><td class="confluenceTd"><p>boolean</p></td><td class="confluenceTd"><p>NO</p></td><td class="confluenceTd"><p><br/></p></td><td class="confluenceTd"><p>FALSE</p></td><td class="confluenceTd"><p>If true event will be repeated weekly</p></td></tr></tbody></table></div><div class="code panel pdl" style="border-width: 1px;">
+ <div class="codeHeader panelHeader pdl hide-border-bottom" style="border-bottom-width: 1px;">
+  <b class="code-title">Creation Statement</b>
+  <span class="collapse-source expand-control" style="display:none;"><span class="expand-control-icon icon">&nbsp;</span><span class="expand-control-text">Expand source</span></span>
+  <span class="collapse-spinner-wrapper"></span>
+ </div>
+ <div class="codeContent panelContent pdl hide-toolbar"> 
+  <pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: sql; gutter: false; first-line: 0001; theme: Eclipse; collapse: true" data-theme="Eclipse">CREATE TABLE `events` (
+    `id`      VARCHAR(36) PRIMARY KEY DEFAULT (uuid()),
+    `course`  VARCHAR(36) NOT NULL,
+    `name`    VARCHAR(64) NOT NULL,
+    `type`    ENUM('LECTURE', 'TUTORIAL', 'LAB', 'TEST', 'QUIZ', 'ASSIGNMENT') NOT NULL,
+    `weight`  INT NOT NULL DEFAULT 0,
+    `datetime` DATETIME NOT NULL,
+    `endDate` datetime,
+    `weekly`  BOOL NOT NULL DEFAULT FALSE, 
+
+    FOREIGN KEY (`course`)
+                    REFERENCES `courses`(`id`)
+                    ON UPDATE CASCADE ON DELETE CASCADE
+);</pre> 
+ </div>
+</div></div></div><div id="expander-1441132210" class="expand-container"><div id="expander-control-1441132210" class="expand-control" aria-expanded="true"><span class="expand-icon aui-icon aui-icon-small aui-iconfont-chevron-down"></span><span class="expand-control-text">Reminder</span></div><div id="expander-content-1441132210" class="expand-content"><h1 id="DataModels-Reminder">Reminder</h1><p>The reminder model represents a scheduled reminder</p><h2 id="DataModels-SQLTable.5">SQL Table</h2><p><strong>Name:</strong> reminders</p><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/><col/><col/><col/><col/><col/></colgroup><tbody><tr><th class="confluenceTh"><p>Field</p></th><th class="confluenceTh"><p>Type</p></th><th class="confluenceTh"><p>Null</p></th><th class="confluenceTh"><p>Key</p></th><th class="confluenceTh"><p>Default</p></th><th class="confluenceTh"><p>Description</p></th></tr><tr><td class="confluenceTd"><p>id</p></td><td class="confluenceTd"><p>varchar(36)</p></td><td class="confluenceTd"><p>NO</p></td><td class="confluenceTd"><p>PRI</p></td><td class="confluenceTd"><p>uuid()</p></td><td class="confluenceTd"><p>Unique ID</p></td></tr><tr><td class="confluenceTd"><p>user</p></td><td class="confluenceTd"><p>varchar(36)</p></td><td class="confluenceTd"><p>NO</p></td><td class="confluenceTd"><p>users(id); UC/DC</p></td><td class="confluenceTd"><p><br/></p></td><td class="confluenceTd"><p>User to deliver reminder to</p></td></tr><tr><td class="confluenceTd"><p>event</p></td><td class="confluenceTd"><p>varchar(36)</p></td><td class="confluenceTd"><p>NO</p></td><td class="confluenceTd"><p>events(id); UC/DC</p></td><td class="confluenceTd"><p><br/></p></td><td class="confluenceTd"><p>Event reminder is for</p></td></tr></tbody></table></div><div class="code panel pdl" style="border-width: 1px;">
+ <div class="codeHeader panelHeader pdl hide-border-bottom" style="border-bottom-width: 1px;">
+  <b class="code-title">Creation Statement</b>
+  <span class="collapse-source expand-control" style="display:none;"><span class="expand-control-icon icon">&nbsp;</span><span class="expand-control-text">Expand source</span></span>
+  <span class="collapse-spinner-wrapper"></span>
+ </div>
+ <div class="codeContent panelContent pdl hide-toolbar"> 
+  <pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: sql; gutter: false; first-line: 0001; theme: Eclipse; collapse: true" data-theme="Eclipse">CREATE TABLE `reminders` (
+    `id`      VARCHAR(36) PRIMARY KEY DEFAULT (uuid()),
+    `user`    VARCHAR(36) NOT NULL,
+    `event`   VARCHAR(36) NOT NULL,
+
+    FOREIGN KEY (`user`)
+                   REFERENCES `users`(`id`)
+                   ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (`event`)
+                   REFERENCES `events`(`id`)
+                   ON UPDATE CASCADE ON DELETE CASCADE
+);</pre> 
+ </div>
+</div></div></div><div id="expander-287505933" class="expand-container"><div id="expander-control-287505933" class="expand-control" aria-expanded="true"><span class="expand-icon aui-icon aui-icon-small aui-iconfont-chevron-down"></span><span class="expand-control-text">Todo</span></div><div id="expander-content-287505933" class="expand-content"><h1 id="DataModels-Todo">Todo</h1><p>The todo model represents an entry in a user's To-Do list</p><h2 id="DataModels-SQLTable.6">SQL Table</h2><p><strong>Name:</strong> todo</p><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/><col/><col/><col/><col/><col/></colgroup><tbody><tr><th class="confluenceTh"><p>Field</p></th><th class="confluenceTh"><p>Type</p></th><th class="confluenceTh"><p>Null</p></th><th class="confluenceTh"><p>Key</p></th><th class="confluenceTh"><p>Default</p></th><th class="confluenceTh"><p>Description</p></th></tr><tr><td class="confluenceTd"><p>id</p></td><td class="confluenceTd"><p>varchar(36)</p></td><td class="confluenceTd"><p>NO</p></td><td class="confluenceTd"><p>PRI</p></td><td class="confluenceTd"><p>uuid()</p></td><td class="confluenceTd"><p>Unique ID</p></td></tr><tr><td class="confluenceTd"><p>user</p></td><td class="confluenceTd"><p>varchar(36)</p></td><td class="confluenceTd"><p>NO</p></td><td class="confluenceTd"><p>users(id); UC/DC</p></td><td class="confluenceTd"><p><br/></p></td><td class="confluenceTd"><p>User To-Do is for</p></td></tr><tr><td class="confluenceTd"><p>name</p></td><td class="confluenceTd"><p>varchar(64)</p></td><td class="confluenceTd"><p>NO</p></td><td class="confluenceTd"><p><br/></p></td><td class="confluenceTd"><p><br/></p></td><td class="confluenceTd"><p>Name of the To-Do</p></td></tr><tr><td class="confluenceTd"><p>completed</p></td><td class="confluenceTd"><p>boolean</p></td><td class="confluenceTd"><p>NO</p></td><td class="confluenceTd"><p><br/></p></td><td class="confluenceTd"><p>FALSE</p></td><td class="confluenceTd"><p>Flag indicating To-Do completion</p></td></tr></tbody></table></div><div class="code panel pdl" style="border-width: 1px;">
+ <div class="codeHeader panelHeader pdl hide-border-bottom" style="border-bottom-width: 1px;">
+  <b class="code-title">Creation Statement</b>
+  <span class="collapse-source expand-control" style="display:none;"><span class="expand-control-icon icon">&nbsp;</span><span class="expand-control-text">Expand source</span></span>
+  <span class="collapse-spinner-wrapper"></span>
+ </div>
+ <div class="codeContent panelContent pdl hide-toolbar"> 
+  <pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: sql; gutter: false; first-line: 0001; theme: Eclipse; collapse: true" data-theme="Eclipse">CREATE TABLE `todo` (
+    `id`      VARCHAR(36) PRIMARY KEY DEFAULT (uuid()),
+    `user`    VARCHAR(36) NOT NULL,
+    `name`    VARCHAR(64) NOT NULL,
+    `completed` BOOL NOT NULL DEFAULT FALSE,
+
+    FOREIGN KEY (`user`)
+                  REFERENCES `users`(`id`)
+                  ON UPDATE CASCADE ON DELETE CASCADE
+);</pre> 
+ </div>
+</div></div></div><div id="expander-1979680861" class="expand-container"><div id="expander-control-1979680861" class="expand-control" aria-expanded="true"><span class="expand-icon aui-icon aui-icon-small aui-iconfont-chevron-down"></span><span class="expand-control-text">Session</span></div><div id="expander-content-1979680861" class="expand-content"><h2 id="DataModels-Session"><span>Session</span></h2><p>The session model connects a session tokento a user's account</p><p><strong>This table is not reflected in the application</strong></p><h2 id="DataModels-SQLTable.7">SQL Table</h2><p><strong>Name:</strong> sessions</p><div class="table-wrap"><table class="wrapped relative-table confluenceTable" style="width: 59.304%;"><colgroup><col style="width: 6.95594%;"/><col style="width: 10.7899%;"/><col style="width: 5.8738%;"/><col style="width: 18.2239%;"/><col style="width: 21.7011%;"/><col style="width: 36.4553%;"/></colgroup><tbody><tr><th class="confluenceTh"><p>Field</p></th><th class="confluenceTh"><p>Type</p></th><th class="confluenceTh"><p>Null</p></th><th class="confluenceTh"><p>Key</p></th><th class="confluenceTh"><p>Default</p></th><th class="confluenceTh"><p>Description</p></th></tr><tr><td class="confluenceTd"><p>token</p></td><td class="confluenceTd"><p>varchar(36)</p></td><td class="confluenceTd"><p>NO</p></td><td class="confluenceTd"><p>PRI</p></td><td class="confluenceTd"><p><br/></p></td><td class="confluenceTd"><p>Unique token to authenticate the user</p></td></tr><tr><td class="confluenceTd"><p>user</p></td><td class="confluenceTd"><p>varchar(36)</p></td><td class="confluenceTd"><p>NO</p></td><td class="confluenceTd"><p>users(id); UC/DC</p></td><td class="confluenceTd"><p><br/></p></td><td class="confluenceTd"><p>The user token authenticates</p></td></tr><tr><td colspan="1" class="confluenceTd">created</td><td colspan="1" class="confluenceTd">datetime</td><td colspan="1" class="confluenceTd">NO</td><td colspan="1" class="confluenceTd"><br/></td><td colspan="1" class="confluenceTd">CURRENT_TIMESTAMP</td><td colspan="1" class="confluenceTd">Date the token was created, used for expiry</td></tr></tbody></table></div><p><br/></p><div class="code panel pdl" style="border-width: 1px;">
+ <div class="codeHeader panelHeader pdl hide-border-bottom" style="border-bottom-width: 1px;">
+  <b class="code-title">Creation Statement</b>
+  <span class="collapse-source expand-control" style="display:none;"><span class="expand-control-icon icon">&nbsp;</span><span class="expand-control-text">Expand source</span></span>
+  <span class="collapse-spinner-wrapper"></span>
+ </div>
+ <div class="codeContent panelContent pdl hide-toolbar"> 
+  <pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: sql; gutter: false; first-line: 0001; theme: Eclipse; collapse: true" data-theme="Eclipse">CREATE TABLE `sessions` (
+    `token`  VARCHAR(36) PRIMARY KEY
+                COMMENT 'Unique token to authenticate the user', 
+  &nbsp; `user`   VARCHAR(36) NOT NULL
+                COMMENT 'The user token authenticates',
+    `created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; COMMENT 'Date the token was created, used for expiry', 
+
+    FOREIGN KEY (`user`)
+                   REFERENCES `users`(`id`)
+                   ON UPDATE CASCADE ON DELETE CASCADE
+);</pre> 
+ </div>
+</div></div></div><div id="expander-333462863" class="expand-container"><div id="expander-control-333462863" class="expand-control" aria-expanded="true"><span class="expand-icon aui-icon aui-icon-small aui-iconfont-chevron-down"></span><span class="expand-control-text">Application</span></div><div id="expander-content-333462863" class="expand-content"><h1 id="DataModels-Application">Application</h1><p>Table stored in local cache with installation-specific data.</p><p><strong>This table is not reflected in server</strong><strong>.</strong></p><h2 id="DataModels-SQLTable.8">SQL Table</h2><p><strong>Name:</strong> _application</p><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/><col/><col/><col/><col/><col/></colgroup><tbody><tr><th class="confluenceTh"><p>Field</p></th><th class="confluenceTh"><p>Type</p></th><th class="confluenceTh"><p>Null</p></th><th class="confluenceTh"><p>Key</p></th><th class="confluenceTh"><p>Default</p></th><th class="confluenceTh"><p>Description</p></th></tr><tr><td class="confluenceTd">lastUpdate</td><td class="confluenceTd">datetime</td><td class="confluenceTd">NO</td><td class="confluenceTd"><br/></td><td class="confluenceTd">CURRENT_TIMESTAMP</td><td class="confluenceTd">Date/time of last update from server</td></tr><tr><td colspan="1" class="confluenceTd">newData</td><td colspan="1" class="confluenceTd">boolean</td><td colspan="1" class="confluenceTd">NO</td><td colspan="1" class="confluenceTd"><br/></td><td colspan="1" class="confluenceTd">false</td><td colspan="1" class="confluenceTd">Indicates if there is new data to be uploaded</td></tr><tr><td class="confluenceTd">localUser</td><td class="confluenceTd">varchar(36)</td><td class="confluenceTd">YES</td><td class="confluenceTd">users(id); UC/DR</td><td class="confluenceTd">NULL</td><td class="confluenceTd">UUID of the local user</td></tr><tr><td colspan="1" class="confluenceTd">token</td><td colspan="1" class="confluenceTd">varchar(36)</td><td colspan="1" class="confluenceTd">YES</td><td colspan="1" class="confluenceTd"><br/></td><td colspan="1" class="confluenceTd">NULL</td><td colspan="1" class="confluenceTd">Session token used to authenticate with API</td></tr></tbody></table></div><div class="code panel pdl" style="border-width: 1px;">
+ <div class="codeHeader panelHeader pdl hide-border-bottom" style="border-bottom-width: 1px;">
+  <b class="code-title">Creation Statement</b>
+  <span class="collapse-source expand-control" style="display:none;"><span class="expand-control-icon icon">&nbsp;</span><span class="expand-control-text">Expand source</span></span>
+  <span class="collapse-spinner-wrapper"></span>
+ </div>
+ <div class="codeContent panelContent pdl hide-toolbar"> 
+  <pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: sql; gutter: false; first-line: 0001; theme: Eclipse; collapse: true" data-theme="Eclipse">CREATE TABLE `_application` (
+    `lastUpdate`	datetime DEFAULT CURRENT_TIMESTAMP,
+    `localUser`		VARCHAR(36) NOT NULL,
+
+    FOREIGN KEY (`localUser`)
+                  REFERENCES `users`(`id`)
+                  ON UPDATE CASCADE ON DELETE RESTRICT
+);</pre> 
+ </div>
+</div></div></div>
+                    </div>
+
+                                        
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Dec 04, 2021 19:03</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>
